@@ -18,7 +18,7 @@ import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.team.service.TeamService;
 
-//aaaaaanbnnnnnncccccccccccrrrrrrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaacccccccccc
+//aaaaaanbnnnnnncccccccccccrrrrrrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaaccccccccccaaaaaaaaa
 @Controller
 public class MemberLoginController {
 	private Logger log = Logger.getLogger(this.getClass());
