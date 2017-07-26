@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+/*레이아웃*/
+body{
+	font-size:20pt;
+	font-family:"맑은 고딕";
+}
+div#main{
+	width:960px;
+	margin:0 auto;
+}
+div#main_header{
+	margin-bottom:10px;
+	padding:0 10px 0 0;
+	background-color:#80ff80;
+}
+/* div#main_menu{
+	float:left;
+	width:17%;
+	min-height:400px;
+} */
+div#main_body{
+	float:left;
+	width:100%;
+	padding:5px;
+	background-color:aqua;
+	border: 1px solid;
+}
+div#main_footer{
+	clear:both;
+	width:100%;
+	text-align:center;
+	background-color:yellow;
+}
+ul.menu{
+	list-style:none;
+}
+ul.menu li{
+	margin-bottom:5px;
+}
+a{
+	text-decoration:none;
+	color:#3f3f3f;
+}
+a:hover{
+	text-decoration:none;
+	color:#0c8f84;
+	font-weight:bold;
+}
+div.page-main-style{
+	width:98%;
+	margin:0 auto;
+}
+div.page-error-style{
+	width:50%;
+	margin:0 auto;
+}
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
