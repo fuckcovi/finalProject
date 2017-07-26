@@ -18,7 +18,7 @@ import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.team.service.TeamService;
 
-//aaaaaa
+//aaaaaanbnnnnnn
 @Controller
 public class MemberLoginController {
 	private Logger log = Logger.getLogger(this.getClass());
@@ -41,18 +41,18 @@ public class MemberLoginController {
 		if(log.isDebugEnabled()){
 			log.debug("<<<<memberCommand>>>>> : " + memberCommand);
 		}
-		// id�� passwd �ʵ常 ��ȿ�� üũ
+		// id占쏙옙 passwd 占십드만 占쏙옙효占쏙옙 체크
 		if(result.hasFieldErrors("id")||result.hasFieldErrors("pw")){
 			return form();
 		}
-		// �α��� üũ(id �Ǵ� ��й�ȣ ��ġ����üũ)
+		// 占싸깍옙占쏙옙 체크(id 占실댐옙 占쏙옙橘占싫� 占쏙옙치占쏙옙占쏙옙체크)
 		try{
 			MemberCommand member = memberService.selectMember(memberCommand.getId());
 			boolean check = false;
 			if(member != null){
 				check = member.isCheckedPasswd(memberCommand.getPw());
 			}
-			if(check){//��������
+			if(check){//占쏙옙占쏙옙占쏙옙占쏙옙
 				session.setAttribute("user_id",memberCommand.getId());
 				
 				TeamMemCommand teamMemCommand = teamMemService.selectTeamMem(memberCommand.getId());
