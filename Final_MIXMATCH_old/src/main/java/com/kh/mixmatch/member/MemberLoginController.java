@@ -18,7 +18,7 @@ import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.team.service.TeamService;
 
-
+//aaaaaa
 @Controller
 public class MemberLoginController {
 	private Logger log = Logger.getLogger(this.getClass());
@@ -41,18 +41,18 @@ public class MemberLoginController {
 		if(log.isDebugEnabled()){
 			log.debug("<<<<memberCommand>>>>> : " + memberCommand);
 		}
-		// id¿Í passwd ÇÊµå¸¸ À¯È¿¼º Ã¼Å©
+		// idï¿½ï¿½ passwd ï¿½Êµå¸¸ ï¿½ï¿½È¿ï¿½ï¿½ Ã¼Å©
 		if(result.hasFieldErrors("id")||result.hasFieldErrors("pw")){
 			return form();
 		}
-		// ·Î±×ÀÎ Ã¼Å©(id ¶Ç´Â ºñ¹Ð¹øÈ£ ÀÏÄ¡¿©ºÎÃ¼Å©)
+		// ï¿½Î±ï¿½ï¿½ï¿½ Ã¼Å©(id ï¿½Ç´ï¿½ ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½Ã¼Å©)
 		try{
 			MemberCommand member = memberService.selectMember(memberCommand.getId());
 			boolean check = false;
 			if(member != null){
 				check = member.isCheckedPasswd(memberCommand.getPw());
 			}
-			if(check){//ÀÎÁõ¼º°ø
+			if(check){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				session.setAttribute("user_id",memberCommand.getId());
 				
 				TeamMemCommand teamMemCommand = teamMemService.selectTeamMem(memberCommand.getId());
