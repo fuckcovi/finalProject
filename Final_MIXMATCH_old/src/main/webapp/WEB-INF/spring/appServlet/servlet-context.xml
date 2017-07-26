@@ -30,6 +30,15 @@
 			<beans:list>
 				<!--  설정파일이 여러개 인 경우 아래 태그를 여러개 나열  -->
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
+				<!-- 회원관련 -->
+				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
+				<!-- 일단 주석처리 -->
+				<!-- 팀관련
+				<beans:value>/WEB-INF/tiles-def/team.xml</beans:value>
+				게시판관련(모든 게시판 포함)
+				<beans:value>/WEB-INF/tiles-def/board.xml</beans:value>
+				포인트샵 관련
+				<beans:value>/WEB-INF/tiles-def/pointshop.xml</beans:value> --> 
 			</beans:list>
 		</beans:property>
 	</beans:bean>

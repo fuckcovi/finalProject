@@ -2,11 +2,9 @@ package com.kh.mixmatch.member.domain;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Arrays;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
-
 
 public class MemberCommand {
 	@NotEmpty
@@ -27,28 +25,17 @@ public class MemberCommand {
 	private Date regdate;
 	@NotEmpty
 	private String address;
-
 	private String auth;
-
 	private String profile_name;
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	
-	// ºñ¹Ð¹øÈ£ ÀÏÄ¡ ¿©ºÎ Ã¼Å©
+	// ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	public boolean isCheckedPasswd(String userPasswd){
 		if(pw.equals(userPasswd)){
 			return true;
 		}
 		return false;
-	}
-	
-
-
-	@Override
-	public String toString() {
-		return "MemberCommand [id=" + id + ", pw=" + pw + ", name=" + name + ", birtrh=" + birtrh + ", phone=" + phone
-				+ ", email=" + email + ", favor=" + favor + ", point=" + point + ", regdate=" + regdate + ", address="
-				+ address + ", auth=" + auth + ", profile_name=" + profile_name +  "]";
 	}
 	public void setProfile_upload(MultipartFile profile_upload) throws IOException {
 		this.profile_upload = profile_upload;
@@ -137,7 +124,11 @@ public class MemberCommand {
 		this.profile_name = profile_name;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "MemberCommand [id=" + id + ", pw=" + pw + ", name=" + name + ", birtrh=" + birtrh + ", phone=" + phone
+				+ ", email=" + email + ", favor=" + favor + ", point=" + point + ", regdate=" + regdate + ", address="
+				+ address + ", auth=" + auth + ", profile_name=" + profile_name +  "]";
+	}
 
-	
 }

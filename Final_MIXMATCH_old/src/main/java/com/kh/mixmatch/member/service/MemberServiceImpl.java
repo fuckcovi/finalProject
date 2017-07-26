@@ -1,16 +1,12 @@
 package com.kh.mixmatch.member.service;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.kh.mixmatch.member.dao.MemberMapper;
 import com.kh.mixmatch.member.domain.MemberCommand;
-import com.kh.mixmatch.team.dao.TeamMapper;
-import com.kh.mixmatch.team.domain.TeamCommand;
+
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
@@ -28,14 +24,18 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateMember(String id) {
-		memberMapper.updateMember(id);
+	public void updateMember(MemberCommand member) {
+		memberMapper.updateMember(member);
 	}
 
+	@Override
+	public void updatePw(MemberCommand member) {
+		memberMapper.updatePw(member);
+	}
+	
 	@Override
 	public void deleteMember(String id) {
 		memberMapper.deleteMember(id);
 	}
-	
 	
 }

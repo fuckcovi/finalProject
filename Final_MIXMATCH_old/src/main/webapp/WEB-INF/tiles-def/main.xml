@@ -11,10 +11,6 @@
      	<put-attribute name="footer" value="/WEB-INF/views/templates/footer.jsp"/>
      	<put-attribute name="body" value="/WEB-INF/views/main/body.jsp"/>
     </definition>
- 	 <definition name="login" extends="main">
-     	<put-attribute name="title" value="MIXMATCH Login"/>
-     	<put-attribute name="body" value="/WEB-INF/views/main/login.jsp"/>
-    </definition>
     
     <!--  팀  -->
   	<definition name="teamHome" extends="main">
