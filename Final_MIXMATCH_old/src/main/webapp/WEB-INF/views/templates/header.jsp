@@ -17,7 +17,7 @@
 <li><a href="${pageContext.request.contextPath}/#" class="submenuLink">공지사항</a></li>
 <li><a href="${pageContext.request.contextPath}/#" class="submenuLink">자유게시판</a></li>
 <li><a href="${pageContext.request.contextPath}/#" class="submenuLink">팀게시판</a></li>
-</ul>
+</ul> 
 </li>
 <li class="topMenuLi">
 <a class="menuLink" href="${pageContext.request.contextPath}/#">매칭</a>
