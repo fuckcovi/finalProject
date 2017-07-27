@@ -32,6 +32,8 @@
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
 				<!-- 회원관련 -->
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
+				<!-- 매칭 -->
+				<beans:value>/WEB-INF/tiles-def/match.xml</beans:value>
 				<!-- 일단 주석처리 -->
 				<!-- 팀관련
 				<beans:value>/WEB-INF/tiles-def/team.xml</beans:value>
