@@ -50,7 +50,7 @@ private Logger log = Logger.getLogger(this.getClass());
 			if(member != null){
 				check = member.isCheckedPasswd(memberCommand.getPw());
 			}
-			
+			  
 			if(check){
 				session.setAttribute("user_id", memberCommand.getId());
 				session.setAttribute("auth", memberCommand.getAuth());
