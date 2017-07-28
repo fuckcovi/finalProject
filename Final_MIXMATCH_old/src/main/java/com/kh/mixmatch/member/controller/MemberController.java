@@ -78,6 +78,59 @@ public class MemberController {
 		return map;
 	}
 	
+	@RequestMapping(value="/member/pwUpdate.do",method=RequestMethod.GET)
+	public String pwUpdateForm(){
+		return "pwUpdate";
+	}
+	
+	@RequestMapping(value="/member/pwUpdate.do",method=RequestMethod.POST)
+	public String pwUpdateAction(@ModelAttribute("memberCommand")@Valid MemberCommand memberCommand, BindingResult result, HttpSession session){
+		String id = (String)session.getAttribute("user_id");
+		
+		MemberCommand member = memberService.selectMember(id);
+		
+		if(result.hasFieldErrors("pw") || result.hasFieldErrors("changePw") || result.hasFieldErrors("changePwCheck")){
+			return "pwUpdate";
+		}
+		
+		if(!member.getPw().equals(memberCommand.getPw())){
+			result.rejectValue("pw", "invalidPassword");
+		}else if(memberCommand.getPw().equals(memberCommand.getChangePw())){
+			result.rejectValue("changePw", "sameBeforeAfterPw");
+		}else if(!memberCommand.getChangePw().equals(memberCommand.getChangePwCheck())){
+			result.rejectValue("changePw", "notSameChangePw");
+		}else{
+			memberCommand.setId(id);
+			memberService.updatePw(memberCommand);
+			return "redirect:/main.do";
+			//return "redirect:/member/detail.do";
+		}
+		return "pwUpdate";
+	}
+	
+	@RequestMapping(value="/member/pwCheck.do",method=RequestMethod.GET)
+	public String pwCheckForm(){
+		return "pwCheck";
+	}
+	
+	@RequestMapping(value="/member/pwCheck.do",method=RequestMethod.POST)
+	public String pwCheckAction(@ModelAttribute("memberCommand")@Valid MemberCommand memberCommand, BindingResult result, HttpSession session){
+		String id = (String)session.getAttribute("user_id");
+		
+		MemberCommand member = memberService.selectMember(id);
+		
+		if(result.hasFieldErrors("pw")){
+			return "pwCheck";
+		}
+		
+		if(!member.getPw().equals(memberCommand.getPw())){
+			result.rejectValue("pw", "invalidPassword");
+			return "pwCheck";
+		}
+		
+		return "redirect:/member/update.do";
+	}
+	
 	@RequestMapping(value="/member/update.do",method=RequestMethod.GET)
 	public String updateForm(HttpSession session, Model model){
 		String id = (String)session.getAttribute("user_id");
@@ -101,7 +154,8 @@ public class MemberController {
 		
 		memberService.updateMember(memberCommand);
 		
-		return "redirect:/member/detail.do";
+		return "redirect:/main.do";
+		//return "redirect:/member/detail.do";
 	}
 	
 	@RequestMapping(value="/member/delete.do",method=RequestMethod.GET)
@@ -111,7 +165,7 @@ public class MemberController {
 		
 		member.setId((String)session.getAttribute("user_id"));
 		
-		model.addAttribute("command",member);
+		model.addAttribute("memberCommand",member);
 		
 		return "memberDelete";
 	}
@@ -144,7 +198,7 @@ public class MemberController {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			result.rejectValue("passwd", "invalidPassword");
+			result.rejectValue("pw", "invalidPassword");
 			
 			return "memberDelete";
 		}

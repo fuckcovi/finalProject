@@ -3,19 +3,28 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="page-main-style">
-	<h1>회원 탈퇴</h1>
-	<form:form commandName="memberCommand" id="delete_form">
+	<h1>비밀번호 수정</h1>
+	<form:form commandName="memberCommand" id="pwUpdate_form" action="pwUpdate.do">
 		<form:errors element="div" cssClass="error-color"/>
-		<form:hidden path="id"/>
 		<ul class="menu">
 			<li>
-				<label for="pw">비밀번호</label>
+				<label for="pw">현재 비밀번호</label>
 				<form:password path="pw"/>
 				<form:errors path="pw" cssClass="error-color"/>
-			</li>	
+			</li>
+			<li>
+				<label for="changePw">변경할 비밀번호</label>
+				<form:password path="changePw"/>
+				<form:errors path="changePw" cssClass="error-color"/>
+			</li>
+			<li>
+				<label for="changePwCheck">비밀번호 확인</label>
+				<form:password path="changePwCheck"/>
+				<form:errors path="changePwCheck" cssClass="error-color"/>
+			</li>
 		</ul>
 		<div class="align-center">
-			<input type="submit" value="회원삭제">
+			<input type="submit" value="비밀번호 수정">
 			<input type="button" value="회원상세" onclick="location.href='detail.do'">
 		</div>
 	</form:form>

@@ -92,6 +92,10 @@
 	<!--  로그인 여부 체크 인터셉터 -->
 	<mvc:interceptors> 
 		<mvc:interceptor>
+			<mvc:mapping path="/member/pwUpdate.do"/>
+			<mvc:mapping path="/member/pwCheck.do"/>
+			<mvc:mapping path="/member/update.do"/>
+			<mvc:mapping path="/member/delete.do"/>
 			<mvc:mapping path="/team.do"/>
 			<beans:bean class="com.kh.mixmatch.member.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>

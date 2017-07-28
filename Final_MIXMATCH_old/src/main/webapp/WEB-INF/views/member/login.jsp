@@ -4,7 +4,6 @@
 <div class="page-main-style">
 	<h1>회원 로그인</h1>
 	<form:form commandName="memberCommand" id="login_form">
-		<form:errors element="div" cssClass="error-color"/>
 		<ul class="menu">
 			<li>
 				<label for="id">아이디</label>
@@ -15,6 +14,9 @@
 				<label for="pw">비밀번호</label>
 				<form:password path="pw"/>
 				<form:errors path="pw" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:errors element="div" cssClass="error-color"/>
 			</li>
 		</ul>
 		<div class="align-center">

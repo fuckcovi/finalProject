@@ -32,6 +32,12 @@ public class MemberCommand {
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	
+	//비밀번호 수정용 프로퍼티(DB에는 없음)
+	@NotEmpty
+	private String changePw;
+	@NotEmpty
+	private String changePwCheck;
+	
 	// 비밀번호 체크
 	public boolean isCheckedPasswd(String userPasswd){
 		if(pw.equals(userPasswd)){
@@ -131,13 +137,26 @@ public class MemberCommand {
 	public void setProfile_name(String profile_name) {
 		this.profile_name = profile_name;
 	}
+	public String getChangePw() {
+		return changePw;
+	}
+	public void setChangePw(String changePw) {
+		this.changePw = changePw;
+	}
+	public String getChangePwCheck() {
+		return changePwCheck;
+	}
+	public void setChangePwCheck(String changePwCheck) {
+		this.changePwCheck = changePwCheck;
+	}
 	
 	@Override
 	public String toString() {
 		return "MemberCommand [id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone=" + phone
 				+ ", email=" + email + ", favor=" + favor + ", point=" + point + ", regdate=" + regdate + ", address="
 				+ address + ", auth=" + auth + ", status=" + status + ", profile_name=" + profile_name
-				+ ", profile_upload=" + profile_upload + "]";
+				+ ", profile_upload=" + profile_upload + ", changePw=" + changePw + ", changePwCheck=" + changePwCheck
+				+ "]";
 	}
 	
 }

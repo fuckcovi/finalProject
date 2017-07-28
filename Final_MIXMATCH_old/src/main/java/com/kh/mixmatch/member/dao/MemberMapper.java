@@ -15,7 +15,7 @@ public interface MemberMapper {
 	@Update("UPDATE g_member SET name=#{name},phone=#{phone},email=#{email},favor=#{favor},address=#{address},"
 			+ "profile_name=#{profile_name,jdbcType=VARCHAR},profile=#{profile,jdbcType=BLOB} WHERE id=#{id}")
 	public void updateMember(MemberCommand member);
-	@Update("UPDATE g_member SET pw=#{pw} WHERE id=#{id}")
+	@Update("UPDATE g_member SET pw=#{changePw} WHERE id=#{id}")
 	public void updatePw(MemberCommand member);
 	@Update("UPDATE g_member SET status='N' WHERE id=#{id}")
 	public void deleteMember(String id);
