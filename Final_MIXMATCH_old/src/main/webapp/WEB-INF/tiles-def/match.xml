@@ -6,12 +6,12 @@
 
 <tiles-definitions>
 
-	<definition name="match/matchBoard" extends="main">
+	<definition name="matchBoard" extends="main">
   		<put-attribute name="title" value="MATCHBOARD"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchBoard.jsp"/>
   	</definition>
   	
-  	<definition name="match/scoreBoard" extends="main">
+  	<definition name="scoreBoard" extends="main">
   		<put-attribute name="title" value="SCOREBOARD"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/scoreBoard.jsp"/>
   	</definition>

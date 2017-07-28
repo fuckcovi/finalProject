@@ -22,8 +22,8 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public int getRowCount(Map<String, Object> map) {
-		return matchMapper.getRowCount(map);
+	public int getRowCount() {
+		return matchMapper.getRowCount();
 	}
 
 	@Override
