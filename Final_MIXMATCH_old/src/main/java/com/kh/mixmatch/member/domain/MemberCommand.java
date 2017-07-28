@@ -3,6 +3,7 @@ package com.kh.mixmatch.member.domain;
 import java.io.IOException;
 import java.sql.Date;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,23 +15,24 @@ public class MemberCommand {
 	@NotEmpty
 	private String name;
 	@NotEmpty
-	private String birtrh;
+	private String birth;
 	@NotEmpty
 	private String phone;
 	@NotEmpty
+	@Email
 	private String email;
-	@NotEmpty
 	private String favor;
 	private int point;
 	private Date regdate;
 	@NotEmpty
 	private String address;
 	private String auth;
+	private String status;
 	private String profile_name;
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	
-	// ��й�ȣ ��ġ ���� üũ
+	// 비밀번호 체크
 	public boolean isCheckedPasswd(String userPasswd){
 		if(pw.equals(userPasswd)){
 			return true;
@@ -69,11 +71,11 @@ public class MemberCommand {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBirtrh() {
-		return birtrh;
+	public String getBirth() {
+		return birth;
 	}
-	public void setBirtrh(String birtrh) {
-		this.birtrh = birtrh;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 	public String getPhone() {
 		return phone;
@@ -117,6 +119,12 @@ public class MemberCommand {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getProfile_name() {
 		return profile_name;
 	}
@@ -126,9 +134,10 @@ public class MemberCommand {
 	
 	@Override
 	public String toString() {
-		return "MemberCommand [id=" + id + ", pw=" + pw + ", name=" + name + ", birtrh=" + birtrh + ", phone=" + phone
+		return "MemberCommand [id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone=" + phone
 				+ ", email=" + email + ", favor=" + favor + ", point=" + point + ", regdate=" + regdate + ", address="
-				+ address + ", auth=" + auth + ", profile_name=" + profile_name +  "]";
+				+ address + ", auth=" + auth + ", status=" + status + ", profile_name=" + profile_name
+				+ ", profile_upload=" + profile_upload + "]";
 	}
-
+	
 }

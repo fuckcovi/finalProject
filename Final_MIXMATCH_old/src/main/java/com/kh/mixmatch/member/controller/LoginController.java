@@ -34,6 +34,7 @@ private Logger log = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
 	public String loginAction(@ModelAttribute("memberCommand")@Valid MemberCommand memberCommand, BindingResult result, HttpSession session){
+		
 		if(log.isDebugEnabled()){
 			log.debug("<<memberCommand>> : " + memberCommand);
 		}
@@ -51,18 +52,23 @@ private Logger log = Logger.getLogger(this.getClass());
 				check = member.isCheckedPasswd(memberCommand.getPw());
 			}
 			  
-			if(check){
-				session.setAttribute("user_id", memberCommand.getId());
-				session.setAttribute("auth", memberCommand.getAuth());
+			if(check && member.getStatus().equals("Y")){
+				session.setAttribute("user_id", member.getId());
+				session.setAttribute("auth", member.getAuth());
+				session.setAttribute("status", member.getStatus());
 				
 				return "redirect:/main.do";
+			}else if(check && member.getStatus().equals("N")){
+				result.reject("unableMember");
+				return loginForm();
 			}else{
-				throw new Exception();
+				result.reject("invalidIdOrPassword");
+				return loginForm();
 			}
 		} catch (Exception e) {
-			result.reject("invalidIdOrPassword");
+			result.reject("loginError");
 			return loginForm();
-		}
+		} 
 	}
 	
 	@RequestMapping("/logout.do")

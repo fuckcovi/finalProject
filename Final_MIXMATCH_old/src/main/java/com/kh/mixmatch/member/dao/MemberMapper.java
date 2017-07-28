@@ -8,7 +8,7 @@ import com.kh.mixmatch.member.domain.MemberCommand;
 
 public interface MemberMapper {
 	@Insert("INSERT INTO g_member (id,pw,name,birth,phone,email,favor,regdate,address,profile_name,profile) "
-			+ "VALUES(#{id},#{pw},#{birth},#{email},#{favor},sysdate,#{address},#{profile_name,jdbcType=VARCHAR},#{profile,jdbcType=BLOB})")
+			+ "VALUES(#{id},#{pw},#{name},#{birth},#{phone},#{email},#{favor},sysdate,#{address},#{profile_name,jdbcType=VARCHAR},#{profile,jdbcType=BLOB})")
 	public void insertMember(MemberCommand member);
 	@Select("SELECT * FROM g_member WHERE id=#{id}")
 	public MemberCommand selectMember(String id);

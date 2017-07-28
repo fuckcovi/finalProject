@@ -1,25 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="page-main-style">
-	<h1>회원 로그인</h1>
-	<form:form commandName="memberCommand" id="login_form">
+	<h1>회원 탈퇴</h1>
+	<form:form commandName="memberCommand" id="delete_form">
 		<form:errors element="div" cssClass="error-color"/>
-		<ul class="menu">
+		<form:hidden path="id"/>
+		<ul>
 			<li>
-				<label for="id">아이디</label>
-				<form:input path="id"/>
-				<form:errors path="id" cssClass="error-color"/>
-			</li>
-			<li>
-				<label for="pw">비밀번호</label>
+				<label for="passwd">비밀번호</label>
 				<form:password path="pw"/>
 				<form:errors path="pw" cssClass="error-color"/>
-			</li>
+			</li>	
 		</ul>
 		<div class="align-center">
-			<input type="submit" value="로그인">
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main.do'">
+			<input type="submit" value="회원삭제">
+			<input type="button" value="회원상세" onclick="location.href='detail.do'">
 		</div>
 	</form:form>
 </div>
