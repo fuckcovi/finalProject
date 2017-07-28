@@ -53,9 +53,29 @@ public class MatchController {
 	}
 	
 	@RequestMapping("/match/scoreBoard.do")
-	public ModelAndView scoreBoardForm() {		
+	public ModelAndView scoreBoardForm(@RequestParam(value="pageNum", defaultValue="1") int currentPage) {		
+		int count = matchService.getRowCount();
+		if (log.isDebugEnabled()) {
+			log.debug("<<pageNum>> : " + currentPage);
+			log.debug("<<count>> : " + count);
+		}
+		
+		PagingUtil page = new PagingUtil(currentPage, count, 10, 10, "match/scoreBoard.do");
+		
+		List<MatchCommand> list = null;
+		if (count > 0) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			list = matchService.matchList(map);
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("scoreBoard");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;
 	}

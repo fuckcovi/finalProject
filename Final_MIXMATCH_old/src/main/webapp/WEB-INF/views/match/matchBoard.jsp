@@ -6,62 +6,39 @@
 <head>
 <meta charset="UTF-8">
 <title>매치보드</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/matchLayout.css">
 </head>
-<style>
-	table {
-		margin: 0 auto; 
-	}
-	
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	
-	th, td {
-		width: 130px;  
-	}
-	
-	th {
-		background: #FF4848;
-		color: white;
-		height: 30px;
-	}
-	
-	td {
-		height: 80px;
-	}
-</style>
 <body>
-<div>
+<div class="page-main-style">
 	<h2>매치보드</h2>
-	<hr style="width:90%;border:3px solid #002266;"><br>
-	<c:if test="${count == 0}">
-		<div class="align-center">출력할 리스트가 없습니다.</div>
-	</c:if>
-	<c:if test="${count > 0}">
-		<table>
-			<tr>
-				<th></th>
-				<th>팀명</th>
-				<th>지역</th>
-				<th>날짜</th>
-				<th>시간</th>
-				<th></th>
-			</tr>
-			<c:forEach var="matchList" items="${matchList}">
-				<tr>
-					<td>팀사진</td>
-					<td>${matchList.id}</td>
-					<td>지역</td>
-					<td>날짜</td>
-					<td>시간</td>
-					<td><input type="button" value="매치신청"></td>
-				</tr>
-			</c:forEach>
-		</table>
-	</c:if> 
-	<br><hr style="width:90%;border:3px solid #002266;"> 
-	<input type="button" value="매치등록" style="float:right;margin-right:42px;">
+	<hr><br>
+	<table>
+		<tr>
+			<th></th>
+			<th>팀명</th>
+			<th>지역</th>
+			<th>날짜</th>
+			<th>시간</th>
+			<th></th>
+		</tr>
+<c:if test="${count == 0}">
+	</table>
+	<br><div class="align-center">등록된 매치가 없습니다. 매치등록을 해주세요 ↘↘</div>
+</c:if>
+<c:if test="${count > 0}">
+		<tr>
+			<td>팀사진</td>
+			<td>팀명<br><input type="button" value="팀정보" class="btn-team-info"></td>
+			<td>지역</td>
+			<td>날짜</td>
+			<td>시간</td>
+			<td><input type="button" value="매치신청" class="btn"></td>
+		</tr>
+	</table>
+</c:if>
+	<br><hr> 
+	<input type="button" value="매치등록" class="btn" style="float:right;margin-right:42px;">
 </div>
 </body>
 </html>

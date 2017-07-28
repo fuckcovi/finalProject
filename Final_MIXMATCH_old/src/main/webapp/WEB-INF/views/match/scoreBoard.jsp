@@ -1,39 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>스코어보드</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/matchLayout.css">
 </head>
-<style>
-	table {
-		margin: 0 auto; 
-	}
-	
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	
-	th, td {
-		width: 130px;  
-	}
-	
-	th {
-		background: #FF4848;
-		color: white;
-		height: 30px;
-	}
-	
-	td {
-		height: 80px;
-	}
-</style>
 <body>
-<div>
+<div class="page-main-style">
 	<h2>스코어보드</h2>
-	<hr style="width:90%;border:3px solid #002266;"><br>
+	<hr><br>
 	<table>
 		<tr>
 			<th>지역</th>
@@ -43,16 +22,22 @@
 			<th>결과</th>
 			<th></th>
 		</tr>
+<c:if test="${count == 0}">
+	</table>
+	<br><div class="align-center">매칭된 경기가 없습니다.</div>
+</c:if>
+<c:if test="${count > 0}">
 		<tr>
 			<td>지역</td>
 			<td>날짜</td>
 			<td>시간</td>
-			<td>홈팀</td>
-			<td><input type="button" value="결과등록"></td>
-			<td>어웨이팀</td>
+			<td>홈팀<br><input type="button" value="팀정보" class="btn-team-info"></td>
+			<td><input type="button" value="결과등록" class="btn"></td>
+			<td>어웨이팀<br><input type="button" value="팀정보" class="btn-team-info"></td>
 		</tr>
-	</table>   
-	<br><hr style="width:90%;border:3px solid #002266;">
+	</table> 
+</c:if>  
+	<br><hr>
 </div>
 </body>
 </html>
