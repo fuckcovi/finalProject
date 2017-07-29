@@ -78,6 +78,19 @@ public class MemberController {
 		return map;
 	}
 	
+	@RequestMapping(value="/member/detail.do")
+	public String detailForm(HttpSession session, Model model){
+		MemberCommand member = memberService.selectMember((String)session.getAttribute("user_id"));
+		
+		if(log.isDebugEnabled()){
+			log.debug("<<memberCommand>> : " + member);
+		}
+		
+		model.addAttribute("member", member);
+		
+		return "memberDetail";
+	}
+	
 	@RequestMapping(value="/member/pwUpdate.do",method=RequestMethod.GET)
 	public String pwUpdateForm(){
 		return "pwUpdate";

@@ -25,7 +25,7 @@
 		</ul>
 		<div class="align-center">
 			<input type="submit" value="비밀번호 수정">
-			<input type="button" value="회원상세" onclick="location.href='detail.do'">
+			<input type="button" value="내정보 보기" onclick="location.href='detail.do'">
 		</div>
 	</form:form>
 </div>
