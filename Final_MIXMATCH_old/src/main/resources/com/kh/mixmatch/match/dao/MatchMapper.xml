@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.kh.mixmatch.match.dao.MatchMapper">
+	<select id="matchList" parameterType="map" resultType="matchCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM g_match ORDER BY m_seq DESC)a)
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>	
+</mapper>
