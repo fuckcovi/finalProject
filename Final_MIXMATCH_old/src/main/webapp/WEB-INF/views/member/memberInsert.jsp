@@ -5,7 +5,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/member/confirmId.js"></script>
 <div class="page-main-style">
 	<h1>회원가입</h1>
-	<form:form commandName="memberCommand" id="write_form">
+	<form:form commandName="memberCommand" id="write_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<ul class="menu">
 			<li>
