@@ -172,4 +172,19 @@ public class MatchController {
 		return "redirect:/match/matchBoard.do";
 	}
 	
+	// 매치신청
+	@RequestMapping("/match/updateChallenger.do")
+	public String updateChallengerSubmit(@RequestParam("m_seq") int m_seq, HttpSession session) {
+		String id = (String) session.getAttribute("user_id");
+		String t_name = matchService.getTeamName(id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_seq", m_seq);
+		map.put("t_name", t_name);
+		
+		matchService.updateChallenger(map);
+		
+		return "redirect:/match/matchBoard.do";
+	}
+	
 }

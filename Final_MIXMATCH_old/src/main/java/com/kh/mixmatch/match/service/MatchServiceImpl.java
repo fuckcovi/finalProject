@@ -51,4 +51,9 @@ public class MatchServiceImpl implements MatchService {
 		return matchMapper.getTeamName(id);
 	}
 
+	@Override
+	public void updateChallenger(Map<String,Object> map) {
+		matchMapper.updateChallenger(map); 
+	}
+
 }

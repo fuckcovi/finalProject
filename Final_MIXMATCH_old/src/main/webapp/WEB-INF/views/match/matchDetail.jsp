@@ -40,7 +40,9 @@
 				<td align="left"> ${match.m_content}</td>
 			</tr>
 		</table><br>
-		<input type="button" value="매치신청" class="btn">
+		<c:if test="${t_name ne match.t_name}">
+			<input type="button" value="매치신청" class="btn" onClick="location.href='updateChallenger.do?m_seq=${match.m_seq}'">
+		</c:if>
 		<input type="button" value="목록으로" class="btn" onclick="location.href='matchBoard.do'">
 	</div>
 	<br><hr class="style">
