@@ -7,13 +7,23 @@
 <tiles-definitions>
 
 	<definition name="matchBoard" extends="main">
-  		<put-attribute name="title" value="MATCHBOARD"/>
+  		<put-attribute name="title" value="매치보드"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchBoard.jsp"/>
   	</definition>
   	
   	<definition name="scoreBoard" extends="main">
-  		<put-attribute name="title" value="SCOREBOARD"/>
+  		<put-attribute name="title" value="스코어보드"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/scoreBoard.jsp"/>
+  	</definition>
+  	
+  	<definition name="matchInsert" extends="main">
+  		<put-attribute name="title" value="매치등록"/>
+  		<put-attribute name="body" value="/WEB-INF/views/match/matchInsert.jsp"/>
+  	</definition>
+  	
+  	<definition name="matchDetail" extends="main">
+  		<put-attribute name="title" value="상세보기"/>
+  		<put-attribute name="body" value="/WEB-INF/views/match/matchDetail.jsp"/>
   	</definition>
  	
 </tiles-definitions>

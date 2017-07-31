@@ -22,8 +22,8 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public int getRowCount() {
-		return matchMapper.getRowCount();
+	public int getRowCount(Map<String,Object> map) {
+		return matchMapper.getRowCount(map);
 	}
 
 	@Override
@@ -44,6 +44,11 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public void deleteMatch(Integer m_seq) {
 		matchMapper.deleteMatch(m_seq);
+	}
+
+	@Override
+	public String getTeamName(String id) {
+		return matchMapper.getTeamName(id);
 	}
 
 }
