@@ -7,7 +7,7 @@ public class MatchCommand {
 
 	private int m_seq;
 	@NotEmpty
-	private String id;
+	private String t_name;
 	private String m_area;
 	private String m_date;
 	@NotEmpty
@@ -17,7 +17,7 @@ public class MatchCommand {
 	private int m_cost;
 	private String m_content;
 	private String m_type;
-	private String t_name;
+	private String m_challenger;
 	private int m_home;
 	private int m_away;
 	private String m_mvp;
@@ -70,11 +70,12 @@ public class MatchCommand {
 	public void setM_seq(int m_seq) {
 		this.m_seq = m_seq;
 	}
-	public String getId() {
-		return id;
+	
+	public String getM_challenger() {
+		return m_challenger;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setM_challenger(String m_challenger) {
+		this.m_challenger = m_challenger;
 	}
 	public String getM_area() {
 		return m_area;
@@ -148,13 +149,13 @@ public class MatchCommand {
 	public void setM_league(String m_league) {
 		this.m_league = m_league;
 	}
-	
 	@Override
 	public String toString() {
-		return "MatchCommand [m_seq=" + m_seq + ", id=" + id + ", m_area=" + m_area + ", m_date=" + m_date + ", m_time="
-				+ m_time + ", m_place=" + m_place + ", m_cost=" + m_cost + ", m_content=" + m_content + ", m_type="
-				+ m_type + ", t_name=" + t_name + ", m_home=" + m_home + ", m_away=" + m_away + ", m_mvp=" + m_mvp
-				+ ", m_league=" + m_league + "]";
+		return "MatchCommand [m_seq=" + m_seq + ", t_name=" + t_name + ", m_area=" + m_area + ", m_date=" + m_date
+				+ ", m_time=" + m_time + ", m_place=" + m_place + ", m_cost=" + m_cost + ", m_content=" + m_content
+				+ ", m_type=" + m_type + ", m_challenger=" + m_challenger + ", m_home=" + m_home + ", m_away=" + m_away
+				+ ", m_mvp=" + m_mvp + ", m_league=" + m_league + ", home_team=" + home_team + ", away_team="
+				+ away_team + "]";
 	}
 	
 }
