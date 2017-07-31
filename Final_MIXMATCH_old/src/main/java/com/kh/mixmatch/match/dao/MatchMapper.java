@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
+import com.kh.mixmatch.team.domain.TeamMemCommand;
 
 public interface MatchMapper {
 
@@ -23,11 +24,14 @@ public interface MatchMapper {
 	@Delete("DELETE FROM g_match WHERE m_seq=#{m_seq}")
 	public void deleteMatch(Integer m_seq);
 	
+	@Update("UPDATE g_match SET m_home=#{m_home},m_away=#{m_away},m_mvp=#{m_mvp} WHERE m_seq=#{m_seq}")
+	public void updateScore(MatchCommand match);
+	
 	@Select("SELECT t_name FROM g_team WHERE id=#{id,jdbcType=VARCHAR}")
 	public String getTeamName(String id);
 	@Update("UPDATE g_match SET m_challenger=#{t_name} WHERE m_seq=#{m_seq}")
-	public void challengerUpdate(Map<String,Object> map);
-	@Update("UPDATE g_match SET m_home=#{m_home},m_away=#{m_away},m_mvp=#{m_mvp} WHERE m_seq=#{m_seq}")
-	public void updateScore(MatchCommand match);
+	public void updateChallenger(Map<String,Object> map);
+	@Select("SELECT id FROM g_team_member WHERE t_name=#{t_name} or t_name=#{m_challenger}")
+	public List<TeamMemCommand> getMvpMember(Map<String, Object> map);
 	
 }

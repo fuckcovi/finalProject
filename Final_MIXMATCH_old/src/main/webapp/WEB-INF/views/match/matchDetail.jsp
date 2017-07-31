@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/match.js"></script>  
 <div class="page-main-style">
 	<h2>상세보기</h2>
 	<hr class="style"><br>
@@ -41,7 +43,7 @@
 			</tr>
 		</table><br>
 		<c:if test="${t_name ne match.t_name}">
-			<input type="button" value="매치신청" class="btn" onClick="location.href='challengerUpdate.do?m_seq=${match.m_seq}'">
+			<input type="button" value="매치신청" id="match_btn" class="btn" onClick="location.href='challengerUpdate.do?m_seq=${match.m_seq}'">
 		</c:if>
 		<input type="button" value="목록으로" class="btn" onclick="location.href='matchBoard.do'">
 	</div>

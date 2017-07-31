@@ -11,12 +11,12 @@
 		<ul>
 			<li>
 				<label for="m_home">홈팀 점수</label>
-				<form:input path="m_home"/>
+				<form:input path="m_home" value="0"/> 
 				<form:errors path="m_home" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="m_away">어웨이팀 점수</label>
-				<form:input path="m_away"/>
+				<form:input path="m_away" value="0"/>
 				<form:errors path="m_away" cssClass="error-color"/>
 			</li>
 			<li>
