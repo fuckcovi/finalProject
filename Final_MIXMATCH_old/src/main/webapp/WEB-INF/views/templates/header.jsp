@@ -29,7 +29,7 @@
 </ul> 
 </li>
 <li class="topMenuLi">
-<a class="menuLink" href="${pageContext.request.contextPath}/#">매칭</a>
+<a class="menuLink" href="${pageContext.request.contextPath}/match/matchBoard.do">매칭</a>
 <ul class="submenu">
 <li><a href="${pageContext.request.contextPath}/match/matchBoard.do" class="submenuLink">매치보드</a></li>
 <li><a href="${pageContext.request.contextPath}/match/scoreBoard.do" class="submenuLink">스코어보드</a></li>

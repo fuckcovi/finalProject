@@ -42,7 +42,7 @@
 			<c:if test="${t_name ne match.t_name}">class="dis-btn" disabled</c:if>></td>
 			</c:if>
 			<c:if test="${match.m_home ne -1}">
-			<td><a>점수보기</a></td>
+			<td><a href="selectScore.do?m_seq=${match.m_seq}">점수보기</a></td>
 			</c:if>
 			<td>${match.m_challenger}<br><input type="button" value="팀정보" class="btn-team-info"></td>
 		</tr>

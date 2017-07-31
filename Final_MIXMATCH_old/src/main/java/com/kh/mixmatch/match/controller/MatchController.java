@@ -218,4 +218,20 @@ public class MatchController {
 		return "redirect:/match/matchBoard.do";
 	}
 	
+	// 점수보기
+	@RequestMapping("/match/selectScore.do")
+	public ModelAndView selectScoreForm(@RequestParam("m_seq") int m_seq) {
+		if (log.isDebugEnabled()) {
+			log.debug("<<m_seq>> : " + m_seq);
+		}
+		
+		MatchCommand match = matchService.selectMatch(m_seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("selectScore");
+		mav.addObject("match", match);
+		
+		return mav;
+	}
+	
 }

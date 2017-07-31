@@ -30,5 +30,10 @@
   		<put-attribute name="title" value="수정"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchUpdate.jsp"/>
   	</definition>
+  	
+  	<definition name="selectScore" extends="main">
+  		<put-attribute name="title" value="점수보기"/>
+  		<put-attribute name="body" value="/WEB-INF/views/match/selectScore.jsp"/>
+  	</definition>
  	
 </tiles-definitions>
