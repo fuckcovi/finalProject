@@ -5,13 +5,13 @@
 <div class="page-main-style">
 	<h2>수정</h2>
 	<hr class="style"><br>
-	<form:form class="style" commandName="command" action="matchUpdate.do" enctype="multipart/form-data" id="update_form">
+	<form:form class="style" commandName="match" action="matchUpdate.do" enctype="multipart/form-data" id="update_form">
 		<form:errors element="div" cssClass="error-color"/><br>
 		<form:hidden path="m_seq"/>
 		<ul>
 			<li>
 				<label for="t_name">팀명</label>
-				<span>${command.t_name}</span>
+				<span>${match.t_name}</span>
 				<form:hidden path="t_name"/>
 			</li>
 			<li>

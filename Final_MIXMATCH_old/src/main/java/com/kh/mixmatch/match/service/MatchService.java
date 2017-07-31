@@ -21,7 +21,7 @@ public interface MatchService {
 	public void deleteMatch(Integer m_seq);
 	
 	public String getTeamName(String id);
-	public void updateChallenger(Map<String,Object> map);
+	public void challengerUpdate(Map<String,Object> map);
 	public void updateScore(MatchCommand match);
 	
 }

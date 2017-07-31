@@ -5,12 +5,12 @@
 <div class="page-main-style">
 	<h2>매치등록</h2>
 	<hr class="style"><br>
-	<form:form class="style" commandName="command" action="matchInsert.do" enctype="multipart/form-data" id="insert_form">
+	<form:form class="style" commandName="match" action="matchInsert.do" enctype="multipart/form-data" id="insert_form">
 		<form:errors element="div" cssClass="error-color"/><br>
 		<ul>
 			<li>
 				<label for="t_name">팀명</label>
-				<span>${command.t_name}</span>
+				<span>${match.t_name}</span>
 				<form:hidden path="t_name"/>
 			</li>
 			<li>

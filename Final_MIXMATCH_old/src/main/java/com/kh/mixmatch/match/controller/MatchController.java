@@ -33,32 +33,30 @@ public class MatchController {
 	
 	// 매치보드
 	@RequestMapping("/match/matchBoard.do")
-	public ModelAndView matchBoardForm(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									   @RequestParam(value="type", defaultValue="축구") String type,
-									   HttpSession session) {
+	public ModelAndView matchBoardForm(@RequestParam(value="type", defaultValue="축구") String type,
+									   HttpSession session) {				
+		// 종목 받아오기
 		String board = "match";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 		
+		// 종목별 게시글 수 카운트
 		int count = matchService.getRowCount(map);
+		
 		if (log.isDebugEnabled()) {
-			log.debug("<<pageNum>> : " + currentPage);
 			log.debug("<<type>> : " + type);		
 			log.debug("<<count>> : " + count);
 		}
 		
-		PagingUtil page = new PagingUtil(type, board, currentPage, count, 10, 10, "match/matchBoard.do");
-		
+		// 리스트에 저장
 		List<MatchCommand> list = null;
 		if (count > 0) {
-			map.put("start", page.getStartCount());
-			map.put("end", page.getEndCount());
-			map.put("type", type);
-			
+			map.put("type", type);		
 			list = matchService.matchList(map);
 		}
 		
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		String t_name = matchService.getTeamName(id);
 		
@@ -68,41 +66,38 @@ public class MatchController {
 		mav.addObject("list", list);
 		mav.addObject("type", type);
 		mav.addObject("t_name", t_name);
-		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;
 	}
 	
 	// 스코어보드
 	@RequestMapping("/match/scoreBoard.do")
-	public ModelAndView scoreBoardForm(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									   @RequestParam(value="type", defaultValue="축구") String type,
-									   HttpSession session) {		
-		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
-		
+	public ModelAndView scoreBoardForm(@RequestParam(value="type", defaultValue="축구") String type,
+									   HttpSession session) {			
+		// 종목 받아오기
 		String board = "score";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 		
+		// 종목별 게시글 수 카운트
 		int count = matchService.getRowCount(map);
+		
 		if (log.isDebugEnabled()) {
-			log.debug("<<pageNum>> : " + currentPage);
 			log.debug("<<type>> : " + type);
 			log.debug("<<count>> : " + count);
 		}
 		
-		PagingUtil page = new PagingUtil(type, board, currentPage, count, 10, 10, "match/scoreBoard.do");
-		
+		// 리스트에 저장
 		List<MatchCommand> list = null;
 		if (count > 0) {
-			map.put("start", page.getStartCount());
-			map.put("end", page.getEndCount());
-			map.put("type", type);
-			
+			map.put("type", type);		
 			list = matchService.matchList(map);
 		}
+		
+		// 유저 팀이름 받아오기
+		String id = (String) session.getAttribute("user_id");
+		String t_name = matchService.getTeamName(id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("scoreBoard");
@@ -110,7 +105,6 @@ public class MatchController {
 		mav.addObject("list", list);
 		mav.addObject("type", type);
 		mav.addObject("t_name", t_name);
-		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;
 	}
@@ -118,22 +112,24 @@ public class MatchController {
 	// 매치등록폼
 	@RequestMapping(value="/match/matchInsert.do", method=RequestMethod.GET)
 	public ModelAndView matchInsertForm(HttpSession session, Model model) {
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		String t_name = matchService.getTeamName(id);
 		
-		MatchCommand command = new MatchCommand();
-		command.setT_name(t_name);
+		// 받아온 팀이름을 matchCommand에 저장
+		MatchCommand matchCommand = new MatchCommand();
+		matchCommand.setT_name(t_name);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchInsert");
-		mav.addObject("command", command);
+		mav.addObject("match", matchCommand);
 		
 		return mav;
 	}
 	
 	// 매치등록
 	@RequestMapping(value="/match/matchInsert.do", method=RequestMethod.POST)
-	public String matchInsertSubmit(@ModelAttribute("command") @Valid MatchCommand matchCommand,
+	public String matchInsertSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<matchCommand>> : " + matchCommand);
@@ -143,6 +139,7 @@ public class MatchController {
 			return "matchInsert";
 		}
 		
+		// 매치등록
 		matchService.insertMatch(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
@@ -150,15 +147,16 @@ public class MatchController {
 	
 	// 매치 상세보기
 	@RequestMapping("/match/matchDetail.do")
-	public ModelAndView matchDetail(@RequestParam("m_seq") int m_seq,
-									HttpSession session) {
-		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
-		
+	public ModelAndView matchDetailForm(@RequestParam("m_seq") int m_seq, HttpSession session) {		
 		if (log.isDebugEnabled()) {
 			log.debug("<<m_seq>> : " + m_seq);
 		}
 		
+		// 유저 팀이름 받아오기
+		String id = (String) session.getAttribute("user_id");
+		String t_name = matchService.getTeamName(id);
+		
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand match = matchService.selectMatch(m_seq);
 		
 		ModelAndView mav = new ModelAndView();
@@ -172,31 +170,40 @@ public class MatchController {
 	// 매치삭제
 	@RequestMapping("/match/matchDelete.do")
 	public String matchDeleteSubmit(@RequestParam("m_seq") int m_seq) {
+		if (log.isDebugEnabled()) {
+			log.debug("<<m_seq>> : " + m_seq);
+		}
+		
+		// 매치삭제
 		matchService.deleteMatch(m_seq);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
 	// 매치신청
-	@RequestMapping("/match/updateChallenger.do")
-	public String updateChallengerSubmit(@RequestParam("m_seq") int m_seq, HttpSession session) {
+	@RequestMapping("/match/challengerUpdate.do")
+	public String challengerUpdateSubmit(@RequestParam("m_seq") int m_seq, HttpSession session) {
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		String t_name = matchService.getTeamName(id);
 		
+		// 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("m_seq", m_seq);
 		map.put("t_name", t_name);
 		
-		matchService.updateChallenger(map);
+		// m_challenger에 받아온 팀이름 저장
+		matchService.challengerUpdate(map);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
 	// 매치수정폼
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.GET)
-	public String updateMatchForm(@RequestParam("m_seq") int m_seq, Model model) {
+	public String matchUpdateForm(@RequestParam("m_seq") int m_seq, Model model) {
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand matchCommand = matchService.selectMatch(m_seq);
-		model.addAttribute("command", matchCommand);
+		model.addAttribute("match", matchCommand);
 		
 		return "matchUpdate";
 	}
