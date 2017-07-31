@@ -234,4 +234,26 @@ public class MatchController {
 		return mav;
 	}
 	
+	// 결과등록폼
+	@RequestMapping(value="/match/updateScore.do", method=RequestMethod.GET)
+	public String updateScoreForm(@RequestParam("m_seq") int m_seq, Model model) {
+		MatchCommand matchCommand = matchService.selectMatch(m_seq);
+		model.addAttribute("command", matchCommand);
+		
+		return "updateScore";
+	}
+	
+	// 결과등록
+	@RequestMapping(value="/match/updateScore.do", method=RequestMethod.POST)
+	public String updateScoreSubmit(@ModelAttribute("command") @Valid MatchCommand matchCommand,
+									BindingResult result, HttpServletRequest request) {
+		if (log.isDebugEnabled()) {
+			log.debug("<<matchCommand>> : " + matchCommand);
+		}
+		
+		matchService.updateScore(matchCommand);
+		
+		return "redirect:/match/scoreBoard.do";
+	}
+	
 }

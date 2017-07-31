@@ -56,4 +56,9 @@ public class MatchServiceImpl implements MatchService {
 		matchMapper.updateChallenger(map); 
 	}
 
+	@Override
+	public void updateScore(MatchCommand match) {
+		matchMapper.updateScore(match);
+	}
+
 }

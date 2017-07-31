@@ -22,5 +22,6 @@ public interface MatchService {
 	
 	public String getTeamName(String id);
 	public void updateChallenger(Map<String,Object> map);
+	public void updateScore(MatchCommand match);
 	
 }

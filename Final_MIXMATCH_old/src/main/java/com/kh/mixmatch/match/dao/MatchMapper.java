@@ -27,5 +27,7 @@ public interface MatchMapper {
 	public String getTeamName(String id);
 	@Update("UPDATE g_match SET m_challenger=#{t_name} WHERE m_seq=#{m_seq}")
 	public void updateChallenger(Map<String,Object> map);
+	@Update("UPDATE g_match SET m_home=#{m_home},m_away=#{m_away},m_mvp=#{m_mvp} WHERE m_seq=#{m_seq}")
+	public void updateScore(MatchCommand match);
 	
 }
