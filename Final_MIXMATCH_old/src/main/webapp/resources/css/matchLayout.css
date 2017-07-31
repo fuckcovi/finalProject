@@ -86,7 +86,7 @@ td.left-style {
 	list-style: none;
 }
 
-.btn {
+.btn, .dis-btn {
 	width: 80px;
 	height: 30px;
 	border: 0;

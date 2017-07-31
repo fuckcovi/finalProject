@@ -31,12 +31,19 @@
 <c:if test="${count > 0}">
 	<c:forEach var="match" items="${list}">
 		<c:if test="${!empty match.m_challenger}">
-		<tr>
+		<tr> 
 			<td>${match.m_area}</td>
 			<td>${match.m_date}</td>
 			<td>${match.m_time}</td>
 			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info"></td>
-			<td><input type="button" value="결과등록" class="btn"></td>
+			<c:if test="${match.m_home eq -1}">
+			<td><input type="button" value="결과등록" 
+			<c:if test="${t_name eq match.t_name}">class="btn"</c:if>
+			<c:if test="${t_name ne match.t_name}">class="dis-btn" disabled</c:if>></td>
+			</c:if>
+			<c:if test="${match.m_home ne -1}">
+			<td><a>점수보기</a></td>
+			</c:if>
 			<td>${match.m_challenger}<br><input type="button" value="팀정보" class="btn-team-info"></td>
 		</tr>
 		</c:if>

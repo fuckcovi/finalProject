@@ -76,7 +76,11 @@ public class MatchController {
 	// 스코어보드
 	@RequestMapping("/match/scoreBoard.do")
 	public ModelAndView scoreBoardForm(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									   @RequestParam(value="type", defaultValue="축구") String type) {		
+									   @RequestParam(value="type", defaultValue="축구") String type,
+									   HttpSession session) {		
+		String id = (String) session.getAttribute("user_id");
+		String t_name = matchService.getTeamName(id);
+		
 		String board = "score";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
@@ -105,6 +109,7 @@ public class MatchController {
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("type", type);
+		mav.addObject("t_name", t_name);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;
