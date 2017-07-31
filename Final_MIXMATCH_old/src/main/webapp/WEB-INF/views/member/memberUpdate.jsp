@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="page-main-style">
 	<h1>회원수정</h1>
-	<form:form commandName="memberCommand" id="update_form">
+	<form:form commandName="memberCommand" id="update_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
 		<form:hidden path="id"/>
 		<ul class="menu">
