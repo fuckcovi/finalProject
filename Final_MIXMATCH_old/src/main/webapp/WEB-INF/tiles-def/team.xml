@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+   
+    
+    <!--  팀  -->
+  	<definition name="teamHome" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAM"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamHome.jsp"/>
+    </definition>
+  	<definition name="teamRegister" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAM"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamRegister.jsp"/>
+    </definition>
+  	<definition name="teamRank" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAMRank"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamRank.jsp"/>
+    </definition>
+  	<definition name="teamInfo" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAMInfo"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamInfo.jsp"/>
+    </definition>
+   	<definition name="teamMemView" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAM MEMBER"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamMemView.jsp"/>
+    </definition>
+   	<definition name="teamSchedule" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAM Schedule"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamSchedule.jsp"/>
+    </definition>
+     <definition name="teamRecord" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAM Record"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamRecord.jsp"/>
+    </definition>
+  
+</tiles-definitions>

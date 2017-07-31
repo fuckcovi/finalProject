@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.mixmatch.match.domain.MatchCommand;
 import com.kh.mixmatch.team.dao.TeamMapper;
 import com.kh.mixmatch.team.domain.TeamCommand;
 @Service("teamService")
@@ -14,6 +15,8 @@ public class TeamServiceImpl implements TeamService {
 
 	@Resource
 	private TeamMapper teamMapper;
+	
+	
 	
 	@Override
 	public List<TeamCommand> list(Map<String, Object> map) {
@@ -42,8 +45,18 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void deleteTeam(String tname) {
+		teamMapper.deleteTeam(tname);
+	}
+
+	@Override
+	public List<TeamCommand> listRank(Map<String, Object> map) {
+		return teamMapper.listRank(map);
+	}
+
+	@Override
+	public List<MatchCommand> listMatch(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		
+		return teamMapper.listMatch(map);
 	}
 	
 }

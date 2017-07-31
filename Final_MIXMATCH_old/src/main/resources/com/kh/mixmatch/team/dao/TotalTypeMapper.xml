@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.kh.mixmatch.team.dao.TotalTypeMapper"> 
+	<!-- <select id="listFoot" parameterType="map" resultType="footCommand">
+		SELECT id,sum(f_goal) AS f_goal,sum(f_assist) f_assist,sum(f_shoot) f_shoot,sum(f_attack) f_attack FROM g_football GROUP BY ROLLUP(id);		
+	</select>
+	  -->
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

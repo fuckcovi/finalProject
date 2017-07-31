@@ -1,6 +1,7 @@
 package com.kh.mixmatch.match.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 public class MatchCommand {
 
@@ -22,6 +23,47 @@ public class MatchCommand {
 	private String m_mvp;
 	private String m_league;
 	
+	
+	// ¡∂¿Œ
+	private String home_team;
+	private String away_team;
+	private MultipartFile t_logo_upload;
+	private String t_logo_name;
+	private byte[] t_logo;
+	
+	
+	
+	
+	public String getHome_team() {
+		return home_team;
+	}
+	public void setHome_team(String home_team) {
+		this.home_team = home_team;
+	}
+	public String getAway_team() {
+		return away_team;
+	}
+	public void setAway_team(String away_team) {
+		this.away_team = away_team;
+	}
+	public MultipartFile getT_logo_upload() {
+		return t_logo_upload;
+	}
+	public void setT_logo_upload(MultipartFile t_logo_upload) {
+		this.t_logo_upload = t_logo_upload;
+	}
+	public String getT_logo_name() {
+		return t_logo_name;
+	}
+	public void setT_logo_name(String t_logo_name) {
+		this.t_logo_name = t_logo_name;
+	}
+	public byte[] getT_logo() {
+		return t_logo;
+	}
+	public void setT_logo(byte[] t_logo) {
+		this.t_logo = t_logo;
+	}
 	public int getM_seq() {
 		return m_seq;
 	}

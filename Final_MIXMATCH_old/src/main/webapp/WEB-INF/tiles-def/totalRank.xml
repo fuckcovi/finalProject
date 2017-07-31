@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+ 	 <definition name="totalPointRank" extends="main">
+     	<put-attribute name="title" value="MIXMATCH 통합포인트랭킹"/>
+     	<put-attribute name="body" value="/WEB-INF/views/rank/totalPointRank.jsp"/>
+    </definition>
+	<definition name="totalBaseRank" extends="main">
+     	<put-attribute name="title" value="MIXMATCH 통합야구랭킹"/>
+     	<put-attribute name="body" value="/WEB-INF/views/rank/totalBaseRank.jsp"/>
+    </definition>
+    <definition name="totalBasketRank" extends="main">
+     	<put-attribute name="title" value="MIXMATCH 통합농구랭킹"/>
+     	<put-attribute name="body" value="/WEB-INF/views/rank/totalBasketRank.jsp"/>
+    </definition>
+    <definition name="totalFootRank" extends="main">
+     	<put-attribute name="title" value="MIXMATCH 통합축구랭킹"/>
+     	<put-attribute name="body" value="/WEB-INF/views/rank/totalFootRank.jsp"/>
+    </definition>
+</tiles-definitions>

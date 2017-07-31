@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.kh.mixmatch.team.dao.TeamMapper"> 
+	<select id="listRank" parameterType="map" resultType="TeamCommand">
+		SELECT * FROM g_team 
+					<where>
+						<if test="keyword != '' and keyfield =='teamtype'">
+							t_type like '%' || #{keyword} || '%'
+						</if>
+					</where>
+					ORDER BY t_win DESC					
+	</select>
+	 
+	<select id="getTeamCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM g_team 
+					<where>
+						<if test="keyword != '' and keyfield =='teamname'">
+							t_name like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='teamtype'">
+							t_type like '%' || #{keyword} || '%'
+						</if>
+					</where>
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

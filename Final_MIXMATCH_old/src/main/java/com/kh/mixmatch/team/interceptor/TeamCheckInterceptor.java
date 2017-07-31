@@ -7,8 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.kh.mixmatch.team.domain.TeamMemCommand;
+import com.kh.mixmatch.team.service.TeamMemService;
+import com.kh.mixmatch.team.service.TeamService;
+
 public class TeamCheckInterceptor extends HandlerInterceptorAdapter{
 	private Logger log = Logger.getLogger(this.getClass());
+	private TeamMemService teamMemService;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if(log.isDebugEnabled()){
@@ -16,7 +21,14 @@ public class TeamCheckInterceptor extends HandlerInterceptorAdapter{
 		}
 		// 로그인 여부 검사
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user_team")==null){
+		String user_id = (String)session.getAttribute("user_id");
+		System.out.println(user_id + " : 아이디");
+		System.out.println(teamMemService.getRowTeamCount(user_id));
+		int teamCount = teamMemService.getRowTeamCount(user_id);
+		
+		System.out.println("팀 수 : " + teamCount);
+		if(teamCount <1){
+			
 			response.sendRedirect(request.getContextPath()+"/team.do");
 			return false;
 		}

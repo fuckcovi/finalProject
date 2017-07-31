@@ -34,9 +34,13 @@
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
 				<!-- 매칭 -->
 				<beans:value>/WEB-INF/tiles-def/match.xml</beans:value>
+				<!--  팀 -->
+				<beans:value>/WEB-INF/tiles-def/team.xml</beans:value>
+				<!--  랭킹 -->
+				<beans:value>/WEB-INF/tiles-def/totalRank.xml</beans:value>
 				<!-- 일단 주석처리 -->
 				<!-- 팀관련
-				<beans:value>/WEB-INF/tiles-def/team.xml</beans:value>
+				
 				게시판관련(모든 게시판 포함)
 				<beans:value>/WEB-INF/tiles-def/board.xml</beans:value>
 				포인트샵 관련
@@ -103,12 +107,12 @@
 	
 	
 	<!--  소속팀 존재여부 체크 인터셉터 -->
-	<mvc:interceptors> 
+	<!-- <mvc:interceptors> 
 		<mvc:interceptor>
 			<mvc:mapping path="/teamRank.do"/>
 			<beans:bean class="com.kh.mixmatch.team.interceptor.TeamCheckInterceptor"/>
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 	
 </beans:beans>
 

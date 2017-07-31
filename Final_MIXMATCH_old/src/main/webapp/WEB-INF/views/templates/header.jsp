@@ -39,10 +39,10 @@
 <li class="topMenuLi">
 <a class="menuLink" href="${pageContext.request.contextPath}/#">기록/랭킹</a>
 <ul class="submenu">
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">통합P랭킹</a></li>
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">야구랭킹</a></li>
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">농구랭킹</a></li>
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">축구랭킹</a></li>
+<li><a href="${pageContext.request.contextPath}/totalRank.do" class="submenuLink">통합P랭킹</a></li>
+<li><a href="${pageContext.request.contextPath}/totalBaseRank.do" class="submenuLink">야구랭킹</a></li>
+<li><a href="${pageContext.request.contextPath}/totalBasketRank.do" class="submenuLink">농구랭킹</a></li>
+<li><a href="${pageContext.request.contextPath}/totalFootRank.do" class="submenuLink">축구랭킹</a></li>
 </ul>
 </li>
 <li class="topMenuLi">
@@ -58,8 +58,8 @@
 <li class="topMenuLi">
 <a class="menuLink" href="${pageContext.request.contextPath}/#">마이페이지</a>
 <ul class="submenu">
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">미니홈피</a></li>
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">구매내역</a></li>
+<li><a href="${pageContext.request.contextPath}/teamSchedule.do" class="submenuLink">미니홈피</a></li>
+<li><a href="${pageContext.request.contextPath}/teamRecord.do" class="submenuLink">구매내역</a></li>
 </ul>
 </li>
 </ul>

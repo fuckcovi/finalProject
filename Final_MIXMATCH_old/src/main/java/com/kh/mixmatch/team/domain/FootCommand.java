@@ -1,21 +1,21 @@
 package com.kh.mixmatch.team.domain;
 
 import java.io.IOException;
-import java.sql.Date;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-public class TeamMemCommand {
-	private int t_mem_seq;
-	@NotEmpty
+import oracle.sql.BLOB;
+
+public class FootCommand {
+	private int f_seq;
 	private String id;
-	@NotEmpty
 	private String t_name;
-	private Date t_mem_regdate;
-	private int t_mem_auth;
-	
-	private String name;	// 조인 MEMBER
+	private int m_seq;
+	private int f_shoot;
+	private int f_assist;
+	private int f_goal;
+	private int f_attack;
+	private String name; //회원명 : MemberCommand 조인
 	private String profile_name; //프로필명 : MemberCommand 조인
 	private byte[] profile;
 	private MultipartFile profile_upload;
@@ -40,31 +40,17 @@ public class TeamMemCommand {
 	public void setProfile_name(String profile_name) {
 		this.profile_name = profile_name;
 	}
-	
-	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getT_mem_auth() {
-		return t_mem_auth;
+	public int getF_seq() {
+		return f_seq;
 	}
-	public void setT_mem_auth(int t_mem_auth) {
-		this.t_mem_auth = t_mem_auth;
-	}
-	public int getT_mem_seq() {
-		return t_mem_seq;
-	}
-	public void setT_mem_seq(int t_mem_seq) {
-		this.t_mem_seq = t_mem_seq;
-	}
-	public Date getT_mem_regdate() {
-		return t_mem_regdate;
-	}
-	public void setT_mem_regdate(Date t_mem_regdate) {
-		this.t_mem_regdate = t_mem_regdate;
+	public void setF_seq(int f_seq) {
+		this.f_seq = f_seq;
 	}
 	public String getId() {
 		return id;
@@ -78,10 +64,40 @@ public class TeamMemCommand {
 	public void setT_name(String t_name) {
 		this.t_name = t_name;
 	}
+	public int getM_seq() {
+		return m_seq;
+	}
+	public void setM_seq(int m_seq) {
+		this.m_seq = m_seq;
+	}
+	public int getF_shoot() {
+		return f_shoot;
+	}
+	public void setF_shoot(int f_shoot) {
+		this.f_shoot = f_shoot;
+	}
+	public int getF_assist() {
+		return f_assist;
+	}
+	public void setF_assist(int f_assist) {
+		this.f_assist = f_assist;
+	}
+	public int getF_goal() {
+		return f_goal;
+	}
+	public void setF_goal(int f_goal) {
+		this.f_goal = f_goal;
+	}
+	public int getF_attack() {
+		return f_attack;
+	}
+	public void setF_attack(int f_attack) {
+		this.f_attack = f_attack;
+	}
 	@Override
 	public String toString() {
-		return "TeamMemCommand [t_mem_seq=" + t_mem_seq + ", id=" + id + ", t_name=" + t_name + ", t_mem_regdate="
-				+ t_mem_regdate + ", t_mem_auth=" + t_mem_auth + "]";
+		return "FootCommand [f_seq=" + f_seq + ", id=" + id + ", t_name=" + t_name + ", m_seq=" + m_seq + ", f_shoot="
+				+ f_shoot + ", f_assist=" + f_assist + ", f_goal=" + f_goal + ", f_attack=" + f_attack + "]";
 	}
 	
 	
