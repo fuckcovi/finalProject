@@ -41,6 +41,9 @@ public class TeamController {
 	private TeamMemService teamMemService;
 	@Resource
 	private TotalTypeService totalTypeService;
+	@Resource
+	private MemberService memberService; 
+	
 	
 	@ModelAttribute("teamCommand")
 	public TeamCommand initCommand(){
@@ -93,6 +96,16 @@ public class TeamController {
 		mav.setViewName("teamInfo");
 		mav.addObject("team",team);
 		mav.addObject("match",match);
+		return mav;
+	}
+	
+	@RequestMapping("/imageViewMem.do")
+	public ModelAndView viewImageMemProfile(@RequestParam String id){
+		MemberCommand member = memberService.selectMember(id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile",member.getProfile());
+		mav.addObject("filename", member.getProfile_name());
 		return mav;
 	}
 	

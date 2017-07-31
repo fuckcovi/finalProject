@@ -63,7 +63,7 @@
 				<td>${status.count}</td>
 				<td>
 				<c:if test="${fn:endsWith(listMem.profile_name, '.jpg') || fn:endsWith(listMem.profile_name, '.png') || fn:endsWith(listMem.profile_name, '.gif') || fn:endsWith(listMem.profile_name, '.JPG') || fn:endsWith(listMem.profile_name, '.PNG') || fn:endsWith(listMem.profile_name, '.GIF')}">
-					<img src="imageView.do?id=${listMem.id}" style="width:100px;height:100px;">
+					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">
 				</c:if> 
 				</td>
 				<td><a href="#?id=${listMem.id}">${listMem.name}</a></td>

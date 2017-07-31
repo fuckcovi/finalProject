@@ -57,7 +57,7 @@
 						<td>${status.count}</td>
 						<td>
 						<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
-							<img src="imageView.do?id=${list.id}" style="width:100px;height:100px;">
+							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
 						</td>
 						<td><a href="#?id=${list.id}">${list.name}</a></td>
@@ -99,7 +99,7 @@
 						<td>${status.count}</td>
 						<td>
 						<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
-							<img src="imageView.do?id=${list.id}" style="width:100px;height:100px;">
+							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
 						</td>
 						<td><a href="#?id=${list.id}">${list.name}</a></td>
@@ -139,7 +139,7 @@
 						<td>${status.count}</td>
 						<td>
 						<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
-							<img src="imageView.do?id=${list.id}" style="width:100px;height:100px;">
+							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
 						</td>
 						<td><a href="#?id=${list.id}">${list.name}</a></td>
