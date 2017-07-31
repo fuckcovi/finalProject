@@ -187,4 +187,30 @@ public class MatchController {
 		return "redirect:/match/matchBoard.do";
 	}
 	
+	// 매치수정폼
+	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.GET)
+	public String updateMatchForm(@RequestParam("m_seq") int m_seq, Model model) {
+		MatchCommand matchCommand = matchService.selectMatch(m_seq);
+		model.addAttribute("command", matchCommand);
+		
+		return "matchUpdate";
+	}
+	
+	// 매치수정
+	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.POST)
+	public String updateMatchSubmit(@ModelAttribute("command") @Valid MatchCommand matchCommand,
+									BindingResult result, HttpServletRequest request) {
+		if (log.isDebugEnabled()) {
+			log.debug("<<matchCommand>> : " + matchCommand);
+		}
+		
+		if (result.hasErrors()) {
+			return "matchUpdate";
+		}
+		
+		matchService.updateMatch(matchCommand);
+		
+		return "redirect:/match/matchBoard.do";
+	}
+	
 }

@@ -25,5 +25,10 @@
   		<put-attribute name="title" value="상세보기"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchDetail.jsp"/>
   	</definition>
+  	
+  	<definition name="matchUpdate" extends="main">
+  		<put-attribute name="title" value="수정"/>
+  		<put-attribute name="body" value="/WEB-INF/views/match/matchUpdate.jsp"/>
+  	</definition>
  	
 </tiles-definitions>

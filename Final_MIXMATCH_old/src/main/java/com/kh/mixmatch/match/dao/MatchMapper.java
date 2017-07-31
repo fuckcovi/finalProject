@@ -18,6 +18,7 @@ public interface MatchMapper {
 	public void insertMatch(MatchCommand match);
 	@Select("SELECT * FROM g_match WHERE m_seq=#{m_seq}")
 	public MatchCommand selectMatch(Integer m_seq);
+	@Update("UPDATE g_match SET m_area=#{m_area},m_date=#{m_date},m_time=#{m_time},m_place=#{m_place},m_cost=#{m_cost},m_content=#{m_content},m_type=#{m_type} WHERE m_seq=#{m_seq}")
 	public void updateMatch(MatchCommand match);
 	@Delete("DELETE FROM g_match WHERE m_seq=#{m_seq}")
 	public void deleteMatch(Integer m_seq);
