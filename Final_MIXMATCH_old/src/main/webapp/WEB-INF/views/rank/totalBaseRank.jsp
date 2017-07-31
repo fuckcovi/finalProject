@@ -66,7 +66,7 @@
 					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">
 				</c:if> 
 				</td>
-				<td><a href="#?id=${listMem.id}">${listMem.name}</a></td>
+				<td><a href="#?미니홈피">${listMem.name}</a></td>
 				<td>${listMem.b_bat}</td>
 				<td>${listMem.b_hit}</td>
 				<td>${listMem.b_rbi}</td>

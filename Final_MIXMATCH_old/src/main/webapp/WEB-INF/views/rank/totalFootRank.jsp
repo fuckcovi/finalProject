@@ -62,7 +62,7 @@
 					<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 				</c:if> 
 				</td>
-				<td><a href="#?id=${list.id}">${list.name}</a></td>
+				<td><a href="#미니홈피">${list.name}</a></td>
 				<td>${list.f_shoot}</td>
 				<td>${list.f_assist}</td>
 				<td>${list.f_goal}</td>

@@ -29,7 +29,7 @@
 		<tr>
 			<th>경기날짜</th>
 			<th>장소</th>
-			<th>상대팀</th>
+			<th>매치업</th>
 			<th>점수</th>
 		</tr>
 	<c:forEach var="match" items="${match}">
@@ -37,7 +37,7 @@
 		<tr>
 			<td>${match.m_date}</td>
 			<td>${match.m_area}</td>
-			<td>${match.t_name} vs ${match.m_challenger}</td>
+			<td><a href="teamInfo.do?t_name=${match.t_name}">${match.t_name}</a> vs <a href="teamInfo.do?t_name=${match.m_challenger}">${match.m_challenger}</a></td>
 			<td>${match.m_home} : ${match.m_away}</td>
 		</tr>
 		</c:if>

@@ -21,9 +21,9 @@
 					<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 				</c:if> 
 			</td>
-			<td>${list.name}</td>
+			<td><a href="#?미니홈피">${list.name}</a></td>
 			<td>${list.t_mem_regdate}</td>
-			<td>
+			<td> 
 				<c:if test="${list.t_mem_auth==1}">
 					팀원
 				</c:if>
