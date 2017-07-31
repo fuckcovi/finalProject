@@ -45,6 +45,8 @@
 	</c:forEach>
 	</table>
 </c:if>
-	<br><hr class="style"> 
-	<input type="button" value="매치등록" id="insert_btn" class="btn" style="float:right;margin-right:42px;" onClick="location.href='matchInsert.do'">
+	<br><hr class="style">
+	<c:if test="${!empty t_name}">
+		<input type="button" value="매치등록" id="insert_btn" class="btn" style="float:right;margin-right:42px;" onClick="location.href='matchInsert.do'">
+	</c:if>
 </div>

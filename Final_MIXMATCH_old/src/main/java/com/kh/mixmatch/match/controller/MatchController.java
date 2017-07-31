@@ -34,7 +34,8 @@ public class MatchController {
 	// 매치보드
 	@RequestMapping("/match/matchBoard.do")
 	public ModelAndView matchBoardForm(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
-									   @RequestParam(value="type", defaultValue="축구") String type) {
+									   @RequestParam(value="type", defaultValue="축구") String type,
+									   HttpSession session) {
 		String board = "match";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
@@ -58,11 +59,15 @@ public class MatchController {
 			list = matchService.matchList(map);
 		}
 		
+		String id = (String) session.getAttribute("user_id");
+		String t_name = matchService.getTeamName(id);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchBoard");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("type", type);
+		mav.addObject("t_name", t_name);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
 		return mav;
