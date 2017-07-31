@@ -5,7 +5,7 @@
 <div class="page-main-style">
 	<h2>결과등록</h2>
 	<hr class="style"><br>
-	<form:form class="style" commandName="command" action="updateScore.do" enctype="multipart/form-data" id="result_form">
+	<form:form class="style" commandName="match" action="scoreUpdate.do" enctype="multipart/form-data" id="result_form">
 		<form:errors element="div" cssClass="error-color"/><br>
 		<form:hidden path="m_seq"/>
 		<ul>

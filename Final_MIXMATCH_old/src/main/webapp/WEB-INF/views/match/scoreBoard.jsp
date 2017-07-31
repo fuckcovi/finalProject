@@ -39,10 +39,10 @@
 			<c:if test="${match.m_home eq -1}">
 			<td><input type="button" value="결과등록" 
 			<c:if test="${t_name eq match.t_name}">class="btn"</c:if>
-			<c:if test="${t_name ne match.t_name}">class="dis-btn" disabled</c:if> onClick="location.href='updateScore.do?m_seq=${match.m_seq}'"></td>
+			<c:if test="${t_name ne match.t_name}">class="dis-btn" disabled</c:if> onClick="location.href='scoreUpdate.do?m_seq=${match.m_seq}'"></td>
 			</c:if>
 			<c:if test="${match.m_home ne -1}">
-			<td><a href="selectScore.do?m_seq=${match.m_seq}">점수보기</a></td>
+			<td><a href="scoreSelect.do?m_seq=${match.m_seq}">점수보기</a></td>
 			</c:if>
 			<td>${match.m_challenger}<br><input type="button" value="팀정보" class="btn-team-info"></td>
 		</tr>

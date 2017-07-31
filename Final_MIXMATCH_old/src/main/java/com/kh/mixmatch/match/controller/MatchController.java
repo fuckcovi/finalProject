@@ -193,7 +193,7 @@ public class MatchController {
 		map.put("t_name", t_name);
 		
 		// m_challenger에 받아온 팀이름 저장
-		matchService.challengerUpdate(map);
+		matchService.updateChallenger(map);
 		
 		return "redirect:/match/matchBoard.do";
 	}
@@ -210,7 +210,7 @@ public class MatchController {
 	
 	// 매치수정
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.POST)
-	public String updateMatchSubmit(@ModelAttribute("command") @Valid MatchCommand matchCommand,
+	public String updateMatchSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<matchCommand>> : " + matchCommand);
@@ -220,44 +220,48 @@ public class MatchController {
 			return "matchUpdate";
 		}
 		
+		// 매치수정
 		matchService.updateMatch(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
 	// 점수보기
-	@RequestMapping("/match/selectScore.do")
+	@RequestMapping("/match/scoreSelect.do")
 	public ModelAndView selectScoreForm(@RequestParam("m_seq") int m_seq) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<m_seq>> : " + m_seq);
 		}
 		
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand match = matchService.selectMatch(m_seq);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("selectScore");
+		mav.setViewName("scoreSelect");
 		mav.addObject("match", match);
 		
 		return mav;
 	}
 	
 	// 결과등록폼
-	@RequestMapping(value="/match/updateScore.do", method=RequestMethod.GET)
+	@RequestMapping(value="/match/scoreUpdate.do", method=RequestMethod.GET)
 	public String updateScoreForm(@RequestParam("m_seq") int m_seq, Model model) {
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand matchCommand = matchService.selectMatch(m_seq);
-		model.addAttribute("command", matchCommand);
+		model.addAttribute("match", matchCommand);
 		
-		return "updateScore";
+		return "scoreUpdate";
 	}
 	
 	// 결과등록
-	@RequestMapping(value="/match/updateScore.do", method=RequestMethod.POST)
-	public String updateScoreSubmit(@ModelAttribute("command") @Valid MatchCommand matchCommand,
+	@RequestMapping(value="/match/scoreUpdate.do", method=RequestMethod.POST)
+	public String updateScoreSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<matchCommand>> : " + matchCommand);
 		}
 		
+		// 결과등록
 		matchService.updateScore(matchCommand);
 		
 		return "redirect:/match/scoreBoard.do";

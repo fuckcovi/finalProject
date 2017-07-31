@@ -31,14 +31,14 @@
   		<put-attribute name="body" value="/WEB-INF/views/match/matchUpdate.jsp"/>
   	</definition>
   	
-  	<definition name="selectScore" extends="main">
+  	<definition name="scoreSelect" extends="main">
   		<put-attribute name="title" value="점수보기"/>
-  		<put-attribute name="body" value="/WEB-INF/views/match/selectScore.jsp"/>
+  		<put-attribute name="body" value="/WEB-INF/views/match/scoreSelect.jsp"/>
   	</definition>
   	
-  	<definition name="updateScore" extends="main">
+  	<definition name="scoreUpdate" extends="main">
   		<put-attribute name="title" value="결과등록"/>
-  		<put-attribute name="body" value="/WEB-INF/views/match/updateScore.jsp"/>
+  		<put-attribute name="body" value="/WEB-INF/views/match/scoreUpdate.jsp"/>
   	</definition>
  	
 </tiles-definitions>
