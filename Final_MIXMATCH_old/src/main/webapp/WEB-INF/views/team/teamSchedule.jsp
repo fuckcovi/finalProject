@@ -30,15 +30,17 @@
 				<td>경기시간</td>
 				<td>매칭신청팀</td>
 			</tr>
+			<c:forEach var="teamlist" items="${list}">
 			<c:forEach var="matchlist" items="${matchList}">
-			<c:if test="${matchlist.m_challenger==null}">
-			<tr>
-				<td>${matchlist.m_date}</td>
-				<td>${matchlist.m_place}</td>
-				<td>${matchlist.m_time}</td>
-				<td>${matchlist.t_name}</td>
-			</tr>
-			</c:if>
+					<c:if test="${matchlist.m_challenger==null && ( matchlist.t_name == teamlist.t_name )}">
+						<tr>
+							<td>${matchlist.m_date}</td>
+							<td>${matchlist.m_place}</td>
+							<td>${matchlist.m_time}</td>
+							<td>${matchlist.t_name}</td>
+						</tr>
+					</c:if>
+				</c:forEach>	
 			</c:forEach>
 			</table>
 		</div>
@@ -52,8 +54,9 @@
 				<td>홈팀</td>
 				<td>어웨이팀</td>
 			</tr>
+			<c:forEach var="teamlist" items="${list}">
 			<c:forEach var="matchlist" items="${matchList}">
-			<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1}">
+			<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
 			<tr>
 				<td>${matchlist.m_date}</td>
 				<td>${matchlist.m_place}</td>
@@ -62,6 +65,7 @@
 				<td>${matchlist.m_challenger}</td>
 			</tr>
 			</c:if>
+			</c:forEach>
 			</c:forEach>
 			</table>
 		</div>
@@ -73,14 +77,16 @@
 				<td>매치결과</td>
 				<td>MVP</td>
 			</tr>
+			<c:forEach var="teamlist" items="${list}">
 			<c:forEach var="matchlist" items="${matchList}">
-			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && matchlist.m_mvp!=null}">
+			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
 			<tr>
 				<td>${matchlist.m_date}</td>
 				<td><a href="teamRecord.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
 				<td>${matchlist.m_mvp}</td>
 			</tr>
 			</c:if>
+			</c:forEach>
 			</c:forEach>
 			</table>
 		</div>

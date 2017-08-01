@@ -392,20 +392,33 @@ public class TeamController {
 	public ModelAndView teamRecordMatch(@RequestParam int m_seq,HttpSession session){
 		
 		MatchCommand match = teamService.selectMatchDetail(m_seq);
-		List<FootCommand> list = null;
+		List<FootCommand> footlist = null;
+		List<BaseCommand> baselist = null;
+		List<BasketCommand> basketlist = null;
+		int footcount = 0;
+		int basecount = 0;
+		int basketcount = 0;
 		if(match.getM_type().equals("绵备")){
-			list = teamMemService.listMatchFoot(m_seq);
-		}/*else if(match.getM_type().equals("具备")){
-			List<FootCommand> list = teamMemService.listMatchFoot(m_seq);
+			footlist = teamMemService.listMatchFoot(m_seq);
+			footcount = footlist.size();
+		}else if(match.getM_type().equals("具备")){
+			baselist = teamMemService.listMatchBase(m_seq);
+			basecount = baselist.size();
 		}else if(match.getM_type().equals("丑备")){
-			List<FootCommand> list = teamMemService.listMatchFoot(m_seq);
-		}*/
+			basketlist = teamMemService.listMatchBasket(m_seq);
+			basketcount = basketlist.size();
+		}
 		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchDetailRecord");
 		mav.addObject("match",match);
-		mav.addObject("list",list);
+		mav.addObject("footlist",footlist);
+		mav.addObject("baselist",baselist);
+		mav.addObject("basketlist",basketlist);
+		mav.addObject("footcount",footcount);
+		mav.addObject("basecount",basecount);
+		mav.addObject("basketcount",basketcount);
 		return mav;
 	}
 	

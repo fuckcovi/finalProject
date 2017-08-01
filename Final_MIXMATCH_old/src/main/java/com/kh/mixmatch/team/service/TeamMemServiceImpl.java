@@ -116,5 +116,17 @@ public class TeamMemServiceImpl implements TeamMemService{
 	public void deleteTeam(String tname) {
 		teamMemMapper.deleteTeam(tname);
 	}
+
+	@Override
+	public List<BaseCommand> listMatchBase(Integer mseq) {
+		// TODO Auto-generated method stub
+		return teamMemMapper.listMatchBase(mseq);
+	}
+
+	@Override
+	public List<BasketCommand> listMatchBasket(Integer mseq) {
+		// TODO Auto-generated method stub
+		return teamMemMapper.listMatchBasket(mseq);
+	}
 	
 }

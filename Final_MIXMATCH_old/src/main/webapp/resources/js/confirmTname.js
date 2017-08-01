@@ -45,6 +45,11 @@ $(document).ready(function(){
 	$("#teamRegister").submit(function(){
 		if(checkTnameDuplicated==0){
 			alert("팀명 중복확인을 해주세요.");
+			if($("#t_name").val("")){
+				$("#t_name").focus();
+			}else{
+				$("#confirmTname").focus();
+			}
 			return;
 		}
 	});
