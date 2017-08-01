@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
+import com.kh.mixmatch.match.service.MatchService;
 import com.kh.mixmatch.member.domain.MemberCommand;
 import com.kh.mixmatch.member.service.MemberService;
 import com.kh.mixmatch.team.domain.BaseCommand;
@@ -45,7 +46,8 @@ public class TeamController {
 	private TotalTypeService totalTypeService;
 	@Resource
 	private MemberService memberService; 
-	
+	@Resource
+	private MatchService matchService;
 	
 	@ModelAttribute("teamCommand")
 	public TeamCommand initCommand(){
@@ -326,10 +328,7 @@ public class TeamController {
 		}else if(teamMemCount>0 && team.getT_type().equals("야구")){
 			listTMemBase = teamMemService.listTMemBase(map);
 		}else if(teamMemCount>0 && team.getT_type().equals("농구")){
-			System.out.println("sd");
 			listTMemBasket = teamMemService.listTMemBasket(map);
-
-			System.out.println(listTMemBasket);
 		}
 		System.out.println(team.getT_type());
 		System.out.println(teamMemCount);
@@ -369,8 +368,98 @@ public class TeamController {
 	
 	
 	
-//=========================================================
+//===========================   매칭결과 : 개인기록 등록  ==============================
+	@RequestMapping(value="/matchMemRecordInsert.do",method=RequestMethod.GET)
+	public ModelAndView matchMemRecordInsertForm(@RequestParam int m_seq){
+		MatchCommand match = matchService.selectMatch(m_seq);
+		String home = match.getT_name();
+		String away = match.getM_challenger();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("t_name", home);
+		List<TeamMemCommand> homelist = teamMemService.listTeamMem(map);
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("t_name", away);
+		List<TeamMemCommand> awaylist = teamMemService.listTeamMem(map2);
+		FootCommand footCommand = new FootCommand();
+		BaseCommand baseCommand = new BaseCommand();
+		BasketCommand basketCommand = new BasketCommand();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("matchMemRecordInsert");
+		mav.addObject("match",match);
+		mav.addObject("homelist",homelist);
+		mav.addObject("awaylist",awaylist);
+		mav.addObject("footCommand",footCommand);
+		mav.addObject("basketCommand",basketCommand);
+		mav.addObject("baseCommand",baseCommand);
+		
+		// 해당매치의 기록이 올라갔는지 리스트 보여줌
+		List<FootCommand> footlist = null;
+		List<BaseCommand> baselist = null;
+		List<BasketCommand> basketlist = null;
+		int footcount = 0;
+		int basecount = 0;
+		int basketcount = 0;
+		if(match.getM_type().equals("축구")){
+			footlist = teamMemService.listMatchFoot(m_seq);
+			footcount = footlist.size();
+		}else if(match.getM_type().equals("야구")){
+			baselist = teamMemService.listMatchBase(m_seq);
+			basecount = baselist.size();
+		}else if(match.getM_type().equals("농구")){
+			basketlist = teamMemService.listMatchBasket(m_seq);
+			basketcount = basketlist.size();
+		}
+
+		mav.addObject("footlist",footlist);
+		mav.addObject("baselist",baselist);
+		mav.addObject("basketlist",basketlist);
+		mav.addObject("footcount",footcount);
+		mav.addObject("basecount",basecount);
+		mav.addObject("basketcount",basketcount);
+		
+		
+		return mav;
+	}
+	@RequestMapping("/homeMemRecord.do")
+	public ModelAndView homeMemRecord(@ModelAttribute("footCommand") FootCommand footCommand, @ModelAttribute("basketCommand") BasketCommand basketCommand ,@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
+		System.out.println(basketCommand);
+		int m_seq = 0;
+		if(footCommand != null){
+			m_seq = footCommand.getM_seq();
+			totalTypeService.insertFoot(footCommand);
+		}else if(baseCommand!=null){
+			m_seq = baseCommand.getM_seq();
+			totalTypeService.insertBase(baseCommand);
+		}else if(basketCommand!=null){
+			
+			m_seq = basketCommand.getM_seq();
+			totalTypeService.insertBasket(basketCommand);
+		}
+		
+		return matchMemRecordInsertForm(m_seq);
+	}
+	@RequestMapping("/awayMemRecord.do")
+	public ModelAndView awayMemRecord(@ModelAttribute("footCommand") FootCommand footCommand, @ModelAttribute("basketCommand") BasketCommand basketCommand ,@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
+		int m_seq = 0;
+		if(footCommand != null){
+			m_seq = footCommand.getM_seq();
+			totalTypeService.insertFoot(footCommand);
+		}else if(baseCommand!=null){
+			m_seq = baseCommand.getM_seq();
+			totalTypeService.insertBase(baseCommand);
+		}else if(basketCommand!=null){
+			m_seq = basketCommand.getM_seq();
+			totalTypeService.insertBasket(basketCommand);
+		}
+		return matchMemRecordInsertForm(m_seq);
+	}
 	
+	
+	
+	
+	
+	
+// =========================================== 팀기록
 	
 	@RequestMapping("/teamRecord.do")
 	public ModelAndView teamRecord(HttpSession session){
