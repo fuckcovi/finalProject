@@ -46,4 +46,10 @@
      	<put-attribute name="title" value="MIXMATCH TEAM matchDetail"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/matchDetailRecord.jsp"/>
     </definition>
+    <!--  매치결과개인기록  -->
+    <definition name="matchMemRecordInsert" extends="main">
+     	<put-attribute name="title" value="MIXMATCH matchMemRecordInsert"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/matchMemRecordInsert.jsp"/>
+    </definition>
+    
 </tiles-definitions>

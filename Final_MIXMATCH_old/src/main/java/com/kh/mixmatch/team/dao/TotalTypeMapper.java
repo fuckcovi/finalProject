@@ -3,6 +3,7 @@ package com.kh.mixmatch.team.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.mixmatch.team.domain.BaseCommand;
@@ -10,9 +11,11 @@ import com.kh.mixmatch.team.domain.BasketCommand;
 import com.kh.mixmatch.team.domain.FootCommand;
 
 public interface TotalTypeMapper {
-
+	@Insert("INSERT INTO g_baseball(b_seq,id,t_name,m_seq,b_bat,b_hit,b_rbi,b_score,b_avg,b_win,b_lose,b_strike,b_ip,b_er,b_era) VALUES(f_baseball_seq.nextval,#{id},#{t_name},#{m_seq},#{b_bat},#{b_hit},#{b_rbi},#{b_score},#{b_avg},#{b_win},#{b_lose},#{b_strike},#{b_ip},#{b_er},#{b_era})")
 	public void insertBase(BaseCommand base);
+	@Insert("INSERT INTO g_basketball(b_seq,id,t_name,m_seq,b_score,b_assist,b_rebound,b_steel,b_block,b_3point) VALUES(f_basketball_seq.nextval,#{id},#{t_name},#{m_seq},#{b_score},#{b_assist},#{b_rebound},#{b_steel},#{b_block},#{b_3point})")
 	public void insertBasket(BasketCommand basket);
+	@Insert("INSERT INTO g_football(f_seq,id,t_name,m_seq,f_shoot,f_assist,f_goal,f_attack) VALUES(f_football_seq.nextval,#{id},#{t_name},#{m_seq},#{f_shoot},#{f_assist},#{f_goal},#{f_attack})")
 	public void insertFoot(FootCommand foot);
 	
 	public void deleteBase(Integer b_seq);

@@ -47,7 +47,7 @@
 		<br>
 		<c:if test="${count>0}">
 			<c:forEach var="list" items="${list}">
-				<div style="width:200px;height:250px;border:1px solid red; float:left;" id="${list.t_type}">
+				<div style="width:200px;height:250px;margin:10px 10px 10px 10px; float:left;" id="${list.t_type}">
 					<c:if test="${fn:endsWith(list.t_logo_name, '.jpg') || fn:endsWith(list.t_logo_name, '.png') || fn:endsWith(list.t_logo_name, '.gif') || fn:endsWith(list.t_logo_name, '.JPG') || fn:endsWith(list.t_logo_name, '.PNG') || fn:endsWith(list.t_logo_name, '.GIF')}">
 						<img src="imageView.do?t_name=${list.t_name}" style="width:200px;height:200px;">
 					</c:if>
