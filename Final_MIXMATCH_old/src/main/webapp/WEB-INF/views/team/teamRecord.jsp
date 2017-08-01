@@ -12,24 +12,25 @@
 		</div>
 	</c:if>
 	<c:if test="${count>0 }">  
-	<ul style="list-style: none">
+	<ul style="list-style: none" id="teamScheduleList">
+		<li style="float: left; width:150px;" value="allList">전체보기</li>
 		<c:forEach var="list" items="${list}">
-			<li style="float: left; width:150px;">
-				<a href="#">${list.t_name}</a><!-- 클릭하면 ajax로 화면 바꿔서 기록 보이기 -->
+			<li style="float: left; width:150px;" value="${list.t_name}"><!-- 클릭하면 ajax로 화면 바꿔서 일정 보이기 -->
+				${list.t_name}
 			</li>
 		</c:forEach>
 	</ul>
 	<br>
 	<hr>
-	<table>
-		<tr>
+	<table class="scheduleList">
+		<tr class="tablehead">
 			<th>매치번호</th>
 			<th>매치일자</th>
 			<th>매치결과</th>
 		</tr>
 		<c:forEach var="matchlist" items="${matchList}">
 			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1}">
-				<tr>
+				<tr class="${matchlist.t_name} ${matchlist.m_challenger}">
 					<td>${matchlist.m_seq}</td>
 					<td>${matchlist.m_date}</td>
 					<td><a href="matchDetail.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>

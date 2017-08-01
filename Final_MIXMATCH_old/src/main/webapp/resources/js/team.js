@@ -36,4 +36,18 @@ $(document).ready(function(){
 	}); 
 	
 	
+	// 팀 선택에 따라 일정결과 목록 보여주기
+	$("#teamScheduleList li").click(function(){
+		if($(this).attr("value")=="allList"){
+			$(".scheduleList tr").show();
+			alert("전체보기");
+		}else{
+			$(".scheduleList tr").hide();
+			$(".tablehead").show();
+			$("."+$(this).attr("value")).show();
+			alert("팀선택 : "+$(this).attr("value"));
+		}
+	});
+	
+	
 });

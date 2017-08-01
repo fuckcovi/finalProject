@@ -367,6 +367,11 @@ public class TeamController {
 		return mav;
 	}
 	
+	
+	
+//=========================================================
+	
+	
 	@RequestMapping("/teamRecord.do")
 	public ModelAndView teamRecord(HttpSession session){
 		String user_id = (String)session.getAttribute("user_id");

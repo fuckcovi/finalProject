@@ -12,81 +12,82 @@
 		</div>
 	</c:if>
 	<c:if test="${count>0 }">
-	<ul style="list-style: none">
+	<ul style="list-style: none" id="teamScheduleList" >
+		<li style="float: left; width:150px;" value="allList">전체보기</li>
 		<c:forEach var="list" items="${list}">
-			<li style="float: left; width:150px;">
-				<a href="#">${list.t_name}</a><!-- 클릭하면 ajax로 화면 바꿔서 일정 보이기 -->
+			<li style="float: left; width:150px;" value="${list.t_name}"><!-- 클릭하면 ajax로 화면 바꿔서 일정 보이기 -->
+				${list.t_name}
 			</li>
 		</c:forEach>
 	</ul>
 	<br>
-	<hr>
-		<div>
-			<h3>예정일정: 아직 안잡힘</h3>
+	<hr><h3>예정일정: 아직 안잡힘</h3>
+		<div class="scheduleList">
 			<table>			
-			<tr>
-				<td>경기일자</td>
-				<td>경기장소</td>
-				<td>경기시간</td>
-				<td>매칭신청팀</td>
+			<tr class="tablehead">
+				<th>경기일자</th>
+				<th>경기장소</th>
+				<th>경기시간</th>
+				<th>매칭신청팀</th>
 			</tr>
 			<c:forEach var="teamlist" items="${list}">
-			<c:forEach var="matchlist" items="${matchList}">
+				<c:forEach var="matchlist" items="${matchList}" >
 					<c:if test="${matchlist.m_challenger==null && ( matchlist.t_name == teamlist.t_name )}">
-						<tr>
+						<tr class="${matchlist.t_name}">
 							<td>${matchlist.m_date}</td>
 							<td>${matchlist.m_place}</td>
 							<td>${matchlist.m_time}</td>
 							<td>${matchlist.t_name}</td>
 						</tr>
 					</c:if>
+					
 				</c:forEach>	
 			</c:forEach>
 			</table>
 		</div>
-		<div>
-			<h3>확정일정: 참석해라</h3>
+		<h3>확정일정</h3>
+		<div class="scheduleList">
 			<table>			
-			<tr>
-				<td>경기일자</td>
-				<td>경기장소</td>
-				<td>경기시간</td>
-				<td>홈팀</td>
-				<td>어웨이팀</td>
+			<tr class="tablehead">
+				<th>경기일자</th>
+				<th>경기장소</th>
+				<th>경기시간</th>
+				<th>홈팀</th>
+				<th>어웨이팀</th>
 			</tr>
 			<c:forEach var="teamlist" items="${list}">
-			<c:forEach var="matchlist" items="${matchList}">
-			<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-			<tr>
-				<td>${matchlist.m_date}</td>
-				<td>${matchlist.m_place}</td>
-				<td>${matchlist.m_time}</td>
-				<td>${matchlist.t_name}</td>
-				<td>${matchlist.m_challenger}</td>
-			</tr>
-			</c:if>
-			</c:forEach>
+				<c:forEach var="matchlist" items="${matchList}">
+					<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
+					<tr class="${matchlist.t_name} ${matchlist.m_challenger}">
+						<td>${matchlist.m_date}</td>
+						<td>${matchlist.m_place}</td>
+						<td>${matchlist.m_time}</td>
+						<td>${matchlist.t_name}</td>
+						<td>${matchlist.m_challenger}</td>
+					</tr>
+					</c:if>
+				</c:forEach>
 			</c:forEach>
 			</table>
 		</div>
-		<div>
-			<h3>결과 : 매칭 결과</h3>
+		<h3>결과 : 매칭 결과</h3>
+		<div class="scheduleList">
 			<table>			
-			<tr>
-				<td>경기일자</td>
-				<td>매치결과</td>
-				<td>MVP</td>
+			<tr class="tablehead">
+				<th>경기일자</th>
+				<th>매치결과</th>
+				<th>MVP</th>
 			</tr>
 			<c:forEach var="teamlist" items="${list}">
-			<c:forEach var="matchlist" items="${matchList}">
-			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-			<tr>
-				<td>${matchlist.m_date}</td>
-				<td><a href="teamRecord.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
-				<td>${matchlist.m_mvp}</td>
-			</tr>
-			</c:if>
-			</c:forEach>
+				<c:forEach var="matchlist" items="${matchList}">
+					<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
+					<tr class="${matchlist.t_name} ${matchlist.m_challenger}">
+						<td>${matchlist.m_date}</td>
+						<td><a href="teamRecord.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
+						<td>${matchlist.m_mvp}</td>
+					</tr>
+					</c:if>
+				</c:forEach>
 			</c:forEach>
 			</table>
 		</div>
