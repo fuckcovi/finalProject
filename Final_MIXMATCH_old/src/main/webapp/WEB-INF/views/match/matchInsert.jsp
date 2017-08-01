@@ -10,8 +10,7 @@
 		<ul>
 			<li>
 				<label for="t_name">팀명</label>
-				<span>${match.t_name}</span>
-				<form:hidden path="t_name"/>
+				<form:select path="t_name" items="${teamList}"/>
 			</li>
 			<li>
 				<label for="m_area">지역</label>

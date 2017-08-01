@@ -58,7 +58,8 @@ public class MatchController {
 		
 		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
+		List<String> t_name = matchService.getTeamList(id);
+		System.out.println(t_name);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchBoard");
@@ -97,7 +98,7 @@ public class MatchController {
 		
 		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
+		List<String> t_name = matchService.getTeamList(id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("scoreBoard");
@@ -114,15 +115,14 @@ public class MatchController {
 	public ModelAndView matchInsertForm(HttpSession session, Model model) {
 		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
+		List<String> t_name = matchService.getTeamList(id);
 		
-		// 받아온 팀이름을 matchCommand에 저장
 		MatchCommand matchCommand = new MatchCommand();
-		matchCommand.setT_name(t_name);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchInsert");
 		mav.addObject("match", matchCommand);
+		mav.addObject("teamList", t_name);
 		
 		return mav;
 	}
@@ -147,14 +147,15 @@ public class MatchController {
 	
 	// 매치 상세보기
 	@RequestMapping("/match/matchDetail.do")
-	public ModelAndView matchDetailForm(@RequestParam("m_seq") int m_seq, HttpSession session) {		
+	public ModelAndView matchDetailForm(@RequestParam("m_seq") int m_seq,
+										Model model, HttpSession session) {		
 		if (log.isDebugEnabled()) {
 			log.debug("<<m_seq>> : " + m_seq);
 		}
 		
 		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
+		List<String> t_name = matchService.getTeamList(id);
 		
 		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand match = matchService.selectMatch(m_seq);
@@ -182,18 +183,18 @@ public class MatchController {
 	
 	// 매치신청
 	@RequestMapping("/match/challengerUpdate.do")
-	public String challengerUpdateSubmit(@RequestParam("m_seq") int m_seq, HttpSession session) {
-		// 유저 팀이름 받아오기
-		String id = (String) session.getAttribute("user_id");
-		String t_name = matchService.getTeamName(id);
+	public String challengerUpdateSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
+										 BindingResult result, HttpServletRequest request) {
+		if (log.isDebugEnabled()) {
+			log.debug("<<matchCommand>> : " + matchCommand);
+		}
 		
-		// 맵에 저장
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("m_seq", m_seq);
-		map.put("t_name", t_name);
+		if (result.hasErrors()) {
+			return "matchInsert";
+		}
 		
-		// m_challenger에 받아온 팀이름 저장
-		matchService.updateChallenger(map);
+		// 매치등록
+		matchService.updateChallenger(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}

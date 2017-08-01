@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="page-main-style">
 	<h2>스코어보드</h2>
 	<hr class="style"><br>
@@ -38,8 +39,8 @@
 			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info"></td>
 			<c:if test="${match.m_home eq -1}">
 			<td><input type="button" value="결과등록" 
-			<c:if test="${t_name eq match.t_name}">class="btn"</c:if>
-			<c:if test="${t_name ne match.t_name}">class="dis-btn" disabled</c:if> onClick="location.href='scoreUpdate.do?m_seq=${match.m_seq}'"></td>
+			<c:if test="${fn:contains(t_name,match.t_name)}">class="btn"</c:if>
+			<c:if test="${!fn:contains(t_name,match.t_name)}">class="dis-btn" disabled</c:if> onClick="location.href='scoreUpdate.do?m_seq=${match.m_seq}'"></td>
 			</c:if>
 			<c:if test="${match.m_home ne -1}">
 			<td><a href="scoreSelect.do?m_seq=${match.m_seq}">점수보기</a></td>

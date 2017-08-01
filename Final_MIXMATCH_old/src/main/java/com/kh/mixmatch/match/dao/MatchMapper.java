@@ -28,10 +28,10 @@ public interface MatchMapper {
 	public void updateScore(MatchCommand match);
 	
 	@Select("SELECT t_name FROM g_team WHERE id=#{id,jdbcType=VARCHAR}")
+	public List<String> getTeamList(String id);
+	@Select("SELECT t_name FROM g_team WHERE id=#{id,jdbcType=VARCHAR}")
 	public String getTeamName(String id);
 	@Update("UPDATE g_match SET m_challenger=#{t_name} WHERE m_seq=#{m_seq}")
-	public void updateChallenger(Map<String,Object> map);
-	@Select("SELECT id FROM g_team_member WHERE t_name=#{t_name} or t_name=#{m_challenger}")
-	public List<TeamMemCommand> getMvpMember(Map<String, Object> map);
+	public void updateChallenger(MatchCommand match);
 	
 }

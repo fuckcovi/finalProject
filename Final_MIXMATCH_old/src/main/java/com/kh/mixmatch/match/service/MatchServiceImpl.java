@@ -52,13 +52,18 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
+	public List<String> getTeamList(String id) {
+		return matchMapper.getTeamList(id);
+	}
+	
+	@Override
 	public String getTeamName(String id) {
 		return matchMapper.getTeamName(id);
 	}
 
 	@Override
-	public void updateChallenger(Map<String,Object> map) {
-		matchMapper.updateChallenger(map); 
+	public void updateChallenger(MatchCommand match) {
+		matchMapper.updateChallenger(match); 
 	}
 
 }
