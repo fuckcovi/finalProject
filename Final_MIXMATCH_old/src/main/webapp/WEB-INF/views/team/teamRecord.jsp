@@ -19,5 +19,23 @@
 			</li>
 		</c:forEach>
 	</ul>
-	</c:if>
+	<br>
+	<hr>
+	<table>
+		<tr>
+			<th>매치번호</th>
+			<th>매치일자</th>
+			<th>매치결과</th>
+		</tr>
+		<c:forEach var="matchlist" items="${matchList}">
+			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1}">
+				<tr>
+					<td>${matchlist.m_seq}</td>
+					<td>${matchlist.m_date}</td>
+					<td><a href="matchDetail.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
+				</tr>
+			</c:if>
+		</c:forEach>
+	</table>
+	</c:if> 
 </div>

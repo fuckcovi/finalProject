@@ -39,8 +39,8 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public void updateTeam(String tname) {
-		teamMapper.updateTeam(tname);
+	public void updateTeam(TeamCommand team){
+		teamMapper.updateTeam(team);
 	}
 
 	@Override
@@ -57,6 +57,23 @@ public class TeamServiceImpl implements TeamService {
 	public List<MatchCommand> listMatch(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return teamMapper.listMatch(map);
+	}
+	@Override
+	public int countHomeMatch(String tname) {
+		// TODO Auto-generated method stub
+		return teamMapper.countHomeMatch(tname);
+	}
+
+	@Override
+	public int countAwayMatch(String tname) {
+		// TODO Auto-generated method stub
+		return teamMapper.countAwayMatch(tname);
+	}
+
+	@Override
+	public MatchCommand selectMatchDetail(Integer mseq) {
+		// TODO Auto-generated method stub
+		return teamMapper.selectMatchDetail(mseq);
 	}
 	
 }

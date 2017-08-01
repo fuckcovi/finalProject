@@ -36,7 +36,7 @@
 			<td>${match.m_area}</td>
 			<td>${match.m_date}</td>
 			<td>${match.m_time}</td>
-			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info"></td>
+			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>
 			<c:if test="${match.m_home eq -1}">
 			<td><input type="button" value="결과등록" 
 			<c:if test="${fn:contains(t_name,match.t_name)}">class="btn"</c:if>
@@ -45,7 +45,7 @@
 			<c:if test="${match.m_home ne -1}">
 			<td><a href="scoreSelect.do?m_seq=${match.m_seq}">점수보기</a></td>
 			</c:if>
-			<td>${match.m_challenger}<br><input type="button" value="팀정보" class="btn-team-info"></td>
+			<td>${match.m_challenger}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.m_challenger}'"></td>
 		</tr>
 		</c:if>
 	</c:forEach>

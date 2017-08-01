@@ -93,5 +93,28 @@ public class TeamMemServiceImpl implements TeamMemService{
 		// TODO Auto-generated method stub
 		return teamMemMapper.getMemList();
 	}
+
+	@Override
+	public void updateTeamMem(Map<String, Object> map) {
+		teamMemMapper.updateTeamMem(map);
+		
+	}
+
+	@Override
+	public void deleteTeamMem(Map<String, Object> map) {
+		teamMemMapper.deleteTeamMem(map);
+		
+	}
+
+	@Override
+	public List<FootCommand> listMatchFoot(Integer mseq) {
+		// TODO Auto-generated method stub
+		return teamMemMapper.listMatchFoot(mseq);
+	}
+
+	@Override
+	public void deleteTeam(String tname) {
+		teamMemMapper.deleteTeam(tname);
+	}
 	
 }

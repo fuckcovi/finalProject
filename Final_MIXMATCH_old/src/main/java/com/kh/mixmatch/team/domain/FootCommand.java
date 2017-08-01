@@ -20,6 +20,23 @@ public class FootCommand {
 	private byte[] profile;
 	private MultipartFile profile_upload;
 
+	
+	private String m_challenger;	// 팀별 매치번호에 따른 기록
+	private String m_type;	// 매치타입
+	
+	
+	public String getM_challenger() {
+		return m_challenger;
+	}
+	public void setM_challenger(String m_challenger) {
+		this.m_challenger = m_challenger;
+	}
+	public String getM_type() {
+		return m_type;
+	}
+	public void setM_type(String m_type) {
+		this.m_type = m_type;
+	}
 	public void setProfile_upload(MultipartFile profile_upload) throws IOException {
 		this.profile_upload = profile_upload;
 		setProfile(profile_upload.getBytes());

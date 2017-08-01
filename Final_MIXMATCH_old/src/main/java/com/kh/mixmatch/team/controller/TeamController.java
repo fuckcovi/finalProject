@@ -1,5 +1,7 @@
 package com.kh.mixmatch.team.controller;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
-import com.kh.mixmatch.match.service.MatchService;
 import com.kh.mixmatch.member.domain.MemberCommand;
 import com.kh.mixmatch.member.service.MemberService;
 import com.kh.mixmatch.team.domain.BaseCommand;
@@ -83,19 +85,41 @@ public class TeamController {
 	}
 	
 	@RequestMapping("/teamInfo.do")
-	public ModelAndView teamInfo(@RequestParam String t_name){
+	public ModelAndView teamInfo(@RequestParam String t_name,HttpSession session){
 		TeamCommand team = teamService.selectTeam(t_name);
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<MatchCommand> match = teamService.listMatch(map);
-		for(int i=0;i<match.size();i++){
-			if(match.get(i).getM_home()==-1 || match.get(i).getM_away() ==-1){
-				match.remove(i);	// 매칭결과 입력안된것은 리스트에서 뺌.
+		List<MatchCommand> match = null;
+		int matchCount = teamService.countHomeMatch(t_name) + teamService.countAwayMatch(t_name);
+		
+		if(matchCount > 0){
+			match = teamService.listMatch(map);
+			for(int i=0;i<match.size();i++){
+				if(match.get(i).getM_home()==-1 || match.get(i).getM_away() ==-1){
+					match.remove(i);	// 매칭결과 입력안된것은 리스트에서 뺌.
+				}
 			}
 		}
+		String id = (String)session.getAttribute("user_id");
+		boolean tCheck = false;
+		// 팀 가입신청 취소버튼 활성화
+		map.put("id", id);
+		List<TeamMemCommand> list = teamMemService.list(map);
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getT_name().equals(t_name) && list.get(i).getT_mem_auth()==0){
+				tCheck = true;
+				break;
+			}
+		}
+		// 팀원수
+		int count = teamMemService.getRowTeamMemCount(t_name);
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("teamInfo");
 		mav.addObject("team",team);
+		mav.addObject("matchCount",matchCount);
 		mav.addObject("match",match);
+		mav.addObject("count",count);
+		mav.addObject("tCheck",tCheck);
 		return mav;
 	}
 	
@@ -140,6 +164,16 @@ public class TeamController {
 		teamMemService.insertTeamMem(teamMem);
 		return "redirect:/team.do";
 	}
+	@RequestMapping("/cancelRegi.do")
+	public String cancelRegi(HttpSession session,@RequestParam String t_name){
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		String user_id = (String)session.getAttribute("user_id");
+		map.put("id", user_id);
+		map.put("t_name",t_name);
+		teamMemService.deleteTeamMem(map);
+		return "redirect:/team.do";
+	}
 	
 //============== 팀 등록 =============================
 	
@@ -166,6 +200,54 @@ public class TeamController {
 		teamMemService.insertTeamMem(teamMem);
 		return "redirect:/team.do";
 	}
+	
+	
+	@RequestMapping(value="/teamUpdate.do",method=RequestMethod.GET)
+	public String teamUpdateForm(@RequestParam String t_name, Model model){
+		TeamCommand teamCommand = teamService.selectTeam(t_name);
+		model.addAttribute("teamCommand",teamCommand);
+		return "teamUpdate";
+	}
+	@RequestMapping(value="/teamUpdate.do",method=RequestMethod.POST)
+	public String teamUpdateSubmit(@ModelAttribute("command") @Valid TeamCommand teamCommand,BindingResult result,HttpSession session) throws Exception{
+		
+		if(log.isDebugEnabled()){
+			log.debug("<<<< teamCommand >>>>  : " + teamCommand);
+		}
+		// 원래의 팀정보
+		TeamCommand team = teamService.selectTeam(teamCommand.getT_name()); 
+		if(result.hasErrors()){
+			teamCommand.setT_logo_name(team.getT_logo_name());	
+			return "teamUpdate";
+		}
+		
+		String id = (String)session.getAttribute("user_id");
+		if(!id.equals(teamCommand.getId())){
+			throw new Exception("팀마스터가 아니면 수정 불가");
+		}
+		// 전송된 파일이 없는경우 기존파일 업로드
+		if(teamCommand.getT_logo_upload().isEmpty()){
+			teamCommand.setT_logo(team.getT_logo());
+			teamCommand.setT_logo_name(team.getT_logo_name());
+		}
+		
+		teamService.updateTeam(teamCommand);
+		return "redirect:/team.do";
+	}
+	
+	@RequestMapping("/deleteTeam.do")
+	public String deleteTeam(@RequestParam String t_name,HttpSession session) throws Exception{
+		String id = (String)session.getAttribute("user_id");
+		// 로그인한 유저가 팀마스터 이면 팀 삭제
+		TeamCommand team = teamService.selectTeam(t_name);
+		if(!id.equals(team.getId())){
+			throw new Exception("팀마스터만 삭제할 수 있습니다.");
+		}
+		teamMemService.deleteTeam(t_name);
+		teamService.deleteTeam(t_name);
+		return "redirect:/team.do";
+	}
+	
 //============== 팀명 중복체크 =========================
 	@RequestMapping("/confirmTname.do")
 	@ResponseBody
@@ -192,7 +274,32 @@ public class TeamController {
 		map.put("t_name", t_name);
 		List<TeamMemCommand> tMemList = teamMemService.listTeamMem(map);	// 로그인한 아이디가 소속된 팀리스트
 		ModelAndView mav = new ModelAndView();
-		
+		mav.setViewName("teamMemView");
+		mav.addObject("tMemList",tMemList);
+		return mav;
+	}
+	
+	@RequestMapping("/approveMem.do")
+	public ModelAndView teamMemApprove(@RequestParam String id,@RequestParam String t_name){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("t_name",t_name);
+		teamMemService.updateTeamMem(map);
+		List<TeamMemCommand> tMemList = teamMemService.listTeamMem(map);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("teamMemView");
+		mav.addObject("tMemList",tMemList);
+		return mav;
+	}
+	
+	@RequestMapping("/deleteMem.do")
+	public ModelAndView teamMemDelete(@RequestParam String id,@RequestParam String t_name){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("t_name",t_name);
+		teamMemService.deleteTeamMem(map);
+		List<TeamMemCommand> tMemList = teamMemService.listTeamMem(map);
+		ModelAndView mav = new ModelAndView();
 		mav.setViewName("teamMemView");
 		mav.addObject("tMemList",tMemList);
 		return mav;
@@ -250,7 +357,6 @@ public class TeamController {
 		
 		// 모든 매치일정-결과 리스트
 		List<MatchCommand> matchList = teamService.listMatch(null);
-
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("teamSchedule");
@@ -272,11 +378,34 @@ public class TeamController {
 		if(count>0){
 			list = teamMemService.listConfirmTeam(map);
 		}
+		// 모든 매치일정-결과 리스트
+		List<MatchCommand> matchList = teamService.listMatch(null);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("teamSchedule");
+		mav.setViewName("teamRecord");
 		mav.addObject("list",list);
 		mav.addObject("count",count);
+		mav.addObject("matchList",matchList);
+		return mav;
+	}
+	@RequestMapping("/matchDetail.do")
+	public ModelAndView teamRecordMatch(@RequestParam int m_seq,HttpSession session){
+		
+		MatchCommand match = teamService.selectMatchDetail(m_seq);
+		List<FootCommand> list = null;
+		if(match.getM_type().equals("축구")){
+			list = teamMemService.listMatchFoot(m_seq);
+		}/*else if(match.getM_type().equals("야구")){
+			List<FootCommand> list = teamMemService.listMatchFoot(m_seq);
+		}else if(match.getM_type().equals("농구")){
+			List<FootCommand> list = teamMemService.listMatchFoot(m_seq);
+		}*/
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("matchDetailRecord");
+		mav.addObject("match",match);
+		mav.addObject("list",list);
 		return mav;
 	}
 	

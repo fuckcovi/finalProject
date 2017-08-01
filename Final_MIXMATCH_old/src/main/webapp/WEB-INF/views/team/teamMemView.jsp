@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="page-main-style">
 	팀원관리 <br>
-	팀명: <% out.print(request.getParameter("t_name")); %>
+	팀명: ${tMemList.get(0).t_name} : <%-- <% out.print(request.getParameter("t_name")); %> --%>
 	<hr>
 	소속 팀원 :
 	<table>
@@ -13,6 +13,9 @@
 			<th>이름</th>
 			<th>팀가입일</th>
 			<th>팀원여부</th>
+			<c:if test="${tMemList.get(0).master == user_id}">
+			<th>팀내보내기</th>
+			</c:if>
 		</tr>
 	<c:forEach var="list" items="${tMemList}">
 		<tr>
@@ -29,8 +32,12 @@
 				</c:if>
 				<c:if test="${list.t_mem_auth==0}">
 					미승인 회원
+					<input type="button" value="승인" onclick="location.href='approveMem.do?t_name=${list.t_name}&id=${list.id}'">
 				</c:if>
 			</td>
+			<c:if test="${list.master == user_id }">
+				<td><input type="button" value="내쫒기"  onclick="location.href='deleteMem.do?t_name=${list.t_name}&id=${list.id}'" <c:if test="${list.id==list.master}">disabled</c:if>></td>
+			</c:if>
 		<tr>
 	</c:forEach>
 	</table>

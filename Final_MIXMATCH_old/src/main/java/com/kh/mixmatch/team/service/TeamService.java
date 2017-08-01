@@ -21,7 +21,7 @@ public interface TeamService {
 	@Transactional(readOnly=true)
 	public TeamCommand selectTeam(String tname);
 	
-	public void updateTeam(String tname);
+	public void updateTeam(TeamCommand team);
 	
 	public void deleteTeam(String tname);
 	
@@ -31,6 +31,10 @@ public interface TeamService {
 	// ¸ÅÄ¡service
 	@Transactional(readOnly=true)
 	public List<MatchCommand> listMatch(Map<String, Object> map);
-	
-	
+	@Transactional(readOnly=true)
+	public int countHomeMatch(String tname);
+	@Transactional(readOnly=true)
+	public int countAwayMatch(String tname);
+	@Transactional(readOnly=true)
+	public MatchCommand selectMatchDetail(Integer mseq);
 }

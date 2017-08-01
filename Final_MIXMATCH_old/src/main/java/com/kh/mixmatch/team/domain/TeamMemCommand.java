@@ -19,7 +19,15 @@ public class TeamMemCommand {
 	private String profile_name; //프로필명 : MemberCommand 조인
 	private byte[] profile;
 	private MultipartFile profile_upload;
-
+	private String master;
+	
+	
+	public String getMaster() {
+		return master;
+	}
+	public void setMaster(String master) {
+		this.master = master;
+	}
 	public void setProfile_upload(MultipartFile profile_upload) throws IOException {
 		this.profile_upload = profile_upload;
 		setProfile(profile_upload.getBytes());

@@ -17,6 +17,9 @@ public interface TeamMemService {
 	public TeamMemCommand selectTeamMem(String id);
 	*/
 	public void insertTeamMem(TeamMemCommand teamMem);
+	public void updateTeamMem(Map<String, Object> map);
+	public void deleteTeamMem(Map<String, Object> map);
+	public void deleteTeam(String tname);
 	
 	@Transactional(readOnly=true)
 	public int getRowMemCount(String id);
@@ -44,6 +47,8 @@ public interface TeamMemService {
 	@Transactional(readOnly=true)
 	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// 정식팀원의 농구기록
 	
+	@Transactional(readOnly=true)
+	public List<FootCommand> listMatchFoot(Integer mseq);	// 각 매치별 선수기록	
 	
 	// 멤버service
 	@Transactional(readOnly=true)

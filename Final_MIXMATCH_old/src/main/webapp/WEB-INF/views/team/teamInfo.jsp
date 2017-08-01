@@ -13,6 +13,7 @@
 			<th>팀마스터</th>
 			<th>등록일</th>
 			<th>연고지</th>
+			<th>팀원수</th>
 		</tr>
 		<tr>
 			<td>${team.t_name}</td>
@@ -20,11 +21,13 @@
 			<td>${team.id}</td>
 			<td>${team.t_regdate}</td>
 			<td>${team.t_address}</td>
+			<td>${count}</td>
 		</tr>
 	</table>
 	
 	<hr size="2">
 	<h5>최근경기결과</h5>
+	<c:if test="${matchCount>0}">
 	<table>
 		<tr>
 			<th>경기날짜</th>
@@ -33,7 +36,7 @@
 			<th>점수</th>
 		</tr>
 	<c:forEach var="match" items="${match}">
-		<c:if test="${match.t_name == team.t_name}">
+		<c:if test="${match.t_name == team.t_name && match.m_challenger!=null && match.m_home!=-1 && match.m_away!=-1}">
 		<tr>
 			<td>${match.m_date}</td>
 			<td>${match.m_area}</td>
@@ -43,13 +46,23 @@
 		</c:if>
 	</c:forEach>
 	</table>
+	</c:if>
+	<c:if test="${matchCount<1}">
+		<div>최근경기결과 없음</div>
+	</c:if>
+	
 		
 	<hr>
 	<form:form commandName="teamMemCommand" action="teamMemJoin.do" id="teamMemJoin">
 		<input type="hidden" value="${team.t_name}" id="t_name" name="t_name">
 		<input type="hidden" value="${user_id}" id="id" name="id">
-		<c:if test="${user_team != team.t_name}">
-			<input type="submit" value="팀에 가입하고 싶어요">
+		<input type="submit" value="팀에 가입하고 싶어요">
+		<c:if test="${tCheck == true}">
+			<input type="button" value="가입철회" onclick="location.href='cancelRegi.do?t_name=${team.t_name}'">
 		</c:if>
 	</form:form>
+	<c:if test="${team.id == user_id}">
+		<input type="button" value="팀정보수정" onclick="location.href='teamUpdate.do?t_name=${team.t_name}'">
+		<input type="button" value="팀삭제" onclick="location.href='deleteTeam.do?t_name=${team.t_name}'">
+	</c:if>
 </div>

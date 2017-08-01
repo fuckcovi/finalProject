@@ -32,9 +32,18 @@
      	<put-attribute name="title" value="MIXMATCH TEAM Schedule"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamSchedule.jsp"/>
     </definition>
-     <definition name="teamRecord" extends="main">
+    <definition name="teamRecord" extends="main">
      	<put-attribute name="title" value="MIXMATCH TEAM Record"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamRecord.jsp"/>
     </definition>
-  
+    <definition name="teamUpdate" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAMUpdate"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/teamUpdate.jsp"/>
+    </definition>
+    
+    <!--  팀기록 -->
+  	<definition name="matchDetailRecord" extends="main">
+     	<put-attribute name="title" value="MIXMATCH TEAM matchDetail"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/matchDetailRecord.jsp"/>
+    </definition>
 </tiles-definitions>

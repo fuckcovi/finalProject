@@ -12,7 +12,7 @@
 		<table class="versus"> 
 			<tr>
 				<td><img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80"></td>
-				<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info"></td>
+				<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>
 				<td><img src="${pageContext.request.contextPath}/resources/images/versus.png" width="80"></td>
 				<td>없음</td>
 				<td><img src="${pageContext.request.contextPath}/resources/images/away_img.png" width="80"></td>

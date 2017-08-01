@@ -35,7 +35,7 @@
 		<c:if test="${empty match.m_challenger}">
 		<tr>
 			<td>팀사진</td>
-			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info"></td>
+			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>
 			<td>${match.m_area}</td>
 			<td>${match.m_date}</td>
 			<td>${match.m_time}</td>
