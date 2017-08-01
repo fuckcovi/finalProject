@@ -5,16 +5,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
-	<h3>팀홈</h3>
-	<div class="align-right">
-		<a href="teamRegister.do">팀생성</a>
-	</div>
+	<h2>팀홈</h2>
+	<hr class="style"><br> 
 	<div>
 		<c:if test="${joinCount==0 }">
 			가입신청한 팀이 없습니다. 자신의 팀을 생성하거나 이미 등록된 팀에 가입신청하세요.
 		</c:if>
 		<c:if test="${joinCount>0 }">
-		<h1 style="color:red;">소속팀</h1>
+		<h3>&lt;&lt;소속팀&gt;&gt;</h3>
 			<c:forEach var="joinList" items="${joinList}">
 				<div>
 					<c:if test="${joinList.t_mem_auth > 0}">
@@ -24,26 +22,24 @@
 					</c:if>
 				</div>
 			</c:forEach>
-			<hr size="4">
-			<h3 style="color:red;">가입신청만 한팀 : </h3> 
+			<hr size="1" width="85%">
+			<h4>가입신청 중인 팀 : </h4> 
 			<c:forEach var="joinList" items="${joinList}">
 				<c:if test="${joinList.t_mem_auth ==0}"> 
 					<div><a href="teamInfo.do?t_name=${joinList.t_name}">${joinList.t_name}</a></div>
-				</c:if>
-				
+				</c:if>				
 			</c:forEach>
-		</c:if>		
+		</c:if>
+		<input type="button" value="팀생성" class="btn" onclick="location.href='teamRegister.do'">
 	</div>
 	
-	<hr>
-	<h4 style="color:red;">MixMatch등록팀현황</h4>
+	<br><hr class="style">
+	<h3 style="color:red;">MixMatch등록팀현황</h3> 
+	<input type="button" value="모든종목" class="btn" id="typeAll">
+	<input type="button" value="축구" class="btn" id="typeFoot">
+	<input type="button" value="야구" class="btn" id="typeBase">
+	<input type="button" value="농구" class="btn" id="typeBasket">
 	<div>
-		<ul style="list-style: none; " >
-			<li style="float:left;"><a id="typeAll">모든종목</a></li>
-			<li style="float:left;"><a id="typeFoot">축구</a></li>
-			<li style="float:left;"><a id="typeBase">야구</a></li>
-			<li style="float:left;"><a id="typeBasket">농구</a></li>
-		</ul>
 		<br>
 		<c:if test="${count>0}">
 			<c:forEach var="list" items="${list}">

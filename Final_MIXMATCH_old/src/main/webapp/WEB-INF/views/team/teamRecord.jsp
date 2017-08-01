@@ -5,7 +5,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
-	<h3>팀기록</h3>
+	<h2>팀기록</h2>
+	<hr class="style"><br>
 	<c:if test="${count==0 }">
 		<div>
 			소속 팀도 없는데 기록이 있을리가 
@@ -21,7 +22,7 @@
 		</c:forEach>
 	</ul>
 	<br>
-	<hr>
+	<hr size="1" width="85%">
 	<table class="scheduleList">
 		<tr class="tablehead">
 			<th>매치번호</th>
@@ -39,4 +40,5 @@
 		</c:forEach>
 	</table>
 	</c:if> 
+	<br><hr class="style"> 
 </div>

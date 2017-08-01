@@ -16,7 +16,9 @@
 						<img src="matchImageView.do?t_name=${match.t_name}" width="80">
 					</c:if>
 					<c:if test="${empty match.t_logo_name}">
-						<img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80">
+						<c:if test="${match.m_type eq '축구'}"><img src="${pageContext.request.contextPath}/resources/images/football.png" style="width:80px;height:80px;"></c:if>
+						<c:if test="${match.m_type eq '야구'}"><img src="${pageContext.request.contextPath}/resources/images/baseball.png" style="width:80px;height:80px;"></c:if>
+						<c:if test="${match.m_type eq '농구'}"><img src="${pageContext.request.contextPath}/resources/images/basketball.png" style="width:80px;height:80px;"></c:if>	
 					</c:if>
 				</td>
 				<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>

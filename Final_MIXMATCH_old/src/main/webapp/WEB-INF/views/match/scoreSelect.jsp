@@ -12,7 +12,9 @@
 						<img src="matchImageView.do?t_name=${match.t_name}" width="80">
 					</c:if>
 					<c:if test="${empty t_name}">
-						<img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80">
+						<c:if test="${match.m_type eq '축구'}"><img src="${pageContext.request.contextPath}/resources/images/football.png" style="width:80px;height:80px;"></c:if>
+						<c:if test="${match.m_type eq '야구'}"><img src="${pageContext.request.contextPath}/resources/images/baseball.png" style="width:80px;height:80px;"></c:if>
+						<c:if test="${match.m_type eq '농구'}"><img src="${pageContext.request.contextPath}/resources/images/basketball.png" style="width:80px;height:80px;"></c:if>
 					</c:if>
 				<td><span style="font-size:25px;color:blue;font-weight:bold;">${match.m_home}</span><br>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>
 				<td><img src="${pageContext.request.contextPath}/resources/images/versus.png" width="80"></td>
@@ -22,7 +24,9 @@
 						<img src="matchImageView.do?t_name=${match.m_challenger}" width="80">
 					</c:if>
 					<c:if test="${empty m_challenger}">
-						<img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80">
+						<c:if test="${match.m_type eq '축구'}"><img src="${pageContext.request.contextPath}/resources/images/football.png" style="width:80px;height:80px;"></c:if>
+						<c:if test="${match.m_type eq '야구'}"><img src="${pageContext.request.contextPath}/resources/images/baseball.png" style="width:80px;height:80px;"></c:if>
+						<c:if test="${match.m_type eq '농구'}"><img src="${pageContext.request.contextPath}/resources/images/basketball.png" style="width:80px;height:80px;"></c:if>
 					</c:if>
 				</td>
 			</tr>
@@ -49,7 +53,7 @@
 				<td align="left"> ${match.m_place}</td>
 			</tr>
 		</table><br><br>
-		<input type="button" value="개인기록등록" class="btn" onclick="location.href='${pageContext.request.contextPath}/matchMemRecordInsert.do?m_seq=${match.m_seq}'">
+		<input type="button" value="개인기록+" class="btn" onclick="location.href='${pageContext.request.contextPath}/matchMemRecordInsert.do?m_seq=${match.m_seq}'">
 		<input type="button" value="목록으로" class="btn" onclick="location.href='scoreBoard.do'">
 	</div>
 	<br><hr class="style">

@@ -5,7 +5,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
-	<h3>팀일정결과</h3>
+	<h2>팀일정결과</h2>
+	<hr class="style"><br>
 	<c:if test="${count==0 }">
 		<div>
 			소속 팀도 없는데 일정이 있을리가 
@@ -21,9 +22,10 @@
 		</c:forEach>
 	</ul>
 	<br>
-	<hr><h3>예정일정: 아직 안잡힘</h3>
+	<hr size="1" width="85%">
+	<h4>예정일정: 아직 안잡힘</h4>
 		<div class="scheduleList">
-			<table>			
+			<table class="style">			
 			<tr class="tablehead">
 				<th>경기일자</th>
 				<th>경기장소</th>
@@ -45,9 +47,9 @@
 			</c:forEach>
 			</table>
 		</div>
-		<h3>확정일정</h3>
+		<h4>확정일정</h4>
 		<div class="scheduleList">
-			<table>			
+			<table class="style">			
 			<tr class="tablehead">
 				<th>경기일자</th>
 				<th>경기장소</th>
@@ -70,9 +72,9 @@
 			</c:forEach>
 			</table>
 		</div>
-		<h3>결과 : 매칭 결과</h3>
+		<h4>결과 : 매칭 결과</h4>
 		<div class="scheduleList">
-			<table>			
+			<table class="style">	 		
 			<tr class="tablehead">
 				<th>경기일자</th>
 				<th>매치결과</th>
@@ -92,4 +94,5 @@
 			</table>
 		</div>
 	</c:if>
+	<br><hr class="style"> 
 </div>
