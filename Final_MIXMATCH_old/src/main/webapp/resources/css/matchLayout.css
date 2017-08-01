@@ -40,14 +40,14 @@ hr.style {
 form.style, div.style {
 	margin: 0 auto;
 	width: 500px;
-	height: 320px;
+	height: 450px;
 	background: #DDDDDD;
 }
 
 div.detail-style {
 	margin: 0 auto;
 	width: 500px;
-	height: 450px;
+	height: 480px;
 	background: #DDDDDD;
 }
 
@@ -113,4 +113,9 @@ td.left-style {
 
 .btn-team-info:hover {
 	background: #B2B2B2;
+}
+
+.select_box {
+	width: 100px;
+	height: 30px;
 }

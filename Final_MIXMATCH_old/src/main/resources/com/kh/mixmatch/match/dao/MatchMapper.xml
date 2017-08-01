@@ -6,9 +6,9 @@
 <mapper namespace="com.kh.mixmatch.match.dao.MatchMapper">
 	
 	<select id="matchList" parameterType="map" resultType="matchCommand">
-		SELECT * FROM  g_match 
+		SELECT m.*,t.t_logo,t.t_logo_name FROM  g_match m, (SELECT * FROM g_team)t 
 		<where>
-			m_type = #{type}
+			m.t_name = t.t_name AND m_type = #{type}
 		</where>
 		ORDER BY m_seq DESC
 	</select>	

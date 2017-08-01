@@ -7,11 +7,24 @@
 	<div class="detail-style"><br><br>
 		<table class="versus"> 
 			<tr>
-				<td><img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80"></td>
+				<td>
+					<c:if test="${!empty t_name}">
+						<img src="matchImageView.do?t_name=${match.t_name}" width="80">
+					</c:if>
+					<c:if test="${empty t_name}">
+						<img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80">
+					</c:if>
 				<td><span style="font-size:25px;color:blue;font-weight:bold;">${match.m_home}</span><br>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>
 				<td><img src="${pageContext.request.contextPath}/resources/images/versus.png" width="80"></td>
 				<td><span style="font-size:25px;color:red;font-weight:bold;">${match.m_away}</span><br>${match.m_challenger}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.m_challenger}'"></td>
-				<td><img src="${pageContext.request.contextPath}/resources/images/away_img.png" width="80"></td>
+				<td>
+					<c:if test="${!empty m_challenger}">
+						<img src="matchImageView.do?t_name=${match.m_challenger}" width="80">
+					</c:if>
+					<c:if test="${empty m_challenger}">
+						<img src="${pageContext.request.contextPath}/resources/images/home_img.png" width="80">
+					</c:if>
+				</td>
 			</tr>
 		</table><br><br>
 		<table class="list"> 
@@ -36,6 +49,7 @@
 				<td align="left"> ${match.m_place}</td>
 			</tr>
 		</table><br><br>
+		<input type="button" value="개인기록등록" class="btn" onclick="location.href='${pageContext.request.contextPath}/matchMemRecordInsert.do?m_seq=${match.m_seq}'">
 		<input type="button" value="목록으로" class="btn" onclick="location.href='scoreBoard.do'">
 	</div>
 	<br><hr class="style">

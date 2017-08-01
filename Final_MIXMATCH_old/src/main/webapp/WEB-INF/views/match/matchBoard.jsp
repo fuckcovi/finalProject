@@ -34,7 +34,14 @@
 	<c:forEach var="match" items="${list}">
 		<c:if test="${empty match.m_challenger}">
 		<tr>
-			<td>팀사진</td>
+			<td>
+				<c:if test="${!empty match.t_logo_name}">
+					<img src="matchImageView.do?t_name=${match.t_name}" style="width:80px;">
+				</c:if>
+				<c:if test="${empty match.t_logo_name}">
+					<img src="${pageContext.request.contextPath}/resources/images/home_img.png" style="width:80px;height:80px;">
+				</c:if>
+			</td>
 			<td>${match.t_name}<br><input type="button" value="팀정보" class="btn-team-info" onclick="location.href='${pageContext.request.contextPath}/teamInfo.do?t_name=${match.t_name}'"></td>
 			<td>${match.m_area}</td>
 			<td>${match.m_date}</td>

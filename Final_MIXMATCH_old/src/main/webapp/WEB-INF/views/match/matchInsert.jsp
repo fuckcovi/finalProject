@@ -10,16 +10,16 @@
 		<ul>
 			<li>
 				<label for="t_name">팀명</label>
-				<form:select path="t_name" items="${teamList}"/>
+				<form:select path="t_name" items="${teamList}" cssClass="select_box"/>
 			</li>
 			<li>
 				<label for="m_area">지역</label>
-				<form:input path="m_area"/>
+				<form:select path="m_area" items="${area}" cssClass="select_box"/>
 				<form:errors path="m_area" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="m_date">날짜</label>
-				<form:input path="m_date"/>
+				<input type="date" name="m_date">
 				<form:errors path="m_date" cssClass="error-color"/>
 			</li>
 			<li>
@@ -44,7 +44,7 @@
 			</li>
 			<li>
 				<label for="m_type">종목</label>
-				<form:input path="m_type"/>
+				<form:select path="m_type" items="${type}" cssClass="select_box"/>
 				<form:errors path="m_type" cssClass="error-color"/>
 			</li>
 		</ul>
