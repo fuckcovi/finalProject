@@ -49,7 +49,68 @@ $(document).ready(function(){
 		}
 	});
 	
-	
-	
-	
+	// 개인기록 수정
+	$(".footRecordModify").click(function(){
+		alert("축구개인기록 수정");
+		var tname= $(this).attr("list-tname");
+		var id = $(this).attr("list-id");
+		var mseq = $(this).attr("list_mseq");
+		var output = "";
+			output+= "<form action='footMemModify.do'>";
+			output+= "	<input type='hidden' id='m_seq' name='m_seq' value='"+mseq+"'>";
+			output+= "	소속팀 : <input type='text' id='t_name' name='t_name' value='"+tname+"' readonly='true'>";
+			output+= "	유저이름(아이디) : <input type='text' id='id' name='id' value='"+id+"' readonly='true'>";
+			output+= "	슈팅 : <input type='text' id='f_shoot' name='f_shoot' value='"+$(this).attr("list-fshoot")+"'>";
+			output+= "	도움 : <input type='text' id='f_assist' name='f_assist' value='"+$(this).attr("list-fassist")+"'>";
+			output+= "	골 : <input type='text' id='f_goal' name='f_goal' value='"+$(this).attr("list-fgoal")+"'>";
+			output+= "	공격포인트 : <input type='text' id='f_attack' name='f_attack' value='"+$(this).attr("list-fattack")+"'>";
+			output+= "	<input type='submit' value='기록수정'>";
+			output+= "</form>";
+		$(this).parent().parent().text("").append(output);
+	});
+	$(".basketRecordModify").click(function(){
+		alert("농구개인기록 수정");
+		var tname= $(this).attr("list-tname");
+		var id = $(this).attr("list-id");
+		var mseq = $(this).attr("list_mseq");
+		var output = "";
+			output+= "<form action='basketMemModify.do'>";
+			output+= "	<input type='hidden' id='m_seq' name='m_seq' value='"+mseq+"'>";
+			output+= "	소속팀 : <input type='text' id='t_name' name='t_name' value='"+tname+"' readonly='true'>";
+			output+= "	유저이름(아이디) : <input type='text' id='id' name='id' value='"+id+"' readonly='true'>";
+			output+= "	득점 : <input type='text' id='b_score' name='b_score' value='"+$(this).attr("list-bscore")+"'>";
+			output+= "	어시스트 : <input type='text' id='b_assist' name='b_assist' value='"+$(this).attr("list-bassist")+"'>";
+			output+= "	리바운드 : <input type='text' id='b_rebound' name='b_rebound' value='"+$(this).attr("list-brebound")+"'>";
+			output+= "	스틸 : <input type='text' id='b_steel' name='b_steel' value='"+$(this).attr("list-bsteel")+"'>";
+			output+= "	블록 : <input type='text' id='b_block' name='b_block' value='"+$(this).attr("list-bblock")+"'>";
+			output+= "	3점슛 : <input type='text' id='b_3point' name='b_3point' value='"+$(this).attr("list-b3point")+"'>";
+			output+= "	<input type='submit' value='기록수정'>";
+			output+= "</form>";
+		$(this).parent().parent().text("").append(output);
+	});
+	$(".baseRecordModify").click(function(){
+		alert("야구개인기록 수정");
+		var tname= $(this).attr("list-tname");
+		var id = $(this).attr("list-id");
+		var mseq = $(this).attr("list_mseq");
+		var output = "";
+			output+= "<form action='baseMemModify.do'>";
+			output+= "	<input type='hidden' id='m_seq' name='m_seq' value='"+mseq+"'>";
+			output+= "	소속팀 : <input type='text' id='t_name' name='t_name' value='"+tname+"' readonly='true'>";
+			output+= "	유저이름(아이디) : <input type='text' id='id' name='id' value='"+id+"' readonly='true'>";
+			output+= "	타수 : <input type='text' id='b_bat' name='b_bat' value='"+$(this).attr("list-bbat")+"'>";
+			output+= "	안타수 : <input type='text' id='b_hit' name='b_hit' value='"+$(this).attr("list-bhit")+"'>";
+			output+= "	타점 : <input type='text' id='b_rbi' name='b_rbi' value='"+$(this).attr("list-brbi")+"'>";
+			output+= "	득점 : <input type='text' id='b_score' name='b_score' value='"+$(this).attr("list-bscore")+"'>";
+			output+= "	타율 : <input type='text' id='b_avg' name='b_avg' value='"+$(this).attr("list-bavg")+"'>";
+			output+= "	승리 : <input type='text' id='b_win' name='b_win' value='"+$(this).attr("list-bwin")+"'>";
+			output+= "	패배 : <input type='text' id='b_lose' name='b_lose' value='"+$(this).attr("list-blose")+"'>";
+			output+= "	삼진 : <input type='text' id='b_strike' name='b_strike' value='"+$(this).attr("list-bstrike")+"'>";
+			output+= "	이닝 : <input type='text' id='b_ip' name='b_ip' value='"+$(this).attr("list-bip")+"'>";
+			output+= "	실점 : <input type='text' id='b_er' name='b_er' value='"+$(this).attr("list-ber")+"'>";
+			output+= "	방어율 : <input type='text' id='b_era' name='b_era' value='"+$(this).attr("list-bera")+"'>";
+			output+= "	<input type='submit' value='기록수정'>";
+			output+= "</form>";
+		$(this).parent().parent().text("").append(output);
+	});
 });

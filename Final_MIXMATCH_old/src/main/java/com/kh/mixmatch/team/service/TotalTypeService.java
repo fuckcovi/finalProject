@@ -18,9 +18,9 @@ public interface TotalTypeService {
 	public void deleteBasket(int b_seq);
 	public void deleteFoot(int f_seq);
 	
-	public BaseCommand updateBase(int b_seq);
-	public BasketCommand updateBasket(int b_seq);
-	public FootCommand updateFoot(int f_seq);
+	public void updateBase(BaseCommand base);
+	public void updateBasket(BasketCommand basket);
+	public void updateFoot(FootCommand foot);
 	
 	@Transactional(readOnly=true)
 	public BaseCommand selectBase(int b_seq);

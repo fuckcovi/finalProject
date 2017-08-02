@@ -49,18 +49,18 @@ public class TotalTypeServiceImpl implements TotalTypeService{
 	}
 
 	@Override
-	public BaseCommand updateBase(int b_seq) {
-		return totalTypeMapper.updateBase(b_seq);
+	public void updateBase(BaseCommand base) {
+		totalTypeMapper.updateBase(base);
 	}
 
 	@Override
-	public BasketCommand updateBasket(int b_seq) {
-		return totalTypeMapper.updateBasket(b_seq);
+	public void updateBasket(BasketCommand basket) {
+		totalTypeMapper.updateBasket(basket);
 	}
 
 	@Override
-	public FootCommand updateFoot(int f_seq) {
-		return totalTypeMapper.updateFoot(f_seq);
+	public void updateFoot(FootCommand foot) {
+		totalTypeMapper.updateFoot(foot);
 	}
 
 	@Override

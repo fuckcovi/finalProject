@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.mixmatch.team.domain.BaseCommand;
 import com.kh.mixmatch.team.domain.BasketCommand;
@@ -22,9 +23,12 @@ public interface TotalTypeMapper {
 	public void deleteBasket(Integer b_seq);
 	public void deleteFoot(Integer f_seq);
 	
-	public BaseCommand updateBase(Integer b_seq);
-	public BasketCommand updateBasket(Integer b_seq);
-	public FootCommand updateFoot(Integer f_seq);
+	@Update("UPDATE g_baseball SET b_bat=#{b_bat},b_hit=#{b_hit},b_rbi=#{b_rbi},b_score=#{b_score},b_avg=#{b_avg},b_win=#{b_win},b_lose=#{b_lose},b_strike=#{b_strike},b_ip=#{b_ip},b_er=#{b_er},b_era=#{b_era} WHERE b_seq=#{b_seq}")
+	public void updateBase(BaseCommand base);
+	@Update("UPDATE g_basketball SET b_score=#{b_score},b_assist=#{b_assist},b_rebound=#{b_rebound},b_steel=#{b_steel},b_block=#{b_block},b_3point=#{b_3point} WHERE b_seq=#{b_seq}")
+	public void updateBasket(BasketCommand basket);
+	@Update("UPDATE g_football SET f_shoot=#{f_shoot},f_assist=#{f_assist},f_goal=#{f_goal},f_attack=#{f_attack} WHERE f_seq=#{f_seq}")
+	public void updateFoot(FootCommand foot);
 	
 	public BaseCommand selectBase(Integer b_seq);
 	public BasketCommand selectBasket(Integer b_seq);

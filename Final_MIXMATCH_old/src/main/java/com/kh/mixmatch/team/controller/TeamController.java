@@ -1,7 +1,5 @@
 package com.kh.mixmatch.team.controller;
 
-import java.io.IOException;
-import java.io.Reader;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -420,43 +418,160 @@ public class TeamController {
 		
 		return mav;
 	}
-	@RequestMapping("/homeMemRecord.do")
-	public ModelAndView homeMemRecord(@ModelAttribute("footCommand") FootCommand footCommand, @ModelAttribute("basketCommand") BasketCommand basketCommand ,@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
-		System.out.println(basketCommand);
-		int m_seq = 0;
-		if(footCommand != null){
-			m_seq = footCommand.getM_seq();
-			totalTypeService.insertFoot(footCommand);
-		}else if(baseCommand!=null){
-			m_seq = baseCommand.getM_seq();
-			totalTypeService.insertBase(baseCommand);
-		}else if(basketCommand!=null){
+	//// 축구
+	@RequestMapping("/homeMemRecordFoot.do")
+	public ModelAndView homeMemRecordFoot(@ModelAttribute("footCommand") FootCommand footCommand,BindingResult result,HttpSession session){
+		System.out.println(footCommand );
+		int m_seq = footCommand.getM_seq();
 			
-			m_seq = basketCommand.getM_seq();
-			totalTypeService.insertBasket(basketCommand);
+		// 이미 해당 매치번호의 소속팀의 유저 기록이 등록되있으면 insert안되고 리턴.
+		List<FootCommand> footlist = teamMemService.listMatchFoot(m_seq);
+		for(int i =0;i<footlist.size();i++){
+			if(footlist.get(i).getId().equals(footCommand.getId())&& footlist.get(i).getT_name().equals(footCommand.getT_name())){
+				// 이미 이사람은 이번매치의 개인기록을 등록함
+				return matchMemRecordInsertForm(m_seq);
+			}
 		}
+		totalTypeService.insertFoot(footCommand);
+		return matchMemRecordInsertForm(m_seq);
+	}
+	@RequestMapping("/awayMemRecordFoot.do")
+	public ModelAndView awayMemRecordFoot(@ModelAttribute("footCommand") FootCommand footCommand,BindingResult result,HttpSession session){
+		int m_seq = footCommand.getM_seq();
+		
+		// 이미 해당 매치번호의 소속팀의 유저 기록이 등록되있으면 insert안되고 리턴.
+		List<FootCommand> footlist = teamMemService.listMatchFoot(m_seq);
+		for(int i =0;i<footlist.size();i++){
+			if(footlist.get(i).getId().equals(footCommand.getId())&& footlist.get(i).getT_name().equals(footCommand.getT_name())){
+				// 이미 이사람은 이번매치의 개인기록을 등록함
+			
+				return matchMemRecordInsertForm(m_seq);
+			}
+		}
+		totalTypeService.insertFoot(footCommand);
+			
+		return matchMemRecordInsertForm(m_seq);
+	}
+	//////////// 농구
+	@RequestMapping("/homeMemRecordBasket.do")
+	public ModelAndView homeMemRecordBasket(@ModelAttribute("basketCommand") BasketCommand basketCommand ,BindingResult result,HttpSession session){
+		System.out.println(basketCommand);
+		int m_seq = basketCommand.getM_seq();
+		List<BasketCommand> basketlist = teamMemService.listMatchBasket(m_seq);
+		for(int i =0;i<basketlist.size();i++){
+			if(basketlist.get(i).getId().equals(basketCommand.getId())&& basketlist.get(i).getT_name().equals(basketCommand.getT_name())){
+				return matchMemRecordInsertForm(m_seq);
+			}
+		}
+		totalTypeService.insertBasket(basketCommand);
+	
 		
 		return matchMemRecordInsertForm(m_seq);
 	}
-	@RequestMapping("/awayMemRecord.do")
-	public ModelAndView awayMemRecord(@ModelAttribute("footCommand") FootCommand footCommand, @ModelAttribute("basketCommand") BasketCommand basketCommand ,@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
-		int m_seq = 0;
-		if(footCommand != null){
-			m_seq = footCommand.getM_seq();
-			totalTypeService.insertFoot(footCommand);
-		}else if(baseCommand!=null){
-			m_seq = baseCommand.getM_seq();
-			totalTypeService.insertBase(baseCommand);
-		}else if(basketCommand!=null){
-			m_seq = basketCommand.getM_seq();
-			totalTypeService.insertBasket(basketCommand);
+	@RequestMapping("/awayMemRecordBasket.do")
+	public ModelAndView awayMemRecordBasket(@ModelAttribute("basketCommand") BasketCommand basketCommand ,BindingResult result,HttpSession session){
+		System.out.println(basketCommand);
+		int m_seq = basketCommand.getM_seq();
+		List<BasketCommand> basketlist = teamMemService.listMatchBasket(m_seq);
+		for(int i =0;i<basketlist.size();i++){
+			if(basketlist.get(i).getId().equals(basketCommand.getId()) && basketlist.get(i).getT_name().equals(basketCommand.getT_name())){
+				return matchMemRecordInsertForm(m_seq);
+			}
 		}
+		totalTypeService.insertBasket(basketCommand);
+		
+		return matchMemRecordInsertForm(m_seq);
+	}
+	//////////////////////s야구
+	@RequestMapping("/homeMemRecordBase.do")
+	public ModelAndView homeMemRecordBase(@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
+		int m_seq= baseCommand.getM_seq();
+		List<BaseCommand> baselist = teamMemService.listMatchBase(m_seq);
+		for(int i =0;i<baselist.size();i++){
+			if(baselist.get(i).getId().equals(baseCommand.getId())&& baselist.get(i).getT_name().equals(baseCommand.getT_name())){
+				return matchMemRecordInsertForm(m_seq);
+			}
+		}
+		totalTypeService.insertBase(baseCommand);
+		
+		return matchMemRecordInsertForm(m_seq);
+	}
+	@RequestMapping("/awayMemRecordBase.do")
+	public ModelAndView awayMemRecordBase(@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
+		int m_seq = baseCommand.getM_seq();
+		List<BaseCommand> baselist = teamMemService.listMatchBase(m_seq);
+		for(int i =0;i<baselist.size();i++){
+			if(baselist.get(i).getId().equals(baseCommand.getId())&& baselist.get(i).getT_name().equals(baseCommand.getT_name())){
+				return matchMemRecordInsertForm(m_seq);
+			}
+		}
+		totalTypeService.insertBase(baseCommand);
+		
 		return matchMemRecordInsertForm(m_seq);
 	}
 	
-	
-	
-	
+// ================== 개인기록 수정 - 축구
+	@RequestMapping("/footMemModify.do")
+	public ModelAndView footMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,@RequestParam int f_shoot, @RequestParam int f_assist,@RequestParam int f_goal,@RequestParam int f_attack){
+		List<FootCommand> footlist = teamMemService.listMatchFoot(m_seq);
+		for(int i =0;i<footlist.size();i++){
+			if(footlist.get(i).getId().equals(id)&& footlist.get(i).getT_name().equals(t_name)){
+				FootCommand foot = new FootCommand();
+				foot.setF_seq(footlist.get(i).getF_seq());
+				foot.setF_shoot(f_shoot);
+				foot.setF_assist(f_assist);
+				foot.setF_goal(f_goal);
+				foot.setF_attack(f_attack);
+				totalTypeService.updateFoot(foot);
+			}
+		}
+		return matchMemRecordInsertForm(m_seq);
+	}
+// ================== 개인기록 수정 - 농구
+	@RequestMapping("/basketMemModify.do")
+	public ModelAndView basketMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,@RequestParam int b_score, @RequestParam int b_assist,@RequestParam int b_rebound,@RequestParam int b_steel, @RequestParam int b_block,@RequestParam int b_3point){
+		List<BasketCommand> basketlist = teamMemService.listMatchBasket(m_seq);
+		for(int i =0;i<basketlist.size();i++){
+			if(basketlist.get(i).getId().equals(id)&& basketlist.get(i).getT_name().equals(t_name)){
+				BasketCommand basket = new BasketCommand();
+				basket.setB_seq(basketlist.get(i).getB_seq());
+				basket.setB_steel(b_steel);
+				basket.setB_score(b_score);
+				basket.setB_rebound(b_rebound);
+				basket.setB_block(b_block);
+				basket.setB_assist(b_assist);
+				basket.setB_3point(b_3point);
+				totalTypeService.updateBasket(basket);
+			}
+		}
+		return matchMemRecordInsertForm(m_seq);
+	}
+// ================== 개인기록 수정 - 야구
+	@RequestMapping("/baseMemModify.do")
+	public ModelAndView baseMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,
+			@RequestParam int b_bat, @RequestParam int b_hit, @RequestParam int b_rbi, @RequestParam int b_score, @RequestParam double b_avg, @RequestParam int b_win,@RequestParam int b_lose, @RequestParam int b_strike,@RequestParam int b_ip, @RequestParam int b_er, @RequestParam double b_era){
+		List<BaseCommand> baselist = teamMemService.listMatchBase(m_seq);
+		for(int i =0;i<baselist.size();i++){
+			if(baselist.get(i).getId().equals(id)&& baselist.get(i).getT_name().equals(t_name)){
+				BaseCommand base = new BaseCommand();
+				base.setB_seq(baselist.get(i).getB_seq());
+				base.setB_avg(b_avg);
+				base.setB_bat(b_bat);
+				base.setB_er(b_er);
+				base.setB_era(b_era);
+				base.setB_hit(b_hit);
+				base.setB_ip(b_ip);
+				base.setB_lose(b_lose);
+				base.setB_rbi(b_rbi);
+				base.setB_score(b_score);
+				base.setB_strike(b_strike);
+				base.setB_win(b_win);
+				
+				totalTypeService.updateBase(base);
+			}
+		}
+		return matchMemRecordInsertForm(m_seq);
+	}	
 	
 	
 // =========================================== 팀기록
