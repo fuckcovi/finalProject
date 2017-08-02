@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
+import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.team.domain.TeamCommand;
 import com.kh.mixmatch.team.domain.TeamMemCommand;
 
@@ -59,5 +60,9 @@ public interface MatchMapper {
 	// ÆÀ lose ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
 	@Update("UPDATE g_member SET point=point+10 WHERE id IN(SELECT id FROM g_team_member WHERE t_name=#{t_name})")
 	public void updatePointLose(String t_name);
+
+	// º£ÆÃ
+	@Insert("INSERT INTO g_toto (t_seq,m_seq,id,t_point,t_winteam,t_score,t_rate) VALUES (g_toto_seq.nextval,#{m_seq},#{id},#{t_point},#{t_winteam},#{t_score},#{rate})")
+	public TotoCommand insertToto(TotoCommand toto);
 	
 }

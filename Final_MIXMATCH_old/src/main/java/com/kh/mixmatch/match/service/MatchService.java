@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
+import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.team.domain.TeamCommand;
 
 @Transactional
@@ -36,5 +37,7 @@ public interface MatchService {
 	public void updatePointWin(String t_name);
 	public void updatePointDraw(String t_name);
 	public void updatePointLose(String t_name);
+	
+	public TotoCommand insertToto(TotoCommand toto);
 	
 }

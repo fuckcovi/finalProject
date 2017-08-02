@@ -2,8 +2,7 @@
 
 table.style {
 	margin: 0 auto;  
-	border-collapse: collapse;
-	
+	border-collapse: collapse;	
 }
 
 .detail-style table {
@@ -21,7 +20,9 @@ table.style {
 .style td {
 	width: 130px;
 	height: 80px;
+	border-top: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
+	padding-top: 5px;
 }
 
 .versus td {

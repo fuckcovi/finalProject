@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mixmatch.match.dao.MatchMapper;
 import com.kh.mixmatch.match.domain.MatchCommand;
+import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.team.domain.TeamCommand;
 
 @Service("matchService")
@@ -105,6 +106,11 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public void updatePointLose(String t_name) {
 		matchMapper.updatePointLose(t_name);
+	}
+
+	@Override
+	public TotoCommand insertToto(TotoCommand toto) {
+		return matchMapper.insertToto(toto);
 	}
 
 }

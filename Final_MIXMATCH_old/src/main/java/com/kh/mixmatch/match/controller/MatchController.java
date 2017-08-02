@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
+import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.match.service.MatchService;
 import com.kh.mixmatch.team.domain.TeamCommand;
 
@@ -289,7 +290,7 @@ public class MatchController {
 	
 	// 매치수정
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.POST)
-	public String updateMatchSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
+	public String matchUpdateSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<매치수정 matchCommand>> : " + matchCommand);
@@ -306,8 +307,8 @@ public class MatchController {
 	}
 	
 	// 점수보기
-	@RequestMapping("/match/scoreSelect.do")
-	public ModelAndView selectScoreForm(@RequestParam("m_seq") int m_seq) {
+	@RequestMapping("/match/scoreDetail.do")
+	public ModelAndView scoreDetailForm(@RequestParam("m_seq") int m_seq) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<점수보기 m_seq>> : " + m_seq);
 		}
@@ -319,11 +320,8 @@ public class MatchController {
 		TeamCommand t_name = matchService.getTeam(match.getT_name());
 		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
 		
-		System.out.println(t_name.getT_logo_name());
-		System.out.println(m_challenger.getT_logo_name());
-		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("scoreSelect");
+		mav.setViewName("scoreDetail");
 		mav.addObject("match", match);
 		mav.addObject("t_name", t_name.getT_logo_name());
 		mav.addObject("m_challenger", m_challenger.getT_logo_name());
@@ -365,7 +363,7 @@ public class MatchController {
 		String id = matchCommand.getM_mvp();
 		matchService.updateMemberPoint(id);
 		
-		// 팀 전적 증가
+		// 팀 전적 증가, 포인트 증가
 		int home = matchCommand.getM_home();
 		int away = matchCommand.getM_away();
 		
@@ -391,5 +389,96 @@ public class MatchController {
 		
 		return "redirect:/match/scoreBoard.do";
 	}
+	
+	///////////////////////////////////승부예측///////////////////////////////////
+	// 승부예측
+	@RequestMapping("/match/sportsToto.do")
+	public ModelAndView sportsTotoForm(@RequestParam(value="type", defaultValue="축구") String type) {			
+		// 종목 받아오기
+		String board = "toto";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("board", board);
+			
+		// 종목별 게시글 수 카운트
+		int count = matchService.getRowCount(map);
+			
+		if (log.isDebugEnabled()) {
+			log.debug("<<승부예측 type>> : " + type);
+			log.debug("<<승부예측 count>> : " + count);
+		}
+		
+		// 리스트에 저장
+		List<MatchCommand> list = null;
+		if (count > 0) {
+			map.put("type", type);		
+			list = matchService.matchList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("sportsToto");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("type", type);
+		
+		return mav;
+	}
+	
+	// 배당률 폼
+	@RequestMapping(value="/match/totoDetail.do", method=RequestMethod.GET)
+	public ModelAndView totoDetailForm(@RequestParam("m_seq") int m_seq,
+										Model model, HttpSession session) {		
+		if (log.isDebugEnabled()) {
+			log.debug("<<배당률 폼 m_seq>> : " + m_seq);
+		}
+			
+		// 유저 팀이름 받아오기
+		String id = (String) session.getAttribute("user_id");
+		List<String> myteam = matchService.getTeamList(id);
+			
+		// 글번호(m_seq)와 일치하는 레코드 선택
+		MatchCommand match = matchService.selectMatch(m_seq);
+		
+		// 팀 이름 가져오기
+		TeamCommand t_name = matchService.getTeam(match.getT_name());
+		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
+		
+		// 경기수 구하기
+		int home = t_name.getT_win() + t_name.getT_lose() + t_name.getT_draw();
+		int away = m_challenger.getT_win() + m_challenger.getT_lose() + m_challenger.getT_draw();
+		
+		TotoCommand toto = new TotoCommand();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("totoDetail");
+		mav.addObject("match", match);
+		mav.addObject("t_name", t_name);
+		mav.addObject("m_challenger", m_challenger);
+		mav.addObject("myteam", myteam);
+		mav.addObject("home", home);
+		mav.addObject("away", away);
+		mav.addObject("user_id", id);
+		mav.addObject("toto", toto);
+			
+		return mav;
+	}
+	
+	/*// 베팅하기
+	@RequestMapping(value="/match/totoDetail.do", method=RequestMethod.POST)
+	public String insertTotoSubmit(@ModelAttribute("toto") @Valid TotoCommand totoCommand,
+								   BindingResult result, HttpServletRequest request) {
+		if (log.isDebugEnabled()) {
+		log.debug("<<베팅하기 totoCommand>> : " + totoCommand);
+		}
+		
+		if (result.hasErrors()) {
+		return "totoDetail";
+		}
+		
+		// DB에 저장
+		matchService.insertToto(totoCommand);
+		
+		return "redirect:/match/sportsToto.do";
+	}*/
 	
 }
