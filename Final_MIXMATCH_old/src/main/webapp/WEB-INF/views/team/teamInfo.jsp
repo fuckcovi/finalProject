@@ -44,6 +44,14 @@
 			<td>${match.m_home} : ${match.m_away}</td>
 		</tr>
 		</c:if>
+		<c:if test="${match.m_challenger == team.t_name && match.m_challenger!=null && match.m_home!=-1 && match.m_away!=-1 }">
+		<tr>
+			<td>${match.m_date}</td>
+			<td>${match.m_area}</td>
+			<td><a href="teamInfo.do?t_name=${match.t_name}">${match.t_name}</a> vs <a href="teamInfo.do?t_name=${match.m_challenger}">${match.m_challenger}</a></td>
+			<td>${match.m_home} : ${match.m_away}</td>
+		</tr>
+		</c:if>
 	</c:forEach>
 	</table>
 	</c:if>
