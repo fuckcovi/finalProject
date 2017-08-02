@@ -48,9 +48,7 @@ li label{
 	width: 120px;
 	float: left;
 }
-/* form input[type="text"],form input[type="password"],form textarea{
-	width:150px;
-} */
+
 a{
 	text-decoration:none;
 	color:white;
