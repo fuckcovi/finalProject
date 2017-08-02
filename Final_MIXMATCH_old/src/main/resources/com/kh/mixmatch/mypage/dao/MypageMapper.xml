@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kh.mixmatch.mypage.dao.MypageMapper">  
+	
+	<!-- 부모글 리스트 -->
+	<resultMap id="mypageList" type="mypageCommand" >		<!-- CLOB를 String으로 만들어줘야하기때문에 resultMap사용 -->
+    	<result property="h_content" column="h_content" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="list" parameterType="map" resultMap="mypageList">
+		SELECT
+		  *
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM(SELECT
+		             b.h_seq,
+					 b.id,
+					 b.h_regdate,
+					 b.h_content,
+                     b.h_show,
+                     b.h_file,
+                     b.h_file_name,
+					 r.reply_cnt
+		           FROM g_home b LEFT JOIN(SELECT h_seq,count(*) reply_cnt
+		           							FROM g_home_re
+		           							GROUP BY h_seq)r
+		           						ON b.h_seq = r.h_seq
+		           						ORDER BY b.h_seq DESC)a)
+		           <![CDATA[
+                   WHERE rnum >= #{start} AND rnum <= #{end} AND id=#{user_id}
+                   ]]> 
+                   										<!-- 로그인 되어있는 유저의 글들만 나오게끔 조건설정 -->
+                   
+	</select>
+	
+	
+	
+	<!-- 댓글 리스트 -->
+	<resultMap id="mypageReplyList" type="MypageReplyCommand" >		<!-- CLOB를 String으로 만들어줘야하기때문에 resultMap사용 -->
+    	<result property="h_re_content" column="h_re_content" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="listReply" parameterType="map" resultMap="mypageReplyList">
+		SELECT
+		   h_re_seq,
+		   h_re_content,
+		   h_re_regdate,
+		   h_seq,
+		   id,
+		   h_re_file,
+		   h_re_file_name
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM(SELECT
+		              *
+		           FROM g_home_re
+		           WHERE h_seq = #{h_seq}
+		           ORDER BY h_re_seq DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>                                         
+	</select>
+</mapper>
