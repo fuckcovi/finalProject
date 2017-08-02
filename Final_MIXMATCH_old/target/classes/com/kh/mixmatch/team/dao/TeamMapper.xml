@@ -5,18 +5,12 @@
 <mapper namespace="com.kh.mixmatch.team.dao.TeamMapper"> 
 	<select id="listRank" parameterType="map" resultType="TeamCommand">
 		SELECT * FROM g_team 
-					
-						<where>
-							<if test="keyword != '' and keyfield =='teamtype' and order=='t_win'">
-							t_type like '%' || #{keyword} || '%' ORDER BY  t_win  DESC
-							</if>
-							<if test="keyword != '' and keyfield =='teamtype' and order=='t_draw'">
-							t_type like '%' || #{keyword} || '%' ORDER BY  t_draw  DESC
-							</if>
-							<if test="keyword != '' and keyfield =='teamtype' and order=='t_lose'">
-							t_type like '%' || #{keyword} || '%' ORDER BY  t_lose DESC
-							</if>
-						</where>	
+					<where>
+						<if test="keyword != '' and keyfield =='teamtype'">
+							t_type like '%' || #{keyword} || '%'
+						</if>
+					</where>
+					ORDER BY t_win DESC					
 	</select>
 	 
 	<select id="getTeamCount" parameterType="map" resultType="integer">

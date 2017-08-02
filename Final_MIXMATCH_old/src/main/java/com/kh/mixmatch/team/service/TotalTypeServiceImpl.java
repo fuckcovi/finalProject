@@ -79,18 +79,18 @@ public class TotalTypeServiceImpl implements TotalTypeService{
 	}
 
 	@Override
-	public List<BaseCommand> listBase() {
-		return totalTypeMapper.listBase();
+	public List<BaseCommand> listBase(Map<String, Object> map) {
+		return totalTypeMapper.listBase(map);
 	}
 
 	@Override
-	public List<BasketCommand> listBasket() {
-		return totalTypeMapper.listBasket();
+	public List<BasketCommand> listBasket(Map<String, Object> map) {
+		return totalTypeMapper.listBasket(map);
 	}
 
 	@Override
-	public List<FootCommand> listFoot() {
-		return totalTypeMapper.listFoot();
+	public List<FootCommand> listFoot(Map<String, Object> map) {
+		return totalTypeMapper.listFoot(map);
 	}
 	
 }

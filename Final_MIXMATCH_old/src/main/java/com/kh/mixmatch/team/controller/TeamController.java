@@ -1,5 +1,6 @@
 package com.kh.mixmatch.team.controller;
 
+import java.security.PublicKey;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,7 @@ public class TeamController {
 	public TeamCommand initCommand(){
 		return new TeamCommand();
 	}
+	
 	
 //=================== ∆¿»® ==============
 	
@@ -549,16 +551,14 @@ public class TeamController {
 // ================== ∞≥¿Œ±‚∑œ ºˆ¡§ - æﬂ±∏
 	@RequestMapping("/baseMemModify.do")
 	public ModelAndView baseMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,
-			@RequestParam int b_bat, @RequestParam int b_hit, @RequestParam int b_rbi, @RequestParam int b_score, @RequestParam double b_avg, @RequestParam int b_win,@RequestParam int b_lose, @RequestParam int b_strike,@RequestParam int b_ip, @RequestParam int b_er, @RequestParam double b_era){
+			@RequestParam int b_bat, @RequestParam int b_hit, @RequestParam int b_rbi, @RequestParam int b_score, @RequestParam int b_win,@RequestParam int b_lose, @RequestParam int b_strike,@RequestParam int b_ip, @RequestParam int b_er){
 		List<BaseCommand> baselist = teamMemService.listMatchBase(m_seq);
 		for(int i =0;i<baselist.size();i++){
 			if(baselist.get(i).getId().equals(id)&& baselist.get(i).getT_name().equals(t_name)){
 				BaseCommand base = new BaseCommand();
 				base.setB_seq(baselist.get(i).getB_seq());
-				base.setB_avg(b_avg);
 				base.setB_bat(b_bat);
 				base.setB_er(b_er);
-				base.setB_era(b_era);
 				base.setB_hit(b_hit);
 				base.setB_ip(b_ip);
 				base.setB_lose(b_lose);
@@ -659,13 +659,14 @@ public class TeamController {
 	}
 //=============================== ≈Î«’æﬂ±∏∑©≈∑ ====================
 	@RequestMapping("/totalBaseRank.do")
-	public ModelAndView totalBaseRank(){
+	public ModelAndView totalBaseRank(@RequestParam(defaultValue="t_win") String order){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","æﬂ±∏");
 		map.put("keyfield","teamtype");
 		int count = teamService.getTeamCount(map);
 		List<TeamCommand> list = null;
 		if(count > 0){
+			map.put("order", order);
 			list = teamService.listRank(map);
 		}
 		ModelAndView mav = new ModelAndView();
@@ -673,19 +674,25 @@ public class TeamController {
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		
-		// ∞≥¿Œ∑©≈∑
-		Map<String, Object> mapMem = new HashMap<String, Object>();
-		List<BaseCommand> listMem = null;
-		if(true){
-			listMem = totalTypeService.listBase();
-		}
+		return mav;
+	}
+	@RequestMapping("/totalBaseMemRank.do")
+	public ModelAndView totalBaseMemRank(@RequestParam(defaultValue="b_hit") String morder){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("morder", morder);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("totalBaseMemRank");
+		List<BaseCommand> listMem = totalTypeService.listBase(map);
+		
 		mav.addObject("listMem",listMem);
 		
 		return mav;
 	}
 //=============================== ≈Î«’≥Û±∏∑©≈∑ ====================
 	@RequestMapping("/totalBasketRank.do")
-	public ModelAndView totalBasketRank(){
+	public ModelAndView totalBasketRank(@RequestParam(defaultValue="t_win") String order){
 		// ≈∏¿‘¿Ã ≥Û±∏¿Œ ∆¿ ∏Ò∑œ
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","≥Û±∏");
@@ -693,32 +700,38 @@ public class TeamController {
 		int count = teamService.getTeamCount(map);
 		List<TeamCommand> list = null;
 		if(count > 0){
+			map.put("order", order);
 			list = teamService.listRank(map);
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalBasketRank");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
+		return mav;
+	}
+	@RequestMapping("/totalBasketMemRank.do")
+	public ModelAndView totalBasketMemRank(@RequestParam(defaultValue="b_score") String morder){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("morder", morder);
 		
-		// ∞≥¿Œ∑©≈∑
-		Map<String, Object> mapMem = new HashMap<String, Object>();
-		List<BasketCommand> listMem = null;
-		if(true){
-			listMem = totalTypeService.listBasket();
-		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("totalBasketMemRank");
+		List<BasketCommand> listMem = totalTypeService.listBasket(map);
+		
 		mav.addObject("listMem",listMem);
 		
 		return mav;
 	}
 //=============================== ≈Î«’√‡±∏∑©≈∑ ====================
 	@RequestMapping("/totalFootRank.do")
-	public ModelAndView totalFootRank(){
+	public ModelAndView totalFootRank(@RequestParam(defaultValue="t_win") String order){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","√‡±∏");
 		map.put("keyfield","teamtype");
 		int count = teamService.getTeamCount(map);
 		List<TeamCommand> list = null;
 		if(count > 0){
+			map.put("order", order);
 			list = teamService.listRank(map);
 		}
 		ModelAndView mav = new ModelAndView();
@@ -726,12 +739,16 @@ public class TeamController {
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		
-		// ∞≥¿Œ∑©≈∑
-		Map<String, Object> mapMem = new HashMap<String, Object>();
-		List<FootCommand> listMem = null;
-		if(true){
-			listMem = totalTypeService.listFoot();
-		}
+		return mav;
+	}
+	@RequestMapping("/totalFootMemRank.do")
+	public ModelAndView totalFootMemRank(@RequestParam(defaultValue="f_goal") String morder){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("morder", morder);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("totalFootMemRank");
+		List<FootCommand> listMem = totalTypeService.listFoot(map);
 		mav.addObject("listMem",listMem);
 		
 		return mav;

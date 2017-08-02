@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.kh.mixmatch.match.dao.MatchMapper">
+	
+	<select id="matchList" parameterType="map" resultType="matchCommand">
+		SELECT m.*,t.t_logo,t.t_logo_name FROM  g_match m, (SELECT * FROM g_team)t 
+		<where>
+			m.t_name = t.t_name AND m_type = #{type}
+		</where>
+		ORDER BY m_seq DESC
+	</select>	
+	
+	<select id="getRowCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM g_match
+		<where>
+			<if test="board == 'match'">
+				m_challenger is null AND m_type = #{type}
+			</if>
+			<if test="board == 'score'">
+				m_challenger is not null AND m_type = #{type}
+			</if>
+			<if test="board == 'toto'">
+				m_challenger is not null AND m_home = -1 AND m_type = #{type}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

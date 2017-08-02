@@ -29,9 +29,9 @@ public interface TotalTypeService {
 	@Transactional(readOnly=true)
 	public FootCommand selectFoot(int f_seq);
 	@Transactional(readOnly=true)
-	public List<BaseCommand> listBase();
+	public List<BaseCommand> listBase(Map<String, Object> map);
 	@Transactional(readOnly=true)
-	public List<BasketCommand> listBasket();
+	public List<BasketCommand> listBasket(Map<String, Object> map);
 	@Transactional(readOnly=true)
-	public List<FootCommand> listFoot();
+	public List<FootCommand> listFoot(Map<String, Object> map);
 }
