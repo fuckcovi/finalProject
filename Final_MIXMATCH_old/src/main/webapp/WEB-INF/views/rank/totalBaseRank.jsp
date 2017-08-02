@@ -8,8 +8,12 @@
 <div class="page-main-style">
 	<h3>통합야구랭킹</h3>
 	<ul style="list-style: none; " >
-		<li style="float:left;"><a id="team" class="menuLink" >팀</a></li>
-		<li style="float:left;"><a id="member" class="menuLink" >개인</a></li>
+		<li style="float:left;">
+			<input type="button" id="team" class="btn" value="팀랭킹">
+		</li>
+		<li style="float:left;">
+			<input type="button" id="member" class="btn" value="개인랭킹">
+		</li>
 	</ul>
 	<br>
 	<div class="teamList">

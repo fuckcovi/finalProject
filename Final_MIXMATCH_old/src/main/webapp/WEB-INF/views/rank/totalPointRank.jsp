@@ -7,6 +7,7 @@
 <div class="page-main-style">
 	<h3>통합포인트랭킹</h3>
 	유저들의 포인트 랭킹
+	<div>
 	<table>
 		<tr>
 			<th>순위</th>
@@ -27,4 +28,5 @@
 		</tr>
 	</c:forEach>
 	</table>
+	</div>
 </div>

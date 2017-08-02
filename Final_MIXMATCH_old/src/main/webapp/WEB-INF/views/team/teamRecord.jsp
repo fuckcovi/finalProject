@@ -14,10 +14,12 @@
 	</c:if>
 	<c:if test="${count>0 }">  
 	<ul style="list-style: none" id="teamScheduleList">
-		<li style="float: left; width:150px;" value="allList">전체보기</li>
+		<li style="float: left; width:150px;" value="allList">
+			<input type="button" class="btn" value="전체보기">
+		</li>
 		<c:forEach var="list" items="${list}">
 			<li style="float: left; width:150px;" value="${list.t_name}"><!-- 클릭하면 ajax로 화면 바꿔서 일정 보이기 -->
-				${list.t_name}
+				<input type="button" class="btn" value="${list.t_name}">
 			</li>
 		</c:forEach>
 	</ul>

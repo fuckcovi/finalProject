@@ -33,12 +33,12 @@
 				<c:if test="${list.t_mem_auth==0}">
 					미승인 회원
 					<c:if test="${list.master == user_id }">
-					<input type="button" value="승인" onclick="location.href='approveMem.do?t_name=${list.t_name}&id=${list.id}'">
+					<input type="button" class="btn" value="승인" onclick="location.href='approveMem.do?t_name=${list.t_name}&id=${list.id}'">
 					</c:if>
 				</c:if>
 			</td>
 			<c:if test="${list.master == user_id }">
-				<td><input type="button" value="내쫒기"  onclick="location.href='deleteMem.do?t_name=${list.t_name}&id=${list.id}'" <c:if test="${list.id==list.master}">disabled</c:if>></td>
+				<td><input type="button" class="btn" value="내쫒기"  onclick="location.href='deleteMem.do?t_name=${list.t_name}&id=${list.id}'" <c:if test="${list.id==list.master}">disabled</c:if>></td>
 			</c:if>
 		<tr>
 	</c:forEach>
