@@ -12,7 +12,6 @@ $(document).ready(function(){
 		
 	});
 	
-	
 	// 팀홈화면
 	$("#typeAll").click(function(){
 		$("#야구").show();
@@ -102,15 +101,14 @@ $(document).ready(function(){
 			output+= "	안타수 : <input type='text' id='b_hit' name='b_hit' value='"+$(this).attr("list-bhit")+"'>";
 			output+= "	타점 : <input type='text' id='b_rbi' name='b_rbi' value='"+$(this).attr("list-brbi")+"'>";
 			output+= "	득점 : <input type='text' id='b_score' name='b_score' value='"+$(this).attr("list-bscore")+"'>";
-			output+= "	타율 : <input type='text' id='b_avg' name='b_avg' value='"+$(this).attr("list-bavg")+"'>";
 			output+= "	승리 : <input type='text' id='b_win' name='b_win' value='"+$(this).attr("list-bwin")+"'>";
 			output+= "	패배 : <input type='text' id='b_lose' name='b_lose' value='"+$(this).attr("list-blose")+"'>";
 			output+= "	삼진 : <input type='text' id='b_strike' name='b_strike' value='"+$(this).attr("list-bstrike")+"'>";
 			output+= "	이닝 : <input type='text' id='b_ip' name='b_ip' value='"+$(this).attr("list-bip")+"'>";
 			output+= "	실점 : <input type='text' id='b_er' name='b_er' value='"+$(this).attr("list-ber")+"'>";
-			output+= "	방어율 : <input type='text' id='b_era' name='b_era' value='"+$(this).attr("list-bera")+"'>";
 			output+= "	<input type='submit' value='기록수정'>";
 			output+= "</form>";
 		$(this).parent().parent().text("").append(output);
 	});
+	
 });
