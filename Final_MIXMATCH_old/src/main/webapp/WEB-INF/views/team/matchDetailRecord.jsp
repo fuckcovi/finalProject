@@ -34,17 +34,17 @@
 			<c:if test="${list.t_name == match.t_name}"><!--  홈팀 기록 -->
 				<tr>
 					<td><a href="#?미니홈피">${list.name}</a></td>
-					<td>${listMem.b_bat}</td>
-					<td>${listMem.b_hit}</td>
-					<td>${listMem.b_rbi}</td>
-					<td>${listMem.b_score}</td>
-					<td>타율계산</td>
-					<td>${listMem.b_win}</td>
-					<td>${listMem.b_lose}</td>
-					<td>${listMem.b_strike}</td>
-					<td>${listMem.b_ip}</td>
-					<td>${listMem.b_er}</td>
-					<td>방어율 계산</td>
+					<td>${list.b_bat}</td>
+					<td>${list.b_hit}</td>
+					<td>${list.b_rbi}</td>
+					<td>${list.b_score}</td>
+					<td>${list.b_avg}</td>
+					<td>${list.b_win}</td>
+					<td>${list.b_lose}</td>
+					<td>${list.b_strike}</td>
+					<td>${list.b_ip}</td>
+					<td>${list.b_er}</td>
+					<td>${list.b_era }</td>
 				</tr>
 			</c:if>
 			</c:forEach>
@@ -70,17 +70,17 @@
 			<c:if test="${list.t_name == match.m_challenger}"><!--  어웨이팀 기록 -->
 				<tr>
 					<td><a href="#?미니홈피">${list.name}</a></td>
-					<td>${listMem.b_bat}</td>
-					<td>${listMem.b_hit}</td>
-					<td>${listMem.b_rbi}</td>
-					<td>${listMem.b_score}</td>
-					<td>타율계산</td>
-					<td>${listMem.b_win}</td>
-					<td>${listMem.b_lose}</td>
-					<td>${listMem.b_strike}</td>
-					<td>${listMem.b_ip}</td>
-					<td>${listMem.b_er}</td>
-					<td>방어율 계산</td>
+					<td>${list.b_bat}</td>
+					<td>${list.b_hit}</td>
+					<td>${list.b_rbi}</td>
+					<td>${list.b_score}</td>
+					<td>${list.b_avg }</td>
+					<td>${list.b_win}</td>
+					<td>${list.b_lose}</td>
+					<td>${list.b_strike}</td>
+					<td>${list.b_ip}</td>
+					<td>${list.b_er}</td>
+					<td>${list.b_era }</td>
 				</tr>
 			</c:if>
 			</c:forEach>

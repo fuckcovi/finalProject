@@ -9,10 +9,10 @@
 	<h3>통합야구랭킹</h3>
 	<ul style="list-style: none; " >
 		<li style="float:left;">
-			<input type="button" id="team" class="btn" value="팀랭킹">
+			<input type="button" id="team" class="btn" value="팀랭킹" onclick="location.href='totalBaseRank.do'">
 		</li>
 		<li style="float:left;">
-			<input type="button" id="member" class="btn" value="개인랭킹">
+			<input type="button" id="member" class="btn" value="개인랭킹" onclick="location.href='totalBaseMemRank.do'">
 		</li>
 	</ul>
 	<br>
@@ -23,9 +23,9 @@
 				<th>팀로고</th>
 				<th>팀명</th>
 				<th>연고지</th>
-				<th>승리</th>
-				<th>무승부</th>
-				<th>패배</th>
+				<th><a href='totalBaseRank.do?order=t_win'>승리</a></th>
+				<th><a href='totalBaseRank.do?order=t_draw'>무승부</a></th>
+				<th><a href='totalBaseRank.do?order=t_lose'>패배</a></th>
 			</tr>
 		<c:forEach var="list" items="${list}" varStatus="status">
 			<tr>
@@ -40,48 +40,6 @@
 				<td>${list.t_win}</td>
 				<td>${list.t_draw}</td>
 				<td>${list.t_lose}</td>
-			</tr>
-		</c:forEach>
-		</table>
-	</div>
-	<div class="memList" style="display:none;">
-		<table>
-			<tr>
-				<th>순위</th>
-				<th>프로필</th>
-				<th>이름</th>
-				<th>타수</th>
-				<th>안타수</th>
-				<th>타점</th>
-				<th>득점</th>
-				<th>타율</th>
-				<th>승리</th>
-				<th>패배</th>
-				<th>삼진</th>
-				<th>이닝</th>
-				<th>실점</th>
-				<th>방어율</th>
-			</tr>
-		<c:forEach var="listMem" items="${listMem}" varStatus="status">
-			<tr>
-				<td>${status.count}</td>
-				<td>
-				<c:if test="${fn:endsWith(listMem.profile_name, '.jpg') || fn:endsWith(listMem.profile_name, '.png') || fn:endsWith(listMem.profile_name, '.gif') || fn:endsWith(listMem.profile_name, '.JPG') || fn:endsWith(listMem.profile_name, '.PNG') || fn:endsWith(listMem.profile_name, '.GIF')}">
-					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">
-				</c:if> 
-				</td>
-				<td><a href="#?미니홈피">${listMem.name}</a></td>
-				<td>${listMem.b_bat}</td>
-				<td>${listMem.b_hit}</td>
-				<td>${listMem.b_rbi}</td>
-				<td>${listMem.b_score}</td>
-				<td>타율계산</td>
-				<td>${listMem.b_win}</td>
-				<td>${listMem.b_lose}</td>
-				<td>${listMem.b_strike}</td>
-				<td>${listMem.b_ip}</td>
-				<td>${listMem.b_er}</td>
-				<td>방어율 계산</td>
 			</tr>
 		</c:forEach>
 		</table>

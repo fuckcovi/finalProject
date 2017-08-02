@@ -213,13 +213,11 @@ list-bscore="${list.b_score}" list-bassist="${list.b_assist}" list-bsteel="${lis
 			<th>안타수</th>
 			<th>타점</th>
 			<th>득점</th>
-			<th>타율</th>
 			<th>승리</th>
 			<th>패배</th>
 			<th>삼진</th>
 			<th>이닝</th>
 			<th>실점</th>
-			<th>방어율</th>
 		</tr>
 		<tr>
 			<td>${match.m_seq}</td>
@@ -235,13 +233,11 @@ list-bscore="${list.b_score}" list-bassist="${list.b_assist}" list-bsteel="${lis
 			<td><form:input path="b_hit"/></td>
 			<td><form:input path="b_rbi"/></td>
 			<td><form:input path="b_score"/></td>
-			<td><form:input path="b_avg"/></td>
 			<td><form:input path="b_win"/></td>
 			<td><form:input path="b_lose"/></td>
 			<td><form:input path="b_strike"/></td>
 			<td><form:input path="b_ip"/></td>
 			<td><form:input path="b_er"/></td>
-			<td><form:input path="b_era"/></td>
 		</tr>
 	</table>
 	<input type="submit" value="홈선수추가등록">
@@ -259,13 +255,11 @@ list-bscore="${list.b_score}" list-bassist="${list.b_assist}" list-bsteel="${lis
 			<th>안타수</th>
 			<th>타점</th>
 			<th>득점</th>
-			<th>타율</th>
 			<th>승리</th>
 			<th>패배</th>
 			<th>삼진</th>
 			<th>이닝</th>
 			<th>실점</th>
-			<th>방어율</th>
 		</tr>
 		<tr>
 			<td>${match.m_seq}</td>
@@ -281,13 +275,11 @@ list-bscore="${list.b_score}" list-bassist="${list.b_assist}" list-bsteel="${lis
 			<td><form:input path="b_hit"/></td>
 			<td><form:input path="b_rbi"/></td>
 			<td><form:input path="b_score"/></td>
-			<td><form:input path="b_avg"/></td>
 			<td><form:input path="b_win"/></td>
 			<td><form:input path="b_lose"/></td>
 			<td><form:input path="b_strike"/></td>
 			<td><form:input path="b_ip"/></td>
 			<td><form:input path="b_er"/></td>
-			<td><form:input path="b_era"/></td>
 		</tr>
 	</table>
 	<input type="submit" value="원정선수추가등록">
