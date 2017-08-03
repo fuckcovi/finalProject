@@ -10,15 +10,15 @@
 		<form:hidden path="m_seq"/>
 		<form:hidden path="t_name"/>
 		<form:hidden path="m_challenger"/>
-		<ul>
+		<ul style="line-height:50px;">
 			<li>
 				<label for="m_home">${match.t_name}팀 점수</label>
-				<form:input path="m_home" value="0"/> 
+				<form:input path="m_home" value="0" cssClass="select_box"/> 
 				<form:errors path="m_home" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="m_away">${match.m_challenger}팀 점수</label>
-				<form:input path="m_away" value="0"/>
+				<form:input path="m_away" value="0" cssClass="select_box"/>
 				<form:errors path="m_away" cssClass="error-color"/>
 			</li>
 			<li>
@@ -26,7 +26,7 @@
 				<form:select path="m_mvp" items="${mvpMember}" cssClass="select_box"/>
 				<form:errors path="m_mvp" cssClass="error-color"/>
 			</li>
-		</ul>
+		</ul><br>
 	<input type="submit" value="결과등록" class="btn">
 	<input type="button" value="목록으로" class="btn" onclick="location.href='scoreBoard.do'">
 	</form:form>

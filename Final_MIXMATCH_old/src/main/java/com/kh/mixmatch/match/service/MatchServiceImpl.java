@@ -109,8 +109,18 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public TotoCommand insertToto(TotoCommand toto) {
-		return matchMapper.insertToto(toto);
+	public void insertToto(TotoCommand toto) {
+		matchMapper.insertToto(toto);
+	}
+
+	@Override
+	public void totoScore(Map<String,Object> map) {
+		matchMapper.totoScore(map);
+	}
+	
+	@Override
+	public void totoDraw(MatchCommand matchCommand) {
+		matchMapper.totoDraw(matchCommand);		
 	}
 
 }

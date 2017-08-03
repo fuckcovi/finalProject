@@ -4,8 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/match.js"></script>
 <div class="page-main-style">
-	<h2>배당률</h2>
+	<h2>베팅하기</h2>
 	<hr class="style"><br>
 	<div class="detail-style"><br><br>
 		<table class="versus"> 
@@ -54,43 +56,43 @@
 					</c:if>%
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2" style="color:blue;">승률: <fmt:formatNumber value="${home/(home+away) * 100}" pattern="0"/>%</td>
+				<td></td>
+				<td colspan="2" style="color:red;">승률: <fmt:formatNumber value="${away/(home+away) * 100}" pattern="0"/>%</td>
+			</tr>
+			<tr>
+				<td colspan="2"style="color:blue;">배당률: 
+			<input type="hidden" id="t1_rate" value="${1/(home/(home+away))}">
+			<c:if test="${1/(home/(home+away)) <= 1}">
+				1
+			</c:if>
+			<c:if test="${1/(home/(home+away)) > 1}">
+				<fmt:formatNumber value="${1/(home/(home+away))}" pattern="0.0"/>
+			</c:if>배</td>
+				<td></td>
+				<td colspan="2" style="color:red;">배당률: 
+			<input type="hidden" id="t2_rate" value="${1/(away/(home+away))}">
+			<c:if test="${1/(away/(home+away)) <= 1}">
+				1
+			</c:if>
+			<c:if test="${1/(away/(home+away)) > 1}">
+				<fmt:formatNumber value="${1/(away/(home+away))}" pattern="0.0"/>
+			</c:if>배</td>
+			</tr>
 		</table><br>
-		<form:form commandName="toto" action="totoDetail.do" enctype="multipart/form-data" id="toto_form">
+		
+		<form:form commandName="toto" action="totoInsert.do" enctype="multipart/form-data" id="toto_form">
 		<form:hidden path="m_seq" value="${match.m_seq}"/>
 		<form:hidden path="id" value="${user_id}"/>
-		<form:hidden path="t_rate" value="1.5"/>
-		<div style="float:left;margin-left:12px;background:white;width:200px;height:110px;font-size:15px;text-align:left;">
-			참여인원: 명<br>
-			누적포인트: P<br>
-			<p style="font-size:18px;color:red;">승률: <fmt:formatNumber value="${home/(home+away) * 100}" pattern="0"/>%<br>
-			배당률: 
-			<c:if test="${1/(home/(home+away)) <= 1.3}">
-				1.3
-			</c:if>
-			<c:if test="${1/(home/(home+away)) > 1.3}">
-				<fmt:formatNumber value="${1/(home/(home+away))}" pattern="0.0"/>
-			</c:if>배
-			</p>
-		</div>
-		<div style="float:left;margin-left:75px;background:white;width:200px;height:110px;font-size:15px;text-align:left;">
-			참여인원: 명<br>
-			누적포인트: P<br>
-			<p style="font-size:18px;color:red;">승률: <fmt:formatNumber value="${away/(home+away) * 100}" pattern="0"/>%<br>
-			배당률: 
-			<c:if test="${1/(away/(home+away)) <= 2}">
-				2
-			</c:if>
-			<c:if test="${1/(away/(home+away)) > 2}">
-				<fmt:formatNumber value="${1/(away/(home+away))}" pattern="0.0"/>
-			</c:if>배
-			</p>
-		</div>
-		<div style="float:left;width:100%;"><br>	
+		
+		<div style="float:left;width:100%;">	
 		<c:if test="${!fn:contains(myteam,match.t_name) && !fn:contains(myteam,match.m_challenger) && !empty user_id}">
-			예상승리팀: <select name="t_winteam" class="select_box">
+			예상승리팀: <select id="t_winteam" name="t_winteam" class="select_box">
 				<option value="${match.t_name}">${match.t_name}</option>
 				<option value="${match.m_challenger}">${match.m_challenger}</option>
 			</select><br>
+			<c:if test="${t_winteam.value eq match.t_name}"><form:hidden path="t_rate" value="10"/></c:if>
 			예상점수: <input type="number" name="t_score"><br>
 			베팅포인트: 
 			<select name="t_point" class="select_box">
@@ -100,7 +102,8 @@
 				<option value="500">500</option>
 				<option value="1000">1000</option>
 			</select>
-			<br><br><input type="submit" value="베팅하기" class="btn" onclick="location.href='totoDetail.do?m_seq=${match.m_seq}'">
+			<input type="hidden" id="final_rate" name="t_rate">
+			<br><br><input type="submit" value="베팅하기" class="btn" onclick="location.href='totoInsert.do'">
 		</c:if>
 		<c:if test="${fn:contains(myteam,match.t_name) || fn:contains(myteam,match.m_challenger)}">
 			<span>본인이 속한 팀에는 베팅할 수 없습니다.</span><br><br>

@@ -5,13 +5,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class TotoCommand {
 	
 	private int t_seq;
-	@NotEmpty
 	private int m_seq;
+	@NotEmpty
 	private String id;
-	@NotEmpty
 	private int t_point;
-	private String t_winteam;
 	@NotEmpty
+	private String t_winteam;
 	private int t_score;
 	private double t_rate;
 	

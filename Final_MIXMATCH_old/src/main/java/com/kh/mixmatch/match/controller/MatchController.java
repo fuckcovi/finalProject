@@ -375,16 +375,36 @@ public class MatchController {
 			matchService.updateTeamLose(t_away);
 			matchService.updatePointWin(t_home);
 			matchService.updatePointLose(t_away);
+			
+			/*// 베팅한 회원 포인트 증가
+			String team = matchCommand.getT_name();
+			int score = matchCommand.getM_home();
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("t_point", t_point);
+			map.put("t_rate", t_rate);
+			map.put("team", team);
+			map.put("score", score);
+			map.put("m_seq", matchCommand.getM_seq());
+			matchService.totoScore(map);*/
+			
 		} else if (home == away) {
 			matchService.updateTeamDraw(matchCommand.getT_name());
 			matchService.updateTeamDraw(matchCommand.getM_challenger());
 			matchService.updatePointDraw(t_home);
 			matchService.updatePointDraw(t_away);
+			
+			// 베팅한 회원 포인트 증가
+			matchService.totoDraw(matchCommand);
+			
 		} else if (home < away) {
 			matchService.updateTeamLose(matchCommand.getT_name());
 			matchService.updateTeamWin(matchCommand.getM_challenger());
 			matchService.updatePointWin(t_away);
 			matchService.updatePointLose(t_home);
+			
+			// 베팅한 회원 포인트 증가
+			
 		}
 		
 		return "redirect:/match/scoreBoard.do";
@@ -424,12 +444,12 @@ public class MatchController {
 		return mav;
 	}
 	
-	// 배당률 폼
-	@RequestMapping(value="/match/totoDetail.do", method=RequestMethod.GET)
+	// 베팅하기 폼
+	@RequestMapping(value="/match/totoDetail.do")
 	public ModelAndView totoDetailForm(@RequestParam("m_seq") int m_seq,
 										Model model, HttpSession session) {		
 		if (log.isDebugEnabled()) {
-			log.debug("<<배당률 폼 m_seq>> : " + m_seq);
+			log.debug("<<베팅하기 폼 m_seq>> : " + m_seq);
 		}
 			
 		// 유저 팀이름 받아오기
@@ -463,8 +483,8 @@ public class MatchController {
 		return mav;
 	}
 	
-	/*// 베팅하기
-	@RequestMapping(value="/match/totoDetail.do", method=RequestMethod.POST)
+	// 베팅하기
+	@RequestMapping("/match/totoInsert.do")
 	public String insertTotoSubmit(@ModelAttribute("toto") @Valid TotoCommand totoCommand,
 								   BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
@@ -476,9 +496,10 @@ public class MatchController {
 		}
 		
 		// DB에 저장
+		
 		matchService.insertToto(totoCommand);
 		
 		return "redirect:/match/sportsToto.do";
-	}*/
+	}
 	
 }

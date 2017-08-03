@@ -38,6 +38,9 @@ public interface MatchService {
 	public void updatePointDraw(String t_name);
 	public void updatePointLose(String t_name);
 	
-	public TotoCommand insertToto(TotoCommand toto);
+	public void insertToto(TotoCommand toto);
+	
+	public void totoScore(Map<String,Object> map);
+	public void totoDraw(MatchCommand matchCommand);
 	
 }
