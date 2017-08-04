@@ -98,7 +98,40 @@ $(document).ready(function(){
 				
 			});
 		});
+		
+		//미니홈피 글삭제
+		$(document).on('click','#post-delete'+h_seq,function(){
+			//글번호
+			var post_num = $(this).attr('data-postNum');
+			//작성자 아이디
+			var id = $(this).attr('data-postId');
+			
+			$.ajax({
+				type:'post',
+				data:{h_seq:post_num,id:id},
+				url:'delete.do',
+				dataType:'json',
+				cache:false,
+				timeoup:30000,
+				success:function(data){
+					if(data.resul == 'logout'){
+						alert('로그인해야 삭제할 수 있습니다.');
+					}else if(data.result == 'success'){
+						alert('삭제완료');
+						location.reload();
+					}else if (data.result == 'wrongAccess') {
+						alert('타인의 글은 삭제할 수 없습니다.')
+					}else{
+						alert('삭제시 오류 발생');
+					}
+				},
+				error:function(){
+					alert('삭제시 네트워크 오류');
+				}
+			});	
+		});
 	
+		
 		//초기 데이터(목록)호출
 		selectData(1,h_seq);		//1페이지, 부모글번호
 		
@@ -137,19 +170,21 @@ $(document).ready(function(){
 							output += '   </tr>'; 	
 							output += '   <tr>'; 
 							output += '   	<td>'+item.h_re_regdate+'</td>'; 
-							output += '   </tr>'; 	
+							output += '  	<td>'; 
+								
 							
-							
-							/*if($('#user_id').val() && $('#user_id').val() == item.id){
+							if($('#user_id').val() && $('#user_id').val() == item.id){
 								//로그인한 id가 글 작성자 id와 같은 경우
-								output += '	<input type="button" value="수정" data-num="'+item.h_seq+'" data-id="'+item.id+'" class="modify-button">';
-								output += '	<input type="button" value="삭제" data-num="'+item.h_seq+'" data-id="'+item.id+'" class="delete-button">';
+								output += '	<input type="button" value="수정" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-modify"'+item.h_seq+'">';
+								output += '	<input type="button" value="삭제" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-delete"'+item.h_seq+'">';
 							}else{
 								//로그인하지 않았거나 작성자 id와 다른 경우
 								output += '	<input type="button" value="수정" disabled="disabled">';
 								output += '	<input type="button" value="삭제" disabled="disabled">';
-							}*/
+							}
 							
+							output += '   	</td>';
+							output += '   </tr>'; 
 							output += '			</div>';
 							
 							
@@ -167,9 +202,9 @@ $(document).ready(function(){
 						});
 					}
 				},
-				error:function(){
-					alert('목록 호출시 네트워크 오류');
-				}
+				/*error:function(){
+					alert('목록 호출시 네트워크 오류222');
+				}*/
 			});	
 
 		}
@@ -249,6 +284,14 @@ $(document).ready(function(){
 			}
 		});
 		
+		//댓글 수정 버튼 클릭시 수정폼 노출
+		$(document).on('click','.reply-modify',function(){
+			//댓글 번호
+			var reply_num = $(this).attr('reply-modify')
+			//작성자 아이디
+			var id = $(this).attr('data-replyId')
+		
+		});
 		
 		
 		
