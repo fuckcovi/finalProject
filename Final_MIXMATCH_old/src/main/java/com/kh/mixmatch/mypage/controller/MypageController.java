@@ -159,7 +159,6 @@ public class MypageController {
 		return "redirect:/mypage/main.do?id=koff777";
 	}
 	
-	
 	//프로필 이미지 출력
 	@RequestMapping("mypage/imageView.do")
 	public ModelAndView viewImage(@RequestParam("id")String id){
