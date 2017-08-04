@@ -7,10 +7,15 @@
 	<hr class="style"><br>
 	<form:form class="style" commandName="match" action="matchInsert.do" enctype="multipart/form-data" id="insert_form">
 		<form:errors element="div" cssClass="error-color"/><br>
+		<form:hidden path="m_type" value="null"/>
 		<ul>
 			<li>
 				<label for="t_name">팀명</label>
-				<form:select path="t_name" items="${teamList}" cssClass="select_box"/>
+				<select name="t_name" class="select_box">
+					<c:forEach var="team" items="${team}">
+						<option value="${team.t_name}:${team.t_type}">${team.t_name}:${team.t_type}</option>
+					</c:forEach>
+				</select>
 			</li>
 			<li>
 				<label for="m_area">지역</label>
@@ -41,11 +46,6 @@
 				<label for="m_content">내용</label>
 				<form:textarea path="m_content"/>
 				<form:errors path="m_content" cssClass="error-color"/>
-			</li>
-			<li>
-				<label for="m_type">종목</label>
-				<form:select path="m_type" items="${type}" cssClass="select_box"/>
-				<form:errors path="m_type" cssClass="error-color"/>
 			</li>
 		</ul>
 	<input type="submit" value="매치등록" class="btn">

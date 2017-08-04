@@ -37,6 +37,10 @@ public interface MatchMapper {
 	@Update("UPDATE g_match SET m_challenger=#{t_name} WHERE m_seq=#{m_seq}")
 	public void updateChallenger(MatchCommand match);
 	
+	// 팀에 따른 종목 받아오기
+	@Select("SELECT * FROM g_team WHERE id IN(SELECT id FROM g_team_member WHERE id=#{id})")
+	public List<TeamCommand> getTeamType(String id);
+	
 	// 팀 win 증가
 	@Update("UPDATE g_team SET t_win=t_win+1 WHERE t_name=#{t_name}")
 	public void updateTeamWin(String t_name);
@@ -64,7 +68,7 @@ public interface MatchMapper {
 	@Insert("INSERT INTO g_toto (t_seq,m_seq,id,t_point,t_winteam,t_score,t_rate) VALUES (g_toto_seq.nextval,#{m_seq},#{id},#{t_point},#{t_winteam},#{t_score},ROUND(#{t_rate},1))")
 	public void insertToto(TotoCommand toto);
 	
-	// 점수까지 맞춘 경우 베팅한 멤버 포인트 증가
+	// 점수까지 맞춘 경우 베팅한 멤버 포인트 증가 (안됨)
 	@Update("UPDATE g_member SET point=point+(#{t_point}*#{t_rate}) WHERE id IN(SELECT id FROM g_toto WHERE t_winteam=#{team} AND t_score=#{score} AND m_seq=#{m_seq})")
 	public void totoScore(Map<String,Object> map);
 	// 비긴 경우 베팅한 멤버 포인트 증가

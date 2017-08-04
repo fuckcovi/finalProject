@@ -29,6 +29,8 @@ public interface MatchService {
 	public TeamCommand getTeam(String t_name);
 	public void updateChallenger(MatchCommand match);
 	
+	public List<TeamCommand> getTeamType(String id);
+	
 	public void updateTeamWin(String t_name);
 	public void updateTeamDraw(String t_name);
 	public void updateTeamLose(String t_name);

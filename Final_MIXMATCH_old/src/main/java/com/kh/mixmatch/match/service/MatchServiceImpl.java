@@ -72,6 +72,11 @@ public class MatchServiceImpl implements MatchService {
 	public void updateChallenger(MatchCommand match) {
 		matchMapper.updateChallenger(match); 
 	}
+	
+	@Override
+	public List<TeamCommand> getTeamType(String id) {
+		return matchMapper.getTeamType(id);
+	}
 
 	@Override
 	public void updateTeamWin(String t_name) {

@@ -137,10 +137,7 @@ public class MatchController {
 		
 		MatchCommand matchCommand = new MatchCommand();
 		
-		ArrayList<String> type = new ArrayList<String>();
-		type.add("축구");
-		type.add("야구");
-		type.add("농구");
+		List<TeamCommand> teamCommand = matchService.getTeamType(id);
 		
 		ArrayList<String> area = new ArrayList<String>();
 		area.add("서울");
@@ -163,8 +160,8 @@ public class MatchController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchInsert");
 		mav.addObject("match", matchCommand);
+		mav.addObject("team", teamCommand);
 		mav.addObject("teamList", t_name);
-		mav.addObject("type", type);
 		mav.addObject("area", area);
 		
 		return mav;
@@ -181,6 +178,12 @@ public class MatchController {
 		if (result.hasErrors()) {
 			return "matchInsert";
 		}
+		
+		System.out.println(matchCommand.getT_name());
+		
+		String[] array = matchCommand.getT_name().split(":");
+		matchCommand.setT_name(array[0]);
+		matchCommand.setM_type(array[1]);
 		
 		// 매치등록
 		matchService.insertMatch(matchCommand);

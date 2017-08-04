@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/match.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/match.js"></script>
 <div class="page-main-style">
 	<h2>베팅하기</h2>
 	<hr class="style"><br>
@@ -57,28 +57,52 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" style="color:blue;">승률: <fmt:formatNumber value="${home/(home+away) * 100}" pattern="0"/>%</td>
+				<td colspan="2" style="color:blue;">승률:
+					<c:if test="${home eq 0}">
+					 0%
+					</c:if>
+					<c:if test="${home ne 0}">
+						<fmt:formatNumber value="${home/(home+away) * 100}" pattern="0"/>%
+					</c:if>
+				 </td>
 				<td></td>
-				<td colspan="2" style="color:red;">승률: <fmt:formatNumber value="${away/(home+away) * 100}" pattern="0"/>%</td>
+				<td colspan="2" style="color:red;">승률:
+					<c:if test="${away eq 0}">
+					 0%
+					</c:if>
+					<c:if test="${away ne 0}">
+						<fmt:formatNumber value="${away/(home+away) * 100}" pattern="0"/>%
+					</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2"style="color:blue;">배당률: 
-			<input type="hidden" id="t1_rate" value="${1/(home/(home+away))}">
-			<c:if test="${1/(home/(home+away)) <= 1}">
-				1
+			
+			<c:if test="${(home+away) eq 0}">
+				2<input type="hidden" id="t1_rate" value="2">
 			</c:if>
-			<c:if test="${1/(home/(home+away)) > 1}">
+			<c:if test="${(home+away) ne 0}">
+			<c:if test="${(home/(home+away) * 100) <= 2}">
+				50<input type="hidden" id="t1_rate" value="50">
+			</c:if>
+			<c:if test="${(home/(home+away) * 100) > 2}">
 				<fmt:formatNumber value="${1/(home/(home+away))}" pattern="0.0"/>
-			</c:if>배</td>
-				<td></td>
+				<input type="hidden" id="t1_rate" value="${1/(home/(home+away))}">
+			</c:if></c:if>배</td>
+				<td></td> 
 				<td colspan="2" style="color:red;">배당률: 
-			<input type="hidden" id="t2_rate" value="${1/(away/(home+away))}">
-			<c:if test="${1/(away/(home+away)) <= 1}">
-				1
+			
+			<c:if test="${(home+away) eq 0}">
+				2<input type="hidden" id="t2_rate" value="2">
 			</c:if>
-			<c:if test="${1/(away/(home+away)) > 1}">
+			<c:if test="${(home+away) ne 0}">
+			<c:if test="${(away/(home+away) * 100) <= 2}">
+				50<input type="hidden" id="t2_rate" value="50">
+			</c:if>
+			<c:if test="${(away/(home+away) * 100) > 2}">
 				<fmt:formatNumber value="${1/(away/(home+away))}" pattern="0.0"/>
-			</c:if>배</td>
+				<input type="hidden" id="t2_rate" value="${1/(away/(home+away))}">
+			</c:if></c:if>배</td>
 			</tr>
 		</table><br>
 		
@@ -103,7 +127,7 @@
 				<option value="1000">1000</option>
 			</select>
 			<input type="hidden" id="final_rate" name="t_rate">
-			<br><br><input type="submit" value="베팅하기" class="btn" onclick="location.href='totoInsert.do'">
+			<br><br><input type="submit" id="btn" value="베팅하기" class="btn" onclick="location.href='totoInsert.do'">
 		</c:if>
 		<c:if test="${fn:contains(myteam,match.t_name) || fn:contains(myteam,match.m_challenger)}">
 			<span>본인이 속한 팀에는 베팅할 수 없습니다.</span><br><br>
