@@ -2,13 +2,9 @@ package com.kh.mixmatch.mypage.domain;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Arrays;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-import oracle.sql.BLOB;
-import oracle.sql.CLOB;
 
 public class MypageCommand {
 	//@NotEmpty			//이걸로 유효성 체크하기때문에 validator를 만들필요없어

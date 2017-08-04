@@ -3,17 +3,13 @@ $(document).ready(function(){
 	var count;				//게시글 총갯수
 	var rowCount;			//한 페이지에 보여질 행(레코드) 수
 
+
 	/*mypageList.jsp에서의 부모글번호(h_seq)는 반복문으로 처리되기때문에 자바스크립에서도 반복문으로 받아야해.
 	반복문으로 받지않으면 제일 마지막 부모글번호(h_seq)만 넘어와.*/
-
+	
 	$("input[name=h_seq]").each(function(idx){  
 		var h_seq = $(this).val();
 		
-		//수정 데이터 호출
-		UpdatePostData(h_seq);		//부모글번호
-
-		function UpdatePostData(h_seq){
-			
 		//미니홈피 글수정
 		$(document).on('click','#post-modify'+h_seq,function(){	//수정 버튼을 클릭했을때
 			
@@ -21,14 +17,16 @@ $(document).ready(function(){
 			var post_num = $(this).attr('data-postNum');
 			//작성자 아이디
 			var post_id = $(this).attr('data-postId');
+			//글 내용 공개
+			var post_show = $(this).attr('data-postShow')
 			//글 내용
 			var post_content = $('#'+post_num+' .post-content');
 			
 			//글 수정폼 UI
-			var	postModifyUI =' <form id="post_re_form" method="post" name="mypage" action="mypagePostUpdate.do">';
+			var	postModifyUI =' <form id="post_re_form">';
 				postModifyUI +=' <input type="hidden" name="h_seq" id="h_seq" value="'+post_num+'">';
 				postModifyUI +=' <input type="hidden" name="id" id="id" value="'+post_id+'">';
-				postModifyUI +=' <input type="hidden" name="h_show" id="h_show" value="'+h_show+'">';
+				postModifyUI +=' <input type="hidden" name="h_show" id="h_show" value="'+post_show+'">';
 				postModifyUI +=' 	<textarea name="h_content" id="h_content'+post_num+'" />'; 
 				postModifyUI +='	  <div class="modify_delete_button_re">';
 				postModifyUI +='  		<input type="submit" value="수정">';
@@ -36,9 +34,9 @@ $(document).ready(function(){
 				postModifyUI +='      </div>';
 				postModifyUI +=' </form>'
 				
-			//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면 숨김 .mregister_form을 환원시키고 수정폼을 초기화함.
+			//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면 숨김 .mregister_form을 환원시키고 수정폼을 초기화함	
 			initModifyForm();
-			$('#'+post_num+' .modify_delete_button').hide();	//원래 글에 존재하던 수정,삭제 버튼 사라지게함.
+			$('#'+post_num+' .modify_delete_button').hide();	
 			
 			//지금 클릭해서 수정하고자 하는 데이터는 감추기
 			$('#'+post_num+' .post-content2').hide();
@@ -69,13 +67,14 @@ $(document).ready(function(){
 				//폼에 입력한 데이터 반환
 				var data = $(this).serialize();
 				
-				/*//수정
+				//수정
 				$.ajax({
 					type:'post',
 					data:data,
 					url:'update.do',
 					dataType:'json',
 					cache:false,
+					async: false,
 					timeout:30000,
 					success:function(data){
 						if (data.result == 'wrongAccess') {
@@ -84,7 +83,7 @@ $(document).ready(function(){
 							//변경한 데이터로 UI 갱신
 							$('#'+post_num+' .post-content2').text($('#h_content'+post_num).val());
 							initModifyForm();
-							alert(post_num);
+							location.reload();
 						}else{
 							alert('수정시 오류 발생');
 						}
@@ -95,11 +94,11 @@ $(document).ready(function(){
 				});
 				
 				//기본 이벤트 제거
-				event.preventDefault();*/
+				event.preventDefault();
 				
-				});
 			});
-		}
+		});
+	
 		//초기 데이터(목록)호출
 		selectData(1,h_seq);		//1페이지, 부모글번호
 		

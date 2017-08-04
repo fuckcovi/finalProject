@@ -10,6 +10,11 @@
     	<result property="h_content" column="h_content" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 	
+	<resultMap type="mypageCommand2" id="mypageUpdate">
+		<!-- CLOB를 String으로 만들어줘야하기때문에 resultMap사용 -->
+		<result javaType="java.lang.String" jdbcType="CLOB" column="h_content" property="h_content"/>
+	</resultMap>
+	
 	<select id="list" parameterType="map" resultMap="mypageList">
 		SELECT
 		  *
@@ -36,8 +41,12 @@
                    										<!-- 로그인 되어있는 유저의 글들만 나오게끔 조건설정 -->
                    
 	</select>
-	
-	
+
+	<select id="update" resultMap="mypageUpdate" parameterType="map">
+		 UPDATE g_home SET h_content=#{h_content} 
+		<!-- h_file=#{h_file,jdbcType=BLOB}, h_file_name=#{h_file_name,jdbcType=VARCHAR} -->
+		 WHERE h_seq=#{h_seq} 
+	</select>
 	
 	<!-- 댓글 리스트 -->
 	<resultMap id="mypageReplyList" type="MypageReplyCommand" >		<!-- CLOB를 String으로 만들어줘야하기때문에 resultMap사용 -->
@@ -65,4 +74,7 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>                                         
 	</select>
+	
+	
+	
 </mapper>

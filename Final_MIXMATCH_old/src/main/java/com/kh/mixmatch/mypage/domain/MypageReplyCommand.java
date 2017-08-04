@@ -1,9 +1,7 @@
 package com.kh.mixmatch.mypage.domain;
 
-import java.io.IOException;
 import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class MypageReplyCommand {
 	private int h_re_seq;					//댓글번호

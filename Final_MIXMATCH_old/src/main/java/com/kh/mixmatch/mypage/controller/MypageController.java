@@ -7,11 +7,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +26,6 @@ import com.kh.mixmatch.mypage.domain.MypageCommand;
 import com.kh.mixmatch.mypage.domain.MypageCommand2;
 import com.kh.mixmatch.mypage.domain.MypageReplyCommand;
 import com.kh.mixmatch.mypage.service.MypageService;
-import com.kh.mixmatch.team.domain.FootCommand;
-import com.kh.mixmatch.team.service.TotalTypeService;
 import com.kh.mixmatch.util.PagingUtil;
 
 
@@ -96,7 +92,6 @@ public class MypageController {
 		return mav;
 	} 
 	
-
 	
 	//미니홈피 글등록
 	@RequestMapping(value="/mypage/main.do",method=RequestMethod.POST)
@@ -112,18 +107,24 @@ public class MypageController {
 		return "redirect:/mypage/main.do?id="+mypageCommand.getId();
 	}
 	
-	/*//미니홈피 글수정
+	
+	//미니홈피 글수정
 	@RequestMapping(value="/mypage/update.do")
 	@ResponseBody
-	public Map<String,String> process(MypageCommand2 mypageCommand2, HttpSession session){
+	public Map<String,String> process(MypageCommand2 mypageCommand2, HttpSession session, BindingResult result){
 		
 		Map<String,String> map = new HashMap<String, String>();
 		
 		String user_id = (String) session.getAttribute("user_id");
 		
+		System.out.println("<<h_seq>> : " + mypageCommand2.getH_seq());
+		System.out.println("<<id>> : " + mypageCommand2.getId());
+		System.out.println("<<h_show>> : " + mypageCommand2.getH_show());
+		System.out.println("<<h_content>> : " + mypageCommand2.getH_content());
+		
 		//h_content만 체크
 		if (result.hasFieldErrors("h_content")) {		//별도로 자바빈을 만든게 아니라 mypageCommand를 활용하여 한개의 필드만 체크
-			return form();
+			//return form();
 		}
 		
 		if (user_id == null) {
@@ -145,19 +146,8 @@ public class MypageController {
 		}
 		
 		return map;
-	}*/
-	
-	//미니홈피 글수정
-	@RequestMapping(value="/mypage/mypagePostUpdate.do", method=RequestMethod.POST)
-	public String mypagePostUpdate(@RequestParam("h_seq")int h_seq){
-		
-		if (log.isDebugEnabled()) {
-			//log.debug("<<!!!!!!!!!!!!!MypageCommand2>> : " + mypage);
-			log.debug("<<>> : " + h_seq);
-		}
-		
-		return "redirect:/mypage/main.do?id=koff777";
 	}
+	
 	
 	//프로필 이미지 출력
 	@RequestMapping("mypage/imageView.do")
@@ -172,6 +162,7 @@ public class MypageController {
 		
 		return mav;
 	}
+	
 	
 	//미니홈피 이미지 출력
 	@RequestMapping("mypage/imageView2.do")
@@ -271,6 +262,4 @@ public class MypageController {
 		
 		return map;
 	}
-	
-	
 }

@@ -6,6 +6,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypageLayout.css">
+<style>
+textarea {
+	width: 600px; 
+	border: none; 
+	background: white; 
+	resize: none;
+}
+</style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage.reply.js"></script>
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -114,6 +123,7 @@
 			<c:forEach var="mypage" items="${list}">
 				<%-- <input type="hidden" name="h_seq" id="h_seq" value="${mypage.h_seq}">	<!-- 부모글번호 --> --%>  
 				<input type="hidden" name="id" id="id" value="${mypage.id}">		<!-- 부모글 작성자 -->
+				<input type="hidden" name="h_show" value="${mypage.h_show}">
 				<div class="post-list" id="${mypage.h_seq}">
 			<div class="post_head">
 				<table>
@@ -141,6 +151,7 @@
 			</div>
 			
 			<div class="post-content1${mypage.h_seq}"></div>
+			<%-- <textarea rows="5" cols="30" class="post-content2" disabled="disabled">${mypage.h_content}</textarea> --%>
 				<div class="post-content2">
 					${mypage.h_content}
 				</div>
@@ -164,8 +175,8 @@
 			<div class="modify_delete_button">
 				<div class="modify_delete_button"${mypage.h_seq}>
 					<c:if test="${!empty user_id && user_id == mypage.id}">
-						<input type="button" value="수정" id="post-modify${mypage.h_seq}" data-postNum="${mypage.h_seq}" data-postId="${mypage.id}">
-						<input type="button" value="삭제" id="post-delete${mypage.h_seq}" data-postNum="${mypage.h_seq}" data-postId="${mypage.id}">
+						<input type="button" value="수정" id="post-modify${mypage.h_seq}" data-postNum="${mypage.h_seq}" data-postId="${mypage.id}" data-postShow="${mypage.h_show}">
+						<input type="button" value="삭제" id="post-delete${mypage.h_seq}" data-postNum="${mypage.h_seq}" data-postId="${mypage.id}" data-postShow="${mypage.h_show}">
 					</c:if>
 				</div>
 			</div>
