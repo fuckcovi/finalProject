@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.kh.mixmatch.member.domain.MemberCommand;
 import com.kh.mixmatch.member.service.MemberService;
 import com.kh.mixmatch.mypage.domain.FootballCommand;
 import com.kh.mixmatch.mypage.domain.MypageCommand;
+import com.kh.mixmatch.mypage.domain.MypageCommand2;
 import com.kh.mixmatch.mypage.domain.MypageReplyCommand;
 import com.kh.mixmatch.mypage.service.MypageService;
 import com.kh.mixmatch.team.domain.FootCommand;
@@ -43,14 +45,16 @@ public class MypageController {
 	@Resource
 	private MemberService memberService;
 	
-	
-	
-	
+
 	//MyPage 메인(로그인 되어있는 유저ID넘겨줘)
 	@RequestMapping(value="/mypage/main.do",method=RequestMethod.GET)
 	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1")int currentPage, HttpSession session){	//濡쒓렇�씤 �릺�뼱�엳�뒗 �쑀��ID
 		
 		String user_id = (String) session.getAttribute("user_id");
+		
+		if (user_id == null) {
+			
+		}
 		
 		MemberCommand member = memberService.selectMember(user_id);		//유저정보
 		FootballCommand football = mypageService.selectFootball(user_id);	//축구기록
@@ -65,7 +69,7 @@ public class MypageController {
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-		map.put("user_id", user_id);	//濡쒓렇�씤�븳 �쑀���쓽 �븘�씠�뵒濡� g_home�뀒�씠釉붿뿉�꽌 議곌굔�쓣 二쇨린�쐞�빐 �궗�슜
+		map.put("user_id", user_id);	
 		
 		
 	
@@ -92,17 +96,9 @@ public class MypageController {
 		return mav;
 	} 
 	
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//게시글 등록
+	//미니홈피 글등록
 	@RequestMapping(value="/mypage/main.do",method=RequestMethod.POST)
 	public String submit(@ModelAttribute("mypageCommand")MypageCommand mypageCommand){
 		
@@ -116,6 +112,52 @@ public class MypageController {
 		return "redirect:/mypage/main.do?id="+mypageCommand.getId();
 	}
 	
+	/*//미니홈피 글수정
+	@RequestMapping(value="/mypage/update.do")
+	@ResponseBody
+	public Map<String,String> process(MypageCommand2 mypageCommand2, HttpSession session){
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		String user_id = (String) session.getAttribute("user_id");
+		
+		//h_content만 체크
+		if (result.hasFieldErrors("h_content")) {		//별도로 자바빈을 만든게 아니라 mypageCommand를 활용하여 한개의 필드만 체크
+			return form();
+		}
+		
+		if (user_id == null) {
+			//로그인이 안 되어있는 경우
+			map.put("result", "logout");
+		}else if(user_id != null && user_id.equals(mypageCommand2.getId())){
+			//로그인 아이디와 작성자 아이디 일치
+			//글 수정
+			mypageService.update(mypageCommand2);
+			map.put("result", "success");
+			
+			if (log.isDebugEnabled()) {
+				log.debug("<<----------------map>> : " + map);
+			}
+			
+		}else{
+			//로그인 아이디와 작성자 아이디 불일치
+			map.put("result", "wrongAccess");
+		}
+		
+		return map;
+	}*/
+	
+	//미니홈피 글수정
+	@RequestMapping(value="/mypage/mypagePostUpdate.do", method=RequestMethod.POST)
+	public String mypagePostUpdate(@RequestParam("h_seq")int h_seq){
+		
+		if (log.isDebugEnabled()) {
+			//log.debug("<<!!!!!!!!!!!!!MypageCommand2>> : " + mypage);
+			log.debug("<<>> : " + h_seq);
+		}
+		
+		return "redirect:/mypage/main.do?id=koff777";
+	}
 	
 	
 	//프로필 이미지 출력
@@ -149,20 +191,6 @@ public class MypageController {
 		
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//미니홈피 댓글 리스트
@@ -244,5 +272,6 @@ public class MypageController {
 		
 		return map;
 	}
+	
 	
 }

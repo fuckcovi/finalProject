@@ -3,17 +3,107 @@ $(document).ready(function(){
 	var count;				//게시글 총갯수
 	var rowCount;			//한 페이지에 보여질 행(레코드) 수
 
-
 	/*mypageList.jsp에서의 부모글번호(h_seq)는 반복문으로 처리되기때문에 자바스크립에서도 반복문으로 받아야해.
 	반복문으로 받지않으면 제일 마지막 부모글번호(h_seq)만 넘어와.*/
-	
+
 	$("input[name=h_seq]").each(function(idx){  
 		var h_seq = $(this).val();
 		
+		//수정 데이터 호출
+		UpdatePostData(h_seq);		//부모글번호
+
+		function UpdatePostData(h_seq){
+			
+		//미니홈피 글수정
+		$(document).on('click','#post-modify'+h_seq,function(){	//수정 버튼을 클릭했을때
+			
+			//글 번호
+			var post_num = $(this).attr('data-postNum');
+			//작성자 아이디
+			var post_id = $(this).attr('data-postId');
+			//글 내용
+			var post_content = $('#'+post_num+' .post-content');
+			
+			//글 수정폼 UI
+			var	postModifyUI =' <form id="post_re_form" method="post" name="mypage" action="mypagePostUpdate.do">';
+				postModifyUI +=' <input type="hidden" name="h_seq" id="h_seq" value="'+post_num+'">';
+				postModifyUI +=' <input type="hidden" name="id" id="id" value="'+post_id+'">';
+				postModifyUI +=' <input type="hidden" name="h_show" id="h_show" value="'+h_show+'">';
+				postModifyUI +=' 	<textarea name="h_content" id="h_content'+post_num+'" />'; 
+				postModifyUI +='	  <div class="modify_delete_button_re">';
+				postModifyUI +='  		<input type="submit" value="수정">';
+				postModifyUI +='  		<input type="button" value="취소" class="post-reset">';
+				postModifyUI +='      </div>';
+				postModifyUI +=' </form>'
+				
+			//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면 숨김 .mregister_form을 환원시키고 수정폼을 초기화함.
+			initModifyForm();
+			$('#'+post_num+' .modify_delete_button').hide();	//원래 글에 존재하던 수정,삭제 버튼 사라지게함.
+			
+			//지금 클릭해서 수정하고자 하는 데이터는 감추기
+			$('#'+post_num+' .post-content2').hide();
+			
+			//수정폼을 수정하고자하는 데이터가 있는 div에 노출
+			$('.post-content1'+post_num).append(postModifyUI);
+			
+			//수정폼에서 취소 버튼 클릭시 수정폼 초기화
+			$(document).on('click','.post-reset',function(){
+				initModifyForm();
+			});
+			
+			//글 수정 폼 초기화
+			function initModifyForm(){
+				$('.post-content2').show();
+				$('#post_re_form').remove();
+				$('.modify_delete_button').show();
+			}
+			
+			//글 수정
+			$(document).on('submit','#post_re_form',function(event){
+				if ($('#h_content'+post_num).val() == '') {
+					alert('수정내용을 입력하세요');
+					$('#h_content'+post_num).focus();
+					return false;
+				}
+				
+				//폼에 입력한 데이터 반환
+				var data = $(this).serialize();
+				
+				/*//수정
+				$.ajax({
+					type:'post',
+					data:data,
+					url:'update.do',
+					dataType:'json',
+					cache:false,
+					timeout:30000,
+					success:function(data){
+						if (data.result == 'wrongAccess') {
+							alert('타인의 글은 수정할 수 없습니다.');
+						}else if(data.result == 'success'){
+							//변경한 데이터로 UI 갱신
+							$('#'+post_num+' .post-content2').text($('#h_content'+post_num).val());
+							initModifyForm();
+							alert(post_num);
+						}else{
+							alert('수정시 오류 발생');
+						}
+					},
+					error:function(){
+						alert('수정시 네트워크 오류');
+					}
+				});
+				
+				//기본 이벤트 제거
+				event.preventDefault();*/
+				
+				});
+			});
+		}
 		//초기 데이터(목록)호출
 		selectData(1,h_seq);		//1페이지, 부모글번호
 		
-		  //게시글 목록
+		 //댓글 목록
 		function selectData(pageNum,h_seq){
 			currentPage = pageNum;
 			
@@ -52,22 +142,21 @@ $(document).ready(function(){
 							
 							
 							/*if($('#user_id').val() && $('#user_id').val() == item.id){
-								//로그인한 id가 댓글 작성자 id와 같은 경우
-								output += '	<input type="button" value="수정" data-num="'+item.re_no+'" data-id="'+item.id+'" class="modify-button">';
-								output += '	<input type="button" value="삭제" data-num="'+item.re_no+'" data-id="'+item.id+'" class="delete-button">';
+								//로그인한 id가 글 작성자 id와 같은 경우
+								output += '	<input type="button" value="수정" data-num="'+item.h_seq+'" data-id="'+item.id+'" class="modify-button">';
+								output += '	<input type="button" value="삭제" data-num="'+item.h_seq+'" data-id="'+item.id+'" class="delete-button">';
 							}else{
 								//로그인하지 않았거나 작성자 id와 다른 경우
 								output += '	<input type="button" value="수정" disabled="disabled">';
 								output += '	<input type="button" value="삭제" disabled="disabled">';
 							}*/
 							
-							//output += ' 			<hr size="1" noshade>';
 							output += '			</div>';
 							
 							
 							//문서객체에 추가
 							$('#output'+h_seq).append(output);
-							
+						
 							//paging button 처리
 							if (currentPage >= Math.ceil(count/rowCount)) {
 								//다음 페이지가 없음
@@ -91,16 +180,12 @@ $(document).ready(function(){
 			var pageNum = currentPage + 1;
 			selectData(pageNum,h_seq);
 		});
-		
-		
-		
-		
-		
+
 		
 		//댓글 등록
 		$('#re_form'+h_seq).submit(function(event){
 			
-			if ($('#h_re_content'+h_seq).val()=='') {
+			if ($('#h_re_content2'+h_seq).val()=='') {
 				alert('내용을 입력하세요');
 				$('#h_re_content'+h_seq).focus();
 				return false;

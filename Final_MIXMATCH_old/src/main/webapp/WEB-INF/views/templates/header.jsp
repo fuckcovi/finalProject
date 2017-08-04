@@ -8,8 +8,6 @@
 	<c:if test="${!empty user_id }">
 	${user_id }님이 로그인 중
 	<a href="${pageContext.request.contextPath }/logout.do">로그아웃</a>
-	<a href="${pageContext.request.contextPath }/member/pwUpdate.do">비밀번호 수정</a>
-	<a href="${pageContext.request.contextPath }/member/pwCheck.do">회원수정</a>
 	<a href="${pageContext.request.contextPath }/member/delete.do">회원탈퇴</a>
 	</c:if>
 	<a href="${pageContext.request.contextPath}/#">사이트맵</a>
@@ -56,7 +54,7 @@
 </ul>
 </li>
 <li class="topMenuLi">
-<a class="menuLink" href="${pageContext.request.contextPath}/#">마이페이지</a>
+<a class="menuLink" href="${pageContext.request.contextPath}/mypage/main.do?id=${user_id}">마이페이지</a>
 <ul class="submenu">
 <li><a href="${pageContext.request.contextPath}/mypage/main.do?id=${user_id}" class="submenuLink">미니홈피</a></li>
 <li><a href="${pageContext.request.contextPath}/#" class="submenuLink">구매내역</a></li>

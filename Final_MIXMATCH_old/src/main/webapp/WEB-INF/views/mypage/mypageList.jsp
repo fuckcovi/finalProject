@@ -13,8 +13,6 @@
 
 
 
-
-
 <div class="container">
 
 <!-- ===============MyPage왼쪽 프로필부분=============== -->
@@ -23,7 +21,7 @@
 		<div class="align-center">
 			<c:if test="${empty member.profile_name}">
 				<!-- 프로필사진이 등록되어 있지않으면 기본이미지 출력 -->
-				<img src="${pageContext.request.contextPath}/resources/images/기본프로필.jpg" style="max-width: 150px">	
+				<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="max-width: 150px">	
 			</c:if>
 		</div>
 		<c:if
@@ -39,9 +37,9 @@
 			</div>
 		</c:if><br>
 		<div class="align-center">
-			<input type="button" value="내 정보" onclick="location.href='#<%-- ${pageContext.request.contextPath}/member/detail.do --%>'" class="btn btn-info"/>
+			<input type="button" value="내 정보" onclick="location.href='${pageContext.request.contextPath}/member/detail.do'" class="btn btn-info"/>
 		</div><br>
-		<ul>
+		<ul style="list-style: none;">
 			<li>이름 : ${member.name}</li>
 			<li>지역 : ${member.address}</li>
 			<li>등급 : ${member.auth}</li>
@@ -87,7 +85,6 @@
 <!-- ===============MyPage가운데 미니홈피부분=============== -->
 
 	<div class="box-center">
-	
 	<!-- 글등록 폼 -->
 		<div class="register_form">
 			<form:form commandName="mypageCommand" action="main.do" enctype="multipart/form-data">
@@ -115,7 +112,7 @@
 		<!-- 목록출력 -->
 		<c:if test="${count > 0}">
 			<c:forEach var="mypage" items="${list}">
-				<%-- <input type="hidden" name="h_seq" id="h_seq" value="${mypage.h_seq}">	<!-- 부모글번호 --> --%>
+				<%-- <input type="hidden" name="h_seq" id="h_seq" value="${mypage.h_seq}">	<!-- 부모글번호 --> --%>  
 				<input type="hidden" name="id" id="id" value="${mypage.id}">		<!-- 부모글 작성자 -->
 				<div class="post-list" id="${mypage.h_seq}">
 			<div class="post_head">
@@ -142,9 +139,13 @@
 					</tr>
 				</table>
 			</div>
-			<div class="align-left">
-				${mypage.h_content}
-			</div>
+			
+			<div class="post-content1${mypage.h_seq}"></div>
+				<div class="post-content2">
+					${mypage.h_content}
+				</div>
+
+			<div class="post-content">
 			<c:if
 				test="${fn:endsWith(mypage.h_file_name,'.jpg') || 
 				  fn:endsWith(mypage.h_file_name,'.JPG') ||
@@ -158,6 +159,20 @@
 				</div>
 			</c:if>
 			
+			<hr size="1" width="100%" style="border-color: #d6cfcf;">		
+			
+			<div class="modify_delete_button">
+				<div class="modify_delete_button"${mypage.h_seq}>
+					<c:if test="${!empty user_id && user_id == mypage.id}">
+						<input type="button" value="수정" id="post-modify${mypage.h_seq}" data-postNum="${mypage.h_seq}" data-postId="${mypage.id}">
+						<input type="button" value="삭제" id="post-delete${mypage.h_seq}" data-postNum="${mypage.h_seq}" data-postId="${mypage.id}">
+					</c:if>
+				</div>
+			</div>
+			</div>
+			
+			
+			<!-- 댓글등록 -->
 			<div id="reply_div">
 				<form id="re_form${mypage.h_seq}">
 					<input type="hidden" name="h_seq" value="${mypage.h_seq}" id="h_seq">

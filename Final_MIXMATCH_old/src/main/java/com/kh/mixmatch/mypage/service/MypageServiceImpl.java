@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.mixmatch.mypage.dao.MypageMapper;
 import com.kh.mixmatch.mypage.domain.FootballCommand;
 import com.kh.mixmatch.mypage.domain.MypageCommand;
+import com.kh.mixmatch.mypage.domain.MypageCommand2;
 import com.kh.mixmatch.mypage.domain.MypageReplyCommand;
 
 @Service("mypageService")
@@ -60,6 +61,18 @@ public class MypageServiceImpl implements MypageService{
 	public void insertReply(MypageReplyCommand mypageReplyCommand) {
 		mypageMapper.insertReply(mypageReplyCommand);
 	}
+
+	@Override
+	public void update(MypageCommand2 mypage) {
+		mypageMapper.update(mypage);
+	}
+
+	/*@Override
+	public void update(MypageCommand mypage) {
+		mypageMapper.update(mypage);
+	}*/
+
+	
 
 	
 
