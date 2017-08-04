@@ -1,5 +1,6 @@
 package com.kh.mixmatch.match.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,9 +69,19 @@ public interface MatchMapper {
 	@Insert("INSERT INTO g_toto (t_seq,m_seq,id,t_point,t_winteam,t_score,t_rate) VALUES (g_toto_seq.nextval,#{m_seq},#{id},#{t_point},#{t_winteam},#{t_score},ROUND(#{t_rate},1))")
 	public void insertToto(TotoCommand toto);
 	
-	// 점수까지 맞춘 경우 베팅한 멤버 포인트 증가 (안됨)
-	@Update("UPDATE g_member SET point=point+(#{t_point}*#{t_rate}) WHERE id IN(SELECT id FROM g_toto WHERE t_winteam=#{team} AND t_score=#{score} AND m_seq=#{m_seq})")
-	public void totoScore(Map<String,Object> map);
+	// 베팅한 멤버 포인트 증가
+	// 이긴팀만 멤버 멤버ID 
+	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score!=#{score}")
+	public ArrayList<String> totoTeamList(Map<String, Object> map);
+	// 이긴팀과 점수를 맞춘 멤버ID
+	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score=#{score}")
+	public ArrayList<String> totoAllList(Map<String, Object> map);
+	// 이긴팀만 맞춘 멤버 포인트 증가
+	@Update("UPDATE g_member SET point=point+111 WHERE id=#{allList}")
+	public void upPointTeam(String allList);
+	// 이긴팀과 점수를 맞춘 멤버 포인트 증가
+	@Update("UPDATE g_member SET point=point+999 WHERE id=#{allList}")
+	public void upPointAll(String allList);
 	// 비긴 경우 베팅한 멤버 포인트 증가
 	@Update("UPDATE g_member SET point=point+100 WHERE id IN(SELECT id FROM g_toto WHERE t_winteam=#{t_name} OR t_winteam=#{m_challenger} AND m_seq=#{m_seq})")
 	public void totoDraw(MatchCommand matchCommand);

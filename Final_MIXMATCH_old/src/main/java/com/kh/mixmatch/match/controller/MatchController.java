@@ -379,18 +379,24 @@ public class MatchController {
 			matchService.updatePointWin(t_home);
 			matchService.updatePointLose(t_away);
 			
-			/*// 베팅한 회원 포인트 증가
-			String team = matchCommand.getT_name();
-			int score = matchCommand.getM_home();
-			
+			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("t_point", t_point);
-			map.put("t_rate", t_rate);
-			map.put("team", team);
-			map.put("score", score);
-			map.put("m_seq", matchCommand.getM_seq());
-			matchService.totoScore(map);*/
+			map.put("team", matchCommand.getT_name());
+			map.put("score", matchCommand.getM_home());
+			ArrayList<String> teamList = matchService.totoTeamList(map);
+			ArrayList<String> allList = matchService.totoAllList(map);
 			
+			if (teamList != null) {
+				for (int i = 0; i < teamList.size(); i++) {
+					matchService.upPointTeam(teamList.get(i));
+				}	
+			}
+			
+			if (allList != null) {
+				for (int i = 0; i < allList.size(); i++) {
+					matchService.upPointAll(allList.get(i));
+				}	
+			}			
 		} else if (home == away) {
 			matchService.updateTeamDraw(matchCommand.getT_name());
 			matchService.updateTeamDraw(matchCommand.getM_challenger());
@@ -407,7 +413,23 @@ public class MatchController {
 			matchService.updatePointLose(t_home);
 			
 			// 베팅한 회원 포인트 증가
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("team", matchCommand.getM_challenger());
+			map.put("score", matchCommand.getM_away());
+			ArrayList<String> teamList = matchService.totoTeamList(map);
+			ArrayList<String> allList = matchService.totoAllList(map);
 			
+			if (teamList != null) {
+				for (int i = 0; i < teamList.size(); i++) {
+					matchService.upPointTeam(teamList.get(i));
+				}	
+			}
+			
+			if (allList != null) {
+				for (int i = 0; i < allList.size(); i++) {
+					matchService.upPointAll(allList.get(i));
+				}	
+			}			
 		}
 		
 		return "redirect:/match/scoreBoard.do";

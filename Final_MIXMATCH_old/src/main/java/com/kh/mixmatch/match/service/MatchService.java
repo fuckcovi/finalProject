@@ -1,5 +1,6 @@
 package com.kh.mixmatch.match.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,10 @@ public interface MatchService {
 	
 	public void insertToto(TotoCommand toto);
 	
-	public void totoScore(Map<String,Object> map);
+	public ArrayList<String> totoTeamList(Map<String, Object> map);
+	public ArrayList<String> totoAllList(Map<String, Object> map);
+	public void upPointTeam(String allList);
+	public void upPointAll(String allList);
 	public void totoDraw(MatchCommand matchCommand);
 	
 }
