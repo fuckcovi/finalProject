@@ -179,14 +179,19 @@ div.register_form{
 	margin-right: 15px;
 }
 
-/* 게시글 본문내용 */
-#h_content{
+/* 게시글 textarea */
+[id*='h_content']{
 	width:95%; 
 	height:150px; 
 	margin-top:10px;
 	resize: none;
 }
-
+/* 게시글 내용 */
+[class*='post-content']{
+	text-align:left;
+	margin-left: 10px;
+	font-size: 15px;
+}
 /* 업로드파일 */
 #uploadfile{
 	display:inline;
@@ -215,11 +220,21 @@ div.reply-list{
 	border: 1px solid black;
 }
 [id*='re_form']{
-	border: 1px solid #d6cfcf;
+	border: 1px solid black;
 	margin:15px 15px 15px 15px;
 }
 .reply-name{
 	color:#ec781c;
 	font-size: 24px;
+}
+/* 수정,삭제 버튼 */
+[class*='modify_delete_button']{
+	text-align:right;
+	margin-right: 15px;
+}
+
+/* 글 수정폼 */
+[id*='post_re_form']{
+	border: 
 }
 /*------------------------------- MyPage -----------------------------*/
