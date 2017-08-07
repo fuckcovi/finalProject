@@ -25,21 +25,26 @@
 	</ul>
 	<br>
 	<hr size="1" width="85%">
-	<table class="scheduleList">
+	<table class="scheduleList fplan">
 		<tr class="tablehead">
 			<th>매치번호</th>
 			<th>매치일자</th>
 			<th>매치결과</th>
 		</tr>
+		<c:forEach var="teamlist" items="${list}">
 		<c:forEach var="matchlist" items="${matchList}">
-			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1}">
-				<tr class="${matchlist.t_name} ${matchlist.m_challenger}">
+			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
+				<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
 					<td>${matchlist.m_seq}</td>
 					<td>${matchlist.m_date}</td>
 					<td><a href="matchDetail.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
 				</tr>
 			</c:if>
 		</c:forEach>
+		</c:forEach>
+		<tr class="tablenull" style="display: none;">
+			<td colspan="4">매치결과없음</td>
+		</tr>
 	</table>
 	</c:if> 
 	<br><hr class="style"> 
