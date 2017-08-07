@@ -39,12 +39,20 @@ $(document).ready(function(){
 	$("#teamScheduleList li").click(function(){
 		if($(this).attr("value")=="allList"){
 			$(".scheduleList tr").show();
+			$(".tablenull").hide();
 			alert("전체보기");
 		}else{
 			$(".scheduleList tr").hide();
 			$(".tablehead").show();
 			$("."+$(this).attr("value")).show();
 			alert("팀선택 : "+$(this).attr("value"));
+			if(!$(".xplan tr").hasClass($(this).attr("value"))){
+				$(".xplan .tablenull").show();
+			}if(!$(".cplan tr").hasClass($(this).attr("value"))){
+				$(".cplan .tablenull").show();
+			}if(!$(".fplan tr").hasClass($(this).attr("value"))){
+				$(".fplan .tablenull").show();
+			}
 		}
 	});
 	

@@ -26,7 +26,7 @@
 	<br>
 	<hr size="1" width="85%">
 	<h4>예정일정: 아직 안잡힘</h4>
-		<div class="scheduleList">
+		<div class="scheduleList xplan">
 			<table class="style">			
 			<tr class="tablehead">
 				<th>경기일자</th>
@@ -44,13 +44,15 @@
 							<td>${matchlist.t_name}</td>
 						</tr>
 					</c:if>
-					
 				</c:forEach>	
 			</c:forEach>
+			<tr class="tablenull" style="display: none;">
+				<td colspan="4">예정일정없음</td>
+			</tr>
 			</table>
 		</div>
 		<h4>확정일정</h4>
-		<div class="scheduleList">
+		<div class="scheduleList cplan">
 			<table class="style">			
 			<tr class="tablehead">
 				<th>경기일자</th>
@@ -72,10 +74,13 @@
 					</c:if>
 				</c:forEach>
 			</c:forEach>
+			<tr class="tablenull" style="display: none;">
+				<td colspan="4">확정일정없음</td>
+			</tr>
 			</table>
 		</div>
 		<h4>결과 : 매칭 결과</h4>
-		<div class="scheduleList">
+		<div class="scheduleList fplan">
 			<table class="style">	 		
 			<tr class="tablehead">
 				<th>경기일자</th>
@@ -93,6 +98,9 @@
 					</c:if>
 				</c:forEach>
 			</c:forEach>
+			<tr class="tablenull" style="display: none;">
+				<td colspan="4">매치결과없음</td>
+			</tr>
 			</table>
 		</div>
 	</c:if>
