@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/match.js"></script>
 <div class="page-main-style">
 	<h2>결과등록</h2>
 	<hr class="style"><br>
@@ -13,12 +15,12 @@
 		<ul style="line-height:50px;">
 			<li>
 				<label for="m_home">${match.t_name}팀 점수</label>
-				<form:input path="m_home" value="0" cssClass="select_box"/> 
+				<form:input path="m_home" value="0" cssClass="select_box" name="m_home"/> 
 				<form:errors path="m_home" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="m_away">${match.m_challenger}팀 점수</label>
-				<form:input path="m_away" value="0" cssClass="select_box"/>
+				<form:input path="m_away" value="0" cssClass="select_box" name="m_away"/>
 				<form:errors path="m_away" cssClass="error-color"/>
 			</li>
 			<li>

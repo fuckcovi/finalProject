@@ -53,7 +53,7 @@
 				<td align="left"> ${match.m_content}</td>
 			</tr>
 		</table><br>
-		<c:if test="${!fn:contains(t_name,match.t_name) && !empty t_name}">
+		<c:if test="${!fn:contains(t_name,match.t_name) && !empty team}">
 			<form:form commandName="match" action="challengerUpdate.do" enctype="multipart/form-data" id="challenger_form">
 				<form:errors element="div" cssClass="error-color"/>
 				<form:hidden path="m_seq"/>
@@ -63,7 +63,7 @@
 				<form:hidden path="m_place"/>
 				<form:hidden path="m_cost"/>
 				<form:hidden path="m_content"/>
-				<form:select path="t_name" items="${t_name}"/>
+				<form:select path="t_name" items="${team}"/>
 				<input type="submit" value="매치신청" id="match_btn" class="btn">			
 			</form:form>
 		</c:if><br>

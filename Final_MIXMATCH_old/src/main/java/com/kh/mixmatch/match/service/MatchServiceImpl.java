@@ -1,6 +1,5 @@
 package com.kh.mixmatch.match.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mixmatch.match.dao.MatchMapper;
 import com.kh.mixmatch.match.domain.MatchCommand;
-import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.team.domain.TeamCommand;
 
 @Service("matchService")
@@ -75,88 +73,13 @@ public class MatchServiceImpl implements MatchService {
 	}
 	
 	@Override
-	public List<TeamCommand> getTeamType(String id) {
-		return matchMapper.getTeamType(id);
-	}
-
-	@Override
-	public void updateTeamWin(String t_name) {
-		matchMapper.updateTeamWin(t_name);
-	}
-
-	@Override
-	public void updateTeamDraw(String t_name) {
-		matchMapper.updateTeamDraw(t_name);
-	}
-
-	@Override
-	public void updateTeamLose(String t_name) {
-		matchMapper.updateTeamLose(t_name);
-	}
-
-	@Override
-	public void updateMemberPoint(String id) {
-		matchMapper.updateMemberPoint(id);
-	}
-
-	@Override
-	public void updatePointWin(String t_name) {
-		matchMapper.updatePointWin(t_name);
-	}
-
-	@Override
-	public void updatePointDraw(String t_name) {
-		matchMapper.updatePointDraw(t_name);
-	}
-
-	@Override
-	public void updatePointLose(String t_name) {
-		matchMapper.updatePointLose(t_name);
-	}
-
-	@Override
-	public void insertToto(TotoCommand toto) {
-		matchMapper.insertToto(toto);
+	public List<String> getTeamType(Map<String, Object> map) {
+		return matchMapper.getTeamType(map);
 	}
 	
 	@Override
-	public ArrayList<String> totoTeamList(Map<String, Object> map) {
-		return matchMapper.totoTeamList(map);
-	}
-
-	@Override
-	public ArrayList<String> totoAllList(Map<String, Object> map) {
-		return matchMapper.totoAllList(map);
-	}
-	
-	@Override
-	public void upPointTeam(Map<String, Object> teamMap) {
-		matchMapper.upPointTeam(teamMap);
-	}
-	
-	@Override
-	public void upPointAll(Map<String, Object> allMap) {
-		matchMapper.upPointAll(allMap);
-	}
-	
-	@Override
-	public void totoDraw(MatchCommand matchCommand) {
-		matchMapper.totoDraw(matchCommand);		
-	}
-	
-	@Override
-	public ArrayList<Integer> totoTeamPoint(Map<String, Object> map) {
-		return matchMapper.totoTeamPoint(map);
-	}
-	
-	@Override
-	public ArrayList<Integer> totoAllPoint(Map<String, Object> map) {
-		return matchMapper.totoAllPoint(map);
-	}
-
-	@Override
-	public double totoRate(String team) {
-		return matchMapper.totoRate(team);
+	public List<TeamCommand> getTeamType2(String id) {
+		return matchMapper.getTeamType2(id);
 	}
 
 }

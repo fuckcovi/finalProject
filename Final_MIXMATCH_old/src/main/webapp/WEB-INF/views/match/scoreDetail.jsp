@@ -57,4 +57,25 @@
 		<input type="button" value="목록으로" class="btn" onclick="location.href='scoreBoard.do'">
 	</div>
 	<br><hr class="style">
+	<div align="center">
+	<h3>베팅회원 목록</h3>
+	<table border="1" style="width:400px;text-align:center;border-collapse:collapse;">
+		<tr>
+			<th>아이디</th>
+			<th>예상승리팀</th>
+			<th>예상점수</th>
+			<th>베팅포인트</th>
+			<th>배당률</th>
+		</tr>
+		<c:forEach var="list" items="${list}">
+			<tr>
+				<td>${list.id}</td>
+				<td>${list.t_winteam}</td>
+				<td>${list.t_score}</td>
+				<td>${list.t_point}</td>
+				<td>${list.t_rate}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	</div>
 </div>

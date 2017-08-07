@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/match.js"></script>
 <div class="page-main-style">
 	<h2>매치등록</h2>
 	<hr class="style"><br>
@@ -24,17 +26,17 @@
 			</li>
 			<li>
 				<label for="m_date">날짜</label>
-				<input type="date" name="m_date">
+				<input type="date" name="m_date" id="m_date">
 				<form:errors path="m_date" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="m_time">시간</label>
-				<form:input path="m_time"/>
+				<form:input path="m_time" id="m_time"/>
 				<form:errors path="m_time" cssClass="error-color"/>
 			</li>
 			<li>
 				<label for="m_place">경기장</label>
-				<form:input path="m_place"/>
+				<form:input path="m_place" id="m_place"/>
 				<form:errors path="m_place" cssClass="error-color"/>
 			</li>
 			<li>

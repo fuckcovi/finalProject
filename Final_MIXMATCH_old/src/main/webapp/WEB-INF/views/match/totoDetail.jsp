@@ -117,17 +117,11 @@
 				<option value="${match.m_challenger}">${match.m_challenger}</option>
 			</select><br>
 			<c:if test="${t_winteam.value eq match.t_name}"><form:hidden path="t_rate" value="10"/></c:if>
-			예상점수: <input type="number" name="t_score"><br>
+			예상점수: <input type="number" name="t_score" id="t_score" class="select_box"><br>
 			베팅포인트: 
-			<select name="t_point" class="select_box">
-				<option value="10">10</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="500">500</option>
-				<option value="1000">1000</option>
-			</select>
+			<input type="number" name="t_point" id="t_point" class="select_box" min="10" max="${point}">
 			<input type="hidden" id="final_rate" name="t_rate">
-			<br><br><input type="submit" id="btn" value="베팅하기" class="btn" onclick="location.href='totoInsert.do'">
+			<br><br><input type="submit" id="btn" value="베팅하기" class="btn">
 		</c:if>
 		<c:if test="${fn:contains(myteam,match.t_name) || fn:contains(myteam,match.m_challenger)}">
 			<span>본인이 속한 팀에는 베팅할 수 없습니다.</span><br><br>
@@ -141,4 +135,25 @@
 		</form:form>
 	</div>
 	<br><hr class="style">
+	<div align="center">
+	<h3>현재 베팅목록</h3>
+	<table border="1" style="width:400px;text-align:center;border-collapse:collapse;">
+		<tr>
+			<th>아이디</th>
+			<th>예상승리팀</th>
+			<th>예상점수</th>
+			<th>베팅포인트</th>
+			<th>배당률</th>
+		</tr>
+		<c:forEach var="list" items="${list}">
+			<tr>
+				<td>${list.id}</td>
+				<td>${list.t_winteam}</td>
+				<td>${list.t_score}</td>
+				<td>${list.t_point}</td>
+				<td>${list.t_rate}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	</div>
 </div>

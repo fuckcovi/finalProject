@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.mixmatch.match.domain.MatchCommand;
 import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.match.service.MatchService;
+import com.kh.mixmatch.match.service.TotoService;
 import com.kh.mixmatch.team.domain.TeamCommand;
 
 @Controller
@@ -32,6 +33,8 @@ public class MatchController {
 	
 	@Resource
 	private MatchService matchService;
+	@Resource
+	private TotoService totoService;
 	
 	// 매치보드
 	@RequestMapping("/match/matchBoard.do")
@@ -137,7 +140,7 @@ public class MatchController {
 		
 		MatchCommand matchCommand = new MatchCommand();
 		
-		List<TeamCommand> teamCommand = matchService.getTeamType(id);
+		List<TeamCommand> teamCommand = matchService.getTeamType2(id);
 		
 		ArrayList<String> area = new ArrayList<String>();
 		area.add("서울");
@@ -179,8 +182,6 @@ public class MatchController {
 			return "matchInsert";
 		}
 		
-		System.out.println(matchCommand.getT_name());
-		
 		String[] array = matchCommand.getT_name().split(":");
 		matchCommand.setT_name(array[0]);
 		matchCommand.setM_type(array[1]);
@@ -204,11 +205,18 @@ public class MatchController {
 		List<String> t_name = matchService.getTeamList(id);
 		
 		// 글번호(m_seq)와 일치하는 레코드 선택
-		MatchCommand match = matchService.selectMatch(m_seq);
+		MatchCommand match = matchService.selectMatch(m_seq); 
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("m_seq", m_seq);
+		
+		List<String> teamCommand = matchService.getTeamType(map);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchDetail");
 		mav.addObject("match", match);
+		mav.addObject("team", teamCommand);
 		mav.addObject("t_name", t_name);
 		
 		return mav;
@@ -323,11 +331,15 @@ public class MatchController {
 		TeamCommand t_name = matchService.getTeam(match.getT_name());
 		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
 		
+		// 베팅 리스트
+		List<TotoCommand> list = totoService.totoList(m_seq);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("scoreDetail");
 		mav.addObject("match", match);
 		mav.addObject("t_name", t_name.getT_logo_name());
 		mav.addObject("m_challenger", m_challenger.getT_logo_name());
+		mav.addObject("list", list);
 		
 		return mav;
 	}
@@ -364,7 +376,7 @@ public class MatchController {
 		
 		// MVP 멤버 포인트 증가
 		String id = matchCommand.getM_mvp();
-		matchService.updateMemberPoint(id);
+		totoService.updateMemberPoint(id);
 		
 		// 팀 전적 증가, 포인트 증가
 		int home = matchCommand.getM_home();
@@ -374,29 +386,35 @@ public class MatchController {
 		String t_away = matchCommand.getM_challenger();
 		
 		if (home > away) {
-			matchService.updateTeamWin(t_home);
-			matchService.updateTeamLose(t_away);
-			matchService.updatePointWin(t_home);
-			matchService.updatePointLose(t_away);
+			totoService.updateTeamWin(t_home);
+			totoService.updateTeamLose(t_away);
+			totoService.updatePointWin(t_home);
+			totoService.updatePointLose(t_away);
 			System.out.println("팀원 포인트 증가 완료");
 			
 			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("team", matchCommand.getT_name());
 			map.put("score", matchCommand.getM_home());
-			ArrayList<String> teamList = matchService.totoTeamList(map);
-			ArrayList<String> allList = matchService.totoAllList(map);
+			map.put("m_seq", matchCommand.getM_seq());
+			ArrayList<String> teamList = totoService.totoTeamList(map);
+			ArrayList<String> allList = totoService.totoAllList(map);
+			ArrayList<String> failList = totoService.totoFailList(map);
 			System.out.println("teamList" + teamList);
 			System.out.println("allList" + allList);
+			System.out.println("failList" + failList);
 						
 			// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
-			ArrayList<Integer> teamPoint = matchService.totoTeamPoint(map);
+			ArrayList<Integer> teamPoint = totoService.totoTeamPoint(map);
 			System.out.println("teamPoint" + teamPoint);
 			// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
-			ArrayList<Integer> allPoint = matchService.totoAllPoint(map);
+			ArrayList<Integer> allPoint = totoService.totoAllPoint(map);
 			System.out.println("allPoint" + allPoint);
+			// 베팅 실패한 멤버 포인트 가져오기
+			ArrayList<Integer> failPoint = totoService.totoFailPoint(map);
+			System.out.println("failPoint" + failPoint);
 			// 배당률 가져오기
-			double t_rate = matchService.totoRate(matchCommand.getT_name());
+			double t_rate = totoService.totoRate(map);
 			System.out.println("t_rate=" + t_rate);
 					
 			if (teamList != null) {
@@ -407,7 +425,7 @@ public class MatchController {
 					System.out.println("teamPoint.get("+i+")="+point);
 					teamMap.put("teamList", teamList.get(i));
 					System.out.println("teamList.get("+i+")="+teamList.get(i));
-					matchService.upPointTeam(teamMap);
+					totoService.upPointTeam(teamMap);
 					System.out.println("teamList 베팅 포인트 증가 완료");
 				}
 			}
@@ -418,45 +436,64 @@ public class MatchController {
 					Map<String, Object> allMap = new HashMap<String, Object>();
 					allMap.put("point", point);
 					System.out.println("allPoint.get("+i+")="+point);
-					allMap.put("teamList", allList.get(i));
+					allMap.put("allList", allList.get(i));
 					System.out.println("allList.get("+i+")="+allList.get(i));
-					matchService.upPointTeam(allMap);
+					totoService.upPointAll(allMap);
 					System.out.println("allList 베팅 포인트 증가 완료");
 				}	
-			}		
+			}	
+			
+			if (failList != null) {
+				for (int i = 0; i < failList.size(); i++) {
+					int point = failPoint.get(i);
+					Map<String, Object> failMap = new HashMap<String, Object>();
+					failMap.put("point", point);
+					System.out.println("failPoint.get("+i+")="+point);
+					failMap.put("failList", failList.get(i));
+					System.out.println("failList.get("+i+")="+failList.get(i));
+					totoService.downPoint(failMap);
+					System.out.println("failList 베팅 포인트 감소 완료");
+				}
+			}
 		} else if (home == away) {
-			matchService.updateTeamDraw(matchCommand.getT_name());
-			matchService.updateTeamDraw(matchCommand.getM_challenger());
-			matchService.updatePointDraw(t_home);
-			matchService.updatePointDraw(t_away);
+			totoService.updateTeamDraw(matchCommand.getT_name());
+			totoService.updateTeamDraw(matchCommand.getM_challenger());
+			totoService.updatePointDraw(t_home);
+			totoService.updatePointDraw(t_away);
 			
 			// 베팅한 회원 포인트 증가
-			matchService.totoDraw(matchCommand);
+			totoService.totoDraw(matchCommand);
 			
 		} else if (home < away) {
-			matchService.updateTeamLose(matchCommand.getT_name());
-			matchService.updateTeamWin(matchCommand.getM_challenger());
-			matchService.updatePointWin(t_away);
-			matchService.updatePointLose(t_home);
+			totoService.updateTeamLose(matchCommand.getT_name());
+			totoService.updateTeamWin(matchCommand.getM_challenger());
+			totoService.updatePointWin(t_away);
+			totoService.updatePointLose(t_home);
 			System.out.println("팀원 포인트 증가 완료");
 			
 			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("team", matchCommand.getM_challenger());
 			map.put("score", matchCommand.getM_away());
-			ArrayList<String> teamList = matchService.totoTeamList(map);
-			ArrayList<String> allList = matchService.totoAllList(map);
+			map.put("m_seq", matchCommand.getM_seq());
+			ArrayList<String> teamList = totoService.totoTeamList(map);
+			ArrayList<String> allList = totoService.totoAllList(map);
+			ArrayList<String> failList = totoService.totoFailList(map);
 			System.out.println("teamList" + teamList);
 			System.out.println("allList" + allList);
+			System.out.println("failList" + failList);
 			
 			// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
-			ArrayList<Integer> teamPoint = matchService.totoTeamPoint(map);
+			ArrayList<Integer> teamPoint = totoService.totoTeamPoint(map);
 			System.out.println("teamPoint" + teamPoint);
 			// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
-			ArrayList<Integer> allPoint = matchService.totoAllPoint(map);
+			ArrayList<Integer> allPoint = totoService.totoAllPoint(map);
 			System.out.println("allPoint" + allPoint);
+			// 베팅 실패한 멤버 포인트 가져오기
+			ArrayList<Integer> failPoint = totoService.totoFailPoint(map);
+			System.out.println("failPoint" + failPoint);
 			// 배당률 가져오기
-			double t_rate = matchService.totoRate(matchCommand.getM_challenger());
+			double t_rate = totoService.totoRate(map);
 			System.out.println("t_rate=" + t_rate);
 			
 			if (teamList != null) {
@@ -467,7 +504,7 @@ public class MatchController {
 					System.out.println("teamPoint.get("+i+")="+point);
 					teamMap.put("teamList", teamList.get(i));
 					System.out.println("teamList.get("+i+")="+teamList.get(i));
-					matchService.upPointTeam(teamMap);
+					totoService.upPointTeam(teamMap);
 					System.out.println("teamList 베팅 포인트 증가 완료");
 				}
 			}
@@ -478,107 +515,28 @@ public class MatchController {
 					Map<String, Object> allMap = new HashMap<String, Object>();
 					allMap.put("point", point);
 					System.out.println("allPoint.get("+i+")="+point);
-					allMap.put("teamList", allList.get(i));
+					allMap.put("allList", allList.get(i));
 					System.out.println("allList.get("+i+")="+allList.get(i));
-					matchService.upPointTeam(allMap);
+					totoService.upPointAll(allMap);
 					System.out.println("allList 베팅 포인트 증가 완료");
 				}	
-			}			
+			}	
+			
+			if (failList != null) {
+				for (int i = 0; i < failList.size(); i++) {
+					int point = failPoint.get(i);
+					Map<String, Object> failMap = new HashMap<String, Object>();
+					failMap.put("point", point);
+					System.out.println("failPoint.get("+i+")="+point);
+					failMap.put("failList", failList.get(i));
+					System.out.println("failList.get("+i+")="+failList.get(i));
+					totoService.downPoint(failMap);
+					System.out.println("failList 베팅 포인트 감소 완료");
+				}
+			}
 		}
 		
 		return "redirect:/match/scoreBoard.do";
-	}
-	
-	///////////////////////////////////승부예측///////////////////////////////////
-	// 승부예측
-	@RequestMapping("/match/sportsToto.do")
-	public ModelAndView sportsTotoForm(@RequestParam(value="type", defaultValue="축구") String type) {			
-		// 종목 받아오기
-		String board = "toto";
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("type", type);
-		map.put("board", board);
-			
-		// 종목별 게시글 수 카운트
-		int count = matchService.getRowCount(map);
-			
-		if (log.isDebugEnabled()) {
-			log.debug("<<승부예측 type>> : " + type);
-			log.debug("<<승부예측 count>> : " + count);
-		}
-		
-		// 리스트에 저장
-		List<MatchCommand> list = null;
-		if (count > 0) {
-			map.put("type", type);		
-			list = matchService.matchList(map);
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("sportsToto");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("type", type);
-		
-		return mav;
-	}
-	
-	// 베팅하기 폼
-	@RequestMapping(value="/match/totoDetail.do")
-	public ModelAndView totoDetailForm(@RequestParam("m_seq") int m_seq,
-										Model model, HttpSession session) {		
-		if (log.isDebugEnabled()) {
-			log.debug("<<베팅하기 폼 m_seq>> : " + m_seq);
-		}
-			
-		// 유저 팀이름 받아오기
-		String id = (String) session.getAttribute("user_id");
-		List<String> myteam = matchService.getTeamList(id);
-			
-		// 글번호(m_seq)와 일치하는 레코드 선택
-		MatchCommand match = matchService.selectMatch(m_seq);
-		
-		// 팀 이름 가져오기
-		TeamCommand t_name = matchService.getTeam(match.getT_name());
-		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
-		
-		// 경기수 구하기
-		int home = t_name.getT_win() + t_name.getT_lose() + t_name.getT_draw();
-		int away = m_challenger.getT_win() + m_challenger.getT_lose() + m_challenger.getT_draw();
-		
-		TotoCommand toto = new TotoCommand();
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("totoDetail");
-		mav.addObject("match", match);
-		mav.addObject("t_name", t_name);
-		mav.addObject("m_challenger", m_challenger);
-		mav.addObject("myteam", myteam);
-		mav.addObject("home", home);
-		mav.addObject("away", away);
-		mav.addObject("user_id", id);
-		mav.addObject("toto", toto);
-			
-		return mav;
-	}
-	
-	// 베팅하기
-	@RequestMapping("/match/totoInsert.do")
-	public String insertTotoSubmit(@ModelAttribute("toto") @Valid TotoCommand totoCommand,
-								   BindingResult result, HttpServletRequest request) {
-		if (log.isDebugEnabled()) {
-		log.debug("<<베팅하기 totoCommand>> : " + totoCommand);
-		}
-		
-		if (result.hasErrors()) {
-		return "totoDetail";
-		}
-		
-		// DB에 저장
-		
-		matchService.insertToto(totoCommand);
-		
-		return "redirect:/match/sportsToto.do";
 	}
 	
 }

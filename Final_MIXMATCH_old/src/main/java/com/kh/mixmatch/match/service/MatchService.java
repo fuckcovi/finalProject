@@ -1,13 +1,11 @@
 package com.kh.mixmatch.match.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
-import com.kh.mixmatch.match.domain.TotoCommand;
 import com.kh.mixmatch.team.domain.TeamCommand;
 
 @Transactional
@@ -30,27 +28,7 @@ public interface MatchService {
 	public TeamCommand getTeam(String t_name);
 	public void updateChallenger(MatchCommand match);
 	
-	public List<TeamCommand> getTeamType(String id);
-	
-	public void updateTeamWin(String t_name);
-	public void updateTeamDraw(String t_name);
-	public void updateTeamLose(String t_name);
-	
-	public void updateMemberPoint(String id);
-	public void updatePointWin(String t_name);
-	public void updatePointDraw(String t_name);
-	public void updatePointLose(String t_name);
-	
-	public void insertToto(TotoCommand toto);
-	
-	public ArrayList<String> totoTeamList(Map<String, Object> map);
-	public ArrayList<String> totoAllList(Map<String, Object> map);
-	public void upPointTeam(Map<String, Object> teamMap);
-	public void upPointAll(Map<String, Object> allMap);
-	public void totoDraw(MatchCommand matchCommand);
-	
-	public ArrayList<Integer> totoTeamPoint(Map<String, Object> map);
-	public ArrayList<Integer> totoAllPoint(Map<String, Object> map);
-	public double totoRate(String team);
+	public List<String> getTeamType(Map<String, Object> map);
+	public List<TeamCommand> getTeamType2(String id);
 	
 }
