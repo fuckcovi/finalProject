@@ -60,7 +60,7 @@
 							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
 						</td>
-						<td><a href="#?미니홈피">${list.name}</a></td>
+						<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 						<td>${list.b_score}</td>
 						<td>${list.b_assist}</td>
 						<td>${list.b_rebound}</td>
@@ -102,18 +102,18 @@
 							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
 						</td>
-						<td><a href="#?미니홈피">${list.name}</a></td>
+						<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 						<td>${list.b_bat}</td>
 						<td>${list.b_hit}</td>
 						<td>${list.b_rbi}</td>
 						<td>${list.b_score}</td>
-						<td>타율계산</td>
+						<td>${list.b_avg }</td>
 						<td>${list.b_win}</td>
 						<td>${list.b_lose}</td>
 						<td>${list.b_strike}</td>
 						<td>${list.b_ip}</td>
 						<td>${list.b_er}</td>
-						<td>방어율 계산</td>
+						<td>${list.b_era }</td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -128,10 +128,10 @@
 			<th>순위</th>
 			<th>프로필</th>
 			<th>이름</th>
-			<th>슈팅</th>
-			<th>도움</th>
-			<th>득점</th>
-			<th>공격포인트</th>
+			<th><a href='totalFootMemRank.do?morder=f_shoot'>슈팅</a></th>
+			<th><a href='totalFootMemRank.do?morder=f_assist'>도움</a></th>
+			<th><a href='totalFootMemRank.do?morder=f_goal'>득점</a></th>
+			<th><a href='totalFootMemRank.do?morder=f_attack'>공격포인트</a></th>
 		</tr>
 			<c:if test="${teamMemCount > 0}">
 				<c:forEach var="list" items="${listTMemFoot}" varStatus="status">
@@ -142,7 +142,7 @@
 							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
 						</td>
-						<td><a href="#?미니홈피">${list.name}</a></td>
+						<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 						<td>${list.f_shoot}</td>
 						<td>${list.f_assist}</td>
 						<td>${list.f_goal}</td>

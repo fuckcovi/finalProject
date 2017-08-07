@@ -33,7 +33,7 @@
 			<c:forEach var="list" items="${baselist}">
 			<c:if test="${list.t_name == match.t_name}"><!--  홈팀 기록 -->
 				<tr>
-					<td><a href="#?미니홈피">${list.name}</a></td>
+					<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 					<td>${list.b_bat}</td>
 					<td>${list.b_hit}</td>
 					<td>${list.b_rbi}</td>
@@ -69,7 +69,7 @@
 			<c:forEach var="list" items="${baselist}">
 			<c:if test="${list.t_name == match.m_challenger}"><!--  어웨이팀 기록 -->
 				<tr>
-					<td><a href="#?미니홈피">${list.name}</a></td>
+					<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 					<td>${list.b_bat}</td>
 					<td>${list.b_hit}</td>
 					<td>${list.b_rbi}</td>
@@ -108,7 +108,7 @@
 			<c:forEach var="list" items="${basketlist}">
 			<c:if test="${list.t_name == match.t_name}"><!--  홈팀 기록 -->
 				<tr>
-					<td><a href="#?미니홈피">${list.name}</a></td>
+					<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 					<td>${list.b_score}</td>
 					<td>${list.b_assist}</td>
 					<td>${list.b_rebound}</td>
@@ -134,7 +134,7 @@
 			<c:forEach var="list" items="${basketlist}">
 			<c:if test="${list.t_name == match.m_challenger}"><!--  어웨이팀 기록 -->
 				<tr>
-					<td><a href="#?미니홈피">${list.name}</a></td>
+					<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 					<td>${list.b_score}</td>
 					<td>${list.b_assist}</td>
 					<td>${list.b_rebound}</td>
@@ -166,7 +166,7 @@
 			<c:forEach var="list" items="${footlist}">
 			<c:if test="${list.t_name == match.t_name}"><!--  홈팀 기록 -->
 				<tr>
-					<td><a href="#?미니홈피">${list.name}</a></td>
+					<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 					<td>${list.f_shoot}</td>
 					<td>${list.f_assist}</td>
 					<td>${list.f_goal}</td>
@@ -188,7 +188,7 @@
 			<c:forEach var="list" items="${footlist}">
 			<c:if test="${list.t_name == match.m_challenger}"><!--  어웨이팀 기록 -->
 				<tr>
-					<td><a href="#?미니홈피">${list.name}</a></td>
+					<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 					<td>${list.f_shoot}</td>
 					<td>${list.f_assist}</td>
 					<td>${list.f_goal}</td>
