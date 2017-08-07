@@ -44,12 +44,12 @@
 			<th>순위</th>
 			<th>프로필</th>
 			<th>이름</th>
-			<th>득점</th>
-			<th>도움</th>
-			<th>리바운드</th>
-			<th>스틸</th>
-			<th>블록</th>
-			<th>3점슛</th>			
+			<th><a href='teamRank.do?t_name=${team.t_name}&bkorder=b_score'>득점</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&bkorder=b_assist'>도움</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&bkorder=b_rebound'>리바운드</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&bkorder=b_steel'>스틸</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&bkorder=b_block'>블록</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&bkorder=b_3point'>3점슛</a></th>			
 		</tr>
 			<c:if test="${teamMemCount > 0}">
 				<c:forEach var="list" items="${listTMemBasket}" varStatus="status">
@@ -81,17 +81,17 @@
 			<th>순위</th>
 			<th>프로필</th>
 			<th>이름</th>
-			<th>타수</th>
-			<th>안타수</th>
-			<th>타점</th>
-			<th>득점</th>
-			<th>타율</th>
-			<th>승리</th>
-			<th>패배</th>
-			<th>삼진</th>
-			<th>이닝</th>
-			<th>실점</th>
-			<th>방어율</th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_bat'>타수</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_hit'>안타수</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_rbi'>타점</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_score'>득점</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_avg'>타율</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_win'>승리</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_lose'>패배</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_strike'>삼진</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_ip'>이닝</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_er'>실점</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&border=b_era'>방어율</a></th>
 		</tr>
 			<c:if test="${teamMemCount > 0}">
 				<c:forEach var="list" items="${listTMemBase}" varStatus="status">
@@ -128,10 +128,10 @@
 			<th>순위</th>
 			<th>프로필</th>
 			<th>이름</th>
-			<th><a href='totalFootMemRank.do?morder=f_shoot'>슈팅</a></th>
-			<th><a href='totalFootMemRank.do?morder=f_assist'>도움</a></th>
-			<th><a href='totalFootMemRank.do?morder=f_goal'>득점</a></th>
-			<th><a href='totalFootMemRank.do?morder=f_attack'>공격포인트</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&forder=f_shoot'>슈팅</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&forder=f_assist'>도움</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&forder=f_goal'>득점</a></th>
+			<th><a href='teamRank.do?t_name=${team.t_name}&forder=f_attack'>공격포인트</a></th>
 		</tr>
 			<c:if test="${teamMemCount > 0}">
 				<c:forEach var="list" items="${listTMemFoot}" varStatus="status">
