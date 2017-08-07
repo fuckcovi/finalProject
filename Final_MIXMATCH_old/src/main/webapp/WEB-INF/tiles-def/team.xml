@@ -6,7 +6,10 @@
 
 <tiles-definitions>
    
-    
+    <definition name="chat" template="/WEB-INF/views/templates/chatLay.jsp">
+     	<put-attribute name="title" value="MIXMATCH chat"/>
+     	<put-attribute name="body" value="/WEB-INF/views/team/chat.jsp"/>
+    </definition>
     <!--  팀  -->
   	<definition name="teamHome" extends="main">
      	<put-attribute name="title" value="MIXMATCH TEAM"/>
