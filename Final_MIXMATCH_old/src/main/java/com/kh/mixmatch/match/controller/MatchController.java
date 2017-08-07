@@ -33,32 +33,32 @@ public class MatchController {
 	@Resource
 	private MatchService matchService;
 	
-	// ¸ÅÄ¡º¸µå
+	// ë§¤ì¹˜ë³´ë“œ
 	@RequestMapping("/match/matchBoard.do")
-	public ModelAndView matchBoardForm(@RequestParam(value="type", defaultValue="Ãà±¸") String type,
+	public ModelAndView matchBoardForm(@RequestParam(value="type", defaultValue="ì¶•êµ¬") String type,
 									   HttpSession session) {				
-		// Á¾¸ñ ¹Ş¾Æ¿À±â
+		// ì¢…ëª© ë°›ì•„ì˜¤ê¸°
 		String board = "match";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 		
-		// Á¾¸ñº° °Ô½Ã±Û ¼ö Ä«¿îÆ®
+		// ì¢…ëª©ë³„ ê²Œì‹œê¸€ ìˆ˜ ì¹´ìš´íŠ¸
 		int count = matchService.getRowCount(map);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡º¸µå type>> : " + type);		
-			log.debug("<<¸ÅÄ¡º¸µå count>> : " + count);
+			log.debug("<<ë§¤ì¹˜ë³´ë“œ type>> : " + type);		
+			log.debug("<<ë§¤ì¹˜ë³´ë“œ count>> : " + count);
 		}
 		
-		// ¸®½ºÆ®¿¡ ÀúÀå
+		// ë¦¬ìŠ¤íŠ¸ì— ì €ì¥
 		List<MatchCommand> list = null;
 		if (count > 0) {
 			map.put("type", type);		
 			list = matchService.matchList(map);
 		}
 		
-		// À¯Àú ÆÀÀÌ¸§ ¹Ş¾Æ¿À±â
+		// ìœ ì € íŒ€ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
@@ -72,32 +72,32 @@ public class MatchController {
 		return mav;
 	}
 	
-	// ½ºÄÚ¾îº¸µå
+	// ìŠ¤ì½”ì–´ë³´ë“œ
 	@RequestMapping("/match/scoreBoard.do")
-	public ModelAndView scoreBoardForm(@RequestParam(value="type", defaultValue="Ãà±¸") String type,
+	public ModelAndView scoreBoardForm(@RequestParam(value="type", defaultValue="ì¶•êµ¬") String type,
 									   HttpSession session) {			
-		// Á¾¸ñ ¹Ş¾Æ¿À±â
+		// ì¢…ëª© ë°›ì•„ì˜¤ê¸°
 		String board = "score";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 		
-		// Á¾¸ñº° °Ô½Ã±Û ¼ö Ä«¿îÆ®
+		// ì¢…ëª©ë³„ ê²Œì‹œê¸€ ìˆ˜ ì¹´ìš´íŠ¸
 		int count = matchService.getRowCount(map);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<½ºÄÚ¾îº¸µå type>> : " + type);
-			log.debug("<<½ºÄÚ¾îº¸µå count>> : " + count);
+			log.debug("<<ìŠ¤ì½”ì–´ë³´ë“œ type>> : " + type);
+			log.debug("<<ìŠ¤ì½”ì–´ë³´ë“œ count>> : " + count);
 		}
 		
-		// ¸®½ºÆ®¿¡ ÀúÀå
+		// ë¦¬ìŠ¤íŠ¸ì— ì €ì¥
 		List<MatchCommand> list = null;
 		if (count > 0) {
 			map.put("type", type);		
 			list = matchService.matchList(map);
 		}
 		
-		// À¯Àú ÆÀÀÌ¸§ ¹Ş¾Æ¿À±â
+		// ìœ ì € íŒ€ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
@@ -111,7 +111,7 @@ public class MatchController {
 		return mav;
 	}
 	
-	// ÆÀ ÀÌ¹ÌÁö Ãâ·Â
+	// íŒ€ ì´ë¯¸ì§€ ì¶œë ¥
 	@RequestMapping("/match/matchImageView.do")
 	public ModelAndView matchImageView(@RequestParam("t_name") String t_name) {
 		TeamCommand team = matchService.getTeam(t_name);
@@ -124,15 +124,15 @@ public class MatchController {
 		return mav;
 	}
 	
-	// ¸ÅÄ¡µî·ÏÆû
+	// ë§¤ì¹˜ë“±ë¡í¼
 	@RequestMapping(value="/match/matchInsert.do", method=RequestMethod.GET)
 	public ModelAndView matchInsertForm(HttpSession session, Model model) {
-		// À¯Àú ÆÀÀÌ¸§ ¹Ş¾Æ¿À±â
+		// ìœ ì € íŒ€ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡µî·ÏÆû t_name>> : " + t_name);
+			log.debug("<<ë§¤ì¹˜ë“±ë¡í¼ t_name>> : " + t_name);
 		}
 		
 		MatchCommand matchCommand = new MatchCommand();
@@ -140,22 +140,22 @@ public class MatchController {
 		List<TeamCommand> teamCommand = matchService.getTeamType(id);
 		
 		ArrayList<String> area = new ArrayList<String>();
-		area.add("¼­¿ï");
-		area.add("ÀÎÃµ");
-		area.add("°æ±â");
-		area.add("°­¿ø");
-		area.add("´ëÀü");
-		area.add("ÃæºÏ");
-		area.add("Ãæ³²");
-		area.add("±¤ÁÖ");
-		area.add("ÀüºÏ");
-		area.add("Àü³²");
-		area.add("´ë±¸");
-		area.add("¿ï»ê");
-		area.add("°æºÏ");
-		area.add("°æ³²");
-		area.add("ºÎ»ê");
-		area.add("Á¦ÁÖ");
+		area.add("ì„œìš¸");
+		area.add("ì¸ì²œ");
+		area.add("ê²½ê¸°");
+		area.add("ê°•ì›");
+		area.add("ëŒ€ì „");
+		area.add("ì¶©ë¶");
+		area.add("ì¶©ë‚¨");
+		area.add("ê´‘ì£¼");
+		area.add("ì „ë¶");
+		area.add("ì „ë‚¨");
+		area.add("ëŒ€êµ¬");
+		area.add("ìš¸ì‚°");
+		area.add("ê²½ë¶");
+		area.add("ê²½ë‚¨");
+		area.add("ë¶€ì‚°");
+		area.add("ì œì£¼");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchInsert");
@@ -167,12 +167,12 @@ public class MatchController {
 		return mav;
 	}
 	
-	// ¸ÅÄ¡µî·Ï
+	// ë§¤ì¹˜ë“±ë¡
 	@RequestMapping(value="/match/matchInsert.do", method=RequestMethod.POST)
 	public String matchInsertSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡µî·Ï matchCommand>> : " + matchCommand);
+			log.debug("<<ë§¤ì¹˜ë“±ë¡ matchCommand>> : " + matchCommand);
 		}
 		
 		if (result.hasErrors()) {
@@ -185,25 +185,25 @@ public class MatchController {
 		matchCommand.setT_name(array[0]);
 		matchCommand.setM_type(array[1]);
 		
-		// ¸ÅÄ¡µî·Ï
+		// ë§¤ì¹˜ë“±ë¡
 		matchService.insertMatch(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// ¸ÅÄ¡ »ó¼¼º¸±â
+	// ë§¤ì¹˜ ìƒì„¸ë³´ê¸°
 	@RequestMapping("/match/matchDetail.do")
 	public ModelAndView matchDetailForm(@RequestParam("m_seq") int m_seq,
 										Model model, HttpSession session) {		
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡ »ó¼¼º¸±â m_seq>> : " + m_seq);
+			log.debug("<<ë§¤ì¹˜ ìƒì„¸ë³´ê¸° m_seq>> : " + m_seq);
 		}
 		
-		// À¯Àú ÆÀÀÌ¸§ ¹Ş¾Æ¿À±â
+		// ìœ ì € íŒ€ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
-		// ±Û¹øÈ£(m_seq)¿Í ÀÏÄ¡ÇÏ´Â ·¹ÄÚµå ¼±ÅÃ
+		// ê¸€ë²ˆí˜¸(m_seq)ì™€ ì¼ì¹˜í•˜ëŠ” ë ˆì½”ë“œ ì„ íƒ
 		MatchCommand match = matchService.selectMatch(m_seq);
 		
 		ModelAndView mav = new ModelAndView();
@@ -214,74 +214,74 @@ public class MatchController {
 		return mav;
 	}
 	
-	// ¸ÅÄ¡»èÁ¦
+	// ë§¤ì¹˜ì‚­ì œ
 	@RequestMapping("/match/matchDelete.do")
 	public String matchDeleteSubmit(@RequestParam("m_seq") int m_seq) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡»èÁ¦ m_seq>> : " + m_seq);
+			log.debug("<<ë§¤ì¹˜ì‚­ì œ m_seq>> : " + m_seq);
 		}
 		
-		// ¸ÅÄ¡»èÁ¦
+		// ë§¤ì¹˜ì‚­ì œ
 		matchService.deleteMatch(m_seq);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// ¸ÅÄ¡½ÅÃ»
+	// ë§¤ì¹˜ì‹ ì²­
 	@RequestMapping("/match/challengerUpdate.do")
 	public String challengerUpdateSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 										 BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡½ÅÃ» matchCommand>> : " + matchCommand);
+			log.debug("<<ë§¤ì¹˜ì‹ ì²­ matchCommand>> : " + matchCommand);
 		}
 		
 		if (result.hasErrors()) {
 			return "matchInsert";
 		}
 		
-		// ¸ÅÄ¡µî·Ï
+		// ë§¤ì¹˜ë“±ë¡
 		matchService.updateChallenger(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// ¸ÅÄ¡¼öÁ¤Æû
+	// ë§¤ì¹˜ìˆ˜ì •í¼
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.GET)
 	public String matchUpdateForm(@RequestParam("m_seq") int m_seq,
 								  HttpSession session, Model model) {		
-		// À¯Àú ÆÀÀÌ¸§ ¹Ş¾Æ¿À±â
+		// ìœ ì € íŒ€ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡¼öÁ¤Æû m_seq>> : " + m_seq);
-			log.debug("<<¸ÅÄ¡¼öÁ¤Æû t_name>> : " + t_name);
+			log.debug("<<ë§¤ì¹˜ìˆ˜ì •í¼ m_seq>> : " + m_seq);
+			log.debug("<<ë§¤ì¹˜ìˆ˜ì •í¼ t_name>> : " + t_name);
 		}
 		
 		ArrayList<String> type = new ArrayList<String>();
-		type.add("Ãà±¸");
-		type.add("¾ß±¸");
-		type.add("³ó±¸");
+		type.add("ì¶•êµ¬");
+		type.add("ì•¼êµ¬");
+		type.add("ë†êµ¬");
 		
 		ArrayList<String> area = new ArrayList<String>();
-		area.add("¼­¿ï");
-		area.add("ÀÎÃµ");
-		area.add("°æ±â");
-		area.add("°­¿ø");
-		area.add("´ëÀü");
-		area.add("ÃæºÏ");
-		area.add("Ãæ³²");
-		area.add("±¤ÁÖ");
-		area.add("ÀüºÏ");
-		area.add("Àü³²");
-		area.add("´ë±¸");
-		area.add("¿ï»ê");
-		area.add("°æºÏ");
-		area.add("°æ³²");
-		area.add("ºÎ»ê");
-		area.add("Á¦ÁÖ");
+		area.add("ì„œìš¸");
+		area.add("ì¸ì²œ");
+		area.add("ê²½ê¸°");
+		area.add("ê°•ì›");
+		area.add("ëŒ€ì „");
+		area.add("ì¶©ë¶");
+		area.add("ì¶©ë‚¨");
+		area.add("ê´‘ì£¼");
+		area.add("ì „ë¶");
+		area.add("ì „ë‚¨");
+		area.add("ëŒ€êµ¬");
+		area.add("ìš¸ì‚°");
+		area.add("ê²½ë¶");
+		area.add("ê²½ë‚¨");
+		area.add("ë¶€ì‚°");
+		area.add("ì œì£¼");
 		
-		// ±Û¹øÈ£(m_seq)¿Í ÀÏÄ¡ÇÏ´Â ·¹ÄÚµå ¼±ÅÃ
+		// ê¸€ë²ˆí˜¸(m_seq)ì™€ ì¼ì¹˜í•˜ëŠ” ë ˆì½”ë“œ ì„ íƒ
 		MatchCommand matchCommand = matchService.selectMatch(m_seq);
 		model.addAttribute("match", matchCommand);
 		model.addAttribute("teamList", t_name);
@@ -291,35 +291,35 @@ public class MatchController {
 		return "matchUpdate";
 	}
 	
-	// ¸ÅÄ¡¼öÁ¤
+	// ë§¤ì¹˜ìˆ˜ì •
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.POST)
 	public String matchUpdateSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<¸ÅÄ¡¼öÁ¤ matchCommand>> : " + matchCommand);
+			log.debug("<<ë§¤ì¹˜ìˆ˜ì • matchCommand>> : " + matchCommand);
 		}
 		
 		if (result.hasErrors()) {
 			return "matchUpdate";
 		}
 		
-		// ¸ÅÄ¡¼öÁ¤
+		// ë§¤ì¹˜ìˆ˜ì •
 		matchService.updateMatch(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// Á¡¼öº¸±â
+	// ì ìˆ˜ë³´ê¸°
 	@RequestMapping("/match/scoreDetail.do")
 	public ModelAndView scoreDetailForm(@RequestParam("m_seq") int m_seq) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<Á¡¼öº¸±â m_seq>> : " + m_seq);
+			log.debug("<<ì ìˆ˜ë³´ê¸° m_seq>> : " + m_seq);
 		}
 		
-		// ±Û¹øÈ£(m_seq)¿Í ÀÏÄ¡ÇÏ´Â ·¹ÄÚµå ¼±ÅÃ
+		// ê¸€ë²ˆí˜¸(m_seq)ì™€ ì¼ì¹˜í•˜ëŠ” ë ˆì½”ë“œ ì„ íƒ
 		MatchCommand match = matchService.selectMatch(m_seq);
 		
-		// ÆÀ ÀÌ¸§ °¡Á®¿À±â
+		// íŒ€ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
 		TeamCommand t_name = matchService.getTeam(match.getT_name());
 		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
 		
@@ -332,17 +332,17 @@ public class MatchController {
 		return mav;
 	}
 	
-	// °á°úµî·ÏÆû
+	// ê²°ê³¼ë“±ë¡í¼
 	@RequestMapping(value="/match/scoreUpdate.do", method=RequestMethod.GET)
 	public String updateScoreForm(@RequestParam("m_seq") int m_seq, Model model) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<°á°úµî·ÏÆû m_seq>> : " + m_seq);
+			log.debug("<<ê²°ê³¼ë“±ë¡í¼ m_seq>> : " + m_seq);
 		}
 		
-		// ±Û¹øÈ£(m_seq)¿Í ÀÏÄ¡ÇÏ´Â ·¹ÄÚµå ¼±ÅÃ
+		// ê¸€ë²ˆí˜¸(m_seq)ì™€ ì¼ì¹˜í•˜ëŠ” ë ˆì½”ë“œ ì„ íƒ
 		MatchCommand matchCommand = matchService.selectMatch(m_seq);
 		
-		// MVP¸â¹ö ¼±ÅÃÀ» À§ÇÑ ÆÀ ¸â¹ö °¡Á®¿À±â
+		// MVPë©¤ë²„ ì„ íƒì„ ìœ„í•œ íŒ€ ë©¤ë²„ ê°€ì ¸ì˜¤ê¸°
 		List<String> mvpMember = matchService.getMvpMember(m_seq);
 		
 		model.addAttribute("match", matchCommand);
@@ -351,22 +351,22 @@ public class MatchController {
 		return "scoreUpdate";
 	}
 	
-	// °á°úµî·Ï
+	// ê²°ê³¼ë“±ë¡
 	@RequestMapping(value="/match/scoreUpdate.do", method=RequestMethod.POST)
 	public String updateScoreSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<°á°úµî·Ï matchCommand>> : " + matchCommand);
+			log.debug("<<ê²°ê³¼ë“±ë¡ matchCommand>> : " + matchCommand);
 		}
 		
-		// °á°úµî·Ï
+		// ê²°ê³¼ë“±ë¡
 		matchService.updateScore(matchCommand);
 		
-		// MVP ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+		// MVP ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 		String id = matchCommand.getM_mvp();
 		matchService.updateMemberPoint(id);
 		
-		// ÆÀ ÀüÀû Áõ°¡, Æ÷ÀÎÆ® Áõ°¡
+		// íŒ€ ì „ì  ì¦ê°€, í¬ì¸íŠ¸ ì¦ê°€
 		int home = matchCommand.getM_home();
 		int away = matchCommand.getM_away();
 		
@@ -379,7 +379,7 @@ public class MatchController {
 			matchService.updatePointWin(t_home);
 			matchService.updatePointLose(t_away);
 			
-			// º£ÆÃÇÑ È¸¿ø Æ÷ÀÎÆ® Áõ°¡
+			// ë² íŒ…í•œ íšŒì› í¬ì¸íŠ¸ ì¦ê°€
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("team", matchCommand.getT_name());
 			map.put("score", matchCommand.getM_home());
@@ -403,7 +403,7 @@ public class MatchController {
 			matchService.updatePointDraw(t_home);
 			matchService.updatePointDraw(t_away);
 			
-			// º£ÆÃÇÑ È¸¿ø Æ÷ÀÎÆ® Áõ°¡
+			// ë² íŒ…í•œ íšŒì› í¬ì¸íŠ¸ ì¦ê°€
 			matchService.totoDraw(matchCommand);
 			
 		} else if (home < away) {
@@ -412,7 +412,7 @@ public class MatchController {
 			matchService.updatePointWin(t_away);
 			matchService.updatePointLose(t_home);
 			
-			// º£ÆÃÇÑ È¸¿ø Æ÷ÀÎÆ® Áõ°¡
+			// ë² íŒ…í•œ íšŒì› í¬ì¸íŠ¸ ì¦ê°€
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("team", matchCommand.getM_challenger());
 			map.put("score", matchCommand.getM_away());
@@ -435,25 +435,25 @@ public class MatchController {
 		return "redirect:/match/scoreBoard.do";
 	}
 	
-	///////////////////////////////////½ÂºÎ¿¹Ãø///////////////////////////////////
-	// ½ÂºÎ¿¹Ãø
+	///////////////////////////////////ìŠ¹ë¶€ì˜ˆì¸¡///////////////////////////////////
+	// ìŠ¹ë¶€ì˜ˆì¸¡
 	@RequestMapping("/match/sportsToto.do")
-	public ModelAndView sportsTotoForm(@RequestParam(value="type", defaultValue="Ãà±¸") String type) {			
-		// Á¾¸ñ ¹Ş¾Æ¿À±â
+	public ModelAndView sportsTotoForm(@RequestParam(value="type", defaultValue="ì¶•êµ¬") String type) {			
+		// ì¢…ëª© ë°›ì•„ì˜¤ê¸°
 		String board = "toto";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 			
-		// Á¾¸ñº° °Ô½Ã±Û ¼ö Ä«¿îÆ®
+		// ì¢…ëª©ë³„ ê²Œì‹œê¸€ ìˆ˜ ì¹´ìš´íŠ¸
 		int count = matchService.getRowCount(map);
 			
 		if (log.isDebugEnabled()) {
-			log.debug("<<½ÂºÎ¿¹Ãø type>> : " + type);
-			log.debug("<<½ÂºÎ¿¹Ãø count>> : " + count);
+			log.debug("<<ìŠ¹ë¶€ì˜ˆì¸¡ type>> : " + type);
+			log.debug("<<ìŠ¹ë¶€ì˜ˆì¸¡ count>> : " + count);
 		}
 		
-		// ¸®½ºÆ®¿¡ ÀúÀå
+		// ë¦¬ìŠ¤íŠ¸ì— ì €ì¥
 		List<MatchCommand> list = null;
 		if (count > 0) {
 			map.put("type", type);		
@@ -469,26 +469,26 @@ public class MatchController {
 		return mav;
 	}
 	
-	// º£ÆÃÇÏ±â Æû
+	// ë² íŒ…í•˜ê¸° í¼
 	@RequestMapping(value="/match/totoDetail.do")
 	public ModelAndView totoDetailForm(@RequestParam("m_seq") int m_seq,
 										Model model, HttpSession session) {		
 		if (log.isDebugEnabled()) {
-			log.debug("<<º£ÆÃÇÏ±â Æû m_seq>> : " + m_seq);
+			log.debug("<<ë² íŒ…í•˜ê¸° í¼ m_seq>> : " + m_seq);
 		}
 			
-		// À¯Àú ÆÀÀÌ¸§ ¹Ş¾Æ¿À±â
+		// ìœ ì € íŒ€ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 		String id = (String) session.getAttribute("user_id");
 		List<String> myteam = matchService.getTeamList(id);
 			
-		// ±Û¹øÈ£(m_seq)¿Í ÀÏÄ¡ÇÏ´Â ·¹ÄÚµå ¼±ÅÃ
+		// ê¸€ë²ˆí˜¸(m_seq)ì™€ ì¼ì¹˜í•˜ëŠ” ë ˆì½”ë“œ ì„ íƒ
 		MatchCommand match = matchService.selectMatch(m_seq);
 		
-		// ÆÀ ÀÌ¸§ °¡Á®¿À±â
+		// íŒ€ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
 		TeamCommand t_name = matchService.getTeam(match.getT_name());
 		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
 		
-		// °æ±â¼ö ±¸ÇÏ±â
+		// ê²½ê¸°ìˆ˜ êµ¬í•˜ê¸°
 		int home = t_name.getT_win() + t_name.getT_lose() + t_name.getT_draw();
 		int away = m_challenger.getT_win() + m_challenger.getT_lose() + m_challenger.getT_draw();
 		
@@ -508,19 +508,19 @@ public class MatchController {
 		return mav;
 	}
 	
-	// º£ÆÃÇÏ±â
+	// ë² íŒ…í•˜ê¸°
 	@RequestMapping("/match/totoInsert.do")
 	public String insertTotoSubmit(@ModelAttribute("toto") @Valid TotoCommand totoCommand,
 								   BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-		log.debug("<<º£ÆÃÇÏ±â totoCommand>> : " + totoCommand);
+		log.debug("<<ë² íŒ…í•˜ê¸° totoCommand>> : " + totoCommand);
 		}
 		
 		if (result.hasErrors()) {
 		return "totoDetail";
 		}
 		
-		// DB¿¡ ÀúÀå
+		// DBì— ì €ì¥
 		
 		matchService.insertToto(totoCommand);
 		

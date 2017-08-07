@@ -38,51 +38,51 @@ public interface MatchMapper {
 	@Update("UPDATE g_match SET m_challenger=#{t_name} WHERE m_seq=#{m_seq}")
 	public void updateChallenger(MatchCommand match);
 	
-	// ÆÀ¿¡ µû¸¥ Á¾¸ñ ¹Ş¾Æ¿À±â
+	// íŒ€ì— ë”°ë¥¸ ì¢…ëª© ë°›ì•„ì˜¤ê¸°
 	@Select("SELECT * FROM g_team WHERE id IN(SELECT id FROM g_team_member WHERE id=#{id})")
 	public List<TeamCommand> getTeamType(String id);
 	
-	// ÆÀ win Áõ°¡
+	// íŒ€ win ì¦ê°€
 	@Update("UPDATE g_team SET t_win=t_win+1 WHERE t_name=#{t_name}")
 	public void updateTeamWin(String t_name);
-	// ÆÀ draw Áõ°¡
+	// íŒ€ draw ì¦ê°€
 	@Update("UPDATE g_team SET t_draw=t_draw+1 WHERE t_name=#{t_name}")
 	public void updateTeamDraw(String t_name);
-	// ÆÀ lose Áõ°¡
+	// íŒ€ lose ì¦ê°€
 	@Update("UPDATE g_team SET t_lose=t_lose+1 WHERE t_name=#{t_name}")
 	public void updateTeamLose(String t_name);
 	
-	// MVP¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// MVPë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+500 WHERE id=#{id}")
 	public void updateMemberPoint(String id);
-	// ÆÀ win ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// íŒ€ win ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+100 WHERE id IN(SELECT id FROM g_team_member WHERE t_name=#{t_name})")
 	public void updatePointWin(String t_name);
-	// ÆÀ draw ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// íŒ€ draw ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+50 WHERE id IN(SELECT id FROM g_team_member WHERE t_name=#{t_name})")
 	public void updatePointDraw(String t_name);
-	// ÆÀ lose ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// íŒ€ lose ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+10 WHERE id IN(SELECT id FROM g_team_member WHERE t_name=#{t_name})")
 	public void updatePointLose(String t_name);
 
-	// º£ÆÃÇÏ±â
+	// ë² íŒ…í•˜ê¸°
 	@Insert("INSERT INTO g_toto (t_seq,m_seq,id,t_point,t_winteam,t_score,t_rate) VALUES (g_toto_seq.nextval,#{m_seq},#{id},#{t_point},#{t_winteam},#{t_score},ROUND(#{t_rate},1))")
 	public void insertToto(TotoCommand toto);
 	
-	// º£ÆÃÇÑ ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
-	// ÀÌ±äÆÀ¸¸ ¸â¹ö ¸â¹öID 
+	// ë² íŒ…í•œ ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
+	// ì´ê¸´íŒ€ë§Œ ë©¤ë²„ ë©¤ë²„ID 
 	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score!=#{score}")
 	public ArrayList<String> totoTeamList(Map<String, Object> map);
-	// ÀÌ±äÆÀ°ú Á¡¼ö¸¦ ¸ÂÃá ¸â¹öID
+	// ì´ê¸´íŒ€ê³¼ ì ìˆ˜ë¥¼ ë§ì¶˜ ë©¤ë²„ID
 	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score=#{score}")
 	public ArrayList<String> totoAllList(Map<String, Object> map);
-	// ÀÌ±äÆÀ¸¸ ¸ÂÃá ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// ì´ê¸´íŒ€ë§Œ ë§ì¶˜ ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+111 WHERE id=#{allList}")
 	public void upPointTeam(String allList);
-	// ÀÌ±äÆÀ°ú Á¡¼ö¸¦ ¸ÂÃá ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// ì´ê¸´íŒ€ê³¼ ì ìˆ˜ë¥¼ ë§ì¶˜ ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+999 WHERE id=#{allList}")
 	public void upPointAll(String allList);
-	// ºñ±ä °æ¿ì º£ÆÃÇÑ ¸â¹ö Æ÷ÀÎÆ® Áõ°¡
+	// ë¹„ê¸´ ê²½ìš° ë² íŒ…í•œ ë©¤ë²„ í¬ì¸íŠ¸ ì¦ê°€
 	@Update("UPDATE g_member SET point=point+100 WHERE id IN(SELECT id FROM g_toto WHERE t_winteam=#{t_name} OR t_winteam=#{m_challenger} AND m_seq=#{m_seq})")
 	public void totoDraw(MatchCommand matchCommand);
 	

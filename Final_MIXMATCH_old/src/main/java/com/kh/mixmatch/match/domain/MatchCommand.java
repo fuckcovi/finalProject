@@ -24,7 +24,7 @@ public class MatchCommand {
 	private String m_league;
 	
 	
-	// ¡∂¿Œ
+	// Ï°∞Ïù∏
 	private String home_team;
 	private String away_team;
 	private MultipartFile t_logo_upload;
