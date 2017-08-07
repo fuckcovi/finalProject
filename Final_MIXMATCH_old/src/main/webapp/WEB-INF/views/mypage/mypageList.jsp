@@ -78,10 +78,16 @@ textarea {
 				<p class="p_size">공격P : ${football.f_attack}</p>
 			</div>
 			<div class="tab-pane fade" id="tab5">
-				<p class="p_center">야구</p>
+				<p class="p_size">소속팀명 : ${baseball.t_name}</p>
+				<p class="p_size">소속팀명 : ${baseball.b_avg}</p>
+				<p class="p_size">소속팀명 : ${baseball.b_era}</p>
 			</div>
 			<div class="tab-pane fade" id="tab6">
-				<p class="p_center">농구</p>
+				<p class="p_size">소속팀명 : ${basketball.t_name}</p>
+				<p class="p_size">득점 : ${basketball.b_score}</p>
+				<p class="p_size">3점슛 : ${basketball.b_3point}</p>
+				<p class="p_size">어시스트 : ${basketball.b_assist}</p>
+				<p class="p_size">리바운드 : ${basketball.b_rebound}</p>
 			</div>
 		</div>
 	</div>

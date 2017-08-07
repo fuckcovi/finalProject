@@ -21,11 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mixmatch.member.domain.MemberCommand;
 import com.kh.mixmatch.member.service.MemberService;
-import com.kh.mixmatch.mypage.domain.FootballCommand;
 import com.kh.mixmatch.mypage.domain.MypageCommand;
 import com.kh.mixmatch.mypage.domain.MypageCommand2;
 import com.kh.mixmatch.mypage.domain.MypageReplyCommand;
 import com.kh.mixmatch.mypage.service.MypageService;
+import com.kh.mixmatch.team.domain.BaseCommand;
+import com.kh.mixmatch.team.domain.BasketCommand;
+import com.kh.mixmatch.team.domain.FootCommand;
 import com.kh.mixmatch.util.PagingUtil;
 
 
@@ -52,9 +54,12 @@ public class MypageController {
 			
 		}
 		
-		MemberCommand member = memberService.selectMember(user_id);		//유저정보
-		FootballCommand football = mypageService.selectFootball(user_id);	//축구기록
+		MemberCommand member = memberService.selectMember(user_id);			//유저정보
+		FootCommand football = mypageService.selectFootball(user_id);		//축구기록
+		BasketCommand basketball = mypageService.selectBasketball(user_id);	//농구기록
+		BaseCommand baseball = mypageService.selectBaseball(user_id);		//야구기록
 
+		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("user_id", user_id);
 		
@@ -82,6 +87,8 @@ public class MypageController {
 		mav.setViewName("mypageList");
 		mav.addObject("member",member);
 		mav.addObject("football",football);
+		mav.addObject("basketball",basketball);
+		mav.addObject("baseball",baseball);
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("pagingHtml",page.getPagingHtml());
@@ -148,6 +155,31 @@ public class MypageController {
 		return map;
 	}
 	
+	//미니홈피 글삭제
+	@RequestMapping(value="/mypage/delete.do")
+	@ResponseBody
+	public Map<String,String> process(@RequestParam("h_seq")int h_seq, @RequestParam("id")String id, HttpSession session){
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		if (log.isDebugEnabled()) {
+			log.debug("<<h_seq>> : " + h_seq);
+			log.debug("<<id>> : " + id);
+		}
+		
+		String user_id = (String) session.getAttribute("user_id");
+		if (user_id == null) {
+			//로그인이 되어 있지 않음
+			map.put("result", "logout");
+		}else if (user_id != null && user_id.equals(id)) {
+			//로그인 되어 있고 로그인한 아이디와 작성자 아이디 일치
+			mypageService.delete(h_seq);
+			map.put("result", "success");
+		}else{
+			map.put("result", "wrongAccess");
+		}
+		return map;
+	}
 	
 	//프로필 이미지 출력
 	@RequestMapping("mypage/imageView.do")
@@ -241,11 +273,6 @@ public class MypageController {
 		
 		Map<String,String> map = new HashMap<String, String>();
 		
-		if (log.isDebugEnabled()) {
-			log.debug("<<--------mypageReplyCommand------->> : " + mypageReplyCommand);
-		}
-		
-		
 		String user_id = (String) session.getAttribute("user_id");
 		if (user_id == null) {
 			//로그인 되어있지 않은 상태
@@ -256,10 +283,86 @@ public class MypageController {
 			map.put("result", "success");
 		}
 		
+		return map;
+	}
+	
+	//미니홈피 댓글 수정
+	@RequestMapping("mypage/updateReply.do")
+	@ResponseBody
+	public Map<String,String> process1(MypageReplyCommand mypageReplyCommand, HttpSession session){
+		
 		if (log.isDebugEnabled()) {
-			log.debug("<<map>> : " + mypageReplyCommand);
+			log.debug("<<mypageReplyCommand>> : " + mypageReplyCommand);
+		}
+		
+		System.out.println(mypageReplyCommand);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		String user_id = (String)session.getAttribute("user_id");
+		
+		if (user_id == null) {
+			//로그인이 안 되어있는 경우
+			map.put("result", "logout");
+		}else if(user_id != null && user_id.equals(mypageReplyCommand.getId())){
+			//로그인 아이디와 작성자 아이디 일치
+			//댓글 수정
+			mypageService.updateReply(mypageReplyCommand);
+			map.put("result", "success");
+		}else{
+			//로그인 아이디와 작성자 아이디 불일치
+			map.put("result", "wrongAccess");
 		}
 		
 		return map;
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	//미니홈피 댓글 삭제
+	@RequestMapping("mypage/deleteReply.do")
+	@ResponseBody
+	public Map<String,String> process2(@RequestParam("h_re_seq")int h_re_seq, @RequestParam("id")String id, HttpSession session){
+		if (log.isDebugEnabled()) {
+			log.debug("<<h_re_seq>> : " + h_re_seq);
+			log.debug("<<id>> : " + id);
+		}
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		String user_id = (String) session.getAttribute("user_id");
+		if (user_id == null) {
+			//로그인이 되어 있지 않음
+			map.put("result", "logout");
+		}else if (user_id != null && user_id.equals(id)) {
+			//로그인이 되어 있고 로그인한 아이디와 작성자 아이디 일치
+			mypageService.deleteReply(h_re_seq);
+			map.put("result", "success");
+		}else{
+			map.put("result", "wrongAccess");
+		}
+		
+		return map;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -162,11 +162,12 @@ $(document).ready(function(){
 						$(list).each(function(index,item){
 							
 							var output = '';
-							output += '<div class="reply-list" id="'+item.h_seq+'">';
-							output += ' <table>';
+							output += '<div id="reply'+item.h_re_seq+'">';
+							output += '<div class="reply-list" id="'+item.h_re_seq+'">';
+							output += ' <table id="tbl">';
 							output += '   <tr>';
 							output += ' 	<td>'+item.id+'</td>';
-							output += '     <td>'+item.h_re_content+'</td>'; 	  		
+							output += '     <td id="re_content">'+item.h_re_content+'</td>'; 	  		
 							output += '   </tr>'; 	
 							output += '   <tr>'; 
 							output += '   	<td>'+item.h_re_regdate+'</td>'; 
@@ -175,8 +176,8 @@ $(document).ready(function(){
 							
 							if($('#user_id').val() && $('#user_id').val() == item.id){
 								//로그인한 id가 글 작성자 id와 같은 경우
-								output += '	<input type="button" value="수정" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-modify"'+item.h_seq+'">';
-								output += '	<input type="button" value="삭제" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-delete"'+item.h_seq+'">';
+								output += '	<input type="button" value="수정" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-modify">';
+								output += '	<input type="button" value="삭제" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-delete">';
 							}else{
 								//로그인하지 않았거나 작성자 id와 다른 경우
 								output += '	<input type="button" value="수정" disabled="disabled">';
@@ -185,6 +186,7 @@ $(document).ready(function(){
 							
 							output += '   	</td>';
 							output += '   </tr>'; 
+							output += '   </div>'; 
 							output += '			</div>';
 							
 							
@@ -202,9 +204,9 @@ $(document).ready(function(){
 						});
 					}
 				},
-				/*error:function(){
-					alert('목록 호출시 네트워크 오류222');
-				}*/
+				error:function(){
+					alert('목록 호출시 네트워크 오류');
+				}
 			});	
 
 		}
@@ -219,7 +221,7 @@ $(document).ready(function(){
 		//댓글 등록
 		$('#re_form'+h_seq).submit(function(event){
 			
-			if ($('#h_re_content2'+h_seq).val()=='') {
+			if ($('#h_re_content'+h_seq).val()=='') {
 				alert('내용을 입력하세요');
 				$('#h_re_content'+h_seq).focus();
 				return false;
@@ -284,18 +286,137 @@ $(document).ready(function(){
 			}
 		});
 		
-		//댓글 수정 버튼 클릭시 수정폼 노출
-		$(document).on('click','.reply-modify',function(){
-			//댓글 번호
-			var reply_num = $(this).attr('reply-modify')
-			//작성자 아이디
-			var id = $(this).attr('data-replyId')
-		
-		});
 		
 		
 		
 	});
 	
-
+	//댓글 수정 버튼 클릭시 수정폼 노출
+	$(document).on('click','.reply-modify',function(){
+		//댓글 번호
+		var reply_num = $(this).attr('data-replyNum')
+		//작성자 아이디
+		var id = $(this).attr('data-replyId');
+		//댓글 내용
+		var reply_content = $('#'+reply_num+' #re_content').text();
+		
+		
+		//댓글 수정폼 UI
+		var modifyUI = 	'<form id="mre_form">';
+			modifyUI +=	' <input type="hidden" name="h_re_seq" id="reply_num" value="'+reply_num+'">';
+			modifyUI +=	' <input type="hidden" name="id" id="muser_id" value="'+id+'">';
+			modifyUI += ' <input type="text" name="h_re_content" id="mh_re_content" value="'+reply_content+'">';
+			modifyUI += ' <div id="mre_second" class="align-right">';
+			modifyUI += ' 	<input type="submit" value="수정">';
+			modifyUI += ' 	<input type="button" value="취소" class="re-reset">';
+			modifyUI += ' </div>';
+			modifyUI += '</form>';
+	
+		//이전에 이미 수정하는 댓글이 있을 경우 수정버튼을 클릭하면 숨김 sub-item을 환원시키고 수정폼을 초기화함
+		initModifyForm();
+		
+		//지금 클릭해서 수정하고자 하는 데이터는 감추기
+		$('#'+reply_num).hide();
+		
+		//수정폼을 수정하고자하는 데이터가 있는 div에 노출
+		$('#reply'+reply_num).append(modifyUI);	
+		
+			
+	});
+	
+	//수정폼에서 취소 버튼 클릭시 수정폼 초기화
+	$(document).on('click','.re-reset',function(){
+		initModifyForm();
+	});
+	
+	//댓글 수정 폼 초기화
+	function initModifyForm(){
+		$('.reply-list').show();
+		$('#mre_form').remove();
+	}
+	
+	//댓글 수정
+	$(document).on('submit','#mre_form',function(event){
+		if ($('#mh_re_content').val() == '') {
+			alert('내용을 입력하세요');
+			$('#mh_re_content').focus();
+			return false;
+		}
+		
+		var replyNum = $("#reply_num").val();
+		
+		
+		//폼에 입력한 데이터 반환
+		var data = $(this).serialize();
+		
+		//수정
+		$.ajax({
+			type:'post',
+			data:data,
+			url:'updateReply.do',
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if (data.result == 'logout') {
+					alert('로그인해야 수정할 수 있습니다.');
+				}else if (data.result == 'success') {
+					//변경한 데이터로 UI 갱신
+					$('#'+replyNum+' #tbl tr td:eq(1)').text($('#mh_re_content').val());
+					
+					//수정폼 초기화
+					initModifyForm();
+				}else if(data.result == 'wrongAccess'){
+					alert('타인의 글은 수정할 수 없습니다.');
+				}else{
+					alert('수정시 오류 발생');
+				}
+			},
+			error:function(){q
+				alert('수정시 네트워크 오류');
+			}
+		});
+		
+		//기본 이벤트 제거
+		event.preventDefault();
+		
+	});
+	
+	
+	
+	
+	
+	
+	//댓글삭제
+	$(document).on('click','.reply-delete',function(){
+		//댓글번호
+		var re_delete_num = $(this).attr('data-replyNum');
+		//작성자  아이디
+		var id = $(this).attr('data-replyId');
+		
+		
+		$.ajax({
+			type:'post',
+			data:{h_re_seq:re_delete_num,id:id},
+			url:'deleteReply.do',
+			dataType:'json',
+			cache:false,
+			timeoup:30000,
+			success:function(data){
+				if(data.resul == 'logout'){
+					alert('로그인해야 삭제할 수 있습니다.');
+				}else if(data.result == 'success'){
+					alert('삭제완료');
+					location.reload();
+				}else if (data.result == 'wrongAccess') {
+					alert('타인의 글은 삭제할 수 없습니다.')
+				}else{
+					alert('삭제시 오류 발생');
+				}
+			},
+			error:function(){
+				alert('삭제시 네트워크 오류');
+			}
+		});
+	});
 });
