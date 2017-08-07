@@ -46,11 +46,9 @@ public interface TeamMemMapper {
 	@Select("SELECT * FROM g_member g,(SELECT t.*, tm.id master FROM g_team tm, (SELECT * FROM g_team_member WHERE t_name=#{t_name})t  WHERE t.t_name=tm.t_name)tt WHERE g.id=tt.id")
 	public List<TeamMemCommand> listTeamMem(Map<String, Object> map);	// 이 팀 소속 회원,팀정보
 	
-	@Select("SELECT * FROM g_member m, (SELECT id,sum(f_goal) AS f_goal,sum(f_assist) f_assist,sum(f_shoot) f_shoot,sum(f_attack) f_attack FROM (SELECT * FROM g_football WHERE t_name=#{t_name}) GROUP BY ROLLUP(id))r WHERE m.id=r.id")
+	//  팀소속 랭킹
 	public List<FootCommand> listTMemFoot(Map<String, Object> map);	// 정식팀원의 축구기록
-	@Select("SELECT * FROM g_member m, (SELECT id,sum(b_bat) b_bat,sum(b_hit) b_hit,sum(b_rbi) b_rbi,sum(b_score) b_score, sum(b_win) b_win, sum(b_lose) b_lose, sum(b_strike) b_strike, sum(b_ip) b_ip, sum(b_er) b_er  FROM (SELECT * FROM g_baseball WHERE t_name=#{t_name}) GROUP BY ROLLUP(id))r WHERE m.id=r.id")
 	public List<BaseCommand> listTMemBase(Map<String, Object> map);	// 정식팀원의 야구기록
-	@Select("SELECT * FROM g_member m , (SELECT id,sum(b_3point) AS b_3point,sum(b_assist) b_assist,sum(b_steel) b_steel,sum(b_score) b_score,sum(b_block) b_block,sum(b_rebound) b_rebound FROM (SELECT * FROM g_basketball WHERE t_name=#{t_name}) GROUP BY ROLLUP(id))r WHERE m.id=r.id")
 	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// 정식팀원의 농구기록
 	
 	// 매치mapper

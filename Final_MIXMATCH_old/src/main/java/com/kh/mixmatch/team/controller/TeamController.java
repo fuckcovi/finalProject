@@ -309,7 +309,7 @@ public class TeamController {
 	
 //============== 评 珐欧 =============================
 	@RequestMapping("/teamRank.do")
-	public ModelAndView teamRank(@RequestParam String t_name){
+	public ModelAndView teamRank(@RequestParam String t_name,@RequestParam(defaultValue="f_shoot") String forder,@RequestParam(defaultValue="b_hit") String border,@RequestParam(defaultValue="b_score") String bkorder){
 
 		
 		TeamCommand team = teamService.selectTeam(t_name);
@@ -324,15 +324,15 @@ public class TeamController {
 		List<BasketCommand> listTMemBasket = null;
 		int teamMemCount = teamMemService.getRowTeamMemCount(t_name);
 		if(teamMemCount>0 && team.getT_type().equals("绵备")){
+			map.put("forder",forder);
 			listTMemFoot = teamMemService.listTMemFoot(map);
 		}else if(teamMemCount>0 && team.getT_type().equals("具备")){
+			map.put("border",border);
 			listTMemBase = teamMemService.listTMemBase(map);
 		}else if(teamMemCount>0 && team.getT_type().equals("丑备")){
+			map.put("bkorder",bkorder);
 			listTMemBasket = teamMemService.listTMemBasket(map);
 		}
-		System.out.println(team.getT_type());
-		System.out.println(teamMemCount);
-		System.out.println(listTMemBasket);
 		mav.addObject("teamMemCount", teamMemCount);
 		mav.addObject("listTMemFoot",listTMemFoot);
 		mav.addObject("listTMemBase",listTMemBase);
