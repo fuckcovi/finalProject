@@ -35,11 +35,28 @@ $(document).ready(function(){
 	}); 
 	
 	
+	$(".scheduleList tr").show();
+	$(".tablenull").hide();
+	if(!$(".xplan tr").hasClass("plan")){
+		$(".xplan .tablenull").show();
+	}if(!$(".cplan tr").hasClass("plan")){
+		$(".cplan .tablenull").show();
+	}if(!$(".fplan tr").hasClass("plan")){
+		$(".fplan .tablenull").show();
+	}
+	
 	// 팀 선택에 따라 일정결과 목록 보여주기
 	$("#teamScheduleList li").click(function(){
 		if($(this).attr("value")=="allList"){
 			$(".scheduleList tr").show();
 			$(".tablenull").hide();
+			if(!$(".xplan tr").hasClass("plan")){
+				$(".xplan .tablenull").show();
+			}if(!$(".cplan tr").hasClass("plan")){
+				$(".cplan .tablenull").show();
+			}if(!$(".fplan tr").hasClass("plan")){
+				$(".fplan .tablenull").show();
+			}
 			alert("전체보기");
 		}else{
 			$(".scheduleList tr").hide();

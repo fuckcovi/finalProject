@@ -37,7 +37,7 @@
 			<c:forEach var="teamlist" items="${list}">
 				<c:forEach var="matchlist" items="${matchList}" >
 					<c:if test="${matchlist.m_challenger==null && ( matchlist.t_name == teamlist.t_name )}">
-						<tr class="${matchlist.t_name}">
+						<tr class="${matchlist.t_name} plan">
 							<td>${matchlist.m_date}</td>
 							<td>${matchlist.m_place}</td>
 							<td>${matchlist.m_time}</td>
@@ -64,7 +64,7 @@
 			<c:forEach var="teamlist" items="${list}">
 				<c:forEach var="matchlist" items="${matchList}">
 					<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-					<tr class="${matchlist.t_name} ${matchlist.m_challenger}">
+					<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
 						<td>${matchlist.m_date}</td>
 						<td>${matchlist.m_place}</td>
 						<td>${matchlist.m_time}</td>
@@ -90,7 +90,7 @@
 			<c:forEach var="teamlist" items="${list}">
 				<c:forEach var="matchlist" items="${matchList}">
 					<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-					<tr class="${matchlist.t_name} ${matchlist.m_challenger}">
+					<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
 						<td>${matchlist.m_date}</td>
 						<td><a href="teamRecord.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
 						<td>${matchlist.m_mvp}</td>
