@@ -16,6 +16,20 @@ div#main_header{
 	background-color:black;
 	color:white;
 }
+div#main_side{
+	float:left;
+	width:15%;
+	height:400px;
+	border:1px solid red;
+}
+#sideMenu div{
+	height:100px;
+}
+#sideMenu ul{
+	margin:0 auto;
+	padding:0 0 0 0;
+	list-style: none;
+}
 /* div#main_menu{
 	float:left;
 	width:17%;
@@ -23,7 +37,7 @@ div#main_header{
 } */
 div#main_body{
 	float:left;
-	width:100%;
+	width:84%;
 	height:905px;
 	border: 1px solid;
 }
