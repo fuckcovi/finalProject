@@ -5,7 +5,9 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -96,6 +98,16 @@
 	<!-- 메인 페이지 설정 -->
 	<mvc:view-controller path="/main.do" view-name="main"/>
 	
+	
+	<!-- 웹소켓  -->
+	<!--  /echo.do  요청시 echo.jsp호출 설정  -->
+	<mvc:view-controller path="/chat.do" view-name="chat"/>
+	
+	<!-- echo.jsp에서 echoHandler이벤트 호출하게 연결 -->
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>
+	</websocket:handlers>
+	<beans:bean id="chatHandler" class="com.kh.mixmatch.chat.chatHandler"/>
 	
 	<!--  로그인 여부 체크 인터셉터 -->
 	<mvc:interceptors> 

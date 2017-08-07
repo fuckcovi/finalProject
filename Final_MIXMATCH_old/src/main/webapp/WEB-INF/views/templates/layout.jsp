@@ -17,6 +17,9 @@
 		<div id="main_body">
 			<tiles:insertAttribute name="body"/>
 		</div>
+		<div id="main_side">
+			<tiles:insertAttribute name="side"/>
+		</div>
 		<div id="main_footer">
 			<tiles:insertAttribute name="footer"/>
 		</div>
