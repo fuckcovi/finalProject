@@ -45,8 +45,12 @@ public interface MatchService {
 	
 	public ArrayList<String> totoTeamList(Map<String, Object> map);
 	public ArrayList<String> totoAllList(Map<String, Object> map);
-	public void upPointTeam(String allList);
-	public void upPointAll(String allList);
+	public void upPointTeam(Map<String, Object> teamMap);
+	public void upPointAll(Map<String, Object> allMap);
 	public void totoDraw(MatchCommand matchCommand);
+	
+	public ArrayList<Integer> totoTeamPoint(Map<String, Object> map);
+	public ArrayList<Integer> totoAllPoint(Map<String, Object> map);
+	public double totoRate(String team);
 	
 }

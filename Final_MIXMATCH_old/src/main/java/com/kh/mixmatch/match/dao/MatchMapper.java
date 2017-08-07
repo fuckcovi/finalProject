@@ -70,20 +70,30 @@ public interface MatchMapper {
 	public void insertToto(TotoCommand toto);
 	
 	// 베팅한 멤버 포인트 증가
-	// 이긴팀만 멤버 멤버ID 
+	// 이긴팀만 맞춘 멤버ID 
 	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score!=#{score}")
 	public ArrayList<String> totoTeamList(Map<String, Object> map);
 	// 이긴팀과 점수를 맞춘 멤버ID
 	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score=#{score}")
 	public ArrayList<String> totoAllList(Map<String, Object> map);
 	// 이긴팀만 맞춘 멤버 포인트 증가
-	@Update("UPDATE g_member SET point=point+111 WHERE id=#{allList}")
-	public void upPointTeam(String allList);
+	@Update("UPDATE g_member SET point=point+#{point} WHERE id=#{teamList}")
+	public void upPointTeam(Map<String, Object> teamMap);
 	// 이긴팀과 점수를 맞춘 멤버 포인트 증가
-	@Update("UPDATE g_member SET point=point+999 WHERE id=#{allList}")
-	public void upPointAll(String allList);
+	@Update("UPDATE g_member SET point=point+#{point} WHERE id=#{allList,}")
+	public void upPointAll(Map<String, Object> allMap);
 	// 비긴 경우 베팅한 멤버 포인트 증가
 	@Update("UPDATE g_member SET point=point+100 WHERE id IN(SELECT id FROM g_toto WHERE t_winteam=#{t_name} OR t_winteam=#{m_challenger} AND m_seq=#{m_seq})")
 	public void totoDraw(MatchCommand matchCommand);
+	
+	// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
+	@Select("SELECT t_point FROM g_toto WHERE t_winteam=#{team} and t_score!=#{score}")
+	public ArrayList<Integer> totoTeamPoint(Map<String, Object> map);
+	// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
+	@Select("SELECT t_point FROM g_toto WHERE t_winteam=#{team} and t_score=#{score}")
+	public ArrayList<Integer> totoAllPoint(Map<String, Object> map);
+	// 배당률 가져오기
+	@Select("SELECT DISTINCT t_rate FROM g_toto WHERE t_winteam=#{team}")
+	public double totoRate(String team);
 	
 }

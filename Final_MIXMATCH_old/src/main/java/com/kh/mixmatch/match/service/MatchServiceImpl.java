@@ -130,18 +130,33 @@ public class MatchServiceImpl implements MatchService {
 	}
 	
 	@Override
-	public void upPointTeam(String allList) {
-		matchMapper.upPointTeam(allList);
+	public void upPointTeam(Map<String, Object> teamMap) {
+		matchMapper.upPointTeam(teamMap);
 	}
 	
 	@Override
-	public void upPointAll(String allList) {
-		matchMapper.upPointAll(allList);
+	public void upPointAll(Map<String, Object> allMap) {
+		matchMapper.upPointAll(allMap);
 	}
 	
 	@Override
 	public void totoDraw(MatchCommand matchCommand) {
 		matchMapper.totoDraw(matchCommand);		
+	}
+	
+	@Override
+	public ArrayList<Integer> totoTeamPoint(Map<String, Object> map) {
+		return matchMapper.totoTeamPoint(map);
+	}
+	
+	@Override
+	public ArrayList<Integer> totoAllPoint(Map<String, Object> map) {
+		return matchMapper.totoAllPoint(map);
+	}
+
+	@Override
+	public double totoRate(String team) {
+		return matchMapper.totoRate(team);
 	}
 
 }

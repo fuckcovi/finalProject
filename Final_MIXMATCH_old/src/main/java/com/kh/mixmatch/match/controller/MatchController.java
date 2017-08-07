@@ -378,6 +378,7 @@ public class MatchController {
 			matchService.updateTeamLose(t_away);
 			matchService.updatePointWin(t_home);
 			matchService.updatePointLose(t_away);
+			System.out.println("팀원 포인트 증가 완료");
 			
 			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -385,18 +386,44 @@ public class MatchController {
 			map.put("score", matchCommand.getM_home());
 			ArrayList<String> teamList = matchService.totoTeamList(map);
 			ArrayList<String> allList = matchService.totoAllList(map);
-			
+			System.out.println("teamList" + teamList);
+			System.out.println("allList" + allList);
+						
+			// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
+			ArrayList<Integer> teamPoint = matchService.totoTeamPoint(map);
+			System.out.println("teamPoint" + teamPoint);
+			// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
+			ArrayList<Integer> allPoint = matchService.totoAllPoint(map);
+			System.out.println("allPoint" + allPoint);
+			// 배당률 가져오기
+			double t_rate = matchService.totoRate(matchCommand.getT_name());
+			System.out.println("t_rate=" + t_rate);
+					
 			if (teamList != null) {
 				for (int i = 0; i < teamList.size(); i++) {
-					matchService.upPointTeam(teamList.get(i));
-				}	
+					int point = (int) (teamPoint.get(i) * t_rate);
+					Map<String, Object> teamMap = new HashMap<String, Object>();
+					teamMap.put("point", point);
+					System.out.println("teamPoint.get("+i+")="+point);
+					teamMap.put("teamList", teamList.get(i));
+					System.out.println("teamList.get("+i+")="+teamList.get(i));
+					matchService.upPointTeam(teamMap);
+					System.out.println("teamList 베팅 포인트 증가 완료");
+				}
 			}
-			
+						
 			if (allList != null) {
 				for (int i = 0; i < allList.size(); i++) {
-					matchService.upPointAll(allList.get(i));
+					int point = (int) (allPoint.get(i) * t_rate * 2);
+					Map<String, Object> allMap = new HashMap<String, Object>();
+					allMap.put("point", point);
+					System.out.println("allPoint.get("+i+")="+point);
+					allMap.put("teamList", allList.get(i));
+					System.out.println("allList.get("+i+")="+allList.get(i));
+					matchService.upPointTeam(allMap);
+					System.out.println("allList 베팅 포인트 증가 완료");
 				}	
-			}			
+			}		
 		} else if (home == away) {
 			matchService.updateTeamDraw(matchCommand.getT_name());
 			matchService.updateTeamDraw(matchCommand.getM_challenger());
@@ -411,6 +438,7 @@ public class MatchController {
 			matchService.updateTeamWin(matchCommand.getM_challenger());
 			matchService.updatePointWin(t_away);
 			matchService.updatePointLose(t_home);
+			System.out.println("팀원 포인트 증가 완료");
 			
 			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -418,16 +446,42 @@ public class MatchController {
 			map.put("score", matchCommand.getM_away());
 			ArrayList<String> teamList = matchService.totoTeamList(map);
 			ArrayList<String> allList = matchService.totoAllList(map);
+			System.out.println("teamList" + teamList);
+			System.out.println("allList" + allList);
+			
+			// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
+			ArrayList<Integer> teamPoint = matchService.totoTeamPoint(map);
+			System.out.println("teamPoint" + teamPoint);
+			// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
+			ArrayList<Integer> allPoint = matchService.totoAllPoint(map);
+			System.out.println("allPoint" + allPoint);
+			// 배당률 가져오기
+			double t_rate = matchService.totoRate(matchCommand.getM_challenger());
+			System.out.println("t_rate=" + t_rate);
 			
 			if (teamList != null) {
 				for (int i = 0; i < teamList.size(); i++) {
-					matchService.upPointTeam(teamList.get(i));
-				}	
+					int point = (int) (teamPoint.get(i) * t_rate);
+					Map<String, Object> teamMap = new HashMap<String, Object>();
+					teamMap.put("point", point);
+					System.out.println("teamPoint.get("+i+")="+point);
+					teamMap.put("teamList", teamList.get(i));
+					System.out.println("teamList.get("+i+")="+teamList.get(i));
+					matchService.upPointTeam(teamMap);
+					System.out.println("teamList 베팅 포인트 증가 완료");
+				}
 			}
 			
 			if (allList != null) {
 				for (int i = 0; i < allList.size(); i++) {
-					matchService.upPointAll(allList.get(i));
+					int point = (int) (allPoint.get(i) * t_rate * 2);
+					Map<String, Object> allMap = new HashMap<String, Object>();
+					allMap.put("point", point);
+					System.out.println("allPoint.get("+i+")="+point);
+					allMap.put("teamList", allList.get(i));
+					System.out.println("allList.get("+i+")="+allList.get(i));
+					matchService.upPointTeam(allMap);
+					System.out.println("allList 베팅 포인트 증가 완료");
 				}	
 			}			
 		}
