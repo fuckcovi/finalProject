@@ -3,7 +3,16 @@ $(document).ready(function(){
 	var count;				//게시글 총갯수
 	var rowCount;			//한 페이지에 보여질 행(레코드) 수
 
-
+	//글 등록
+	$(document).on('submit','#mypageCommand',function(event){
+		if ($('#h_content').val() == '') {
+			alert('내용을 입력하세요');
+			$('#h_content').focus();
+			return false;
+		}
+	});
+	
+	
 	/*mypageList.jsp에서의 부모글번호(h_seq)는 반복문으로 처리되기때문에 자바스크립에서도 반복문으로 받아야해.
 	반복문으로 받지않으면 제일 마지막 부모글번호(h_seq)만 넘어와.*/
 	
@@ -180,8 +189,7 @@ $(document).ready(function(){
 								output += '	<input type="button" value="삭제" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-delete">';
 							}else{
 								//로그인하지 않았거나 작성자 id와 다른 경우
-								output += '	<input type="button" value="수정" disabled="disabled">';
-								output += '	<input type="button" value="삭제" disabled="disabled">';
+								
 							}
 							
 							output += '   	</td>';

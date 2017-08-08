@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.kh.mixmatch.member.domain.MemberCommand;
 import com.kh.mixmatch.member.service.MemberService;
 import com.kh.mixmatch.mypage.domain.MypageCommand;
@@ -28,6 +27,7 @@ import com.kh.mixmatch.mypage.service.MypageService;
 import com.kh.mixmatch.team.domain.BaseCommand;
 import com.kh.mixmatch.team.domain.BasketCommand;
 import com.kh.mixmatch.team.domain.FootCommand;
+import com.kh.mixmatch.util.MypagePagingUtil;
 import com.kh.mixmatch.util.PagingUtil;
 
 
@@ -43,48 +43,42 @@ public class MypageController {
 	@Resource
 	private MemberService memberService;
 	
-
+	
 	//MyPage 메인(로그인 되어있는 유저ID넘겨줘)
 	@RequestMapping(value="/mypage/main.do",method=RequestMethod.GET)
-	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1")int currentPage, HttpSession session){	//濡쒓렇�씤 �릺�뼱�엳�뒗 �쑀��ID
+	public ModelAndView process(@RequestParam(value="pageNum", defaultValue="1")int currentPage, HttpSession session, @RequestParam(value="id", required=false)String id){	
 		
 		String user_id = (String) session.getAttribute("user_id");
 		
-		if (user_id == null) {
-			
-		}
-		
-		MemberCommand member = memberService.selectMember(user_id);			//유저정보
-		FootCommand football = mypageService.selectFootball(user_id);		//축구기록
-		BasketCommand basketball = mypageService.selectBasketball(user_id);	//농구기록
-		BaseCommand baseball = mypageService.selectBaseball(user_id);		//야구기록
+		MemberCommand member = memberService.selectMember(id);			//유저정보
+		FootCommand football = mypageService.selectFootball(id);		//축구기록
+		BasketCommand basketball = mypageService.selectBasketball(id);	//농구기록
+		BaseCommand baseball = mypageService.selectBaseball(id);		//야구기록
 
 		
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("user_id", user_id);
+		map.put("id", id);
 		
 		//총 글의 갯수
 		int count = mypageService.getRowCount(map);
-		
-		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "main.do");
+				
+		MypagePagingUtil page = new MypagePagingUtil(currentPage, count, rowCount, pageCount, "main.do?id="+id);
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-		map.put("user_id", user_id);	
-		
-		
 	
 		List<MypageCommand> list = null;
 		if (count > 0) {
 			list = mypageService.list(map);
 		}
+			
 		
 		MypageCommand mypageCommand = new MypageCommand();
-		mypageCommand.setId(user_id);
-		
-		
+		mypageCommand.setId(id);
+			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypageList");
+		mav.addObject("user_id",user_id);
 		mav.addObject("member",member);
 		mav.addObject("football",football);
 		mav.addObject("basketball",basketball);
@@ -92,12 +86,11 @@ public class MypageController {
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("pagingHtml",page.getPagingHtml());
-
-		
 		mav.addObject("mypageCommand",mypageCommand);
 		
 		return mav;
 	} 
+	
 	
 	
 	//미니홈피 글등록

@@ -36,7 +36,7 @@
 		           						ON b.h_seq = r.h_seq
 		           						ORDER BY b.h_seq DESC)a)
 		           <![CDATA[
-                   WHERE rnum >= #{start} AND rnum <= #{end} AND id=#{user_id}
+                   WHERE rnum >= #{start} AND rnum <= #{end} AND id=#{id}
                    ]]> 
                    										<!-- 로그인 되어있는 유저의 글들만 나오게끔 조건설정 -->
                    

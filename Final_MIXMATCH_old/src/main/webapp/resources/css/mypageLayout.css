@@ -6,7 +6,7 @@ div.container{
 	display: flex;
 }
 div.box-left {
-  flex: 1.2;
+  flex: 1.4;
   margin-top: 15px;
 }
 
@@ -90,12 +90,13 @@ div.reply-list{
 /* 댓글 입력창 */
 [id*='h_re_content']{
 	margin-top: 15px;
-	width: 500px;
+	width: 450px;
 	border: 1px solid black;
 }
-[id*='re_form']{
-	border: 1px solid black;
+[id^='re_form']{
+	/* border: 1px solid black; */
 	margin:15px 15px 15px 15px;
+	background-color: #F6F7F8;
 }
 .reply-name{
 	color:#ec781c;
@@ -109,7 +110,7 @@ div.reply-list{
 
 /* 글 수정폼 */
 [id*='post_re_form']{
-	border: 
+	border: none;
 }
 .post-content2{
 	width: 600px;
