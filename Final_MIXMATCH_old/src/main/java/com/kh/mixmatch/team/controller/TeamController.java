@@ -33,6 +33,7 @@ import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.team.service.TeamService;
 import com.kh.mixmatch.team.service.TotalTypeService;
+import com.kh.mixmatch.util.PagingUtil;
 
 @Controller
 public class TeamController {
@@ -54,6 +55,39 @@ public class TeamController {
 	}
 	
 	
+	
+	private int rowCount = 10;
+	private int pageCount = 1;
+	@RequestMapping("/teamList.do")
+	@ResponseBody
+	public Map<String, Object> teamList(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
+		if(log.isDebugEnabled()){
+			log.debug("<<< currentPage >>> : " + currentPage);
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// ÃÑ ÆÀÀÇ °¹¼ö
+		int teamCount = teamService.getTeamCount(map); 
+		PagingUtil page = new PagingUtil(currentPage, teamCount, rowCount, pageCount, null);
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
+		List<TeamCommand> list = null;
+		if(teamCount>0){
+			list = teamService.list(map);
+		}else{
+			list = Collections.emptyList();	// count°¡ 0ÀÌ¿©µµ nullÀÌ¾Æ´Ñ ºñ¾îÀÖ´Â ¸®½ºÆ® È£Ãâ
+		}
+		System.out.println("ÃÑ ÆÀ ¼ö : "+ teamCount);
+		System.out.println("ÆÀ¸ñ·Ï : " + list);
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("teamCount",teamCount);
+		mapJson.put("rowCount", rowCount);
+		mapJson.put("list", list);
+		
+		return mapJson;	
+	}
 //=================== ÆÀÈ¨ ==============
 	
 	@RequestMapping("/team.do")

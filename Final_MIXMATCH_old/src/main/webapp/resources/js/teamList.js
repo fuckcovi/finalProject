@@ -25,13 +25,13 @@ $(document).ready(function(){
 					alert("팀목록 호출 시 오류 발생");
 				}else{
 					$(list).each(function(index,item){
-						var output="";
+						var output="<li style='list-style: none;float:left;'>";
 						output += "<div style='width:200px;height:250px;margin:10px 10px 10px 10px;' id='"+item.t_type+"'>";
 						output += "	<c:if test='${fn:endsWith("+item.t_logo_name+", '.jpg') || fn:endsWith("+item.t_logo_name+", '.png') || fn:endsWith("+item.t_logo_name+", '.gif') || fn:endsWith("+item.t_logo_name+",  '.JPG') || fn:endsWith("+item.t_logo_name+",  '.PNG') || fn:endsWith("+item.t_logo_name+",  '.GIF')}'>";
 						output += "		<img src='imageView.do?t_name="+item.t_name+"' style='width:200px;height:200px; >";
 						output += "	</c:if>";
 						output += "	<a href='teamInfo.do?t_name="+item.t_name+"'>"+item.t_name+"</a> | "+item.t_address ;
-						output += "</div>";
+						output += "</div></li>";
 						$("#output").append(output);
 					});
 					

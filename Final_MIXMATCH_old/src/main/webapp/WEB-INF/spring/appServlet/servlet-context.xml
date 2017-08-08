@@ -44,6 +44,8 @@
 				<beans:value>/WEB-INF/tiles-def/mypage.xml</beans:value>
 				<!-- 게시판 -->
 				<beans:value>/WEB-INF/tiles-def/board.xml</beans:value>
+				<!--  공지사항 -->
+				<beans:value>/WEB-INF/tiles-def/notice.xml</beans:value>
 				<!-- 일단 주석처리 -->
 				<!-- 팀관련
 				

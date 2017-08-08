@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/teamList.js"></script> --%>
 <div class="page-main-style">
 	<h2>팀홈</h2>
 	<hr class="style"><br> 
@@ -54,5 +55,7 @@
 		<c:if test="${count==0}">
 			등록된 팀이 없습니다. 첫번째 팀을 생성해주세요.
 		</c:if>
-	</div>
+	</div> 
+	<!-- <div id="output"><ul style="list-style: none"></ul></div>
+	<div class="paging-team-button">다음글보기</div> -->
 </div>
