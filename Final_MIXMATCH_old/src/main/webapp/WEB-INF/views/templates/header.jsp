@@ -19,11 +19,11 @@
 <a class="menuLink" href="${pageContext.request.contextPath}/main.do">MIXMATCH</a>
 </li>
 <li class="topMenuLi">
-<a class="menuLink" href="${pageContext.request.contextPath}/#">게시판</a>
+<a class="menuLink" href="${pageContext.request.contextPath}/notice.do">게시판</a>
 <ul class="submenu">
 <li><a href="${pageContext.request.contextPath}/notice.do" class="submenuLink">공지사항</a></li>
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">자유게시판</a></li>
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">팀게시판</a></li>
+<li><a href="${pageContext.request.contextPath}/freeboard.do" class="submenuLink">자유게시판</a></li>
+<li><a href="${pageContext.request.contextPath}/teamboard.do" class="submenuLink">팀게시판</a></li>
 </ul> 
 </li>
 <li class="topMenuLi">
