@@ -10,12 +10,24 @@
 </style>
 <div class="page-main-style">
 	<h2>팀게시판</h2>
-	<div class="align-center">
-		<input type="button" value="글쓰기"  onclick="location.href='teamboardInsert.do'" >
+	<div class="align-center" style="min-height:50px; width:100%;"> 
+		<c:if test="${teamcount==0 }">
+			소속된 팀이 없어서 팀게시판 이용이 불가합니다. 
+		</c:if>
+		<c:if test="${teamcount>0 }">
+		<ul style="list-style: none" id="teamboardList" >
+			<c:forEach var="list" items="${teamlist}">
+				<li style="float: left;" value="${list.t_name}">
+					<input type="button" class="btn" value="${list.t_name}" onclick="location.href='teamboard.do?t_name=${list.t_name}'">
+				</li>
+			</c:forEach>
+		</ul>
+		</c:if>
 	</div>
 	<div class="align-right">
 		<input type="button" value="글쓰기"  onclick="location.href='teamboardInsert.do'" >
 	</div>
+	<div>
 	<c:if test="${count==0 }">
 		<div class="align-center">등록된 팀게시글이 없습니다.</div>
 	</c:if>
@@ -23,6 +35,7 @@
 		<table>
 			<tr>
 				<th>번호</th>
+				<th>팀명</th>
 				<th width="400">제목</th>
 				<th>등록일</th>
 				<th>작성자</th>
@@ -30,11 +43,12 @@
 			</tr>
 			<c:forEach var="article" items="${list}">
 			<tr>
-				<td>${article.tb_seq }</td>
-				<td><a href="noticeDetail.do?n_seq=${article.tb_seq}">${article.tb_title}</a></td>
-				<td>${article.tb_regdate}</td>
+				<td>${article.gt_seq }</td>
+				<td>${article.t_name}</td>
+				<td><a href="teamboardDetail.do?gt_seq=${article.gt_seq}">${article.gt_title}</a></td>
+				<td>${article.gt_regdate}</td>
 				<td>${article.id}</td>
-				<td>${article.tb_hit}</td>
+				<td>${article.gt_hit}</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -44,8 +58,8 @@
 		<ul class="search">
 			<li>
 				<select name="keyfield">
-					<option value="tb_title">제목</option>
-					<option value="tb_content">내용</option>
+					<option value="gt_title">제목</option>
+					<option value="gt_content">내용</option>
 					<option value="id">작성자</option>
 					<option value="all">전체</option>
 				</select>
@@ -58,4 +72,5 @@
 			</li>
 		</ul>
 	</form>
+	</div>
 </div>

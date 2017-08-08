@@ -21,8 +21,8 @@ public class TeamBoardServiceImpl implements TeamBoardService{
 	}
 
 	@Override
-	public void teamboardDelete(Integer tb_seq) {
-		teamBoardMapper.teamboardDelete(tb_seq);
+	public void teamboardDelete(Integer gt_seq) {
+		teamBoardMapper.teamboardDelete(gt_seq);
 	}
 
 	@Override
@@ -31,13 +31,13 @@ public class TeamBoardServiceImpl implements TeamBoardService{
 	}
 
 	@Override
-	public void teamboardeUpdateHit(Integer tb_seq) {
-		teamBoardMapper.teamboardeUpdateHit(tb_seq);
+	public void teamboardUpdateHit(Integer gt_seq) {
+		teamBoardMapper.teamboardUpdateHit(gt_seq);
 	}
 
 	@Override
-	public TeamBoardCommand teamboardSelect(Integer tb_seq) {
-		return teamBoardMapper.teamboardSelect(tb_seq);
+	public TeamBoardCommand teamboardSelect(Integer gt_seq) {
+		return teamBoardMapper.teamboardSelect(gt_seq);
 	}
 
 	@Override

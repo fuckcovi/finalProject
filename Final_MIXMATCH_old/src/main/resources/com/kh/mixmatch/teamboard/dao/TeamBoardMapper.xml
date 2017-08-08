@@ -7,44 +7,46 @@
 	<select id="getRowCount" parameterType="map" resultType="integer">
 		SELECT COUNT(*) FROM g_teamboard 
 					<where>
-						<if test="keyword != '' and keyfield =='tb_title'">
-							tb_title like '%' || #{keyword} || '%'
+						t_name=#{t_name}
+						<if test="keyword != '' and keyfield =='gt_title'">
+							AND gt_title like '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield =='id'">
-							id like '%' || #{keyword} || '%'
+							AND id like '%' || #{keyword} || '%'
 						</if>
-						<if test="keyword != '' and keyfield =='tb_content'">
-							tb_content like '%' || #{keyword} || '%'
+						<if test="keyword != '' and keyfield =='gt_content'">
+							AND gt_content like '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield =='all'">
-							tb_title like '%' || #{keyword} || '%' or
+							AND ( gt_title like '%' || #{keyword} || '%' or
 							id like '%' || #{keyword} || '%' or
-							tb_content like '%' || #{keyword} || '%'
+							gt_content like '%' || #{keyword} || '%' )
 						</if>
 					</where>
 	</select>
 	
 	<select id="teamboardList" parameterType="map" resultType="teamBoardCommand">
-		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT b.tb_seq, 
-			<![CDATA[ REPLACE(REPLACE(b.tb_title,'<','&lt;'),'>','&gt;') tb_title, ]]>
-			b.tb_hit, b.tb_regdate, b.id<!-- , r.reply_cnt --> FROM g_teamboard b
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT b.gt_seq, 
+			<![CDATA[ REPLACE(REPLACE(b.gt_title,'<','&lt;'),'>','&gt;') gt_title, ]]>
+			b.gt_hit, b.gt_regdate,b.ip, b.id,b.t_name<!-- , r.reply_cnt --> FROM g_teamboard b
 					<where>
-						<if test="keyword != '' and keyfield =='tb_title'">
-							b.tb_title like '%' || #{keyword} || '%'
+						t_name=#{t_name}
+						<if test="keyword != '' and keyfield =='gt_title'">
+							AND b.gt_title like '%' || #{keyword} || '%'
 						</if>
-						<if test="keyword != '' and keyfield =='tb_content'">
-							b.tb_content like '%' || #{keyword} || '%'
+						<if test="keyword != '' and keyfield =='gt_content'">
+							AND b.gt_content like '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield =='id'">
-							b.id like '%' || #{keyword} || '%'
+							AND b.id like '%' || #{keyword} || '%'
 						</if>
 						<if test="keyword != '' and keyfield =='all'">
-							b.tb_title like '%' || #{keyword} || '%' or
+							AND ( b.gt_title like '%' || #{keyword} || '%' or
 							b.id like '%' || #{keyword} || '%' or
-							b.tb_content like '%' || #{keyword} || '%'
+							b.gt_content like '%' || #{keyword} || '%' )
 						</if>
 					</where>
-					ORDER BY b.tb_seq DESC)a) 
+					ORDER BY b.gt_seq DESC)a) 
 					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>
 </mapper>

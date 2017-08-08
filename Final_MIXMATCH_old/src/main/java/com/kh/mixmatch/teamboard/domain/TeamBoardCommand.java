@@ -8,26 +8,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 public class TeamBoardCommand {
-	private int tb_seq;
+	private int gt_seq;
 	@NotEmpty
 	private String t_name;
 	@NotEmpty
-	private String tb_title;
+	private String gt_title;
 	@NotEmpty
-	private String tb_content;
-	private int tb_hit;
-	private byte[] tb_file;
-	private String tb_file_name;
-	private MultipartFile tb_file_upload;
-	private Date tb_regdate;
+	private String gt_content;
+	private int gt_hit;
+	private byte[] gt_uploadfile;
+	private String gt_filename;
+	private MultipartFile gt_uploadfile_upload;
+	private Date gt_regdate;
 	@NotEmpty
 	private String id;
-	
-	public int getTb_seq() {
-		return tb_seq;
+	private String ip;
+	public int getGt_seq() {
+		return gt_seq;
 	}
-	public void setTb_seq(int tb_seq) {
-		this.tb_seq = tb_seq;
+	public void setGt_seq(int gt_seq) {
+		this.gt_seq = gt_seq;
 	}
 	public String getT_name() {
 		return t_name;
@@ -35,49 +35,49 @@ public class TeamBoardCommand {
 	public void setT_name(String t_name) {
 		this.t_name = t_name;
 	}
-	public String getTb_title() {
-		return tb_title;
+	public String getGt_title() {
+		return gt_title;
 	}
-	public void setTb_title(String tb_title) {
-		this.tb_title = tb_title;
+	public void setGt_title(String gt_title) {
+		this.gt_title = gt_title;
 	}
-	public String getTb_content() {
-		return tb_content;
+	public String getGt_content() {
+		return gt_content;
 	}
-	public void setTb_content(String tb_content) {
-		this.tb_content = tb_content;
+	public void setGt_content(String gt_content) {
+		this.gt_content = gt_content;
 	}
-	public int getTb_hit() {
-		return tb_hit;
+	public int getGt_hit() {
+		return gt_hit;
 	}
-	public void setTb_hit(int tb_hit) {
-		this.tb_hit = tb_hit;
+	public void setGt_hit(int gt_hit) {
+		this.gt_hit = gt_hit;
 	}
-	public byte[] getTb_file() {
-		return tb_file;
+	public byte[] getGt_uploadfile() {
+		return gt_uploadfile;
 	}
-	public void setTb_file(byte[] tb_file) {
-		this.tb_file = tb_file;
+	public void setGt_uploadfile(byte[] gt_uploadfile) {
+		this.gt_uploadfile = gt_uploadfile;
 	}
-	public String getTb_file_name() {
-		return tb_file_name;
+	public String getGt_filename() {
+		return gt_filename;
 	}
-	public void setTb_file_name(String tb_file_name) {
-		this.tb_file_name = tb_file_name;
+	public void setGt_filename(String gt_filename) {
+		this.gt_filename = gt_filename;
 	}
-	public MultipartFile getTb_file_upload() {
-		return tb_file_upload;
+	public MultipartFile getGt_uploadfile_upload() {
+		return gt_uploadfile_upload;
 	}
-	public void setTb_file_upload(MultipartFile tb_file_upload) throws IOException {
-		this.tb_file_upload = tb_file_upload;
-		setTb_file_name(tb_file_upload.getOriginalFilename());
-		setTb_file(tb_file_upload.getBytes());
+	public void setGt_uploadfile_upload(MultipartFile gt_uploadfile_upload) throws IOException {
+		this.gt_uploadfile_upload = gt_uploadfile_upload;
+		setGt_uploadfile(gt_uploadfile_upload.getBytes());
+		setGt_filename(gt_uploadfile_upload.getOriginalFilename());
 	}
-	public Date getTb_regdate() {
-		return tb_regdate;
+	public Date getGt_regdate() {
+		return gt_regdate;
 	}
-	public void setTb_regdate(Date tb_regdate) {
-		this.tb_regdate = tb_regdate;
+	public void setGt_regdate(Date gt_regdate) {
+		this.gt_regdate = gt_regdate;
 	}
 	public String getId() {
 		return id;
@@ -85,11 +85,17 @@ public class TeamBoardCommand {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 	@Override
 	public String toString() {
-		return "TeamBoardCommand [tb_seq=" + tb_seq + ", t_name=" + t_name + ", tb_title=" + tb_title + ", tb_content="
-				+ tb_content + ", tb_hit=" + tb_hit + ", tb_file_name=" + tb_file_name + ", tb_regdate=" + tb_regdate
-				+ ", id=" + id + "]";
+		return "TeamBoardCommand [gt_seq=" + gt_seq + ", t_name=" + t_name + ", gt_title=" + gt_title + ", gt_content="
+				+ gt_content + ", gt_hit=" + gt_hit + ", gt_filename=" + gt_filename + ", gt_regdate=" + gt_regdate
+				+ ", id=" + id + ", ip=" + ip + "]";
 	}
 	
 	

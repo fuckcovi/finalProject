@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mixmatch.notice.domain.NoticeCommand;
 import com.kh.mixmatch.notice.service.NoticeService;
+import com.kh.mixmatch.team.domain.TeamMemCommand;
+import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.teamboard.domain.TeamBoardCommand;
 import com.kh.mixmatch.teamboard.service.TeamBoardService;
 import com.kh.mixmatch.util.PagingUtil;
@@ -32,6 +34,8 @@ public class TeamBoardController {
 	private Logger log = Logger.getLogger(this.getClass());
 	@Resource
 	private TeamBoardService teamBoardService;
+	@Resource
+	private TeamMemService teamMemService;
 	@ModelAttribute
 	public TeamBoardCommand initCommand(){
 		return new TeamBoardCommand();
@@ -43,15 +47,36 @@ public class TeamBoardController {
 	@RequestMapping("/teamboard.do")
 	public ModelAndView teamboardList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 			@RequestParam(value="keyfield",defaultValue="") String keyfield,
-			@RequestParam(value="keyword",defaultValue="") String keyword){
+			@RequestParam(value="keyword",defaultValue="") String keyword,
+			@RequestParam(value="t_name",defaultValue="") String t_name, HttpSession session){
 		if(log.isDebugEnabled()){
 			log.debug("<<pageNum>> : " +currentPage);
 			log.debug("<<keyfield>> : " +keyfield);
 			log.debug("<<keyword>> : " +keyword);
 		}
+
+		/// 소속 팀 목록 구하기
+		List<TeamMemCommand> teamlist = null;
+		Map<String, Object> tmap = new HashMap<String, Object>();
+		String user_id = (String)session.getAttribute("user_id");
+		tmap.put("id", user_id);
+		int teamcount = teamMemService.getRowTeamCount(user_id);
+		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyfield",keyfield);
 		map.put("keyword", keyword);
+		if(teamcount>0){
+			teamlist = teamMemService.listConfirmTeam(tmap);
+			if(t_name.equals("")){
+				map.put("t_name", teamlist.get(0).getT_name());	// 임의로 첫번째 팀을 넣어서 검색
+			}else{
+				map.put("t_name", t_name);
+			}
+		}
+		
+		
+		
+		
 		// 총 글의 갯수 또는 검색된 글의 갯수
 		int count = teamBoardService.getRowCount(map);
 		if(log.isDebugEnabled()){
@@ -65,64 +90,84 @@ public class TeamBoardController {
 		if(count>0){
 			list = teamBoardService.teamboardList(map);
 		}
+		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("teamboard");
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		mav.addObject("count",count);
 		mav.addObject("list",list);
+		mav.addObject("teamcount",teamcount);
+		mav.addObject("teamlist",teamlist);
 		return mav; 
 	}
-	/*@RequestMapping(value="/noticeInsert.do",method=RequestMethod.GET)
-	public String noticeInsertForm(HttpSession session, Model model){
-		String id = (String)session.getAttribute("user_id");
-		NoticeCommand noticeCommand = new NoticeCommand();
-		noticeCommand.setId(id);
-		model.addAttribute("noticeCommand", noticeCommand);
-		return "noticeInsert";
-	}
-	@RequestMapping(value="/noticeInsert.do",method=RequestMethod.POST)
-	public String noticeInsertSubmit(@ModelAttribute("command") @Valid NoticeCommand noticeCommand, BindingResult result, HttpServletRequest request){
+	@RequestMapping("/teamboardDetail.do")
+	public ModelAndView teamboardDetail(@RequestParam int gt_seq){
 		if(log.isDebugEnabled()){
-			log.debug("<<<<<<< noticeCommand : " +noticeCommand);
-		}
-		if(result.hasErrors()){
-			return "noticeInsert";
-		}
-		// 글쓰기
-		noticeService.noticeInsert(noticeCommand);
-		return "redirect:/notice.do";
-	}
-	@RequestMapping("/noticeDetail.do")
-	public ModelAndView noticeDetail(@RequestParam int n_seq){
-		if(log.isDebugEnabled()){
-			log.debug("<<<< n_seq>>>>> : " +n_seq);
+			log.debug("<<<< gt_seq>>>>> : " +gt_seq);
 		}
 		// 해당 글의 조회수 증가
-		noticeService.noticeUpdateHit(n_seq);
-		NoticeCommand notice = noticeService.noticeSelect(n_seq);
+		teamBoardService.teamboardUpdateHit(gt_seq);
+		TeamBoardCommand teamboard = teamBoardService.teamboardSelect(gt_seq);
 		
-		return new ModelAndView("noticeDetail","notice",notice);
+		return new ModelAndView("teamboardDetail","teamboard",teamboard);
 	}
 
 	// 파일 다운로드
-	@RequestMapping("/noticefile.do")
-	public ModelAndView download(@RequestParam int n_seq){
-		NoticeCommand notice = noticeService.noticeSelect(n_seq);
+	@RequestMapping("/teamboardfile.do")
+	public ModelAndView download(@RequestParam int gt_seq){
+		TeamBoardCommand teamboard = teamBoardService.teamboardSelect(gt_seq);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadView");
-		mav.addObject("downloadFile",notice.getN_file());
-		mav.addObject("filename", notice.getN_file_name());
+		mav.addObject("downloadFile",teamboard.getGt_uploadfile());
+		mav.addObject("filename", teamboard.getGt_filename());
 		return mav;
 	}
 	
 	// 이미지 출력
-	@RequestMapping("/noticeimageView.do")
-	public ModelAndView viewImage(@RequestParam int n_seq){
-		NoticeCommand notice = noticeService.noticeSelect(n_seq);
+	@RequestMapping("/teamboardimageView.do")
+	public ModelAndView viewImage(@RequestParam int gt_seq){
+		TeamBoardCommand teamboard = teamBoardService.teamboardSelect(gt_seq);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
-		mav.addObject("imageFile",notice.getN_file());
-		mav.addObject("filename",  notice.getN_file_name());
+		mav.addObject("imageFile",teamboard.getGt_uploadfile());
+		mav.addObject("filename",  teamboard.getGt_filename());
 		return mav;
-	}*/
+	}
+	
+	@RequestMapping(value="/teamboardInsert.do",method=RequestMethod.GET)
+	public ModelAndView teamboardInsertForm(HttpSession session){
+		String id = (String)session.getAttribute("user_id");
+		
+		int teamcount = teamMemService.getRowTeamCount(id);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("id",id);
+		List<TeamMemCommand> teamlist = null;
+		if(teamcount>0){
+			teamlist = teamMemService.listConfirmTeam(map);
+		}
+		TeamBoardCommand teamboardCommand = new TeamBoardCommand();
+		teamboardCommand.setId(id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("teamboardInsert");
+		mav.addObject("teamboardCommand", teamboardCommand);
+		mav.addObject("teamlist", teamlist);
+		return mav;
+	}
+	@RequestMapping(value="/teamboardInsert.do",method=RequestMethod.POST)
+	public String teamboardInsertSubmit(@ModelAttribute("command") @Valid TeamBoardCommand teamboardCommand, BindingResult result, HttpServletRequest request){
+		if(log.isDebugEnabled()){
+			System.out.println("asdffffasdfsdfsdf");
+			log.debug("<<<<<<< teamboardCommand : " +teamboardCommand);
+		}
+		if(result.hasErrors()){
+			return "redirect:/teamboardInsert.do";
+		}
+		// 글쓰기
+		teamboardCommand.setIp(request.getRemoteAddr());
+		System.out.println(teamboardCommand);
+		teamBoardService.teamboardInsert(teamboardCommand);
+		return "redirect:/teamboard.do";
+	}
+	
 }
