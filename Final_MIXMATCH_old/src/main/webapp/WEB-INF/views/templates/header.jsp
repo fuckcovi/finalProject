@@ -21,7 +21,7 @@
 <li class="topMenuLi">
 <a class="menuLink" href="${pageContext.request.contextPath}/#">게시판</a>
 <ul class="submenu">
-<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">공지사항</a></li>
+<li><a href="${pageContext.request.contextPath}/notice.do" class="submenuLink">공지사항</a></li>
 <li><a href="${pageContext.request.contextPath}/#" class="submenuLink">자유게시판</a></li>
 <li><a href="${pageContext.request.contextPath}/#" class="submenuLink">팀게시판</a></li>
 </ul> 

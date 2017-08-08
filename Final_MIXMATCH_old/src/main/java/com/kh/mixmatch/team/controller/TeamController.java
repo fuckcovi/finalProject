@@ -55,7 +55,7 @@ public class TeamController {
 	}
 	
 	
-	
+	/*
 	private int rowCount = 10;
 	private int pageCount = 1;
 	@RequestMapping("/teamList.do")
@@ -87,7 +87,7 @@ public class TeamController {
 		mapJson.put("list", list);
 		
 		return mapJson;	
-	}
+	}*/
 //=================== ∆¿»® ==============
 	
 	@RequestMapping("/team.do")
