@@ -33,7 +33,7 @@ public class TeamBoardServiceImpl implements TeamBoardService{
 	@Override
 	public void teamboardUpdateHit(Integer gt_seq) {
 		teamBoardMapper.teamboardUpdateHit(gt_seq);
-	}
+	} 
 
 	@Override
 	public TeamBoardCommand teamboardSelect(Integer gt_seq) {
@@ -41,8 +41,8 @@ public class TeamBoardServiceImpl implements TeamBoardService{
 	}
 
 	@Override
-	public int getRowCount(Map<String, Object> map) {
-		return teamBoardMapper.getRowCount(map);
+	public int getTbRowCount(Map<String, Object> map) {
+		return teamBoardMapper.getTbRowCount(map);
 	}
 
 	@Override

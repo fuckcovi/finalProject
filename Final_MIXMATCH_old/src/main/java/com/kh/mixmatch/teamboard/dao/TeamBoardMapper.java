@@ -22,7 +22,6 @@ public interface TeamBoardMapper {
 	public void teamboardUpdateHit(Integer gt_seq);
 	@Select("SELECT * FROM g_teamboard WHERE gt_seq=#{gt_seq}")
 	public TeamBoardCommand teamboardSelect(Integer gt_seq);
-	@Select("SELECT COUNT(*) FROM g_teamboard")
-	public int getRowCount(Map<String, Object> map);
+	public int getTbRowCount(Map<String, Object> map);
 	public List<TeamBoardCommand> teamboardList(Map<String, Object> map);
 }

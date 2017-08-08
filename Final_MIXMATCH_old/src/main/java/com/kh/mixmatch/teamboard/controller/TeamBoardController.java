@@ -11,7 +11,6 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.mixmatch.notice.domain.NoticeCommand;
-import com.kh.mixmatch.notice.service.NoticeService;
 import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.teamboard.domain.TeamBoardCommand;
@@ -78,7 +75,7 @@ public class TeamBoardController {
 		
 		
 		// ÃÑ ±ÛÀÇ °¹¼ö ¶Ç´Â °Ë»öµÈ ±ÛÀÇ °¹¼ö
-		int count = teamBoardService.getRowCount(map);
+		int count = teamBoardService.getTbRowCount(map);
 		if(log.isDebugEnabled()){
 			log.debug("<<<count>> : "+count );
 		}
@@ -156,6 +153,7 @@ public class TeamBoardController {
 	}
 	@RequestMapping(value="/teamboardInsert.do",method=RequestMethod.POST)
 	public String teamboardInsertSubmit(@ModelAttribute("command") @Valid TeamBoardCommand teamboardCommand, BindingResult result, HttpServletRequest request){
+		System.out.println(teamboardCommand.getT_name());
 		if(log.isDebugEnabled()){
 			System.out.println("asdffffasdfsdfsdf");
 			log.debug("<<<<<<< teamboardCommand : " +teamboardCommand);

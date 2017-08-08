@@ -20,7 +20,7 @@ public interface TeamBoardService {
 	@Transactional(readOnly=true)
 	public TeamBoardCommand teamboardSelect(Integer gt_seq);
 	@Transactional(readOnly=true)
-	public int getRowCount(Map<String, Object> map);
-	@Transactional(readOnly=true)
+	public int getTbRowCount(Map<String, Object> map);
+	@Transactional(readOnly=true) 
 	public List<TeamBoardCommand> teamboardList(Map<String, Object> map);
 }

@@ -22,7 +22,7 @@ public interface NoticeMapper {
 	public void noticeUpdateHit(Integer gn_seq);
 	@Select("SELECT * FROM g_notice WHERE gn_seq=#{gn_seq}")
 	public NoticeCommand noticeSelect(Integer gn_seq);
-	@Select("SELECT COUNT(*) FROM g_notice")
+	
 	public int getRowCount(Map<String, Object> map);
 	public List<NoticeCommand> noticeList(Map<String, Object> map);
 }
