@@ -26,13 +26,13 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public NoticeCommand noticeUpdate(NoticeCommand notice) {
-		return noticeMapper.noticeUpdate(notice);
+	public void noticeUpdate(NoticeCommand notice) {
+		noticeMapper.noticeUpdate(notice);
 	}
 
 	@Override
-	public NoticeCommand noticeUpdateHit(Integer n_seq) {
-		return noticeMapper.noticeUpdateHit(n_seq);
+	public void noticeUpdateHit(Integer n_seq) {
+		noticeMapper.noticeUpdateHit(n_seq);
 	}
 
 	@Override

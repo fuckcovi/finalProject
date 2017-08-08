@@ -10,8 +10,8 @@ import com.kh.mixmatch.notice.domain.NoticeCommand;
 public interface NoticeService {
 	public void noticeInsert(NoticeCommand notice);
 	public void noticeDelete(Integer n_seq);
-	public NoticeCommand noticeUpdate(NoticeCommand notice);
-	public NoticeCommand noticeUpdateHit(Integer n_seq);
+	public void noticeUpdate(NoticeCommand notice);
+	public void noticeUpdateHit(Integer n_seq);
 	@Transactional(readOnly=true)
 	public NoticeCommand noticeSelect(Integer n_seq);
 	@Transactional(readOnly=true)

@@ -17,9 +17,9 @@ public interface NoticeMapper {
 	@Delete("DELETE FROM g_notice WHERE n_seq=#{n_seq}")
 	public void noticeDelete(Integer n_seq);
 	@Update("UPDATE g_notice SET n_title=#{n_title},n_content=#{n_content},n_file=#{n_file,jdbcType=BLOB},n_file_name=#{n_file_name,jdbcType=VARCHAR} WHERE n_seq=#{n_seq}")
-	public NoticeCommand noticeUpdate(NoticeCommand notice);
+	public void noticeUpdate(NoticeCommand notice);
 	@Update("UPDATE g_notice SET n_hit=n_hit+1 WHERE n_seq=#{n_seq}")
-	public NoticeCommand noticeUpdateHit(Integer n_seq);
+	public void noticeUpdateHit(Integer n_seq);
 	@Select("SELECT * FROM g_notice WHERE n_seq=#{n_seq}")
 	public NoticeCommand noticeSelect(Integer n_seq);
 	@Select("SELECT COUNT(*) FROM g_notice")
