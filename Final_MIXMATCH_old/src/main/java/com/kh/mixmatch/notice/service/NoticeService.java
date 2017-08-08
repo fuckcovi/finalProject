@@ -15,5 +15,7 @@ public interface NoticeService {
 	@Transactional(readOnly=true)
 	public NoticeCommand noticeSelect(Integer n_seq);
 	@Transactional(readOnly=true)
+	public int getRowCount(Map<String, Object> map);
+	@Transactional(readOnly=true)
 	public List<NoticeCommand> noticeList(Map<String, Object> map);
 }

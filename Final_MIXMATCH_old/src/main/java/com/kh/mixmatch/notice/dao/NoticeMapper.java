@@ -22,6 +22,7 @@ public interface NoticeMapper {
 	public NoticeCommand noticeUpdateHit(Integer n_seq);
 	@Select("SELECT * FROM g_notice WHERE n_seq=#{n_seq}")
 	public NoticeCommand noticeSelect(Integer n_seq);
-	
+	@Select("SELECT COUNT(*) FROM g_notice")
+	public int getRowCount(Map<String, Object> map);
 	public List<NoticeCommand> noticeList(Map<String, Object> map);
 }

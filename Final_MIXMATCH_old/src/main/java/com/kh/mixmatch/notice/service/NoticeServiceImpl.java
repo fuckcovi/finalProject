@@ -44,5 +44,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<NoticeCommand> noticeList(Map<String, Object> map) {
 		return noticeMapper.noticeList(map);
 	}
+
+	@Override
+	public int getRowCount(Map<String, Object> map) {
+		return noticeMapper.getRowCount(map);
+	}
 	
 }
