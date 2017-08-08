@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
@@ -48,13 +49,13 @@
 				<td>${listMem.b_hit}</td>
 				<td>${listMem.b_rbi}</td>
 				<td>${listMem.b_score}</td>
-				<td>${listMem.b_avg}</td>
+				<td><fmt:formatNumber value="${listMem.b_avg }" pattern="0.000"/></td>
 				<td>${listMem.b_win}</td>
 				<td>${listMem.b_lose}</td>
 				<td>${listMem.b_strike}</td>
 				<td>${listMem.b_ip}</td>
 				<td>${listMem.b_er}</td>
-				<td>${listMem.b_era }</td>
+				<td><fmt:formatNumber value="${listMem.b_era }" pattern="0.00"/></td>
 			</tr>
 		</c:forEach>
 		</table>

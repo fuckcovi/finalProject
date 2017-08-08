@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/team.js"></script>
 <div class="page-main-style">
@@ -309,13 +310,13 @@ list-bscore="${list.b_score}" list-bassist="${list.b_assist}" list-bsteel="${lis
 				<td>${list.b_hit}</td>
 				<td>${list.b_rbi}</td>
 				<td>${list.b_score}</td>
-				<td>${list.b_avg}</td>
+				<td><fmt:formatNumber value="${list.b_avg }" pattern="0.000"/></td>
 				<td>${list.b_win}</td>
 				<td>${list.b_lose}</td>
 				<td>${list.b_strike}</td>
 				<td>${list.b_ip}</td>
 				<td>${list.b_er}</td>
-				<td>${list.b_era}</td>
+				<td><fmt:formatNumber value="${list.b_era }" pattern="0.00"/></td>
 				<td><input type="button" value="수정" class="baseRecordModify" list_mseq="${list.m_seq}" list-tname="${list.t_name}" list-id="${list.id}" list-name="${list.name}" 
 list-bbat="${list.b_bat}" list-bhit="${list.b_hit}" list-brbi="${list.b_rbi}" list-bscore="${list.b_score}" list-bavg="${list.b_avg}" 
 list-bwin="${list.b_win}" list-blose="${list.b_lose}" list-bstrike="${list.b_strike}" list-bip="${list.b_ip}" list-ber="${list.b_er}" list-bera="${list.b_era}"></td>

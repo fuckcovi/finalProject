@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
@@ -38,13 +39,13 @@
 					<td>${list.b_hit}</td>
 					<td>${list.b_rbi}</td>
 					<td>${list.b_score}</td>
-					<td>${list.b_avg}</td>
+					<td><fmt:formatNumber value="${list.b_avg }" pattern="0.000"/></td>
 					<td>${list.b_win}</td>
 					<td>${list.b_lose}</td>
 					<td>${list.b_strike}</td>
 					<td>${list.b_ip}</td>
 					<td>${list.b_er}</td>
-					<td>${list.b_era }</td>
+					<td><fmt:formatNumber value="${list.b_era }" pattern="0.00"/></td>
 				</tr>
 			</c:if>
 			</c:forEach>
@@ -74,13 +75,13 @@
 					<td>${list.b_hit}</td>
 					<td>${list.b_rbi}</td>
 					<td>${list.b_score}</td>
-					<td>${list.b_avg }</td>
+					<td><fmt:formatNumber value="${list.b_avg }" pattern="0.000"/></td>
 					<td>${list.b_win}</td>
 					<td>${list.b_lose}</td>
 					<td>${list.b_strike}</td>
 					<td>${list.b_ip}</td>
 					<td>${list.b_er}</td>
-					<td>${list.b_era }</td>
+					<td><fmt:formatNumber value="${list.b_era }" pattern="0.00"/></td>
 				</tr>
 			</c:if>
 			</c:forEach>
