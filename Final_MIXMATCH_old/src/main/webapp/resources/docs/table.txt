@@ -164,70 +164,111 @@ CREATE TABLE G_HOME_RE(
 );
 CREATE SEQUENCE G_HOME_RE_SEQ;
 
+----------------------- 포인트 숍 ---------------------------------------------
+CREATE TABLE G_POINT_PRODUCT
+(
+    p_seq          INT              NOT NULL, 
+    p_grade        VARCHAR2(20)     NOT NULL, 
+    p_name         VARCHAR2(500)    NOT NULL, 
+    p_price        NUMBER           NOT NULL, 
+    p_file_name    VARCHAR2(150)    NOT NULL,  
+    upload_file    BLOB             NOT NULL,
+    CONSTRAINT G_POINT_PRODUCT_PK PRIMARY KEY (p_seq)
+)
 
+CREATE SEQUENCE G_POINT_PRODUCT_SEQ
+START WITH 1
+INCREMENT BY 1;
 
-CREATE TABLE G_NOTICE (
-    N_SEQ NUMBER PRIMARY KEY,
-    N_TITLE VARCHAR2(150) NOT NULL,
-    N_CONTENT CLOB NOT NULL,
-    N_HIT NUMBER DEFAULT(0),
-    N_FILE BLOB,
-    N_FILE_NAME VARCHAR2(150),
-    N_REGDATE DATE NOT NULL,
-    ID VARCHAR2(20) NOT NULL
+--------------------------------- 게시판 ------------------------------------
+create table g_board(
+ gb_seq number not null,
+ gb_title varchar2(100) not null,
+ gb_content clob not null,
+ gb_hit number(5) default 0 not null,
+ gb_regdate date not null,
+ gb_uploadfile blob,
+ gb_filename varchar2(100),
+ ip varchar2(40) not null,
+ id varchar2(12) not null,
+ constraint g_board_pk primary key (gb_seq),
+ constraint g_board_g_member_fk1 foreign key (id) references g_member (id)
 );
-CREATE SEQUENCE G_NOTICE_SEQ;
 
-CREATE TABLE G_BOARD (
-    B_SEQ NUMBER PRIMARY KEY,
-    B_TITLE VARCHAR2(150) NOT NULL,
-    B_CONTENT CLOB NOT NULL,
-    B_HIT NUMBER DEFAULT(0),
-    B_FILE BLOB,
-    B_FILE_NAME VARCHAR2(150),
-    B_REGDATE DATE NOT NULL,
-    ID VARCHAR2(20) NOT NULL,
-    CONSTRAINT G_BOARD_FK FOREIGN KEY (ID) REFERENCES G_MEMBER(ID)
-);
-CREATE SEQUENCE G_BOARD_SEQ;
+create sequence g_board_seq;
 
-CREATE TABLE G_BOARD_RE (
-    B_RE_SEQ NUMBER PRIMARY KEY,
-    B_SEQ NUMBER NOT NULL,
-    B_RE_CONTENT CLOB NOT NULL,
-    B_RE_FILE BLOB,
-    B_RE_FILE_NAME VARCHAR2(150),
-    B_RE_REGDATE DATE NOT NULL,
-    ID VARCHAR2(20) NOT NULL,
-    CONSTRAINT G_BOARD_RE_FK1 FOREIGN KEY (B_SEQ) REFERENCES G_BOARD(B_SEQ),
-    CONSTRAINT G_BOARD_RE_FK2 FOREIGN KEY (ID) REFERENCES G_MEMBER(ID)
+create table g_board_re(
+  gbre_no number not null,
+  gbre_content varchar2(900) not null,
+  gbre_date date not null,
+  ip varchar2(40) not null,
+  gbre_seq number not null,
+  id varchar2(12) not null,
+  constraint g_board_reply_pk primary key (gbre_no),
+  constraint reply_g_board_fk1 foreign key (gbre_seq) references g_board (gb_seq),
+  constraint reply_gb_member_fk2 foreign key (id) references g_member (id)
 );
-CREATE SEQUENCE G_BOARD_RE_SEQ;
 
-CREATE TABLE G_TEAMBOARD (
-    TB_SEQ NUMBER PRIMARY KEY,
-    T_NAME VARCHAR2(30) NOT NULL,
-    TB_TITLE VARCHAR2(150) NOT NULL,
-    TB_CONTENT CLOB NOT NULL,
-    TB_HIT NUMBER DEFAULT(0),
-    TB_FILE BLOB,
-    TB_FILE_NAME VARCHAR2(150),
-    TB_REGDATE DATE NOT NULL,
-    ID VARCHAR2(20) NOT NULL,
-    CONSTRAINT G_TEAMBOARD_FK1 FOREIGN KEY (T_NAME) REFERENCES G_TEAM(T_NAME),
-    CONSTRAINT G_TEAMBOARD_FK2 FOREIGN KEY (ID) REFERENCES G_MEMBER(ID)
-);
-CREATE SEQUENCE G_TEAMBOARD_SEQ;
+create sequence gbre_seq;
 
-CREATE TABLE G_TEAMBOARD_RE (
-    TB_RE_SEQ NUMBER PRIMARY KEY,
-    TB_SEQ NUMBER NOT NULL,
-    TB_RE_CONTENT CLOB NOT NULL,
-    TB_RE_FILE BLOB,
-    TB_RE_FILE_NAME VARCHAR2(150),
-    TB_RE_REGDATE DATE NOT NULL,
-    ID VARCHAR2(20) NOT NULL,
-    CONSTRAINT G_TEAMBOARD_RE_FK1 FOREIGN KEY (TB_SEQ) REFERENCES G_TEAMBOARD(TB_SEQ),
-    CONSTRAINT G_TEAMBOARD_RE_FK2 FOREIGN KEY (ID) REFERENCES G_MEMBER(ID)
+create table g_notice(
+ gn_seq number not null,
+ gn_title varchar2(100) not null,
+ gn_content clob not null,
+ gn_hit number(5) default 0 not null,
+ gn_regdate date not null,
+ gn_uploadfile blob,
+ gn_filename varchar2(100),
+ ip varchar2(40) not null,
+ id varchar2(12) not null,
+ constraint g_notice_pk primary key (gn_seq),
+ constraint g_notice_g_member_fk1 foreign key (id) references g_member (id)
 );
-CREATE SEQUENCE G_TEAMBOARD_RE_SEQ;
+
+create sequence g_notice_seq;
+
+create table g_notice_re(
+  gnre_no number not null,
+  gnre_content varchar2(900) not null,
+  gnre_date date not null,
+  ip varchar2(40) not null,
+  gnre_seq number not null,
+  id varchar2(12) not null,
+  constraint g_notice_reply_pk primary key (gnre_no),
+  constraint reply_g_notice_fk1 foreign key (gnre_seq) references g_notice (gn_seq),
+  constraint reply_gn_member_fk2 foreign key (id) references g_member (id)
+);
+
+create sequence gnbre_seq;
+
+create table g_teamboard(
+ gt_seq number not null,
+ gt_title varchar2(100) not null,
+ gt_content clob not null,
+ gt_hit number(5) default 0 not null,
+ gt_regdate date not null,
+ gt_uploadfile blob,
+ gt_filename varchar2(100),
+ ip varchar2(40) not null,
+ t_name varchar2(30) not null,
+ id varchar2(12) not null,
+ constraint g_teamboard_pk primary key (gt_seq),
+ constraint g_teamboard_g_member_fk1 foreign key (id) references g_member (id),
+ constraint g_teamboard_g_member_fk2 foreign key (t_name) references g_team(t_name)
+);
+
+create sequence g_teamboard_seq;
+
+create table g_teamboard_re(
+  gtre_no number not null,
+  gtre_content varchar2(900) not null,
+  gtre_date date not null,
+  ip varchar2(40) not null,
+  gtre_seq number not null,
+  id varchar2(12) not null,
+  constraint g_teamboard_reply_pk primary key (gtre_no),
+  constraint reply_g_teamboard_fk1 foreign key (gtre_seq) references g_teamboard (gt_seq),
+  constraint reply_gt_member_fk2 foreign key (id) references g_member (id)
+);
+
+create sequence gtbre_seq;
