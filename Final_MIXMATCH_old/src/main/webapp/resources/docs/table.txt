@@ -272,3 +272,11 @@ create table g_teamboard_re(
 );
 
 create sequence gtbre_seq;
+
+create table g_sale_history(
+	id varchar2(20) not null,
+	p_seq number not null,
+	s_regdate date not null,
+	constraint g_sale_history_fk1 foreign key(id) references g_member(id),
+	constraint g_sale_history_fk2 foreign key(p_seq) references g_point_product(p_seq)
+);
