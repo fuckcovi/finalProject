@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kh.mixmatch.notice.dao.NoticeMapper">  
+	<select id="getRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM g_notice 
+					<where>
+						<if test="keyword != '' and keyfield =='n_title'">
+							n_title like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='n_content'">
+							n_content like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='all'">
+							n_title like '%' || #{keyword} || '%' or
+							n_content like '%' || #{keyword} || '%'
+						</if>
+					</where>
+	</select>
+	
+	<select id="noticeList" parameterType="map" resultType="noticeCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT b.n_seq, 
+			<![CDATA[ REPLACE(REPLACE(b.n_title,'<','&lt;'),'>','&gt;') n_title, ]]>
+			b.n_hit, b.n_regdate, b.id<!-- , r.reply_cnt --> FROM g_notice b
+					<where>
+						<if test="keyword != '' and keyfield =='n_title'">
+							b.n_title like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='n_content'">
+							b.n_content like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='all'">
+							b.n_title like '%' || #{keyword} || '%' or
+							b.n_content like '%' || #{keyword} || '%'
+						</if>
+					</where>
+					ORDER BY b.n_seq DESC)a) 
+					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
+	</select>
+</mapper>
