@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kh.mixmatch.teamboard.dao.TeamBoardMapper">  
+	<select id="getRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM g_teamboard 
+					<where>
+						<if test="keyword != '' and keyfield =='tb_title'">
+							tb_title like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='id'">
+							id like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='tb_content'">
+							tb_content like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='all'">
+							tb_title like '%' || #{keyword} || '%' or
+							id like '%' || #{keyword} || '%' or
+							tb_content like '%' || #{keyword} || '%'
+						</if>
+					</where>
+	</select>
+	
+	<select id="teamboardList" parameterType="map" resultType="teamBoardCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT b.tb_seq, 
+			<![CDATA[ REPLACE(REPLACE(b.tb_title,'<','&lt;'),'>','&gt;') tb_title, ]]>
+			b.tb_hit, b.tb_regdate, b.id<!-- , r.reply_cnt --> FROM g_teamboard b
+					<where>
+						<if test="keyword != '' and keyfield =='tb_title'">
+							b.tb_title like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='tb_content'">
+							b.tb_content like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='id'">
+							b.id like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='all'">
+							b.tb_title like '%' || #{keyword} || '%' or
+							b.id like '%' || #{keyword} || '%' or
+							b.tb_content like '%' || #{keyword} || '%'
+						</if>
+					</where>
+					ORDER BY b.tb_seq DESC)a) 
+					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
+	</select>
+</mapper>
