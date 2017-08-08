@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var count;				//게시글 총갯수
 	var rowCount;			//한 페이지에 보여질 행(레코드) 수
 
-	//글 등록
+	//글 등록 유효성체크
 	$(document).on('submit','#mypageCommand',function(event){
 		if ($('#h_content').val() == '') {
 			alert('내용을 입력하세요');
@@ -187,9 +187,6 @@ $(document).ready(function(){
 								//로그인한 id가 글 작성자 id와 같은 경우
 								output += '	<input type="button" value="수정" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-modify">';
 								output += '	<input type="button" value="삭제" data-replyNum="'+item.h_re_seq+'" data-replyId="'+item.id+'" class="reply-delete">';
-							}else{
-								//로그인하지 않았거나 작성자 id와 다른 경우
-								
 							}
 							
 							output += '   	</td>';
@@ -252,9 +249,7 @@ $(document).ready(function(){
 					}else if (data.result == 'success') {
 						//폼 초기화
 						initForm();
-						
-						 /* 댓글 작성이 성공하면  새로 삽입한 글을 포함해서 첫번째 페이지의 게시글들을 다시 호출*/
-						 
+						//댓글 작성이 성공하면  새로 삽입한 글을 포함해서 첫번째 페이지의 게시글들을 다시 호출
 						selectData(1,h_seq);
 					}else{
 						alert('등록시 오류 발생!');

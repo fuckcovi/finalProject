@@ -7,20 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypageLayout.css">
-<style>
-textarea {
-	width: 600px; 
-	border: none; 
-	background: white; 
-	resize: none;
-}
-</style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mypage.reply.js"></script>
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
-
-
-
 
 <div class="container">
 
@@ -46,7 +35,7 @@ textarea {
 			</div>
 		</c:if><br>
 		<div class="align-center">
-			<c:if test="${!empty user_id && user_id == member.id}">		<!-- 자신의 미니홈피가 아니면 내 정보로 가는 버튼 숨김 -->
+			<c:if test="${!empty user_id && user_id == member.id}">		<!-- 자신의 미니홈피가 아니면 내 정보 버튼 숨김 -->
 				<input type="button" value="내 정보" onclick="location.href='${pageContext.request.contextPath}/member/detail.do'" class="btn btn-info"/>
 			</c:if>
 		</div><br>
@@ -57,21 +46,13 @@ textarea {
 			<li>포인트 : ${member.point}</li>
 		</ul><br>
 
-
-
-
-
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab4" data-toggle="tab">축구</a></li>
 			<li><a href="#tab5" data-toggle="tab">야구</a></li>
 			<li><a href="#tab6" data-toggle="tab">농구</a></li>
 		</ul>
 
-
-
-
-
-		<div class="tab-content">			<!-- 각각의 종목들의 가장 최근 기록 -->
+		<div class="tab-content">			<!-- 각 종목들의 가장 최근 기록 -->
 			<!-- 축구 -->
 			<c:if test="${football == null}">
 				<div class="tab-pane active fade in" id="tab4">
@@ -84,7 +65,6 @@ textarea {
 					<p class="p_size">어시스트 : ${football.f_assist}</p>
 					<p class="p_size">공격P : ${football.f_attack}</p>
 				</div>
-				
 				
 			<!-- 야구 -->	
 			<c:if test="${baseball == null}">
@@ -111,8 +91,6 @@ textarea {
 					<p class="p_size">어시스트 : ${basketball.b_assist}</p>
 					<p class="p_size">리바운드 : ${basketball.b_rebound}</p>
 				</div>
-			
-			
 		</div>
 	</div>
 
@@ -128,25 +106,19 @@ textarea {
 	<c:if test="${!empty user_id && user_id == member.id}">		<!-- 자신의 미니홈피가 아니면 글등록폼 숨김 -->
 	<!-- 글등록 폼 -->
 		<div class="register_form">
-			<form:form commandName="mypageCommand" action="main.do" enctype="multipart/form-data">
+			<form:form commandName="mypageCommand" action="main.do" enctype="multipart/form-data">		<!-- 파일 업로드 일때만 enctype을 명시해줘 -->
 				<form:hidden path="id"/>
-				<form:errors element="div" cssClass="error-color"/>
-				
-					
-						<label for="h_content"></label>
-						<form:textarea path="h_content"   placeholder="내용을 입력하세요" />
-						<form:errors path="h_content" cssClass="error-color"/>
-					
-					<div class="post-file">
-						<label for="uploadfile"></label>
-						<input type="file" name="uploadfile" id="uploadfile">
-					
-						<form:select path="h_show">
-							<form:option value="y">전체공개</form:option>
-							<form:option value="n">비공개</form:option>
-						</form:select>
+				<label for="h_content"></label>
+				<form:textarea path="h_content"   placeholder="내용을 입력하세요" />
+				<div class="post-file">
+					<label for="uploadfile"></label>
+					<input type="file" name="uploadfile" id="uploadfile">
+					<form:select path="h_show">
+						<form:option value="y">전체공개</form:option>
+						<form:option value="n">비공개</form:option>
+					</form:select>
 						<input type="submit" value="등록">
-					</div>
+				</div>
 			</form:form>
 		</div>
 	</c:if>
@@ -160,9 +132,8 @@ textarea {
 		<!-- 로그인 되어있는 유저가 다른 유저의 페이지를 방문했을때 비공개로 되어있는 글은 확인불가능 -->				
 		<c:if test="${user_id != mypage.id}">							
 		<c:if test="${mypage.h_show eq 'y'}">
-			<%-- <input type="hidden" name="h_seq" id="h_seq" value="${mypage.h_seq}">	<!-- 부모글번호 --> --%>  
 			<input type="hidden" name="id" id="id" value="${mypage.id}">		<!-- 부모글 작성자 -->
-			<input type="hidden" name="h_show" value="${mypage.h_show}">
+			<input type="hidden" name="h_show" value="${mypage.h_show}">		<!-- 글 공개여부 -->
 			<div class="post-list" id="${mypage.h_seq}">
 		<div class="post_head">
 			<table>
@@ -333,7 +304,6 @@ textarea {
 	</div>
 	
 	</c:if>
-
 		</c:forEach>
 	</c:if>
 

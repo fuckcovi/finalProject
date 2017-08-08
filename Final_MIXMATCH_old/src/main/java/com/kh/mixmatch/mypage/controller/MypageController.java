@@ -35,8 +35,8 @@ import com.kh.mixmatch.util.PagingUtil;
 public class MypageController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	private int rowCount = 6;
-	private int pageCount = 10;
+	private int rowCount = 6;		//한 화면에 6개의 게시글만 노출
+	private int pageCount = 10;		//총 10개의 목록
 	
 	@Resource
 	private MypageService mypageService;
@@ -77,16 +77,16 @@ public class MypageController {
 		mypageCommand.setId(id);
 			
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypageList");
-		mav.addObject("user_id",user_id);
-		mav.addObject("member",member);
-		mav.addObject("football",football);
-		mav.addObject("basketball",basketball);
-		mav.addObject("baseball",baseball);
-		mav.addObject("count",count);
-		mav.addObject("list",list);
-		mav.addObject("pagingHtml",page.getPagingHtml());
-		mav.addObject("mypageCommand",mypageCommand);
+		mav.setViewName("mypageList");								//View
+		mav.addObject("user_id",user_id);							//로그인되어있는 유저
+		mav.addObject("member",member);								//유저정보
+		mav.addObject("football",football);							//축구기록
+		mav.addObject("basketball",basketball);						//농구기록
+		mav.addObject("baseball",baseball);							//야구기록
+		mav.addObject("count",count);								//총 글의 갯수
+		mav.addObject("list",list);									//글 목록
+		mav.addObject("pagingHtml",page.getPagingHtml());			//페이징
+		mav.addObject("mypageCommand",mypageCommand);				//미니홈피 자바빈
 		
 		return mav;
 	} 
@@ -96,10 +96,6 @@ public class MypageController {
 	//미니홈피 글등록
 	@RequestMapping(value="/mypage/main.do",method=RequestMethod.POST)
 	public String submit(@ModelAttribute("mypageCommand")MypageCommand mypageCommand){
-		
-		if (log.isDebugEnabled()) {
-			log.debug("<<mypageCommand1111>> : " + mypageCommand);
-		}
 		
 		//글쓰기
 		mypageService.insert(mypageCommand);
@@ -200,10 +196,6 @@ public class MypageController {
 		mav.addObject("imageFile", mypage.getH_file());
 		mav.addObject("filename", mypage.getH_file_name());
 		
-		if (log.isDebugEnabled()) {
-			log.debug("<<seq>> : " + seq);
-		}
-		
 		return mav;
 	}
 	
@@ -211,16 +203,11 @@ public class MypageController {
 	//미니홈피 댓글 리스트
 	@RequestMapping("/mypage/postReplyList.do")
 	@ResponseBody
-	public Map<String,Object> process(@RequestParam(value="pageNum", defaultValue="1")int currentPage,@RequestParam(value="h_seq")String h_seq){	//濡쒓렇�씤 �릺�뼱�엳�뒗 �쑀��ID
+	public Map<String,Object> process(@RequestParam(value="pageNum", defaultValue="1")int currentPage,@RequestParam(value="h_seq")String h_seq){	
 		int rowCount = 5;
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("h_seq", h_seq);
-		
-		if (log.isDebugEnabled()) {
-			log.debug("<<1111map>> : " + map);
-		}
-		
 		
 		//총 댓글 갯수
 		int count = mypageService.getRowCountReply(map);
@@ -229,14 +216,6 @@ public class MypageController {
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
-
-		if (log.isDebugEnabled()) {
-			log.debug("<<currentPage>> : " + currentPage);
-			log.debug("<<count>> : " + count);
-			log.debug("<<h_seq>> : " + h_seq);
-			log.debug("<<map>> : " + map);
-		}
-		
 		
 		List<MypageReplyCommand> list = null;
 		if (count > 0) {
@@ -245,11 +224,6 @@ public class MypageController {
 			list = Collections.emptyList();
 		}
 	
-		if (log.isDebugEnabled()) {
-			log.debug("<<list>> : " + list);
-		}
-		
-		
 		Map<String,Object> mapJson = new HashMap<String, Object>();
 		mapJson.put("count", count);
 		mapJson.put("rowCount", rowCount);
@@ -278,6 +252,7 @@ public class MypageController {
 		
 		return map;
 	}
+	
 	
 	//미니홈피 댓글 수정
 	@RequestMapping("mypage/updateReply.do")
@@ -313,10 +288,6 @@ public class MypageController {
 	
 	
 	
-	
-	
-	
-	
 	//미니홈피 댓글 삭제
 	@RequestMapping("mypage/deleteReply.do")
 	@ResponseBody
@@ -343,19 +314,6 @@ public class MypageController {
 		return map;
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

@@ -7,15 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 public class MypageCommand {
-	//@NotEmpty			//이걸로 유효성 체크하기때문에 validator를 만들필요없어
 	private int h_seq;
-	//@NotEmpty
 	private String id;
-	//@NotEmpty
 	private Date h_regdate;
-	//@NotEmpty
 	private String h_content;		//CLOB
-	//@NotEmpty
 	private String h_show;
 	private MultipartFile uploadfile;	//업로드한 파일의 정보를 uploadfile이 가지고있어.
 	private byte[] h_file;		//blob를 바이트 배열로 넣어주기 위해 필요해(Mybatis가 MultipartFile을 바로 BLOB타입으로 못 바꿔줘). 다시 데이터베이스에서 빼낼때도 BLOB타입을 배열로 바꾸어서 꺼내와

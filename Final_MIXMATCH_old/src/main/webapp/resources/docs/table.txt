@@ -164,7 +164,7 @@ CREATE TABLE G_HOME_RE(
 );
 CREATE SEQUENCE G_HOME_RE_SEQ;
 
------------------------ Æ÷ÀÎÆ® ¼ó ---------------------------------------------
+----------------------- ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ ---------------------------------------------
 CREATE TABLE G_POINT_PRODUCT
 (
     p_seq          INT              NOT NULL, 
@@ -174,13 +174,13 @@ CREATE TABLE G_POINT_PRODUCT
     p_file_name    VARCHAR2(150)    NOT NULL,  
     upload_file    BLOB             NOT NULL,
     CONSTRAINT G_POINT_PRODUCT_PK PRIMARY KEY (p_seq)
-)
+);
 
 CREATE SEQUENCE G_POINT_PRODUCT_SEQ
 START WITH 1
 INCREMENT BY 1;
 
---------------------------------- °Ô½ÃÆÇ ------------------------------------
+--------------------------------- ï¿½Ô½ï¿½ï¿½ï¿½ ------------------------------------
 create table g_board(
  gb_seq number not null,
  gb_title varchar2(100) not null,
