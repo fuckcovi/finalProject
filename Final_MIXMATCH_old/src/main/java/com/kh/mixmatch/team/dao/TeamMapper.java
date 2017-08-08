@@ -13,7 +13,6 @@ import com.kh.mixmatch.team.domain.TeamCommand;
 
 public interface TeamMapper {
 	
-	@Select("SELECT * FROM g_team ORDER BY t_regdate DESC")
 	public List<TeamCommand> list(Map<String, Object> map);
 	
 	@Insert("INSERT INTO g_team (t_name,t_type,t_regdate,t_address,id,t_logo,t_logo_name) VALUES(#{t_name},#{t_type},sysdate,#{t_address},#{id},#{t_logo,jdbcType=BLOB},#{t_logo_name,jdbcType=VARCHAR})")

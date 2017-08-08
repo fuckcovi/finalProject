@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -54,52 +55,29 @@ public class TeamController {
 		return new TeamCommand();
 	}
 	
-	
-	/*
-	private int rowCount = 10;
+	private int rowCount = 3;
 	private int pageCount = 1;
-	@RequestMapping("/teamList.do")
-	@ResponseBody
-	public Map<String, Object> teamList(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
+
+//=================== 팀홈 ==============
+	
+	@RequestMapping("/team.do")
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,HttpSession session){
 		if(log.isDebugEnabled()){
 			log.debug("<<< currentPage >>> : " + currentPage);
 		}
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		// 총 팀의 갯수
-		int teamCount = teamService.getTeamCount(map); 
-		PagingUtil page = new PagingUtil(currentPage, teamCount, rowCount, pageCount, null);
-		map.put("start", page.getStartCount());
-		map.put("end",page.getEndCount());
-		
-		List<TeamCommand> list = null;
-		if(teamCount>0){
-			list = teamService.list(map);
-		}else{
-			list = Collections.emptyList();	// count가 0이여도 null이아닌 비어있는 리스트 호출
-		}
-		System.out.println("총 팀 수 : "+ teamCount);
-		System.out.println("팀목록 : " + list);
-		Map<String, Object> mapJson = new HashMap<String, Object>();
-		mapJson.put("teamCount",teamCount);
-		mapJson.put("rowCount", rowCount);
-		mapJson.put("list", list);
-		
-		return mapJson;	
-	}*/
-//=================== 팀홈 ==============
-	
-	@RequestMapping("/team.do")
-	public ModelAndView process(HttpSession session){
 		// 사이트에 등록되어 있는 팀 목록
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<TeamCommand> list = null;
 		int count = teamService.getTeamCount(map);
+
+		System.out.println(count + " : " + list);
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "team.do");
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
 		if(count>0){
 			list = teamService.list(map);
 		}
-		
 		// 가입신청한 팀 목록
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		String user_id = (String)session.getAttribute("user_id");
@@ -114,7 +92,7 @@ public class TeamController {
 		mav.setViewName("teamHome");
 		mav.addObject("count", count);	// 등록된 팀의 총 수
 		mav.addObject("list",list);	// 등록된 팀의 리스트
-
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		mav.addObject("joinCount",joinCount);
 		mav.addObject("joinList",joinList);			// 가입신청한 팀 목록
 		return mav;

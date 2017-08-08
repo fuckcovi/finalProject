@@ -23,7 +23,8 @@
 	<select id="noticeList" parameterType="map" resultType="noticeCommand">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT b.gn_seq, 
 			<![CDATA[ REPLACE(REPLACE(b.gn_title,'<','&lt;'),'>','&gt;') gn_title, ]]>
-			b.gn_hit, b.gn_regdate, b.id,b.ip<!-- , r.reply_cnt --> FROM g_notice b
+			b.gn_hit, b.gn_regdate, b.id,b.ip, r.reply_cnt  FROM g_notice b
+			LEFT JOIN (SELECT gnre_seq,count(*) reply_cnt FROM g_notice_re GROUP BY gnre_seq)r ON b.gn_seq = r.gnre_seq
 					<where>
 						<if test="keyword != '' and keyfield =='gn_title'">
 							b.gn_title like '%' || #{keyword} || '%'

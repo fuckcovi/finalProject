@@ -28,7 +28,8 @@
 	<select id="teamboardList" parameterType="map" resultType="teamBoardCommand">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT b.gt_seq, 
 			<![CDATA[ REPLACE(REPLACE(b.gt_title,'<','&lt;'),'>','&gt;') gt_title, ]]>
-			b.gt_hit, b.gt_regdate,b.ip, b.id,b.t_name<!-- , r.reply_cnt --> FROM g_teamboard b
+			b.gt_hit, b.gt_regdate,b.ip, b.id,b.t_name  <!-- , r.reply_cnt-->  FROM g_teamboard b
+			
 					<where>
 						t_name=#{t_name}
 						<if test="keyword != '' and keyfield =='gt_title'">
