@@ -27,10 +27,10 @@
 			</tr>
 			<c:forEach var="article" items="${list}">
 			<tr>
-				<td>${article.n_seq }</td>
-				<td><a href="noticeDetail.do?n_seq=${article.n_seq}">${article.n_title}</a></td>
-				<td>${article.n_regdate}</td>
-				<td>${article.n_hit}</td>
+				<td>${article.gn_seq }</td>
+				<td><a href="noticeDetail.do?gn_seq=${article.gn_seq}">${article.gn_title}</a></td>
+				<td>${article.gn_regdate}</td>
+				<td>${article.gn_hit}</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -40,8 +40,8 @@
 		<ul class="search">
 			<li>
 				<select name="keyfield">
-					<option value="n_title">제목</option>
-					<option value="n_content">내용</option>
+					<option value="gn_title">제목</option>
+					<option value="gn_content">내용</option>
 					<option value="all">전체</option>
 				</select>
 			</li> 

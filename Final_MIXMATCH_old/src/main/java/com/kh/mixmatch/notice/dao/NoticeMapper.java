@@ -12,16 +12,16 @@ import com.kh.mixmatch.notice.domain.NoticeCommand;
 
 
 public interface NoticeMapper {
-	@Insert("INSERT INTO g_notice (n_seq,n_title,n_content,n_hit,n_file,n_file_name,n_regdate,id) VALUES(g_notice_seq.nextval,#{n_title},#{n_content},#{n_hit},#{n_file,jdbcType=BLOB},#{n_file_name,jdbcType=VARCHAR},sysdate,#{id})")
+	@Insert("INSERT INTO g_notice (gn_seq,gn_title,gn_content,gn_hit,gn_uploadfile,gn_filename,gn_regdate,ip,id) VALUES(g_notice_seq.nextval,#{gn_title},#{gn_content},#{gn_hit},#{gn_uploadfile,jdbcType=BLOB},#{gn_filename,jdbcType=VARCHAR},sysdate,#{ip},#{id})")
 	public void noticeInsert(NoticeCommand notice);
-	@Delete("DELETE FROM g_notice WHERE n_seq=#{n_seq}")
-	public void noticeDelete(Integer n_seq);
-	@Update("UPDATE g_notice SET n_title=#{n_title},n_content=#{n_content},n_file=#{n_file,jdbcType=BLOB},n_file_name=#{n_file_name,jdbcType=VARCHAR} WHERE n_seq=#{n_seq}")
+	@Delete("DELETE FROM g_notice WHERE gn_seq=#{gn_seq}")
+	public void noticeDelete(Integer gn_seq);
+	@Update("UPDATE g_notice SET gn_title=#{gn_title},gn_content=#{gn_content},gn_uploadfile=#{gn_uploadfile,jdbcType=BLOB},gn_filename=#{gn_filename,jdbcType=VARCHAR},ip=#{ip} WHERE gn_seq=#{gn_seq}")
 	public void noticeUpdate(NoticeCommand notice);
-	@Update("UPDATE g_notice SET n_hit=n_hit+1 WHERE n_seq=#{n_seq}")
-	public void noticeUpdateHit(Integer n_seq);
-	@Select("SELECT * FROM g_notice WHERE n_seq=#{n_seq}")
-	public NoticeCommand noticeSelect(Integer n_seq);
+	@Update("UPDATE g_notice SET gn_hit=gn_hit+1 WHERE gn_seq=#{gn_seq}")
+	public void noticeUpdateHit(Integer gn_seq);
+	@Select("SELECT * FROM g_notice WHERE gn_seq=#{gn_seq}")
+	public NoticeCommand noticeSelect(Integer gn_seq);
 	@Select("SELECT COUNT(*) FROM g_notice")
 	public int getRowCount(Map<String, Object> map);
 	public List<NoticeCommand> noticeList(Map<String, Object> map);

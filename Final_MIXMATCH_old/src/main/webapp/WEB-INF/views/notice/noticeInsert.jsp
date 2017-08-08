@@ -13,18 +13,18 @@
 		<form:hidden path="id"/>
 		<ul>
 			<li>
-				<label for="n_title">제목</label>
-				<form:input path="n_title"/>
-				<form:errors path="n_title" cssClass="error-color"/>
+				<label for="gn_title">제목</label>
+				<form:input path="gn_title"/>
+				<form:errors path="gn_title" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="n_content">내용</label>
-				<form:input path="n_content"/>
-				<form:errors path="n_content" cssClass="error-color"/>
+				<label for="gn_content">내용</label>
+				<form:input path="gn_content"/>
+				<form:errors path="gn_content" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="n_file_upload">파일업로드</label>
-				<input type="file" id="n_file_upload" name="n_file_upload">
+				<label for="gn_uploadfile_upload">파일업로드</label>
+				<input type="file" id="gn_uploadfile_upload" name="gn_uploadfile_upload">
 			</li>
 		</ul>
 		<input type="submit" value="공지사항등록">

@@ -21,8 +21,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public void noticeDelete(Integer n_seq) {
-		noticeMapper.noticeDelete(n_seq);		
+	public void noticeDelete(Integer gn_seq) {
+		noticeMapper.noticeDelete(gn_seq);		
 	}
 
 	@Override
@@ -31,13 +31,13 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public void noticeUpdateHit(Integer n_seq) {
-		noticeMapper.noticeUpdateHit(n_seq);
+	public void noticeUpdateHit(Integer gn_seq) {
+		noticeMapper.noticeUpdateHit(gn_seq);
 	}
 
 	@Override
-	public NoticeCommand noticeSelect(Integer n_seq) {
-		return noticeMapper.noticeSelect(n_seq);
+	public NoticeCommand noticeSelect(Integer gn_seq) {
+		return noticeMapper.noticeSelect(gn_seq);
 	}
 
 	@Override

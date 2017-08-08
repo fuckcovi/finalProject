@@ -9,11 +9,11 @@ import com.kh.mixmatch.notice.domain.NoticeCommand;
 @Transactional
 public interface NoticeService {
 	public void noticeInsert(NoticeCommand notice);
-	public void noticeDelete(Integer n_seq);
+	public void noticeDelete(Integer gn_seq);
 	public void noticeUpdate(NoticeCommand notice);
-	public void noticeUpdateHit(Integer n_seq);
+	public void noticeUpdateHit(Integer gn_seq);
 	@Transactional(readOnly=true)
-	public NoticeCommand noticeSelect(Integer n_seq);
+	public NoticeCommand noticeSelect(Integer gn_seq);
 	@Transactional(readOnly=true)
 	public int getRowCount(Map<String, Object> map);
 	@Transactional(readOnly=true)

@@ -86,30 +86,31 @@ public class NoticeController {
 		if(result.hasErrors()){
 			return "noticeInsert";
 		}
+		noticeCommand.setIp(request.getRemoteAddr());
 		// 글쓰기
 		noticeService.noticeInsert(noticeCommand);
 		return "redirect:/notice.do";
 	}
 	@RequestMapping("/noticeDetail.do")
-	public ModelAndView noticeDetail(@RequestParam int n_seq){
+	public ModelAndView noticeDetail(@RequestParam int gn_seq){
 		if(log.isDebugEnabled()){
-			log.debug("<<<< n_seq>>>>> : " +n_seq);
+			log.debug("<<<< gn_seq>>>>> : " +gn_seq);
 		}
 		// 해당 글의 조회수 증가
-		noticeService.noticeUpdateHit(n_seq);
-		NoticeCommand notice = noticeService.noticeSelect(n_seq);
+		noticeService.noticeUpdateHit(gn_seq);
+		NoticeCommand notice = noticeService.noticeSelect(gn_seq);
 		
 		return new ModelAndView("noticeDetail","notice",notice);
 	}
 
 	// 파일 다운로드
 	@RequestMapping("/noticefile.do")
-	public ModelAndView download(@RequestParam int n_seq){
-		NoticeCommand notice = noticeService.noticeSelect(n_seq);
+	public ModelAndView download(@RequestParam int gn_seq){
+		NoticeCommand notice = noticeService.noticeSelect(gn_seq);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadView");
-		mav.addObject("downloadFile",notice.getN_file());
-		mav.addObject("filename", notice.getN_file_name());
+		mav.addObject("downloadFile",notice.getGn_uploadfile());
+		mav.addObject("filename", notice.getGn_filename());
 		return mav;
 	}
 	
@@ -119,8 +120,8 @@ public class NoticeController {
 		NoticeCommand notice = noticeService.noticeSelect(n_seq);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("imageView");
-		mav.addObject("imageFile",notice.getN_file());
-		mav.addObject("filename",  notice.getN_file_name());
+		mav.addObject("imageFile",notice.getGn_uploadfile());
+		mav.addObject("filename",  notice.getGn_filename());
 		return mav;
 	}
 }
