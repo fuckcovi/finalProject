@@ -121,6 +121,7 @@
 			<mvc:mapping path="/member/update.do"/>
 			<mvc:mapping path="/member/delete.do"/>
 			<mvc:mapping path="/team.do"/>
+			<mvc:mapping path="/teamInfo.do"/>
 			<mvc:mapping path="/teamSchedule.do"/>
 			<mvc:mapping path="/teamRecord.do"/>
 			<mvc:mapping path="/mypage/main.do"/>
