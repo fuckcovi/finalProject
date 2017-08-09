@@ -55,7 +55,7 @@
 	</c:forEach>
 	</table>
 	</c:if>
-	<c:if test="${matchCount<1}">
+	<c:if test="${matchCount==0}">
 		<div>최근경기결과 없음</div>
 	</c:if>
 	<br>

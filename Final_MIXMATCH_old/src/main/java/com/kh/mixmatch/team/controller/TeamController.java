@@ -61,7 +61,7 @@ public class TeamController {
 //=================== 팀홈 ==============
 	
 	@RequestMapping("/team.do")
-	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,HttpSession session){
+	public ModelAndView process(@RequestParam(defaultValue="") String t_type,@RequestParam(value="pageNum",defaultValue="1") int currentPage,HttpSession session){
 		if(log.isDebugEnabled()){
 			log.debug("<<< currentPage >>> : " + currentPage);
 		}
@@ -69,11 +69,14 @@ public class TeamController {
 		// 사이트에 등록되어 있는 팀 목록
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<TeamCommand> list = null;
+		map.put("keyfield", "teamtype");
+		map.put("keyword",t_type);
 		int count = teamService.getTeamCount(map);
 
-		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "team.do");
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "team.do?t_type="+t_type);
 		map.put("start", page.getStartCount());
 		map.put("end",page.getEndCount());
+		
 		if(count>0){
 			list = teamService.list(map);
 		}

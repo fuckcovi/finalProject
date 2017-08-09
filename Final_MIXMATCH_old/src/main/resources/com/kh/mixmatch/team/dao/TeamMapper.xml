@@ -35,22 +35,11 @@
 	<select id="list" parameterType="map" resultType="teamCommand">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM
 		(SELECT b.* FROM g_team b 
-					<!-- <where>
-						<if test="keyword != '' and keyfield =='title'">
-							b.title like '%' || #{keyword} || '%'
+					<where>
+						<if test="keyword != ''">
+							b.t_type=#{keyword}
 						</if>
-						<if test="keyword != '' and keyfield =='id'">
-							b.id like '%' || #{keyword} || '%'
-						</if>
-						<if test="keyword != '' and keyfield =='content'">
-							b.content like '%' || #{keyword} || '%'
-						</if>
-						<if test="keyword != '' and keyfield =='all'">
-							b.title like '%' || #{keyword} || '%' or
-							b.id like '%' || #{keyword} || '%' or
-							b.content like '%' || #{keyword} || '%'
-						</if>
-					</where> --> 
+					</where> 
 					ORDER BY b.t_regdate DESC)a) 
 					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>

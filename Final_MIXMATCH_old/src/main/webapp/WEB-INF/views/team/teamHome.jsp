@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script> --%>
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/teamList.js"></script> --%>
 <div class="page-main-style">
 	<h2>팀홈</h2>
@@ -15,7 +15,7 @@
 		</c:if>
 		<c:if test="${joinCount>0 }">
 		<h3>&lt;&lt;소속팀&gt;&gt;</h3>
-		<div style="overflow-y: auto; height:120px;">  
+		<div style="margin:0 auto;overflow-y: auto;width:600px; height:120px;">  
 			<c:forEach var="joinList" items="${joinList}">
 				<div>
 					<c:if test="${joinList.t_mem_auth > 0}">
@@ -44,31 +44,32 @@
 	<br><hr class="style">
 	
 	<h3 style="color:red;">MixMatch등록팀현황</h3> 
-	<input type="button" value="모든종목" class="btn" id="typeAll">
-	<input type="button" value="축구" class="btn" id="typeFoot">
-	<input type="button" value="야구" class="btn" id="typeBase">
-	<input type="button" value="농구" class="btn" id="typeBasket">
+	<input type="button" value="전체보기" class="btn" id="typeAll" onclick="location.href='team.do?t_type='">
+	<input type="button" value="축구" class="btn" id="typeFoot" onclick="location.href='team.do?t_type=축구'">
+	<input type="button" value="야구" class="btn" id="typeBase" onclick="location.href='team.do?t_type=야구'">
+	<input type="button" value="농구" class="btn" id="typeBasket" onclick="location.href='team.do?t_type=농구'">
 	
 	
 	
-	<div style="height: 300px;">
+	<div  style="height: 300px;">
 	
 		<br>
 		<c:if test="${count>0}">
 			<c:forEach var="list" items="${list}">
-			<div style="width:200px;height:250px;margin:10px 10px 10px 10px; background-color: red; float:left;" id="${list.t_type}">
+			<div style="width:30%;height:250px;margin:10px 10px 10px 10px;  float:left;" id="${list.t_type}">
 				<c:if test="${fn:endsWith(list.t_logo_name, '.jpg') || 
 							fn:endsWith(list.t_logo_name, '.png') || 
 							fn:endsWith(list.t_logo_name, '.gif') || 
 							fn:endsWith(list.t_logo_name, '.JPG') || 
 							fn:endsWith(list.t_logo_name, '.PNG') || 
 							fn:endsWith(list.t_logo_name, '.GIF')}">
-					<img src="imageView.do?t_name=${list.t_name}" style="width:200px;height:200px;">
+					<img src="imageView.do?t_name=${list.t_name}" style="width:100%;height:200px;">
 				</c:if>
 				<a href="teamInfo.do?t_name=${list.t_name}">${list.t_name}</a> | ${list.t_address}
 				<br>
 			</div>
 			</c:forEach>
+		<div class="align-center">${pagingHtml}</div>
 		</c:if>
 		<c:if test="${count==0}">
 			등록된 팀이 없습니다. 첫번째 팀을 생성해주세요.
@@ -76,5 +77,4 @@
 	
 	
 	</div>
-	<div class="align-center">${pagingHtml}</div>
 </div>
