@@ -72,7 +72,7 @@
 			</c:if>
 			<c:if test="${teamMemCount == 0}">
 				<tr>
-					<td colspan="9">소속 회원의 기록이 하나도 없을수가 있나</td>
+					<td colspan="9">${team.t_name}의 회원기록이 존재하지 않습니다.</td>
 				</tr>
 			</c:if>
 		</c:if>
@@ -119,7 +119,7 @@
 			</c:if>
 			<c:if test="${teamMemCount == 0}">
 				<tr>
-					<td colspan="9">소속 회원의 기록이 하나도 없을수가 있나</td>
+					<td colspan="14">${team.t_name}의 회원기록이 존재하지 않습니다.</td>
 				</tr>
 			</c:if>
 		</c:if>
@@ -152,11 +152,11 @@
 			</c:if>
 			<c:if test="${teamMemCount == 0}">
 				<tr>
-					<td colspan="9">소속 회원의 기록이 하나도 없을수가 있나</td>
+					<td colspan="7">${team.t_name}의 회원기록이 존재하지 않습니다.</td>
 				</tr>
 			</c:if>
 		</c:if>
-	<c:forEach var="memlist" items="${listTeamMem}">
+	<%-- <c:forEach var="memlist" items="${listTeamMem}">
 		<c:if test="${memlist.t_mem_auth>0}">
 			<tr>
 				<td>${memlist.id}</td>
@@ -171,7 +171,7 @@
 				<td>${memlist.t_mem_auth}</td>
 			</tr>
 		</c:if>		
-	</c:forEach>
+	</c:forEach> --%>
 	</table>
 	
 </div>

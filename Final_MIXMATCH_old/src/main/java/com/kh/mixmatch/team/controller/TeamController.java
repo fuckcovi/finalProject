@@ -334,7 +334,9 @@ public class TeamController {
 		List<FootCommand> listTMemFoot = null;
 		List<BaseCommand> listTMemBase = null;
 		List<BasketCommand> listTMemBasket = null;
-		int teamMemCount = teamMemService.getRowTeamMemCount(t_name);
+		map.put("type", team.getT_type());
+		
+		int teamMemCount = teamMemService.getRowTeamMemRecordCount(map);
 		if(teamMemCount>0 && team.getT_type().equals("축구")){
 			map.put("forder",forder);
 			listTMemFoot = teamMemService.listTMemFoot(map);
@@ -653,8 +655,8 @@ public class TeamController {
 	
 	
 //=============================== 통합포인트랭킹=========================
-	private int totalProwCount =2	;
-	private int totalPpageCount = 2;
+	private int totalProwCount =10	;
+	private int totalPpageCount = 5;
 	@RequestMapping("/totalRank.do")
 	public ModelAndView totalPointRank(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		// 가입한 총 유저 목록

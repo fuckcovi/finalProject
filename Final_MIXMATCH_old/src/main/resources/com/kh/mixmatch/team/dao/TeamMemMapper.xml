@@ -4,6 +4,16 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.kh.mixmatch.team.dao.TeamMemMapper"> 
 
+	
+	
+	<select id="getRowTeamMemRecordCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM 
+		<if test="type == '야구'">g_baseball</if>
+		<if test="type == '축구'">g_football</if>
+		<if test="type == '농구'">g_basketball</if>
+		WHERE t_name=#{t_name}
+	</select>
+	
 	<select id="getMemList" parameterType="map" resultType="memberCommand">
 		SELECT * FROM (SELECT a.*, rownum rnum, rownum pointStatus FROM
 		(SELECT * FROM g_member ORDER BY point DESC)a )

@@ -55,7 +55,8 @@ public interface TeamMemService {
 	public List<BasketCommand> listMatchBasket(Integer mseq);	
 	@Transactional(readOnly=true)
 	public int getMemRecordCount(Map<String,Object> map);
-	
+	@Transactional(readOnly=true)
+	public int getRowTeamMemRecordCount(Map<String, Object> map);
 	
 	// ¸â¹öservice
 	@Transactional(readOnly=true)

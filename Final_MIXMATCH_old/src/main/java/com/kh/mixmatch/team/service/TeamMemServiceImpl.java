@@ -135,5 +135,11 @@ public class TeamMemServiceImpl implements TeamMemService{
 		// TODO Auto-generated method stub
 		return teamMemMapper.getMemRecordCount(map);
 	}
+
+	@Override
+	public int getRowTeamMemRecordCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return teamMemMapper.getRowTeamMemRecordCount(map);
+	}
 	
 }
