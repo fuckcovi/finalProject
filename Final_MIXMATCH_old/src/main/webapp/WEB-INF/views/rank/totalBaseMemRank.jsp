@@ -8,14 +8,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
 	<h3>통합야구랭킹</h3>
-	<ul style="list-style: none; " >
-		<li style="float:left;">
+	<div class="align-center" style="height:30px;">
+	<ul style="list-style:none;  " >
+		<li style="display: inline; ">
 			<input type="button" id="team" class="btn" value="팀랭킹" onclick="location.href='totalBaseRank.do'">
 		</li>
-		<li style="float:left;">
+		<li style="display: inline; ">
 			<input type="button" id="member" class="btn" value="개인랭킹" onclick="location.href='totalBaseMemRank.do'">
 		</li>
 	</ul>
+	</div>
 	<br>
 	
 	<div class="memList" >
@@ -44,7 +46,7 @@
 				<c:if test="${fn:endsWith(listMem.profile_name, '.jpg') || fn:endsWith(listMem.profile_name, '.png') || fn:endsWith(listMem.profile_name, '.gif') || fn:endsWith(listMem.profile_name, '.JPG') || fn:endsWith(listMem.profile_name, '.PNG') || fn:endsWith(listMem.profile_name, '.GIF')}">
 					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">
 				</c:if> 
-				<c:if test="${empty list.profile_name }">
+				<c:if test="${empty listMem.profile_name }">
 					<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:100px;height:100px;">
 				</c:if>
 				</td>

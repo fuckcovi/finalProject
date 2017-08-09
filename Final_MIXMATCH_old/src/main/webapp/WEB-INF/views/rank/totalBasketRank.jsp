@@ -7,14 +7,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
 	<h3>통합농구랭킹</h3>
-	<ul style="list-style: none; " >
-		<li style="float:left;">
+	<div class="align-center" style="height:30px;">
+	<ul style="list-style:none;  " >
+		<li style="display: inline; ">
 			<input type="button" id="team" class="btn" value="팀랭킹" onclick="location.href='totalBasketRank.do'">
 		</li>
-		<li style="float:left;">
+		<li style="display: inline; ">
 			<input type="button" id="member" class="btn" value="개인랭킹" onclick="location.href='totalBasketMemRank.do'">
 		</li>
 	</ul>
+	</div>
 	<br>
 	<div class="teamList">
 	<table>
