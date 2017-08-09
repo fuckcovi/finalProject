@@ -58,19 +58,20 @@ public class TeamBoardController {
 		String user_id = (String)session.getAttribute("user_id");
 		tmap.put("id", user_id);
 		int teamcount = teamMemService.getRowTeamCount(user_id);
-		
+		ModelAndView mav = new ModelAndView();
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyfield",keyfield);
 		map.put("keyword", keyword);
 		if(teamcount>0){
 			teamlist = teamMemService.listConfirmTeam(tmap);
-			if(t_name.equals("")){
-				map.put("t_name", teamlist.get(0).getT_name());	// 임의로 첫번째 팀을 넣어서 검색
-			}else{
-				map.put("t_name", t_name);
-			}
-		}
-		
+				if(t_name.equals("")){
+					map.put("t_name", teamlist.get(0).getT_name());	// 임의로 첫번째 팀을 넣어서 검색
+				}else{
+					map.put("t_name", t_name);
+				}
+				
+				
+			
 		
 		
 		
@@ -89,11 +90,13 @@ public class TeamBoardController {
 		}
 		
 		
-		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("teamboard");
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		mav.addObject("count",count);
 		mav.addObject("list",list);
+		
+		}
 		mav.addObject("teamcount",teamcount);
 		mav.addObject("teamlist",teamlist);
 		return mav; 
