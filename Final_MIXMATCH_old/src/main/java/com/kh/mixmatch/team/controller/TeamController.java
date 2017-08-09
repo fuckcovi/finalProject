@@ -653,13 +653,21 @@ public class TeamController {
 	
 	
 //=============================== 통합포인트랭킹=========================
+	private int totalProwCount =2	;
+	private int totalPpageCount = 2;
 	@RequestMapping("/totalRank.do")
-	public ModelAndView totalPointRank(){
+	public ModelAndView totalPointRank(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		// 가입한 총 유저 목록
 		int count = teamMemService.getMemCount();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalRank.do");
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
 		List<MemberCommand> list = null;
 		if(count>0){
-			list = teamMemService.getMemList();
+			list = teamMemService.getMemList(map);
 		}else{
 			list = Collections.emptyList();
 		}
@@ -667,15 +675,21 @@ public class TeamController {
 		mav.setViewName("totalPointRank");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
 //=============================== 통합야구랭킹 ====================
 	@RequestMapping("/totalBaseRank.do")
-	public ModelAndView totalBaseRank(@RequestParam(defaultValue="t_win") String order){
+	public ModelAndView totalBaseRank(@RequestParam(defaultValue="t_win") String order,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","야구");
 		map.put("keyfield","teamtype");
 		int count = teamService.getTeamCount(map);
+
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalBaseRank.do");
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
 		List<TeamCommand> list = null;
 		if(count > 0){
 			map.put("order", order);
@@ -685,7 +699,7 @@ public class TeamController {
 		mav.setViewName("totalBaseRank");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
-		
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
 	@RequestMapping("/totalBaseMemRank.do")
@@ -704,12 +718,17 @@ public class TeamController {
 	}
 //=============================== 통합농구랭킹 ====================
 	@RequestMapping("/totalBasketRank.do")
-	public ModelAndView totalBasketRank(@RequestParam(defaultValue="t_win") String order){
+	public ModelAndView totalBasketRank(@RequestParam(defaultValue="t_win") String order,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		// 타입이 농구인 팀 목록
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","농구");
 		map.put("keyfield","teamtype");
 		int count = teamService.getTeamCount(map);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalBasketRank.do");
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
 		List<TeamCommand> list = null;
 		if(count > 0){
 			map.put("order", order);
@@ -719,6 +738,7 @@ public class TeamController {
 		mav.setViewName("totalBasketRank");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
 	@RequestMapping("/totalBasketMemRank.do")
@@ -736,11 +756,16 @@ public class TeamController {
 	}
 //=============================== 통합축구랭킹 ====================
 	@RequestMapping("/totalFootRank.do")
-	public ModelAndView totalFootRank(@RequestParam(defaultValue="t_win") String order){
+	public ModelAndView totalFootRank(@RequestParam(defaultValue="t_win") String order,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","축구");
 		map.put("keyfield","teamtype");
 		int count = teamService.getTeamCount(map);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalFootRank.do");
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
 		List<TeamCommand> list = null;
 		if(count > 0){
 			map.put("order", order);
@@ -750,7 +775,7 @@ public class TeamController {
 		mav.setViewName("totalFootRank");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
-		
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
 	@RequestMapping("/totalFootMemRank.do")

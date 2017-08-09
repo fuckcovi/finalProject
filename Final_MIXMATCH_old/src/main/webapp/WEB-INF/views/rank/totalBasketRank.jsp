@@ -27,9 +27,10 @@
 				<th><a href='totalBasketRank.do?order=t_draw'>무승부</a></th>
 				<th><a href='totalBasketRank.do?order=t_lose'>패배</a></th>
 			</tr>
-		<c:forEach var="list" items="${list}" varStatus="status">
+		<c:if test="${count>0 }">
+		<c:forEach var="list" items="${list}">
 			<tr>
-				<td>${status.count}</td>
+				<td>${list.status}</td>
 				<td>
 				<c:if test="${fn:endsWith(list.t_logo_name, '.jpg') || fn:endsWith(list.t_logo_name, '.png') || fn:endsWith(list.t_logo_name, '.gif') || fn:endsWith(list.t_logo_name, '.JPG') || fn:endsWith(list.t_logo_name, '.PNG') || fn:endsWith(list.t_logo_name, '.GIF')}">
 					<img src="imageView.do?t_name=${list.t_name}" style="width:100px;height:100px;">
@@ -41,7 +42,16 @@
 				<td>${list.t_draw}</td>
 				<td>${list.t_lose}</td>
 			</tr>
+		
 		</c:forEach>
 		</table>
+			<div class="align-center">${pagingHtml}</div>
+		</c:if>
+		<c:if test="${count==0 }">
+			<tr>
+				<td colspan="7">등록된 농구팀이 없습니다.</td>
+			</tr>
+			</table>
+		</c:if>
 	</div>
 </div>

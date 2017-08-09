@@ -32,13 +32,23 @@ public class MemberCommand {
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	
-	//비밀번호 수정용 프로퍼티(DB에는 없음)
+	private int pointStatus;	//랭킹 리스트화
+	
+	
+	public int getPointStatus() {
+		return pointStatus;
+	}
+	public void setPointStatus(int pointStatus) {
+		this.pointStatus = pointStatus;
+	}
+
+	//鍮꾨�踰덊샇 �닔�젙�슜 �봽濡쒗띁�떚(DB�뿉�뒗 �뾾�쓬)
 	@NotEmpty
 	private String changePw;
 	@NotEmpty
 	private String changePwCheck;
 	
-	// 비밀번호 체크
+	// 鍮꾨�踰덊샇 泥댄겕
 	public boolean isCheckedPasswd(String userPasswd){
 		if(pw.equals(userPasswd)){
 			return true;

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import com.kh.mixmatch.member.domain.MemberCommand;
@@ -89,11 +90,11 @@ public class TeamMemServiceImpl implements TeamMemService{
 	}
 
 	@Override
-	public List<MemberCommand> getMemList() {
+	public List<MemberCommand> getMemList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return teamMemMapper.getMemList();
+		return teamMemMapper.getMemList(map);
 	}
-
+	
 	@Override
 	public void updateTeamMem(Map<String, Object> map) {
 		teamMemMapper.updateTeamMem(map);

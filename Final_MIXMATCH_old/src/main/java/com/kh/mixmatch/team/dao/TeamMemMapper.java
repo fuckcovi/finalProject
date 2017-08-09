@@ -63,7 +63,7 @@ public interface TeamMemMapper {
 	// ¸â¹ömapper
 	@Select("SELECT COUNT(*) FROM g_member")	// ÃÑ È¸¿ø¼ö
 	public int getMemCount();
-	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM g_member ORDER BY point DESC)a)")
-	public List<MemberCommand> getMemList();	// ÃÑ È¸¿ø¸®½ºÆ®
+	
+	public List<MemberCommand> getMemList(Map<String, Object> map);	// ÃÑ È¸¿ø¸®½ºÆ®
 	
 }

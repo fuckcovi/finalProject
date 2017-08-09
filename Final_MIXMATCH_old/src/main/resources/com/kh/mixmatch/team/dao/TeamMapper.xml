@@ -4,19 +4,20 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.kh.mixmatch.team.dao.TeamMapper"> 
 	<select id="listRank" parameterType="map" resultType="TeamCommand">
-		SELECT * FROM g_team 
+		SELECT * FROM (SELECT a.*, rownum rnum, rownum status FROM (SELECT * FROM g_team 
 					
 						<where>
 							<if test="keyword != '' and keyfield =='teamtype' and order=='t_win'">
-							t_type like '%' || #{keyword} || '%' ORDER BY  t_win  DESC
+							t_type like '%' || #{keyword} || '%' ORDER BY  t_win  DESC)a)
 							</if>
 							<if test="keyword != '' and keyfield =='teamtype' and order=='t_draw'">
-							t_type like '%' || #{keyword} || '%' ORDER BY  t_draw  DESC
+							t_type like '%' || #{keyword} || '%' ORDER BY  t_draw  DESC)a)
 							</if>
 							<if test="keyword != '' and keyfield =='teamtype' and order=='t_lose'">
-							t_type like '%' || #{keyword} || '%' ORDER BY  t_lose DESC
+							t_type like '%' || #{keyword} || '%' ORDER BY  t_lose DESC)a)
 							</if>
-						</where>	
+						</where>
+						<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>	
 	</select>
 	 
 	<select id="getTeamCount" parameterType="map" resultType="integer">

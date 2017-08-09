@@ -59,5 +59,5 @@ public interface TeamMemService {
 	@Transactional(readOnly=true)
 	public int getMemCount();	// 총 회원 수
 	@Transactional(readOnly=true)
-	public List<MemberCommand> getMemList();	// 총 회원리스트
+	public List<MemberCommand> getMemList(Map<String, Object> map);	// 총 회원리스트
 }

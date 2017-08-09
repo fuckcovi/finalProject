@@ -22,7 +22,7 @@
 	<ul>
 		<li>
 			<c:if test="${!empty user_id }">
-			<a href="mypage/main.do?id=${user_id}">
+			<a href="${pageContext.request.contextPath}/mypage/main.do?id=${user_id}">
 				<div style="height:100px;background:red;">
 				마이페이지
 				</div>
