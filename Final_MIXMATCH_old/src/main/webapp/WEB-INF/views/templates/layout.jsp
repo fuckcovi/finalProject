@@ -8,6 +8,19 @@
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/matchLayout.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+	$( window ).resize(function() {
+		if($( window ).width() < 1050 ){
+			$("#main_side").hide();
+		}else{
+			$("#main_side").show();
+		}
+	});
+		
+ });
+</script>
 </head>
 <body>
 	<div id="main">

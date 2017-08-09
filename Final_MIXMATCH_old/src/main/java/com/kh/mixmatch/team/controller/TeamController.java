@@ -71,7 +71,6 @@ public class TeamController {
 		List<TeamCommand> list = null;
 		int count = teamService.getTeamCount(map);
 
-		System.out.println(count + " : " + list);
 		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "team.do");
 		map.put("start", page.getStartCount());
 		map.put("end",page.getEndCount());

@@ -9,11 +9,13 @@
 	<h2>팀홈</h2>
 	<hr class="style"><br> 
 	<div>
+	
 		<c:if test="${joinCount==0 }">
 			가입신청한 팀이 없습니다. 자신의 팀을 생성하거나 이미 등록된 팀에 가입신청하세요.
 		</c:if>
 		<c:if test="${joinCount>0 }">
 		<h3>&lt;&lt;소속팀&gt;&gt;</h3>
+		<div style="overflow-y: auto; height:120px;">  
 			<c:forEach var="joinList" items="${joinList}">
 				<div>
 					<c:if test="${joinList.t_mem_auth > 0}">
@@ -23,13 +25,16 @@
 					</c:if>
 				</div>
 			</c:forEach>
+			</div>
 			<hr size="1" width="85%">
 			<h4>가입신청 중인 팀 : </h4> 
+			<div style="overflow-y: auto; height:50px;">  
 			<c:forEach var="joinList" items="${joinList}">
 				<c:if test="${joinList.t_mem_auth ==0}"> 
 					<div><a href="teamInfo.do?t_name=${joinList.t_name}">${joinList.t_name}</a></div>
 				</c:if>				
 			</c:forEach>
+			</div>
 		</c:if>
 		<input type="button" value="팀생성" class="btn" onclick="location.href='teamRegister.do'">
 	</div>
@@ -46,12 +51,12 @@
 	
 	
 	
-	<div style="background-color: yellow; overflow-y: auto; max-height: 350px;">
+	<div style="height: 300px;">
 	
 		<br>
 		<c:if test="${count>0}">
 			<c:forEach var="list" items="${list}">
-			<div style="width:200px;height:250px;margin:10px 10px 10px 10px; background-color: red;" id="${list.t_type}">
+			<div style="width:200px;height:250px;margin:10px 10px 10px 10px; background-color: red; float:left;" id="${list.t_type}">
 				<c:if test="${fn:endsWith(list.t_logo_name, '.jpg') || 
 							fn:endsWith(list.t_logo_name, '.png') || 
 							fn:endsWith(list.t_logo_name, '.gif') || 
@@ -64,17 +69,12 @@
 				<br>
 			</div>
 			</c:forEach>
-			<div class="align-center">${pagingHtml}</div>
 		</c:if>
 		<c:if test="${count==0}">
 			등록된 팀이 없습니다. 첫번째 팀을 생성해주세요.
 		</c:if>
 	
 	
-	
-	<!-- <div id="output"><ul style="list-style: none"></ul></div>
-	
-	<div class="paging-team-button">다음글보기</div> -->
-	
 	</div>
+	<div class="align-center">${pagingHtml}</div>
 </div>
