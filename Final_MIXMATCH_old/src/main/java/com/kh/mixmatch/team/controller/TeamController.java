@@ -686,7 +686,7 @@ public class TeamController {
 		map.put("keyfield","teamtype");
 		int count = teamService.getTeamCount(map);
 
-		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalBaseRank.do");
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalBaseRank.do?order="+order);
 		map.put("start", page.getStartCount());
 		map.put("end",page.getEndCount());
 		
