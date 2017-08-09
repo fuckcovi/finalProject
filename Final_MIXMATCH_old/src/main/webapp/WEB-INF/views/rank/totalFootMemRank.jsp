@@ -28,6 +28,7 @@
 				<th><a href='totalFootMemRank.do?morder=f_goal'>득점</a></th>
 				<th><a href='totalFootMemRank.do?morder=f_attack'>공격포인트</a></th>
 			</tr>
+			<c:if test="${count>0 }">
 		<c:forEach var="list" items="${listMem}" varStatus="status">
 			<tr>
 				<td>${status.count}</td>
@@ -44,5 +45,13 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<div class="align-center">${pagingHtml}</div>
+		</c:if>
+		<c:if test="${count==0 }">
+			<tr>
+				<td colspan="7">축구 회원 기록이 없습니다.</td>
+			</tr>
+			</table>
+		</c:if>
 	</div>
 </div>

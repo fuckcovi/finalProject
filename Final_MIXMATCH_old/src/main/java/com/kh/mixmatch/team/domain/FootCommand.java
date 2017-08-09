@@ -24,7 +24,15 @@ public class FootCommand {
 	private String m_challenger;	// 팀별 매치번호에 따른 기록
 	private String m_type;	// 매치타입
 	
+	private int recordstatus;
 	
+	
+	public int getRecordstatus() {
+		return recordstatus;
+	}
+	public void setRecordstatus(int recordstatus) {
+		this.recordstatus = recordstatus;
+	}
 	public String getM_challenger() {
 		return m_challenger;
 	}

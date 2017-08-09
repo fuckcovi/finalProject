@@ -4,82 +4,87 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.kh.mixmatch.team.dao.TotalTypeMapper"> 
 	<select id="listBase" parameterType="map" resultType="BaseCommand">
-	SELECT m.*,b.*, (b_hit/b_bat) b_avg, NVL((b_er*9) / DECODE(b_ip, 0, NULL, b_ip), 0)  b_era FROM G_MEMBER M, (SELECT id,sum(b_bat) b_bat,sum(b_hit) b_hit,sum(b_rbi) b_rbi,sum(b_score) b_score, sum(b_win) b_win, sum(b_lose) b_lose, sum(b_strike) b_strike, sum(b_ip) b_ip, sum(b_er) b_er FROM g_baseball GROUP BY ROLLUP(id)) B 
+	SELECT * FROM (SELECT a.*, rownum rnum, rownum recordstatus FROM (SELECT m.status status, m.name name, m.point point, m.regdate regdate, m.address address, m.auth auth, m.profile_name profile_name,b.*, (b_hit/b_bat) b_avg, NVL((b_er*9) / DECODE(b_ip, 0, NULL, b_ip), 0)  b_era FROM G_MEMBER M, (SELECT id,sum(b_bat) b_bat,sum(b_hit) b_hit,sum(b_rbi) b_rbi,sum(b_score) b_score, sum(b_win) b_win, sum(b_lose) b_lose, sum(b_strike) b_strike, sum(b_ip) b_ip, sum(b_er) b_er FROM g_baseball GROUP BY ROLLUP(id)) B 
 		<where>
 			<if test="morder=='b_bat'">
- 				M.ID=B.ID ORDER BY b_bat DESC
+ 				M.ID=B.ID ORDER BY b_bat DESC)a)
  			</if>
  			<if test="morder=='b_hit'">
- 				M.ID=B.ID ORDER BY b_hit DESC
+ 				M.ID=B.ID ORDER BY b_hit DESC)a)
  			</if>
  			<if test="morder=='b_rbi'">
- 				M.ID=B.ID ORDER BY b_rbi DESC
+ 				M.ID=B.ID ORDER BY b_rbi DESC)a)
  			</if>
  			<if test="morder=='b_score'">
- 				M.ID=B.ID ORDER BY b_score DESC
+ 				M.ID=B.ID ORDER BY b_score DESC)a)
  			</if>
  			<if test="morder=='b_avg'">
- 				M.ID=B.ID ORDER BY b_avg DESC
+ 				M.ID=B.ID ORDER BY b_avg DESC)a)
  			</if>
  			<if test="morder=='b_win'">
- 				M.ID=B.ID ORDER BY b_win DESC
+ 				M.ID=B.ID ORDER BY b_win DESC)a)
  			</if>
  			<if test="morder=='b_lose'">
- 				M.ID=B.ID ORDER BY b_lose DESC
+ 				M.ID=B.ID ORDER BY b_lose DESC)a)
  			</if>
  			<if test="morder=='b_strike'">
- 				M.ID=B.ID ORDER BY b_strike DESC
+ 				M.ID=B.ID ORDER BY b_strike DESC)a)
  			</if>
  			<if test="morder=='b_ip'">
- 				M.ID=B.ID ORDER BY b_ip DESC
+ 				M.ID=B.ID ORDER BY b_ip DESC)a)
  			</if>
  			<if test="morder=='b_er'">
- 				M.ID=B.ID ORDER BY b_er DESC
+ 				M.ID=B.ID ORDER BY b_er DESC)a)
  			</if>
  			<if test="morder=='b_era'">
- 				M.ID=B.ID ORDER BY b_era DESC
+ 				M.ID=B.ID ORDER BY b_era DESC)a)
  			</if>
 		</where>
+					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>	
 	<select id="listBasket" parameterType="map" resultType="BasketCommand">
-	SELECT * FROM G_MEMBER M, (SELECT id,sum(b_3point) AS b_3point,sum(b_assist) b_assist,sum(b_steel) b_steel,sum(b_score) b_score,sum(b_block) b_block,sum(b_rebound) b_rebound FROM g_basketball GROUP BY ROLLUP(id)) B 
+	 select * from (select a.*, rownum rnum, rownum recordstatus from (select  m.status status, m.name name, m.point point, m.regdate regdate, m.address address, m.auth auth, m.profile_name profile_name, b.*     
+	 FROM G_MEMBER M, (SELECT id,sum(b_3point) AS b_3point,sum(b_assist) b_assist,sum(b_steel) b_steel,sum(b_score) b_score,sum(b_block) b_block,sum(b_rebound) b_rebound FROM g_basketball GROUP BY ROLLUP(id)) B 
 	<where>
 		<if test="morder=='b_3point'">
- 			M.ID=B.ID ORDER BY b_3point DESC
+ 			M.ID=B.ID ORDER BY b_3point DESC)a)
  		</if>
  		<if test="morder=='b_assist'">
- 			M.ID=B.ID ORDER BY b_assist DESC
+ 			M.ID=B.ID ORDER BY b_assist DESC)a)
  		</if>
  		<if test="morder=='b_steel'">
- 			M.ID=B.ID ORDER BY b_steel DESC
+ 			M.ID=B.ID ORDER BY b_steel DESC)a)
  		</if>
  		<if test="morder=='b_score'">
- 			M.ID=B.ID ORDER BY b_score DESC
+ 			M.ID=B.ID ORDER BY b_score DESC)a)
  		</if>
  		<if test="morder=='b_block'">
- 			M.ID=B.ID ORDER BY b_block DESC
+ 			M.ID=B.ID ORDER BY b_block DESC)a)
  		</if>
  		<if test="morder=='b_rebound'">
- 			M.ID=B.ID ORDER BY b_rebound DESC
+ 			M.ID=B.ID ORDER BY b_rebound DESC)a)
  		</if>
 	</where>
+		<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>
 	<select id="listFoot" parameterType="map" resultType="FootCommand">
-	SELECT * FROM G_MEMBER M, (SELECT id,sum(f_goal) AS f_goal,sum(f_assist) f_assist,sum(f_shoot) f_shoot,sum(f_attack) f_attack FROM g_football GROUP BY ROLLUP(id)) F 
+	 select * from (select a.*, rownum rnum, rownum recordstatus from (select  m.status status, m.name name, m.point point, m.regdate regdate, m.address address, m.auth auth, m.profile_name profile_name, f.*     
+	FROM G_MEMBER M, (SELECT id,sum(f_goal) AS f_goal,sum(f_assist) f_assist,sum(f_shoot) f_shoot,sum(f_attack) f_attack FROM g_football GROUP BY ROLLUP(id)) F 
 	<where>
 		<if test="morder=='f_goal'">
- 			M.ID=F.ID ORDER BY f_goal DESC
+ 			M.ID=F.ID ORDER BY f_goal DESC)a)
  		</if>
  		<if test="morder=='f_assist'">
- 			M.ID=F.ID ORDER BY f_assist DESC
+ 			M.ID=F.ID ORDER BY f_assist DESC)a)
  		</if>
  		<if test="morder=='f_shoot'">
- 			M.ID=F.ID ORDER BY f_shoot DESC
+ 			M.ID=F.ID ORDER BY f_shoot DESC)a)
  		</if>
  		<if test="morder=='f_attack'">
- 			M.ID=F.ID ORDER BY f_attack DESC
+ 			M.ID=F.ID ORDER BY f_attack DESC)a)
  		</if>
  	</where>
+ 	<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
  	</select>
 </mapper>
 

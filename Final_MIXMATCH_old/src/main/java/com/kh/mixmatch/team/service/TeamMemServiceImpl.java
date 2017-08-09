@@ -129,5 +129,11 @@ public class TeamMemServiceImpl implements TeamMemService{
 		// TODO Auto-generated method stub
 		return teamMemMapper.listMatchBasket(mseq);
 	}
+
+	@Override
+	public int getMemRecordCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return teamMemMapper.getMemRecordCount(map);
+	}
 	
 }

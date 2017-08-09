@@ -53,7 +53,9 @@ public interface TeamMemService {
 	public List<BaseCommand> listMatchBase(Integer mseq);	// 각 매치별 선수기록
 	@Transactional(readOnly=true)
 	public List<BasketCommand> listMatchBasket(Integer mseq);	
-
+	@Transactional(readOnly=true)
+	public int getMemRecordCount(Map<String,Object> map);
+	
 	
 	// 멤버service
 	@Transactional(readOnly=true)

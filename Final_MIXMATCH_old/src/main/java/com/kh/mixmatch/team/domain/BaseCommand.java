@@ -26,6 +26,15 @@ public class BaseCommand {
 	private byte[] profile;
 	private MultipartFile profile_upload;
 
+	private int recordstatus;
+	
+	
+	public int getRecordstatus() {
+		return recordstatus;
+	}
+	public void setRecordstatus(int recordstatus) {
+		this.recordstatus = recordstatus;
+	}
 	public void setProfile_upload(MultipartFile profile_upload) throws IOException {
 		this.profile_upload = profile_upload;
 		setProfile(profile_upload.getBytes());

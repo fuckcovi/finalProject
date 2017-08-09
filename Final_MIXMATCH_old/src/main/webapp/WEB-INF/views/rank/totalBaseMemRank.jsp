@@ -36,9 +36,10 @@
 				<th><a href='totalBaseMemRank.do?morder=b_er'>실점</a></th>
 				<th><a href='totalBaseMemRank.do?morder=b_era'>방어율</a></th>
 			</tr>
-		<c:forEach var="listMem" items="${listMem}" varStatus="status">
+		<c:if test="${count>0 }">
+		<c:forEach var="listMem" items="${listMem}">
 			<tr>
-				<td>${status.count}</td>
+				<td>${listMem.recordstatus}</td>
 				<td>
 				<c:if test="${fn:endsWith(listMem.profile_name, '.jpg') || fn:endsWith(listMem.profile_name, '.png') || fn:endsWith(listMem.profile_name, '.gif') || fn:endsWith(listMem.profile_name, '.JPG') || fn:endsWith(listMem.profile_name, '.PNG') || fn:endsWith(listMem.profile_name, '.GIF')}">
 					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">
@@ -59,5 +60,13 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<div class="align-center">${pagingHtml}</div>
+		</c:if>
+		<c:if test="${count==0 }">
+			<tr>
+				<td colspan="14">야구 회원 기록이 없습니다.</td>
+			</tr>
+			</table>
+		</c:if>
 	</div>
 </div>

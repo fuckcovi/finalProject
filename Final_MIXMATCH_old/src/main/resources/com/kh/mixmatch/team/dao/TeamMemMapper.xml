@@ -11,6 +11,24 @@
 					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>
 	
+	<select id="getMemRecordCount" parameterType="map" resultType="integer">
+		<if test="keyword != '' ">
+			SELECT COUNT(*) FROM G_MEMBER M, 
+            (SELECT id FROM
+			<if test="keyword == '야구'">
+				g_baseball
+			</if>
+			<if test="keyword == '농구'">
+				g_basketball
+			</if>
+			<if test="keyword == '축구'">
+				g_football
+			</if>
+			GROUP BY ROLLUP(id)) B 
+                    WHERE M.ID=B.ID
+		</if>
+	</select>
+	
 	
 	<select id="listTMemFoot" parameterType="map" resultType="FootCommand">
 		SELECT * FROM G_MEMBER M, 

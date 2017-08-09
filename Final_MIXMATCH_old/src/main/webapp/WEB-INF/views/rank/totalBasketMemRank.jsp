@@ -30,9 +30,10 @@
 				<th><a href='totalBasketMemRank.do?morder=b_block'>블록</a></th>
 				<th><a href='totalBasketMemRank.do?morder=b_3point'>3점슛</a></th>
 			</tr>
-		<c:forEach var="list" items="${listMem}" varStatus="status">
+			<c:if test="${count>0 }">
+		<c:forEach var="list" items="${listMem}">
 			<tr>
-				<td>${status.count}</td>
+				<td>${list.recordstatus}</td>
 				<td>
 				<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
 					<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
@@ -48,5 +49,13 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<div class="align-center">${pagingHtml}</div>
+		</c:if>
+		<c:if test="${count==0 }">
+			<tr>
+				<td colspan="9">농구 회원 기록이 없습니다.</td>
+			</tr>
+			</table>
+		</c:if>
 	</div>
 </div>

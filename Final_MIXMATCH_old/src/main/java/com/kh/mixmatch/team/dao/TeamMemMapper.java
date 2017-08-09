@@ -60,6 +60,9 @@ public interface TeamMemMapper {
 	public List<BasketCommand> listMatchBasket(Integer mseq);	// 각 매치별 선수기록
 	
 	
+	// 경기 기록이 존재하는유저가 있는지 확인하여 개인랭킹
+	public int getMemRecordCount(Map<String,Object> map);
+	
 	// 멤버mapper
 	@Select("SELECT COUNT(*) FROM g_member")	// 총 회원수
 	public int getMemCount();

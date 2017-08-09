@@ -703,17 +703,28 @@ public class TeamController {
 		return mav;
 	}
 	@RequestMapping("/totalBaseMemRank.do")
-	public ModelAndView totalBaseMemRank(@RequestParam(defaultValue="b_hit") String morder){
+	public ModelAndView totalBaseMemRank(@RequestParam(defaultValue="b_hit") String morder,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("morder", morder);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalBaseMemRank");
-		List<BaseCommand> listMem = totalTypeService.listBase(map);
+		// 야구종목 기록 확인 수.
+		map.put("keyword","야구");
+		int count = teamMemService.getMemRecordCount(map);
 		
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalBaseMemRank.do?morder="+morder);
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
+		List<BaseCommand> listMem  = null;
+		if(count > 0){
+			map.put("morder", morder);
+			listMem = totalTypeService.listBase(map);
+		}
+		mav.addObject("count",count);
 		mav.addObject("listMem",listMem);
-		
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
 //=============================== 통합농구랭킹 ====================
@@ -742,16 +753,28 @@ public class TeamController {
 		return mav;
 	}
 	@RequestMapping("/totalBasketMemRank.do")
-	public ModelAndView totalBasketMemRank(@RequestParam(defaultValue="b_score") String morder){
+	public ModelAndView totalBasketMemRank(@RequestParam(defaultValue="b_score") String morder,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("morder", morder);
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalBasketMemRank");
-		List<BasketCommand> listMem = totalTypeService.listBasket(map);
+		// 농구종목 기록 확인 수.
+		map.put("keyword","농구");
+		int count = teamMemService.getMemRecordCount(map);
 		
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalBasketMemRank.do?morder="+morder);
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
+		List<BasketCommand> listMem  = null;
+		if(count > 0){
+			map.put("morder", morder);
+			listMem = totalTypeService.listBasket(map);
+		}
+		mav.addObject("count",count);
 		mav.addObject("listMem",listMem);
-		
+		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
 //=============================== 통합축구랭킹 ====================
@@ -779,14 +802,27 @@ public class TeamController {
 		return mav;
 	}
 	@RequestMapping("/totalFootMemRank.do")
-	public ModelAndView totalFootMemRank(@RequestParam(defaultValue="f_goal") String morder){
+	public ModelAndView totalFootMemRank(@RequestParam(defaultValue="f_goal") String morder,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("morder", morder);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalFootMemRank");
-		List<FootCommand> listMem = totalTypeService.listFoot(map);
+		// 축구종목 기록 확인 수.
+		map.put("keyword","축구");
+		int count = teamMemService.getMemRecordCount(map);
+		
+		PagingUtil page = new PagingUtil(currentPage, count, totalProwCount, totalPpageCount, "totalFootMemRank.do?morder="+morder);
+		map.put("start", page.getStartCount());
+		map.put("end",page.getEndCount());
+		
+		List<FootCommand> listMem  = null;
+		if(count > 0){
+			map.put("morder", morder);
+			listMem = totalTypeService.listFoot(map);
+		}
+		mav.addObject("count",count);
 		mav.addObject("listMem",listMem);
+		mav.addObject("pagingHtml",page.getPagingHtml());
+		
 		
 		return mav;
 	}
