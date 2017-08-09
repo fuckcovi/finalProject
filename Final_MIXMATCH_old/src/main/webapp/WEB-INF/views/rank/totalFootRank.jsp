@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rank.css">
 <div class="page-main-style">
 	<h3>통합축구랭킹</h3>
 	<div class="align-center" style="height:30px;">
@@ -19,7 +20,7 @@
 	</div>
 	<br>
 	<div class="teamList">
-		<table>
+		<table class="ranking">
 			<tr>
 				<th>순위</th>
 				<th>팀로고</th>

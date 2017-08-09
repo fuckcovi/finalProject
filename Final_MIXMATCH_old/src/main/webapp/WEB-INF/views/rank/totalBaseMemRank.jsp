@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rank.css">
 <div class="page-main-style">
 	<h3>통합야구랭킹</h3>
 	<div class="align-center" style="height:30px;">
@@ -21,7 +22,7 @@
 	<br>
 	
 	<div class="memList" >
-		<table>
+		<table  class="ranking">
 			<tr>
 				<th>순위</th>
 				<th>프로필</th>

@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rank.css">
 <div class="page-main-style">
 	<h3>우리팀통합랭킹</h3>
 	
-	<table>
+	<table >
 		<tr>
 			<th>팀로고</th>
 			<th>팀명</th>
@@ -23,6 +24,17 @@
 				<c:if test="${fn:endsWith(team.t_logo_name, '.jpg') || fn:endsWith(team.t_logo_name, '.png') || fn:endsWith(team.t_logo_name, '.gif') || fn:endsWith(team.t_logo_name, '.JPG') || fn:endsWith(team.t_logo_name, '.PNG') || fn:endsWith(team.t_logo_name, '.GIF')}">
 					<img src="imageView.do?t_name=${team.t_name}" style="width:200px;height:200px;">
 				</c:if>
+				<c:if test="${empty team.t_logo_name }">
+					<c:if test="${team.t_type eq '야구' }">
+						<img src="${pageContext.request.contextPath}/resources/images/baseball.png" style="width:200px;height:200px;">
+					</c:if>
+					<c:if test="${team.t_type eq '농구' }">
+						<img src="${pageContext.request.contextPath}/resources/images/basketball.png" style="width:200px;height:200px;">
+					</c:if>
+					<c:if test="${team.t_type eq '축구' }">
+						<img src="${pageContext.request.contextPath}/resources/images/football.png" style="width:200px;height:200px;">
+					</c:if>
+				</c:if> 
 			</td>
 			<td>${team.t_name}</td>
 			<td>${team.t_win}</td>
@@ -34,11 +46,8 @@
 			<td>${team.id}</td>
 		</tr>
 	</table>
-</div>
-	<br>
-<div>
-	<h3>우리팀원통합랭킹</h3>
-	<table>
+	<h3>우리팀원통합랭킹</h3> 
+	<table class="ranking">
 		<c:if test="${team.t_type eq '농구'}">
 		<tr>
 			<th>순위</th>
@@ -59,6 +68,9 @@
 						<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
 							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
+						<c:if test="${empty list.profile_name }">
+							<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:100px;height:100px;">
+						</c:if>
 						</td>
 						<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 						<td>${list.b_score}</td>
@@ -100,7 +112,10 @@
 						<td>
 						<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
 							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
-						</c:if> 
+						</c:if>
+						<c:if test="${empty list.profile_name }">
+							<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:100px;height:100px;">
+						</c:if>
 						</td>
 						<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 						<td>${list.b_bat}</td>
@@ -141,6 +156,9 @@
 						<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
 							<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
 						</c:if> 
+						<c:if test="${empty list.profile_name }">
+							<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:100px;height:100px;">
+						</c:if>
 						</td>
 						<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 						<td>${list.f_shoot}</td>
