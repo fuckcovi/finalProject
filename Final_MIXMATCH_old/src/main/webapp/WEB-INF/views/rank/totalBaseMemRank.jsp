@@ -44,6 +44,9 @@
 				<c:if test="${fn:endsWith(listMem.profile_name, '.jpg') || fn:endsWith(listMem.profile_name, '.png') || fn:endsWith(listMem.profile_name, '.gif') || fn:endsWith(listMem.profile_name, '.JPG') || fn:endsWith(listMem.profile_name, '.PNG') || fn:endsWith(listMem.profile_name, '.GIF')}">
 					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">
 				</c:if> 
+				<c:if test="${empty list.profile_name }">
+					<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:100px;height:100px;">
+				</c:if>
 				</td>
 				<td><a href="mypage/main.do?id=${list.id}">${listMem.name}</a></td>
 				<td>${listMem.b_bat}</td>

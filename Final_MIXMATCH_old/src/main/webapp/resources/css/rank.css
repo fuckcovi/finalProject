@@ -1,13 +1,16 @@
 @CHARSET "UTF-8";
 /*-------------------------------  -----------------------------*/
+.ranking{
+	margin:0 auto;
+}
 .ranking thead{
-	height:50px;
-	background:yellow;
-	margin:0 0 ;
-	padding:0 0 0 0;
-	float: left;
+	font-size:large;
 }
 .ranking td{
-	width:100px;
-	height:100px;
+	width:80px;
+	height:65px;
+}
+#profile,#regdate{
+	width:150px;
+	
 }

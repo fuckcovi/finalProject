@@ -35,6 +35,17 @@
 				<c:if test="${fn:endsWith(list.t_logo_name, '.jpg') || fn:endsWith(list.t_logo_name, '.png') || fn:endsWith(list.t_logo_name, '.gif') || fn:endsWith(list.t_logo_name, '.JPG') || fn:endsWith(list.t_logo_name, '.PNG') || fn:endsWith(list.t_logo_name, '.GIF')}">
 					<img src="imageView.do?t_name=${list.t_name}" style="width:100px;height:100px;">
 				</c:if> 
+				<c:if test="${empty list.t_logo_name }">
+				<c:if test="${list.t_type eq '야구' }">
+					<img src="${pageContext.request.contextPath}/resources/images/baseball.png" style="width:100px;height:100px;">
+				</c:if>
+				<c:if test="${list.t_type eq '농구' }">
+					<img src="${pageContext.request.contextPath}/resources/images/basketball.png" style="width:100px;height:100px;">
+				</c:if>
+				<c:if test="${list.t_type eq '축구' }">
+					<img src="${pageContext.request.contextPath}/resources/images/football.png" style="width:100px;height:100px;">
+				</c:if>
+				</c:if>
 				</td>
 				<td><a href="teamInfo.do?t_name=${list.t_name}">${list.t_name}</a></td>
 				<td>${list.t_address}</td>

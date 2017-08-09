@@ -11,10 +11,10 @@
 	<thead>
 		<tr>
 			<th>순위</th>
-			<th>프로필사진</th>
+			<th id="profile">프로필사진</th>
 			<th>회원이름</th>
 			<th>포인트</th>
-			<th>가입일</th>
+			<th id="regdate">가입일</th>
 		</tr>
 	</thead>
 	<c:if test="${count>0 }"><!--  유저가 있으면 -->
@@ -23,8 +23,11 @@
 		<tr>
 			<td>${list.pointStatus}</td>
 			<td>
+				<c:if test="${empty list.profile_name }">
+					<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:60px;height:60px;">
+				</c:if>
 				<c:if test="${fn:endsWith(list.profile_name, '.jpg') || fn:endsWith(list.profile_name, '.png') || fn:endsWith(list.profile_name, '.gif') || fn:endsWith(list.profile_name, '.JPG') || fn:endsWith(list.profile_name, '.PNG') || fn:endsWith(list.profile_name, '.GIF')}">
-					<img src="imageViewMem.do?id=${list.id}" style="width:100px;height:100px;">
+					<img src="imageViewMem.do?id=${list.id}" style="width:60px;height:60px;">
 				</c:if> 
 			</td>
 			<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
@@ -34,6 +37,7 @@
 	</c:forEach>
 	</tbody>
 	</table>
+	<br>
 		<div class="align-center">${pagingHtml}</div>
 	</c:if>
 	<c:if test="${count==0 }">
