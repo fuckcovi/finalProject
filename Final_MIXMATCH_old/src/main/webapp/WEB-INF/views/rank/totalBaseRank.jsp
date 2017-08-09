@@ -7,6 +7,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/team.js"></script>
 <div class="page-main-style">
 	<h3>통합야구랭킹</h3>
+	<div class="align-center" style="height:30px;">
 	<ul style="list-style: none; " >
 		<li style="float:left;">
 			<input type="button" id="team" class="btn" value="팀랭킹" onclick="location.href='totalBaseRank.do'">
@@ -15,6 +16,7 @@
 			<input type="button" id="member" class="btn" value="개인랭킹" onclick="location.href='totalBaseMemRank.do'">
 		</li>
 	</ul>
+	</div>
 	<br>
 	<div class="teamList">
 	<table>

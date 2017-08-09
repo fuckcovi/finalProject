@@ -5,6 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/team.js"></script>
+<style type="text/css">
+	input{
+		width:100%;
+	}
+	#modifyform input{float:left;}
+</style>
 <div class="page-main-style">
 	<h2>매치 개인 기록 입력</h2>
 	<hr class="style"><br>
@@ -45,7 +51,7 @@
 	<form:form commandName="footCommand" id="type_form" action="awayMemRecordFoot.do">
 	<form:hidden path="m_seq" value="${match.m_seq}"/>
 	<form:hidden path="t_name" value="${match.m_challenger}"/>
-	<table class="style"  id="awayMem">
+	<table class="style"  id="awayMem" >
 		<tr>
 			<th>매치번호</th>
 			<th>매치원정팀</th>
@@ -102,7 +108,7 @@
 	<form:form commandName="basketCommand" id="type_form" action="homeMemRecordBasket.do">
 	<form:hidden path="m_seq" value="${match.m_seq}"/>
 	<form:hidden path="t_name" value="${match.t_name}"/>
-	<table class="style"  id="homeMem">
+	<table class="style"  id="homeMem" >
 		<tr>
 			<th>매치번호</th>
 			<th>매치홈팀</th>

@@ -12,7 +12,7 @@ $(document).ready(function(){
 		
 	});
 	
-	// 팀홈화면
+	/*// 팀홈화면
 	$("#typeAll").click(function(){
 		$("#야구").show();
 		$("#농구").show();
@@ -32,7 +32,7 @@ $(document).ready(function(){
 		$("#야구").hide();
 		$("#농구").show();
 		$("#축구").hide();
-	}); 
+	}); */
 	
 	
 	$(".scheduleList tr").show();
@@ -80,15 +80,16 @@ $(document).ready(function(){
 		var id = $(this).attr("list-id");
 		var mseq = $(this).attr("list_mseq");
 		var output = "";
-			output+= "<form action='footMemModify.do'>";
-			output+= "	<input type='hidden' id='m_seq' name='m_seq' value='"+mseq+"'>";
-			output+= "	소속팀 : <input type='text' id='t_name' name='t_name' value='"+tname+"' readonly='true'>";
-			output+= "	유저이름(아이디) : <input type='text' id='id' name='id' value='"+id+"' readonly='true'>";
-			output+= "	슈팅 : <input type='text' id='f_shoot' name='f_shoot' value='"+$(this).attr("list-fshoot")+"'>";
-			output+= "	도움 : <input type='text' id='f_assist' name='f_assist' value='"+$(this).attr("list-fassist")+"'>";
-			output+= "	골 : <input type='text' id='f_goal' name='f_goal' value='"+$(this).attr("list-fgoal")+"'>";
-			output+= "	공격포인트 : <input type='text' id='f_attack' name='f_attack' value='"+$(this).attr("list-fattack")+"'>";
-			output+= "	<input type='submit' value='기록수정'>";
+			output+= "<form id='modifyform' action='footMemModify.do'>";
+			output+= "	<td>";
+			output+="<input type='hidden' id='m_seq' name='m_seq' value='"+mseq+"'></td>";
+			output+= "	<td><input type='text' id='t_name' name='t_name' value='"+tname+"' readonly='true'></td>";
+			output+= "	<td><input type='text' id='id' name='id' value='"+id+"' readonly='true'></td>";
+			output+= "	<td><input type='text' id='f_shoot' name='f_shoot' value='"+$(this).attr("list-fshoot")+"'></td>";
+			output+= "	<td><input type='text' id='f_assist' name='f_assist' value='"+$(this).attr("list-fassist")+"'></td>";
+			output+= "	<td><input type='text' id='f_goal' name='f_goal' value='"+$(this).attr("list-fgoal")+"'></td>";
+			output+= "	<td><input type='text' id='f_attack' name='f_attack' value='"+$(this).attr("list-fattack")+"'></td>";
+			output+= "	<td><input type='submit' value='기록수정'></td>";
 			output+= "</form>";
 		$(this).parent().parent().text("").append(output);
 	});

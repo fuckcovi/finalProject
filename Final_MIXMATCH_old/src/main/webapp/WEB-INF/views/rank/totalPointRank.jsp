@@ -6,14 +6,14 @@
 
 <div class="page-main-style">
 	<h3>통합포인트랭킹</h3>
-	유저들의 포인트 랭킹
-	<div>
-	<table>
+	<div >
+	<table style="width:90%;margin-right: 10%">
 		<tr>
-			<th>순위</th>
-			<th>프로필사진</th>
-			<th>회원이름</th>
-			<th>포인트</th>
+			<th style="width:10%;">순위</th>
+			<th style="width:30%;">프로필사진</th>
+			<th style="width:20%;">회원이름</th>
+			<th style="width:20%;">포인트</th>
+			<th style="width:30%;">가입일</th>
 		</tr>
 	<c:if test="${count>0 }"><!--  유저가 있으면 -->
 	<c:forEach var="list" items="${list}" >
@@ -26,6 +26,7 @@
 			</td>
 			<td><a href="mypage/main.do?id=${list.id}">${list.name}</a></td>
 			<td>${list.point} 점</td>
+			<td>${list.regdate} </td>
 		</tr>
 	</c:forEach>
 	</table>
