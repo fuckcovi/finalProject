@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+/*-------------------------------  -----------------------------*/
+.ranking thead{
+	height:50px;
+	background:yellow;
+	margin:0 0 ;
+	padding:0 0 0 0;
+	float: left;
+}
+.ranking td{
+	width:100px;
+	height:100px;
+}

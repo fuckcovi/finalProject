@@ -3,19 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/rank.css">
 <div class="page-main-style">
 	<h3>통합포인트랭킹</h3>
 	<div >
-	<table style="width:90%;margin-right: 10%">
+	<table class="ranking">
+	<thead>
 		<tr>
-			<th style="width:10%;">순위</th>
-			<th style="width:30%;">프로필사진</th>
-			<th style="width:20%;">회원이름</th>
-			<th style="width:20%;">포인트</th>
-			<th style="width:30%;">가입일</th>
+			<th>순위</th>
+			<th>프로필사진</th>
+			<th>회원이름</th>
+			<th>포인트</th>
+			<th>가입일</th>
 		</tr>
+	</thead>
 	<c:if test="${count>0 }"><!--  유저가 있으면 -->
+	<tbody>
 	<c:forEach var="list" items="${list}" >
 		<tr>
 			<td>${list.pointStatus}</td>
@@ -29,13 +32,16 @@
 			<td>${list.regdate} </td>
 		</tr>
 	</c:forEach>
+	</tbody>
 	</table>
 		<div class="align-center">${pagingHtml}</div>
 	</c:if>
 	<c:if test="${count==0 }">
+	<tbody>
 		<tr>
 			<td colspan="4">사이트에 등록된 유저가 없습니다.</td>
 		</tr>
+	</tbody>
 	</table>
 	</c:if>
 	</div>
