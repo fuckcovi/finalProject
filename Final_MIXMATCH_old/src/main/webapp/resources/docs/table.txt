@@ -308,3 +308,26 @@ create table g_league_detail (
   constraint g_league_detail_fk2 foreign key (t_name) references g_team (t_name)
 );
 create sequence g_league_detail_seq;
+
+
+--------------------- 경기장 ------------
+CREATE TABLE G_STADIUM (
+    S_SEQ NUMBER PRIMARY KEY,
+    S_NAME VARCHAR2(30) NOT NULL,
+    S_ADDRESS1 VARCHAR2(30) NOT NULL,
+    S_ADDRESS2 VARCHAR2(300),
+    S_LOGO_NAME VARCHAR2(150),
+    S_LOGO BLOB,
+    S_REGDATE DATE NOT NULL
+);
+CREATE SEQUENCE G_STADIUM_SEQ;
+
+CREATE TABLE G_BOOKING (
+    B_SEQ NUMBER PRIMARY KEY,
+    S_SEQ NUMBER NOT NULL,
+    B_REGDATE DATE NOT NULL,
+    B_TIME VARCHAR2(30) NOT NULL,
+    B_CHECK NUMBER DEFAULT(0),
+    CONSTRAINT G_BOOKING_FK FOREIGN KEY(S_SEQ) REFERENCES G_STADIUM(S_SEQ)
+);
+CREATE SEQUENCE G_BOOKING_SEQ;
