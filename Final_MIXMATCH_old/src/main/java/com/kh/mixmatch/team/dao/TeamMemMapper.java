@@ -39,7 +39,7 @@ public interface TeamMemMapper {
 	
 	@Select("SELECT * FROM g_team_member WHERE id=#{id}")
 	public List<TeamMemCommand> list(Map<String, Object> map);	// ������ ����/��û�� �� ����Ʈ
-	@Select("SELECT * FROM g_team_member WHERE id=#{id} AND t_mem_auth=1")
+	@Select("SELECT t.*,m.t_mem_regdate, m.t_mem_auth FROM g_team t ,(SELECT * FROM g_team_member WHERE id=#{id} AND t_mem_auth=1 )m where t.t_name=m.t_name")
 	public List<TeamMemCommand> listConfirmTeam(Map<String, Object> map); // ������ ���ΰ����� �� ����Ʈ
 	
 	

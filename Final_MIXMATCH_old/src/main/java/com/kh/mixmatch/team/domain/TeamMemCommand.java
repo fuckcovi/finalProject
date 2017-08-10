@@ -15,13 +15,70 @@ public class TeamMemCommand {
 	private Date t_mem_regdate;
 	private int t_mem_auth;
 	
-	private String name;	// Á¶ÀÎ MEMBER
-	private String profile_name; //ÇÁ·ÎÇÊ¸í : MemberCommand Á¶ÀÎ
+	private String name;	// ï¿½ï¿½ï¿½ï¿½ MEMBER
+	private String profile_name; //ï¿½ï¿½ï¿½ï¿½ï¿½Ê¸ï¿½ : MemberCommand ï¿½ï¿½ï¿½ï¿½
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	private String master;
 	
+	private String t_type;
+	private Date t_regdate;
+	private String t_address;
+	private int t_win;
+	private int t_draw;
+	private int t_lose;
+	private String t_logo_name;
+	private byte[] t_logo;
 	
+	
+	public String getT_type() {
+		return t_type;
+	}
+	public void setT_type(String t_type) {
+		this.t_type = t_type;
+	}
+	public Date getT_regdate() {
+		return t_regdate;
+	}
+	public void setT_regdate(Date t_regdate) {
+		this.t_regdate = t_regdate;
+	}
+	public String getT_address() {
+		return t_address;
+	}
+	public void setT_address(String t_address) {
+		this.t_address = t_address;
+	}
+	public int getT_win() {
+		return t_win;
+	}
+	public void setT_win(int t_win) {
+		this.t_win = t_win;
+	}
+	public int getT_draw() {
+		return t_draw;
+	}
+	public void setT_draw(int t_draw) {
+		this.t_draw = t_draw;
+	}
+	public int getT_lose() {
+		return t_lose;
+	}
+	public void setT_lose(int t_lose) {
+		this.t_lose = t_lose;
+	}
+	public String getT_logo_name() {
+		return t_logo_name;
+	}
+	public void setT_logo_name(String t_logo_name) {
+		this.t_logo_name = t_logo_name;
+	}
+	public byte[] getT_logo() {
+		return t_logo;
+	}
+	public void setT_logo(byte[] t_logo) {
+		this.t_logo = t_logo;
+	}
 	public String getMaster() {
 		return master;
 	}

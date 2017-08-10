@@ -15,6 +15,12 @@ $(document).ready(function(){
 			$("#footballImages").hide();
 		}
 	});
+	$("#"+$("#myteam option:selected").val()).show();
+	$("#myteam").click(function(){
+		$("#myteamLogo img").hide();
+		$("#"+$("#myteam option:selected").val()).show();
+		
+	});
 	
 	
 });

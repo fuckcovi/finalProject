@@ -19,7 +19,8 @@
 		</li>
 		<c:forEach var="list" items="${list}">
 			<li style="float: left; width:150px;" value="${list.t_name}"><!-- 클릭하면 ajax로 화면 바꿔서 일정 보이기 -->
-				<input type="button" class="btn" value="${list.t_name}">
+				<!-- <input type="button" class="btn" value=""> -->
+				${list.t_name}
 			</li>
 		</c:forEach>
 	</ul>

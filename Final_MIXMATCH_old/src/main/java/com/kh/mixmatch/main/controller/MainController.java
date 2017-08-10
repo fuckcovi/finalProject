@@ -19,6 +19,8 @@ import com.kh.mixmatch.member.service.MemberService;
 import com.kh.mixmatch.notice.domain.NoticeCommand;
 import com.kh.mixmatch.notice.service.NoticeService;
 import com.kh.mixmatch.team.domain.TeamCommand;
+import com.kh.mixmatch.team.domain.TeamMemCommand;
+import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.team.service.TeamService;
 import com.kh.mixmatch.util.PagingUtil;
 
@@ -33,6 +35,8 @@ public class MainController {
 	private MatchService matchService;
 	@Resource
 	private MemberService memberService;
+	@Resource
+	private TeamMemService teamMemService;
 	
 	@RequestMapping("/home.do")
 	public ModelAndView mainPage(HttpSession session){
@@ -103,11 +107,21 @@ public class MainController {
 		//////////////
 		
 		
-	// 사이드바
+	// 사이드바 - 마이페이지
 		String user_id = (String)session.getAttribute("user_id");
 		MemberCommand member = null;
+		int joinCountSide = 0;
+	// 사이드 팀 메뉴
+		Map<String, Object> teammap = new HashMap<String, Object>();	
+		teammap.put("id", user_id);
 		if(user_id != null){	// 로그인한 상태면 마이페이지에 뜸
 			member = memberService.selectMember(user_id);
+			joinCountSide = teamMemService.getRowMemCount(user_id);
+		}
+		
+		List<TeamMemCommand> joinListSide = null;
+		if(joinCountSide>0){
+			joinListSide = teamMemService.listConfirmTeam(teammap);
 		}
 		
 		ModelAndView mav = new ModelAndView();
@@ -125,7 +139,11 @@ public class MainController {
 		mav.addObject("matchResultlist", matchResultlist);
 		
 		mav.addObject("member",member);
+		mav.addObject("joinCountSide",joinCountSide);
+		mav.addObject("joinListSide",joinListSide);	 
 		session.setAttribute("member", member);
+		session.setAttribute("joinCountSide", joinCountSide);
+		session.setAttribute("joinListSide", joinListSide);
 		return mav;
 	}
 	
@@ -140,6 +158,16 @@ public class MainController {
 		mav.addObject("imageFile", member.getProfile());
 		mav.addObject("filename", member.getProfile_name());
 		
+		return mav;
+	}
+	// 사이드 마이팀 사진
+	@RequestMapping("/imageViewTside.do")
+	public ModelAndView viewImageTeamLogo(@RequestParam String t_name){
+		TeamCommand team = teamService.selectTeam(t_name);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile",team.getT_logo());
+		mav.addObject("filename", team.getT_logo_name());
 		return mav;
 	}
 	
