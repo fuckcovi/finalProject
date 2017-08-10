@@ -59,7 +59,6 @@
 </script>
 <div class="page-main-style">
 	<h1>MIXMATCH</h1>
-	<img src="${pageContext.request.contextPath }/resources/images/main.png">
 	
 	<!--  공지사항 게시글 최근5개 보이기. 없으면 없음 띄움 -->
 	<div id="noticeView" class="half" 

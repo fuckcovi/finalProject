@@ -51,6 +51,7 @@ div#main_footer{
 	text-align:center;
 	background-color:black;
 	color:white;
+	z-index:999;
 }
 ul.menu{
 	list-style:none;
