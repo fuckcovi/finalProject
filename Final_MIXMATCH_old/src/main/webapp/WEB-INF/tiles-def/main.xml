@@ -12,7 +12,10 @@
      	<put-attribute name="body" value="/WEB-INF/views/main/body.jsp"/>
      	<put-attribute name="side" value="/WEB-INF/views/templates/side.jsp"/>
     </definition>
-    
+     <definition name="home" extends="main">
+     	<put-attribute name="title" value="MIXMATCH HomeController"/>
+     	<put-attribute name="body" value="/WEB-INF/views/main/mainbody.jsp"/>
+    </definition>
   
     <definition	name="pageError" extends="main">
     	<put-attribute name="title" value="Error Page"/>

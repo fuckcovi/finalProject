@@ -57,7 +57,7 @@ private Logger log = Logger.getLogger(this.getClass());
 				session.setAttribute("auth", member.getAuth());
 				session.setAttribute("status", member.getStatus());
 				
-				return "redirect:/main.do";
+				return "redirect:/home.do";
 			}else if(check && member.getStatus().equals("N")){
 				result.reject("unableMember");
 				return loginForm();
@@ -74,6 +74,6 @@ private Logger log = Logger.getLogger(this.getClass());
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect:/main.do";
+		return "redirect:/home.do";
 	}
 }

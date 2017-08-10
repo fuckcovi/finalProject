@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kh.mixmatch.notice.dao.NoticeReplyMapper">  
+	
+	<select id="noticeReplyList" parameterType="map" resultType="noticeReplyCommand">
+		SELECT gnre_no, gnre_content, to_char(gnre_date,'YYYY-MM-DD HH24:MI:SS') gnre_date, gnre_seq, id
+			FROM ( SELECT a.*, rownum rnum FROM 
+				(SELECT * FROM g_notice_re WHERE gnre_seq=#{gnre_seq} ORDER BY gnre_no DESC)a )
+					<![CDATA[
+						WHERE rnum>=${start} AND rnum<= ${end}
+					]]> 
+				
+	</select>
+</mapper>

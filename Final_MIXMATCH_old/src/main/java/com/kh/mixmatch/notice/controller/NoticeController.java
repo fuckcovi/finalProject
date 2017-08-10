@@ -35,8 +35,12 @@ public class NoticeController {
 		return new NoticeCommand();
 	}
 	
-	private int rowCount = 2;
-	private int pageCount = 3;
+	
+	
+	
+	private int rowCount = 10;
+	private int pageCount = 5;
+	
 	
 	@RequestMapping("/notice.do")
 	public ModelAndView noticeList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,

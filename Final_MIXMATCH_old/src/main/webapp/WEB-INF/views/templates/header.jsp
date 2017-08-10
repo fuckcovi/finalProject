@@ -16,7 +16,7 @@
 <div class="align-center" id="topMenu">
 <ul>
 <li class="topMenuLi">
-<a class="menuLink" href="${pageContext.request.contextPath}/main.do">MIXMATCH</a>
+<a class="menuLink" href="${pageContext.request.contextPath}/home.do">MIXMATCH</a>
 </li>
 <li class="topMenuLi">
 <a class="menuLink" href="${pageContext.request.contextPath}/notice.do">게시판</a>
