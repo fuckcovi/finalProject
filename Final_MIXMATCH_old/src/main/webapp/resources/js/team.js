@@ -35,6 +35,7 @@ $(document).ready(function(){
 	}); */
 	
 	
+	
 	$(".scheduleList tr").show();
 	$(".tablenull").hide();
 	if(!$(".xplan tr").hasClass("plan")){

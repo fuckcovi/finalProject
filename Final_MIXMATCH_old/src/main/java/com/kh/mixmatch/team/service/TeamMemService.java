@@ -41,16 +41,16 @@ public interface TeamMemService {
 	
 	
 	@Transactional(readOnly=true)
-	public List<FootCommand> listTMemFoot(Map<String, Object> map);	// Á¤½ÄÆÀ¿øÀÇ Ãà±¸±â·Ï
+	public List<FootCommand> listTMemFoot(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½à±¸ï¿½ï¿½ï¿½
 	@Transactional(readOnly=true)
-	public List<BaseCommand> listTMemBase(Map<String, Object> map);	// Á¤½ÄÆÀ¿øÀÇ ¾ß±¸±â·Ï
+	public List<BaseCommand> listTMemBase(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±ï¿½ï¿½ï¿½ï¿½
 	@Transactional(readOnly=true)
-	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// Á¤½ÄÆÀ¿øÀÇ ³ó±¸±â·Ï
+	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó±¸±ï¿½ï¿½
 	
 	@Transactional(readOnly=true)
-	public List<FootCommand> listMatchFoot(Integer mseq);	// °¢ ¸ÅÄ¡º° ¼±¼ö±â·Ï	
+	public List<FootCommand> listMatchFoot(Integer mseq);	// ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
 	@Transactional(readOnly=true)
-	public List<BaseCommand> listMatchBase(Integer mseq);	// °¢ ¸ÅÄ¡º° ¼±¼ö±â·Ï
+	public List<BaseCommand> listMatchBase(Integer mseq);	// ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Transactional(readOnly=true)
 	public List<BasketCommand> listMatchBasket(Integer mseq);	
 	@Transactional(readOnly=true)
@@ -58,9 +58,11 @@ public interface TeamMemService {
 	@Transactional(readOnly=true)
 	public int getRowTeamMemRecordCount(Map<String, Object> map);
 	
-	// ¸â¹öservice
+	// ï¿½ï¿½ï¿½service
 	@Transactional(readOnly=true)
-	public int getMemCount();	// ÃÑ È¸¿ø ¼ö
+	public int getMemCount();	// ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½
 	@Transactional(readOnly=true)
-	public List<MemberCommand> getMemList(Map<String, Object> map);	// ÃÑ È¸¿ø¸®½ºÆ®
+	public List<MemberCommand> getMemList(Map<String, Object> map);	// ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+	@Transactional(readOnly=true)
+	public List<String> getTeamMemList(String user_id);
 }

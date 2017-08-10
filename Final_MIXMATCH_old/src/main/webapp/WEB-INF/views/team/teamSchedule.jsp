@@ -61,16 +61,21 @@
 				<th>홈팀</th>
 				<th>어웨이팀</th>
 			</tr>
-			<c:forEach var="teamlist" items="${list}">
+			<c:set var="seq" value="0"/>
+			<c:forEach var="teamList" items="${teamList}">
 				<c:forEach var="matchlist" items="${matchList}">
-					<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-					<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
-						<td>${matchlist.m_date}</td>
-						<td>${matchlist.m_place}</td>
-						<td>${matchlist.m_time}</td>
-						<td>${matchlist.t_name}</td>
-						<td>${matchlist.m_challenger}</td>
-					</tr>
+					<c:if test="${matchlist.m_challenger!=null && matchlist.m_home==-1 && matchlist.m_away==-1 && (matchlist.t_name==teamList || matchlist.m_challenger==teamList)}">
+						<c:set var="m_seq" value="[${matchlist.m_seq}]"/>
+						<c:if test="${!fn:contains(seq,m_seq)}">
+						<c:set var="seq" value="${seq},[${matchlist.m_seq}]"/>
+						<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
+							<td>${matchlist.m_date}</td>
+							<td>${matchlist.m_place}</td>
+							<td>${matchlist.m_time}</td>
+							<td>${matchlist.t_name}</td>
+							<td>${matchlist.m_challenger}</td>
+						</tr>
+						</c:if>
 					</c:if>
 				</c:forEach>
 			</c:forEach>
@@ -87,14 +92,19 @@
 				<th>매치결과</th>
 				<th>MVP</th>
 			</tr>
-			<c:forEach var="teamlist" items="${list}">
+			<c:set var="fseq" value="0"/>
+			<c:forEach var="teamList" items="${teamList}">
 				<c:forEach var="matchlist" items="${matchList}">
-					<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-					<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
-						<td>${matchlist.m_date}</td>
-						<td><a href="teamRecord.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
-						<td>${matchlist.m_mvp}</td>
-					</tr>
+					<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamList || matchlist.m_challenger==teamList)}">
+					<c:set var="m_fseq" value="[${matchlist.m_seq}]"/>
+						<c:if test="${!fn:contains(fseq,m_fseq)}">
+						<c:set var="fseq" value="${fseq},[${matchlist.m_seq}]"/>
+						<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
+							<td>${matchlist.m_date}</td>
+							<td><a href="teamRecord.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
+							<td>${matchlist.m_mvp}</td>
+						</tr>
+						</c:if>
 					</c:if>
 				</c:forEach>
 			</c:forEach>

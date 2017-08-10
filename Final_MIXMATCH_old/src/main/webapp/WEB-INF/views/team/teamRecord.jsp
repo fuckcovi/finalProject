@@ -31,14 +31,19 @@
 			<th>매치일자</th>
 			<th>매치결과</th>
 		</tr>
+		<c:set var="seq" value="0"/>
 		<c:forEach var="teamlist" items="${list}">
 		<c:forEach var="matchlist" items="${matchList}">
 			<c:if test="${matchlist.m_home!=-1 && matchlist.m_away!=-1 && (matchlist.t_name==teamlist.t_name || matchlist.m_challenger==teamlist.t_name)}">
-				<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
-					<td>${matchlist.m_seq}</td>
-					<td>${matchlist.m_date}</td>
-					<td><a href="matchDetail.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
-				</tr>
+				<c:set var="m_seq" value="[${matchlist.m_seq}]"/>
+				<c:if test="${!fn:contains(seq,m_seq)}">
+					<c:set var="seq" value="${seq},[${matchlist.m_seq}]"/>
+					<tr class="${matchlist.t_name} ${matchlist.m_challenger} plan">
+						<td>${matchlist.m_seq}</td>
+						<td>${matchlist.m_date}</td>
+						<td><a href="matchDetail.do?m_seq=${matchlist.m_seq}">${matchlist.t_name} ${matchlist.m_home} : ${matchlist.m_away} ${matchlist.m_challenger}</a></td>
+					</tr>
+				</c:if>
 			</c:if>
 		</c:forEach>
 		</c:forEach>

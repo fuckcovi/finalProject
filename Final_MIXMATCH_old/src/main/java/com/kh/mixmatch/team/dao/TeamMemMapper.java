@@ -16,58 +16,61 @@ import com.kh.mixmatch.team.domain.TeamCommand;
 import com.kh.mixmatch.team.domain.TeamMemCommand;
 
 public interface TeamMemMapper {
-	/*@Select("SELECT * FROM g_team_member WHERE id=#{id}")	// °¡ÀÔ½ÅÃ» È¤Àº µî·ÏµÈ ÆÀ¸ñ·ÏÀÌ ¸®½ºÆ®·Î³ª¿È
+	/*@Select("SELECT * FROM g_team_member WHERE id=#{id}")	// ï¿½ï¿½ï¿½Ô½ï¿½Ã» È¤ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Î³ï¿½ï¿½ï¿½
 	public TeamMemCommand selectTeamMem(String id);*/
 	
 	@Insert("INSERT INTO g_team_member (t_mem_seq,id,t_name,t_mem_regdate,t_mem_auth) VALUES (g_team_member_seq.nextval,#{id},#{t_name},sysdate,#{t_mem_auth})")
 	public void insertTeamMem(TeamMemCommand teamMem);
 	@Update("UPDATE g_team_member SET t_mem_auth=1 WHERE id=#{id} AND t_name=#{t_name}")
-	public void updateTeamMem(Map<String, Object> map);	// ÆÀ¸¶½ºÅÍ°¡ °¡ÀÔ½ÅÃ»ÇÑ È¸¿ø ½ÂÀÎ ½Ã.
+	public void updateTeamMem(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ô½ï¿½Ã»ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 	@Delete("DELETE FROM g_team_member WHERE id=#{id} AND t_name=#{t_name}")
-	public void deleteTeamMem(Map<String, Object> map);	// ÆÀ¸¶½ºÅÍ°¡ ÆÀÈ¸¿ø ÆÀ¿¡¼­ Å»Åğ½ÃÅ°°Å³ª È¸¿øÀÌ °¡ÀÔÃ¶È¸ ½Ã.
+	public void deleteTeamMem(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ï¿½Å°ï¿½Å³ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¶È¸ ï¿½ï¿½.
 	@Delete("DELETE FROM g_team_member WHERE t_name=#{t_name}")
-	public void deleteTeam(String tname);	// ÆÀ¸¶½ºÅÍ°¡ ÆÀ»èÁ¦ ½Ã ÇØ´çÆÀ ¸ñ·Ï »èÁ¦.
+	public void deleteTeam(String tname);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	
 	@Select("SELECT COUNT(*) FROM g_team_member WHERE id=#{id}")
-	public int getRowMemCount(String id);	// À¯Àú°¡ °¡ÀÔ/½ÅÃ»ÇÑ ÆÀÀÇ ¼ö
+	public int getRowMemCount(String id);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@Select("SELECT COUNT(*) FROM g_team_member WHERE id=#{id} AND t_mem_auth=1")
-	public int getRowTeamCount(String id);	// À¯Àú°¡ ½ÂÀÎ°¡ÀÔÇÑ ÆÀÀÇ ¼ö
+	public int getRowTeamCount(String id);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	
 	
 	@Select("SELECT COUNT(*) FROM g_team_member WHERE t_name=#{t_name} AND t_mem_auth=1")
-	public int getRowTeamMemCount(String t_name);	// ¼Ò¼ÓÆÀÀÇ Á¤½ÄÆÀ¿ø ¼ö
+	public int getRowTeamMemCount(String t_name);	// ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	
 	@Select("SELECT * FROM g_team_member WHERE id=#{id}")
-	public List<TeamMemCommand> list(Map<String, Object> map);	// À¯Àú°¡ °¡ÀÔ/½ÅÃ»ÇÑ ÆÀ ¸®½ºÆ®
+	public List<TeamMemCommand> list(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	@Select("SELECT * FROM g_team_member WHERE id=#{id} AND t_mem_auth=1")
-	public List<TeamMemCommand> listConfirmTeam(Map<String, Object> map); // À¯Àú°¡ ½ÂÀÎ°¡ÀÔÇÑ ÆÀ ¸®½ºÆ®
+	public List<TeamMemCommand> listConfirmTeam(Map<String, Object> map); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	
 	
 	@Select("SELECT * FROM g_member g,(SELECT t.*, tm.id master FROM g_team tm, (SELECT * FROM g_team_member WHERE t_name=#{t_name})t  WHERE t.t_name=tm.t_name)tt WHERE g.id=tt.id")
-	public List<TeamMemCommand> listTeamMem(Map<String, Object> map);	// ÀÌ ÆÀ ¼Ò¼Ó È¸¿ø,ÆÀÁ¤º¸
+	public List<TeamMemCommand> listTeamMem(Map<String, Object> map);	// ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò¼ï¿½ È¸ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	//  ÆÀ¼Ò¼Ó ·©Å·
-	public List<FootCommand> listTMemFoot(Map<String, Object> map);	// Á¤½ÄÆÀ¿øÀÇ Ãà±¸±â·Ï
-	public List<BaseCommand> listTMemBase(Map<String, Object> map);	// Á¤½ÄÆÀ¿øÀÇ ¾ß±¸±â·Ï
-	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// Á¤½ÄÆÀ¿øÀÇ ³ó±¸±â·Ï
+	//  ï¿½ï¿½ï¿½Ò¼ï¿½ ï¿½ï¿½Å·
+	public List<FootCommand> listTMemFoot(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½à±¸ï¿½ï¿½ï¿½
+	public List<BaseCommand> listTMemBase(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±ï¿½ï¿½ï¿½ï¿½
+	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó±¸±ï¿½ï¿½
 	
-	// ¸ÅÄ¡mapper
+	// ï¿½ï¿½Ä¡mapper
 	@Select("SELECT match.m_type,match.m_challenger,f.* FROM (SELECT * FROM g_match)match, (SELECT foot.*, m.name name FROM g_member m ,g_football foot WHERE m.id=foot.id) f WHERE match.m_seq=f.m_seq AND match.m_seq=#{m_seq}")
-	public List<FootCommand> listMatchFoot(Integer mseq);	// °¢ ¸ÅÄ¡º° ¼±¼ö±â·Ï
+	public List<FootCommand> listMatchFoot(Integer mseq);	// ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Select("SELECT match.m_type,match.m_challenger,f.* FROM (SELECT * FROM g_match)match, (SELECT base.*, m.name name  FROM g_member m ,g_baseball base WHERE m.id=base.id) f WHERE match.m_seq=f.m_seq AND match.m_seq=#{m_seq}")
-	public List<BaseCommand> listMatchBase(Integer mseq);	// °¢ ¸ÅÄ¡º° ¼±¼ö±â·Ï
+	public List<BaseCommand> listMatchBase(Integer mseq);	// ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Select("SELECT match.m_type,match.m_challenger,f.* FROM (SELECT * FROM g_match)match, (SELECT basket.*, m.name name FROM g_member m ,g_basketball basket WHERE m.id=basket.id) f WHERE match.m_seq=f.m_seq AND match.m_seq=#{m_seq}")
-	public List<BasketCommand> listMatchBasket(Integer mseq);	// °¢ ¸ÅÄ¡º° ¼±¼ö±â·Ï
+	public List<BasketCommand> listMatchBasket(Integer mseq);	// ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	
-	// °æ±â ±â·ÏÀÌ Á¸ÀçÇÏ´ÂÀ¯Àú°¡ ÀÖ´ÂÁö È®ÀÎÇÏ¿© °³ÀÎ·©Å·
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½Î·ï¿½Å·
 	public int getMemRecordCount(Map<String,Object> map);
-	// ÇØ´çÆÀ ¼Ò¼Ó ¸â¹öÀÇ ±â·ÏÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+	// ï¿½Ø´ï¿½ï¿½ï¿½ ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public int getRowTeamMemRecordCount(Map<String, Object> map);
-	// ¸â¹ömapper
-	@Select("SELECT COUNT(*) FROM g_member")	// ÃÑ È¸¿ø¼ö
+	// ï¿½ï¿½ï¿½mapper
+	@Select("SELECT COUNT(*) FROM g_member")	// ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½
 	public int getMemCount();
 	
-	public List<MemberCommand> getMemList(Map<String, Object> map);	// ÃÑ È¸¿ø¸®½ºÆ®
+	public List<MemberCommand> getMemList(Map<String, Object> map);	// ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	
+	// í•´ë‹¹ì•„ì´ë””ê°€ ì†Œì†ëœ íŒ€ ë¦¬ìŠ¤íŠ¸
+	@Select("SELECT t_name FROM g_team_member WHERE id='admin' and T_Mem_Auth=1")
+	public List<String> getTeamMemList(String user_id);
 }
