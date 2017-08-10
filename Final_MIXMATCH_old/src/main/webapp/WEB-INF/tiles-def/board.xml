@@ -6,7 +6,7 @@
 
 <tiles-definitions>
   
-	<definition name="gnoticeList" extends="main">
+	<definition name="gnoticeList" extends="home">
   		<put-attribute name="title" value="공지사항목록"/>
   		<put-attribute name="body" value="/WEB-INF/views/board/Notice.jsp"/>
   	</definition>

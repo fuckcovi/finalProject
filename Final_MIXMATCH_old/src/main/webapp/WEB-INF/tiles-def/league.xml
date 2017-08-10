@@ -6,22 +6,22 @@
 
 <tiles-definitions>
 
-  	<definition name="leagueList" extends="main">
+  	<definition name="leagueList" extends="home">
   		<put-attribute name="title" value="리그"/>
   		<put-attribute name="body" value="/WEB-INF/views/league/leagueList.jsp"/>
   	</definition>
   	
-  	<definition name="leagueDetail" extends="main">
+  	<definition name="leagueDetail" extends="home">
   		<put-attribute name="title" value="리그정보"/>
   		<put-attribute name="body" value="/WEB-INF/views/league/leagueDetail.jsp"/>
   	</definition>
  	
- 	<definition name="leagueInsert" extends="main">
+ 	<definition name="leagueInsert" extends="home">
   		<put-attribute name="title" value="리그등록"/>
   		<put-attribute name="body" value="/WEB-INF/views/league/leagueInsert.jsp"/>
   	</definition>
   	
-  	<definition name="leagueUpdate" extends="main">
+  	<definition name="leagueUpdate" extends="home">
   		<put-attribute name="title" value="리그수정"/>
   		<put-attribute name="body" value="/WEB-INF/views/league/leagueUpdate.jsp"/>
   	</definition>

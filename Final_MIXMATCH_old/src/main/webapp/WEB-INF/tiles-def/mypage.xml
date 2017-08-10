@@ -6,7 +6,7 @@
 
 <tiles-definitions>
    
- 	<definition name="mypageList" extends="main">
+ 	<definition name="mypageList" extends="home">
  		<put-attribute name="title" value="MyPageList" />
  		<put-attribute name="body" value="/WEB-INF/views/mypage/mypageList.jsp"/>
  	</definition>

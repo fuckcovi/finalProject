@@ -5,31 +5,31 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
- 	 <definition name="totalPointRank" extends="main">
+ 	 <definition name="totalPointRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합포인트랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalPointRank.jsp"/>
     </definition>
-	<definition name="totalBaseRank" extends="main">
+	<definition name="totalBaseRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합야구랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalBaseRank.jsp"/>
     </definition>
-    <definition name="totalBaseMemRank" extends="main">
+    <definition name="totalBaseMemRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합야구랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalBaseMemRank.jsp"/>
     </definition>
-    <definition name="totalBasketRank" extends="main">
+    <definition name="totalBasketRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합농구랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalBasketRank.jsp"/>
     </definition>
-    <definition name="totalBasketMemRank" extends="main">
+    <definition name="totalBasketMemRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합농구랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalBasketMemRank.jsp"/>
     </definition>
-    <definition name="totalFootRank" extends="main">
+    <definition name="totalFootRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합축구랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalFootRank.jsp"/>
     </definition>
-    <definition name="totalFootMemRank" extends="main">
+    <definition name="totalFootMemRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH 통합축구랭킹"/>
      	<put-attribute name="body" value="/WEB-INF/views/rank/totalFootMemRank.jsp"/>
     </definition>

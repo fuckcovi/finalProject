@@ -651,11 +651,6 @@ public class TeamController {
 	
 	
 	
-	
-	
-	
-	
-	
 //================================ 통합포인트랭킹==========================
 	private int totalProwCount =10	;
 	private int totalPpageCount = 5;

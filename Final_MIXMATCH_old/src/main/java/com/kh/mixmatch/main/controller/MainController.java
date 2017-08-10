@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
 import com.kh.mixmatch.match.service.MatchService;
+import com.kh.mixmatch.member.domain.MemberCommand;
+import com.kh.mixmatch.member.service.MemberService;
 import com.kh.mixmatch.notice.domain.NoticeCommand;
 import com.kh.mixmatch.notice.service.NoticeService;
 import com.kh.mixmatch.team.domain.TeamCommand;
@@ -28,9 +31,11 @@ public class MainController {
 	private TeamService teamService;
 	@Resource
 	private MatchService matchService;
+	@Resource
+	private MemberService memberService;
 	
 	@RequestMapping("/home.do")
-	public ModelAndView mainPage(){
+	public ModelAndView mainPage(HttpSession session){
 	// 공지사항 //
 		Map<String, Object> map = new HashMap<String, Object>();
 		// map에 아무것도 전달해주지 않으면서 단순 공지사항 글 수 개져옴
@@ -98,6 +103,13 @@ public class MainController {
 		//////////////
 		
 		
+	// 사이드바
+		String user_id = (String)session.getAttribute("user_id");
+		MemberCommand member = null;
+		if(user_id != null){	// 로그인한 상태면 마이페이지에 뜸
+			member = memberService.selectMember(user_id);
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home");
 		mav.addObject("noticeCount",noticeCount);
@@ -111,6 +123,24 @@ public class MainController {
 		
 		mav.addObject("matchResultCount", matchResultCount);
 		mav.addObject("matchResultlist", matchResultlist);
+		
+		mav.addObject("member",member);
+		session.setAttribute("member", member);
 		return mav;
 	}
+	
+	// 마이페이지 사진
+	@RequestMapping("/imageViewSide.do")
+	public ModelAndView viewImage(@RequestParam("id")String id){
+		
+		MemberCommand member = memberService.selectMember(id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile", member.getProfile());
+		mav.addObject("filename", member.getProfile_name());
+		
+		return mav;
+	}
+	
 }

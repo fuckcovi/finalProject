@@ -6,47 +6,47 @@
 
 <tiles-definitions>
 
-	<definition name="matchBoard" extends="main">
+	<definition name="matchBoard" extends="home">
   		<put-attribute name="title" value="매치보드"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchBoard.jsp"/>
   	</definition>
   	
-  	<definition name="scoreBoard" extends="main">
+  	<definition name="scoreBoard" extends="home">
   		<put-attribute name="title" value="스코어보드"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/scoreBoard.jsp"/>
   	</definition>
   	
-  	<definition name="matchInsert" extends="main">
+  	<definition name="matchInsert" extends="home">
   		<put-attribute name="title" value="매치등록"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchInsert.jsp"/>
   	</definition>
   	
-  	<definition name="matchDetail" extends="main">
+  	<definition name="matchDetail" extends="home">
   		<put-attribute name="title" value="상세보기"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchDetail.jsp"/>
   	</definition>
   	
-  	<definition name="matchUpdate" extends="main">
+  	<definition name="matchUpdate" extends="home">
   		<put-attribute name="title" value="수정"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/matchUpdate.jsp"/>
   	</definition>
   	
-  	<definition name="scoreDetail" extends="main">
+  	<definition name="scoreDetail" extends="home">
   		<put-attribute name="title" value="점수보기"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/scoreDetail.jsp"/>
   	</definition>
   	
-  	<definition name="scoreUpdate" extends="main">
+  	<definition name="scoreUpdate" extends="home">
   		<put-attribute name="title" value="결과등록"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/scoreUpdate.jsp"/>
   	</definition>
   	
-  	<definition name="sportsToto" extends="main">
+  	<definition name="sportsToto" extends="home">
   		<put-attribute name="title" value="승부예측"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/sportsToto.jsp"/>
   	</definition>
   	
-  	<definition name="totoDetail" extends="main">
+  	<definition name="totoDetail" extends="home">
   		<put-attribute name="title" value="승부예측"/>
   		<put-attribute name="body" value="/WEB-INF/views/match/totoDetail.jsp"/>
   	</definition>

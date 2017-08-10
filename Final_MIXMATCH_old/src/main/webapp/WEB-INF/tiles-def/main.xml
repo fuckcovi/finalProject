@@ -5,6 +5,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+  
     <definition name="main" template="/WEB-INF/views/templates/layout.jsp">
      	<put-attribute name="title" value="MIXMATCH Home"/>
      	<put-attribute name="header" value="/WEB-INF/views/templates/header.jsp"/>
@@ -15,9 +16,10 @@
      <definition name="home" extends="main">
      	<put-attribute name="title" value="MIXMATCH HomeController"/>
      	<put-attribute name="body" value="/WEB-INF/views/main/mainbody.jsp"/>
+     	<put-attribute name="side" value="/WEB-INF/views/main/sidebar.jsp"/>
     </definition>
   
-    <definition	name="pageError" extends="main">
+    <definition	name="pageError" extends="home">
     	<put-attribute name="title" value="Error Page"/>
     	<put-attribute name="body" value="/WEB-INF/views/error/pageError.jsp"/>
     </definition>

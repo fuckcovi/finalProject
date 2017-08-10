@@ -6,37 +6,37 @@
 
 <tiles-definitions>
 
-    <definition name="memberInsert" extends="main">
+    <definition name="memberInsert" extends="home">
     	<put-attribute name="title" value="회원가입" />
     	<put-attribute name="body" value="/WEB-INF/views/member/memberInsert.jsp" />
     </definition>
     
-    <definition name="memberDetail" extends="main">
+    <definition name="memberDetail" extends="home">
     	<put-attribute name="title" value="내 정보" />
     	<put-attribute name="body" value="/WEB-INF/views/member/memberDetail.jsp" />
     </definition>
     
-    <definition name="pwUpdate" extends="main">
+    <definition name="pwUpdate" extends="home">
     	<put-attribute name="title" value="비밀번호 수정" />
     	<put-attribute name="body" value="/WEB-INF/views/member/pwUpdate.jsp" />
     </definition>
     
-    <definition name="memberUpdate" extends="main">
+    <definition name="memberUpdate" extends="home">
     	<put-attribute name="title" value="회원수정" />
     	<put-attribute name="body" value="/WEB-INF/views/member/memberUpdate.jsp" />
     </definition>
     
-    <definition name="memberDelete" extends="main">
+    <definition name="memberDelete" extends="home">
     	<put-attribute name="title" value="회원탈퇴" />
     	<put-attribute name="body" value="/WEB-INF/views/member/memberDelete.jsp" />
     </definition>
     
-    <definition name="pwCheck" extends="main">
+    <definition name="pwCheck" extends="home">
     	<put-attribute name="title" value="비밀번호 확인" />
     	<put-attribute name="body" value="/WEB-INF/views/member/pwCheck.jsp" />
     </definition>
     
-    <definition name="login" extends="main">
+    <definition name="login" extends="home">
      	<put-attribute name="title" value="MIXMATCH Login"/>
      	<put-attribute name="body" value="/WEB-INF/views/member/login.jsp"/>
     </definition>

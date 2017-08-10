@@ -6,15 +6,15 @@
 
 <tiles-definitions>
   
-	<definition name="notice" extends="main">
+	<definition name="notice" extends="home">
   		<put-attribute name="title" value="공지사항"/>
   		<put-attribute name="body" value="/WEB-INF/views/notice/notice.jsp"/>
   	</definition>
-  	<definition name="noticeInsert" extends="main">
+  	<definition name="noticeInsert" extends="home">
   		<put-attribute name="title" value="공지사항 등록"/>
   		<put-attribute name="body" value="/WEB-INF/views/notice/noticeInsert.jsp"/>
   	</definition>
- 	<definition name="noticeDetail" extends="main">
+ 	<definition name="noticeDetail" extends="home">
   		<put-attribute name="title" value="공지사항"/>
   		<put-attribute name="body" value="/WEB-INF/views/notice/noticeDetail.jsp"/>
   	</definition>

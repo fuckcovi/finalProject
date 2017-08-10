@@ -11,46 +11,46 @@
      	<put-attribute name="body" value="/WEB-INF/views/team/chat.jsp"/>
     </definition>
     <!--  팀  -->
-  	<definition name="teamHome" extends="main">
+  	<definition name="teamHome" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAM"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamHome.jsp"/>
     </definition>
-  	<definition name="teamRegister" extends="main">
+  	<definition name="teamRegister" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAM"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamRegister.jsp"/>
     </definition>
-  	<definition name="teamRank" extends="main">
+  	<definition name="teamRank" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAMRank"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamRank.jsp"/>
     </definition>
-  	<definition name="teamInfo" extends="main">
+  	<definition name="teamInfo" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAMInfo"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamInfo.jsp"/>
     </definition>
-   	<definition name="teamMemView" extends="main">
+   	<definition name="teamMemView" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAM MEMBER"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamMemView.jsp"/>
     </definition>
-   	<definition name="teamSchedule" extends="main">
+   	<definition name="teamSchedule" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAM Schedule"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamSchedule.jsp"/>
     </definition>
-    <definition name="teamRecord" extends="main">
+    <definition name="teamRecord" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAM Record"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamRecord.jsp"/>
     </definition>
-    <definition name="teamUpdate" extends="main">
+    <definition name="teamUpdate" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAMUpdate"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/teamUpdate.jsp"/>
     </definition>
     
     <!--  팀기록 -->
-  	<definition name="matchDetailRecord" extends="main">
+  	<definition name="matchDetailRecord" extends="home">
      	<put-attribute name="title" value="MIXMATCH TEAM matchDetail"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/matchDetailRecord.jsp"/>
     </definition>
     <!--  매치결과개인기록  -->
-    <definition name="matchMemRecordInsert" extends="main">
+    <definition name="matchMemRecordInsert" extends="home">
      	<put-attribute name="title" value="MIXMATCH matchMemRecordInsert"/>
      	<put-attribute name="body" value="/WEB-INF/views/team/matchMemRecordInsert.jsp"/>
     </definition>

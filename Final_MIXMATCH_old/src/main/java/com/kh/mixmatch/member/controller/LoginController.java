@@ -56,7 +56,7 @@ private Logger log = Logger.getLogger(this.getClass());
 				session.setAttribute("user_id", member.getId());
 				session.setAttribute("auth", member.getAuth());
 				session.setAttribute("status", member.getStatus());
-				
+				session.setAttribute("member", member);
 				return "redirect:/home.do";
 			}else if(check && member.getStatus().equals("N")){
 				result.reject("unableMember");

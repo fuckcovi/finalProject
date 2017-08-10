@@ -6,15 +6,15 @@
 
 <tiles-definitions>
   
-	<definition name="teamboard" extends="main">
+	<definition name="teamboard" extends="home">
   		<put-attribute name="title" value="팀게시판"/>
   		<put-attribute name="body" value="/WEB-INF/views/teamboard/teamboard.jsp"/>
   	</definition>
-  	<definition name="teamboardInsert" extends="main">
+  	<definition name="teamboardInsert" extends="home">
   		<put-attribute name="title" value="팀게시판 등록"/>
   		<put-attribute name="body" value="/WEB-INF/views/teamboard/teamboardInsert.jsp"/>
   	</definition>
- 	<definition name="teamboardDetail" extends="main">
+ 	<definition name="teamboardDetail" extends="home">
   		<put-attribute name="title" value="팀게시판"/>
   		<put-attribute name="body" value="/WEB-INF/views/teamboard/teamboardDetail.jsp"/>
   	</definition>
