@@ -57,14 +57,16 @@
 	   												com.kh.mixmatch.member.domain,com.kh.mixmatch.mypage.domain,
 	   												com.kh.mixmatch.pointshop.domain,com.kh.mixmatch.record.domain,
 	   												com.kh.mixmatch.team.domain,com.kh.mixmatch.toto.domain, com.kh.mixmatch.notice.domain,
-	   												com.kh.mixmatch.teamboard.domain, com.kh.mixmatch.main.domain, com.kh.mixmatch.league.domain"/>
+	   												com.kh.mixmatch.teamboard.domain, com.kh.mixmatch.main.domain, com.kh.mixmatch.league.domain
+	   												,com.kh.mixmatch.stadium.domain"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.kh.mixmatch.board.dao,com.kh.mixmatch.match.dao,
 	   										com.kh.mixmatch.member.dao,com.kh.mixmatch.mypage.dao,
 	   										com.kh.mixmatch.pointshop.dao,com.kh.mixmatch.record.dao,
 	   										com.kh.mixmatch.team.dao,com.kh.mixmatch.toto.dao,com.kh.mixmatch.notice.dao,
-	   										com.kh.mixmatch.teamboard.dao,com.kh.mixmatch.main.dao, com.kh.mixmatch.league.dao"/>
+	   										com.kh.mixmatch.teamboard.dao,com.kh.mixmatch.main.dao, com.kh.mixmatch.league.dao
+	   										,com.kh.mixmatch.stadium.dao"/>
 	</bean> 
 </beans>
 

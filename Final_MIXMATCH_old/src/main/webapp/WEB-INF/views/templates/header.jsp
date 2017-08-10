@@ -33,6 +33,7 @@
 <li><a href="${pageContext.request.contextPath}/match/scoreBoard.do" class="submenuLink">스코어보드</a></li>
 <li><a href="${pageContext.request.contextPath}/match/sportsToto.do" class="submenuLink">승부예측</a></li>
 <li><a href="${pageContext.request.contextPath}/league/leagueList.do" class="submenuLink">리그</a></li>
+<li><a href="${pageContext.request.contextPath}/stadium.do" class="submenuLink">경기장예약</a></li>
 </ul>
 </li>
 <li class="topMenuLi">

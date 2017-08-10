@@ -58,6 +58,8 @@
 				<beans:value>/WEB-INF/tiles-def/teamboard.xml</beans:value>
 				<!-- 리그 -->
 				<beans:value>/WEB-INF/tiles-def/league.xml</beans:value>
+				<!-- 경기장예약 -->
+				<beans:value>/WEB-INF/tiles-def/stadium.xml</beans:value>
 				<!-- 일단 주석처리 -->
 				<!-- 팀관련
 				
