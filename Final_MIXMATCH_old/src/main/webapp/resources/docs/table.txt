@@ -280,3 +280,31 @@ create table g_sale_history(
 	constraint g_sale_history_fk1 foreign key(id) references g_member(id),
 	constraint g_sale_history_fk2 foreign key(p_seq) references g_point_product(p_seq)
 );
+
+--------------------------리그-------------------------------------
+create table g_league (
+  l_seq number not null primary key,
+  id varchar2(20) not null,
+  l_title varchar2(50) not null,
+  l_area varchar2(20) not null,
+  l_date varchar2(20) not null,
+  l_time varchar2(20) not null,
+  l_place varchar2(50) not null,
+  l_cost number default 0 not null,
+  l_content varchar2(300),
+  l_number number not null,
+  l_team number default 0 not null,
+  l_type varchar2(20) not null,
+  constraint g_league_fk1 foreign key (id) references g_member (id)
+);
+create sequence g_league_seq;
+
+create table g_league_detail (
+  ld_seq number not null primary key,
+  l_seq number not null,
+  t_name varchar2(30) not null,
+  ld_check varchar2(5) default 'N',
+  constraint g_league_detail_fk1 foreign key (l_seq) references g_league (l_seq),
+  constraint g_league_detail_fk2 foreign key (t_name) references g_team (t_name)
+);
+create sequence g_league_detail_seq;
