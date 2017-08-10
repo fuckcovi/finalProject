@@ -1,3 +1,3 @@
 <%
-	response.sendRedirect(request.getContextPath() + "/main.do");
+	response.sendRedirect(request.getContextPath() + "/home.do");
 %>

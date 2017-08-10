@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-table.style {
+table.style, table.l-style {
 	margin: 0 auto;  
 	border-collapse: collapse;	
 }
@@ -16,8 +16,15 @@ table.style {
 	width: 130px;
 	height: 30px;
 }
+
+.l-style th {
+	background: #54c5e5;
+	color: white;
+	width: 130px;
+	height: 30px;
+}
 	
-.style td {
+.style td, .l-style td {
 	width: 130px;
 	height: 80px;
 	border-top: 1px solid #CCCCCC;
@@ -38,6 +45,11 @@ table.style {
 hr.style {
 	width: 90%;
 	border: 3px solid #002266;
+}
+
+hr.l-style {
+	width: 90%;
+	border: 3px solid #54c5e5;
 }
 
 form.style, div.style {
@@ -66,6 +78,18 @@ td.left-style {
 	border: 0;
 	background: #FF4848;
 	color: white;
+}
+
+.l-style .btn {
+	width: 80px;
+	height: 30px;
+	border: 0;
+	background: #54c5e5;
+	color: white;
+}
+
+.l-style .btn:hover {
+	background: #00b1e2;
 }
 
 .style .btn:hover, .detail-style .btn:hover {
@@ -121,4 +145,12 @@ td.left-style {
 .select_box {
 	width: 100px;
 	height: 30px;
+}
+
+.select-l-btn {
+	width: 80px;
+	height: 30px;
+	border: 0;
+	background: #54c5e5;
+	color: white;
 }
