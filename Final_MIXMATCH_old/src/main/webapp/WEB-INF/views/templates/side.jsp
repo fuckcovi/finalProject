@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
-
+<script type="text/javascript">
+ $(document).ready(function(){
+		if($( window ).width() < 1050 ){
+			$("#main_side").hide();
+		}else{
+			$("#main_side").show();
+		}		
+ });
+</script>
 <div class="align-center" id="sideMenu">
 	<ul>
 		<li>

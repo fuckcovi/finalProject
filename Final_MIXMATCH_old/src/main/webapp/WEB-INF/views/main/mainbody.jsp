@@ -57,9 +57,11 @@
 		});
 	});	
 </script>
-<div class="page-main-style">
-	<h1>MIXMATCH</h1>
-	
+<div style="text-align:center;width:100%;height:150px;border-bottom:1px solid #BDBDBD;">
+	<img src="${pageContext.request.contextPath}/resources/images/mixmatch.png" height="100%">
+</div>
+<div style="width:80%;margin:0 auto;">
+	<br>
 	<!--  공지사항 게시글 최근5개 보이기. 없으면 없음 띄움 -->
 	<div id="noticeView" class="half" 
 		style="float:left;">

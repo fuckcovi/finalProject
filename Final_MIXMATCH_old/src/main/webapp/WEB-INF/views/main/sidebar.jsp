@@ -5,6 +5,19 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/teamLogo.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var flag = false;
+		$("#sideMenu").hide();
+		
+		$('#side-btn').click(function(){
+			if(flag == false) {
+				$("#sideMenu").show();
+				flag = true;
+			} else {
+				$("#sideMenu").hide();
+				flag = false;
+			}
+		});
+		
 		var chat;
 		var open = 0;
 		$("#chat").click(function(){
@@ -29,7 +42,10 @@
 		width:80px;
 	}
 </style>
-<div class="align-center" id="sideMenu">
+<div>
+	<span class="glyphicon glyphicon-chevron-right" id="side-btn"></span>
+</div>
+<div class="align-center" id="sideMenu" style="background:white;">
 	<ul id="sideul">
 		<li>
 			<c:if test="${!empty user_id }">
