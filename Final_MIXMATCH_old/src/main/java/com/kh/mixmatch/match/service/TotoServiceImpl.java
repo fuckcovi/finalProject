@@ -79,11 +79,6 @@ public class TotoServiceImpl implements TotoService {
 	}
 	
 	@Override
-	public ArrayList<String> totoFailList(Map<String, Object> map) {
-		return totoMapper.totoFailList(map);
-	}
-	
-	@Override
 	public void upPointTeam(Map<String, Object> teamMap) {
 		totoMapper.upPointTeam(teamMap);
 	}
@@ -94,8 +89,8 @@ public class TotoServiceImpl implements TotoService {
 	}
 	
 	@Override
-	public void downPoint(Map<String, Object> failMap) {
-		totoMapper.downPoint(failMap);
+	public void downPoint(Map<String, Object> map) {
+		totoMapper.downPoint(map);
 	}
 	
 	@Override
@@ -111,11 +106,6 @@ public class TotoServiceImpl implements TotoService {
 	@Override
 	public ArrayList<Integer> totoAllPoint(Map<String, Object> map) {
 		return totoMapper.totoAllPoint(map);
-	}
-	
-	@Override
-	public ArrayList<Integer> totoFailPoint(Map<String, Object> map) {
-		return totoMapper.totoFailPoint(map);
 	}
 
 	@Override

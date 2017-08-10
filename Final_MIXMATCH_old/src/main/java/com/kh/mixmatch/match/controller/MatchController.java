@@ -36,32 +36,42 @@ public class MatchController {
 	@Resource
 	private TotoService totoService;
 	
-	// 留ㅼ튂蹂대뱶
+	@ModelAttribute("matchCommand")
+	public MatchCommand initMatchCommand() {
+		return new MatchCommand();
+	}
+	
+	@ModelAttribute("totoCommand")
+	public TotoCommand initTotoCommand() {
+		return new TotoCommand();
+	}
+	
+	// 매치보드
 	@RequestMapping("/match/matchBoard.do")
-	public ModelAndView matchBoardForm(@RequestParam(value="type", defaultValue="異뺢뎄") String type,
+	public ModelAndView matchBoardForm(@RequestParam(value="type", defaultValue="축구") String type,
 									   HttpSession session) {				
-		// 醫낅ぉ 諛쏆븘�삤湲�
+		// 종목 받아오기
 		String board = "match";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 		
-		// 醫낅ぉ蹂� 寃뚯떆湲� �닔 移댁슫�듃
+		// 종목별 게시글 수 카운트
 		int count = matchService.getRowCount(map);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂蹂대뱶 type>> : " + type);		
-			log.debug("<<留ㅼ튂蹂대뱶 count>> : " + count);
+			log.debug("<<매치보드 type>> : " + type);		
+			log.debug("<<매치보드 count>> : " + count);
 		}
 		
-		// 由ъ뒪�듃�뿉 ���옣
+		// 리스트에 저장
 		List<MatchCommand> list = null;
 		if (count > 0) {
 			map.put("type", type);		
 			list = matchService.matchList(map);
 		}
 		
-		// �쑀�� ���씠由� 諛쏆븘�삤湲�
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
@@ -75,32 +85,32 @@ public class MatchController {
 		return mav;
 	}
 	
-	// �뒪肄붿뼱蹂대뱶
+	// 스코어보드
 	@RequestMapping("/match/scoreBoard.do")
-	public ModelAndView scoreBoardForm(@RequestParam(value="type", defaultValue="異뺢뎄") String type,
+	public ModelAndView scoreBoardForm(@RequestParam(value="type", defaultValue="축구") String type,
 									   HttpSession session) {			
-		// 醫낅ぉ 諛쏆븘�삤湲�
+		// 종목 받아오기
 		String board = "score";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("board", board);
 		
-		// 醫낅ぉ蹂� 寃뚯떆湲� �닔 移댁슫�듃
+		// 종목별 게시글 수 카운트
 		int count = matchService.getRowCount(map);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<�뒪肄붿뼱蹂대뱶 type>> : " + type);
-			log.debug("<<�뒪肄붿뼱蹂대뱶 count>> : " + count);
+			log.debug("<<스코어보드 type>> : " + type);
+			log.debug("<<스코어보드 count>> : " + count);
 		}
 		
-		// 由ъ뒪�듃�뿉 ���옣
+		// 리스트에 저장
 		List<MatchCommand> list = null;
 		if (count > 0) {
 			map.put("type", type);		
 			list = matchService.matchList(map);
 		}
 		
-		// �쑀�� ���씠由� 諛쏆븘�삤湲�
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
@@ -114,7 +124,7 @@ public class MatchController {
 		return mav;
 	}
 	
-	// �� �씠誘몄� 異쒕젰
+	// 팀 이미지 출력
 	@RequestMapping("/match/matchImageView.do")
 	public ModelAndView matchImageView(@RequestParam("t_name") String t_name) {
 		TeamCommand team = matchService.getTeam(t_name);
@@ -127,15 +137,15 @@ public class MatchController {
 		return mav;
 	}
 	
-	// 留ㅼ튂�벑濡앺뤌
+	// 매치등록폼
 	@RequestMapping(value="/match/matchInsert.do", method=RequestMethod.GET)
 	public ModelAndView matchInsertForm(HttpSession session, Model model) {
-		// �쑀�� ���씠由� 諛쏆븘�삤湲�
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂�벑濡앺뤌 t_name>> : " + t_name);
+			log.debug("<<매치등록폼 t_name>> : " + t_name);
 		}
 		
 		MatchCommand matchCommand = new MatchCommand();
@@ -143,22 +153,22 @@ public class MatchController {
 		List<TeamCommand> teamCommand = matchService.getTeamType2(id);
 		
 		ArrayList<String> area = new ArrayList<String>();
-		area.add("�꽌�슱");
-		area.add("�씤泥�");
-		area.add("寃쎄린");
-		area.add("媛뺤썝");
-		area.add("���쟾");
-		area.add("異⑸턿");
-		area.add("異⑸궓");
-		area.add("愿묒＜");
-		area.add("�쟾遺�");
-		area.add("�쟾�궓");
-		area.add("��援�");
-		area.add("�슱�궛");
-		area.add("寃쎈턿");
-		area.add("寃쎈궓");
-		area.add("遺��궛");
-		area.add("�젣二�");
+		area.add("서울");
+		area.add("인천");
+		area.add("경기");
+		area.add("강원");
+		area.add("대전");
+		area.add("충북");
+		area.add("충남");
+		area.add("광주");
+		area.add("전북");
+		area.add("전남");
+		area.add("대구");
+		area.add("울산");
+		area.add("경북");
+		area.add("경남");
+		area.add("부산");
+		area.add("제주");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchInsert");
@@ -170,12 +180,12 @@ public class MatchController {
 		return mav;
 	}
 	
-	// 留ㅼ튂�벑濡�
+	// 매치등록
 	@RequestMapping(value="/match/matchInsert.do", method=RequestMethod.POST)
 	public String matchInsertSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂�벑濡� matchCommand>> : " + matchCommand);
+			log.debug("<<매치등록 matchCommand>> : " + matchCommand);
 		}
 		
 		if (result.hasErrors()) {
@@ -186,27 +196,27 @@ public class MatchController {
 		matchCommand.setT_name(array[0]);
 		matchCommand.setM_type(array[1]);
 		
-		// 留ㅼ튂�벑濡�
+		// 매치등록
 		matchService.insertMatch(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// 留ㅼ튂 �긽�꽭蹂닿린
+	// 매치 상세보기
 	@RequestMapping("/match/matchDetail.do")
 	public ModelAndView matchDetailForm(@RequestParam("m_seq") int m_seq,
 										Model model, HttpSession session) {		
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂 �긽�꽭蹂닿린 m_seq>> : " + m_seq);
+			log.debug("<<매치 상세보기 m_seq>> : " + m_seq);
 		}
 		
-		// �쑀�� ���씠由� 諛쏆븘�삤湲�
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
-		// 湲�踰덊샇(m_seq)�� �씪移섑븯�뒗 �젅肄붾뱶 �꽑�깮
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand match = matchService.selectMatch(m_seq); 
-		 
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("m_seq", m_seq);
@@ -222,74 +232,74 @@ public class MatchController {
 		return mav;
 	}
 	
-	// 留ㅼ튂�궘�젣
+	// 매치삭제
 	@RequestMapping("/match/matchDelete.do")
 	public String matchDeleteSubmit(@RequestParam("m_seq") int m_seq) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂�궘�젣 m_seq>> : " + m_seq);
+			log.debug("<<매치삭제 m_seq>> : " + m_seq);
 		}
 		
-		// 留ㅼ튂�궘�젣
+		// 매치삭제
 		matchService.deleteMatch(m_seq);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// 留ㅼ튂�떊泥�
+	// 매치신청
 	@RequestMapping("/match/challengerUpdate.do")
 	public String challengerUpdateSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 										 BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂�떊泥� matchCommand>> : " + matchCommand);
+			log.debug("<<매치신청 matchCommand>> : " + matchCommand);
 		}
 		
 		if (result.hasErrors()) {
 			return "matchInsert";
 		}
 		
-		// 留ㅼ튂�벑濡�
+		// 매치등록
 		matchService.updateChallenger(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// 留ㅼ튂�닔�젙�뤌
+	// 매치수정폼
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.GET)
 	public String matchUpdateForm(@RequestParam("m_seq") int m_seq,
 								  HttpSession session, Model model) {		
-		// �쑀�� ���씠由� 諛쏆븘�삤湲�
+		// 유저 팀이름 받아오기
 		String id = (String) session.getAttribute("user_id");
 		List<String> t_name = matchService.getTeamList(id);
 		
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂�닔�젙�뤌 m_seq>> : " + m_seq);
-			log.debug("<<留ㅼ튂�닔�젙�뤌 t_name>> : " + t_name);
+			log.debug("<<매치수정폼 m_seq>> : " + m_seq);
+			log.debug("<<매치수정폼 t_name>> : " + t_name);
 		}
 		
 		ArrayList<String> type = new ArrayList<String>();
-		type.add("異뺢뎄");
-		type.add("�빞援�");
-		type.add("�냽援�");
+		type.add("축구");
+		type.add("야구");
+		type.add("농구");
 		
 		ArrayList<String> area = new ArrayList<String>();
-		area.add("�꽌�슱");
-		area.add("�씤泥�");
-		area.add("寃쎄린");
-		area.add("媛뺤썝");
-		area.add("���쟾");
-		area.add("異⑸턿");
-		area.add("異⑸궓");
-		area.add("愿묒＜");
-		area.add("�쟾遺�");
-		area.add("�쟾�궓");
-		area.add("��援�");
-		area.add("�슱�궛");
-		area.add("寃쎈턿");
-		area.add("寃쎈궓");
-		area.add("遺��궛");
-		area.add("�젣二�");
+		area.add("서울");
+		area.add("인천");
+		area.add("경기");
+		area.add("강원");
+		area.add("대전");
+		area.add("충북");
+		area.add("충남");
+		area.add("광주");
+		area.add("전북");
+		area.add("전남");
+		area.add("대구");
+		area.add("울산");
+		area.add("경북");
+		area.add("경남");
+		area.add("부산");
+		area.add("제주");
 		
-		// 湲�踰덊샇(m_seq)�� �씪移섑븯�뒗 �젅肄붾뱶 �꽑�깮
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand matchCommand = matchService.selectMatch(m_seq);
 		model.addAttribute("match", matchCommand);
 		model.addAttribute("teamList", t_name);
@@ -299,39 +309,39 @@ public class MatchController {
 		return "matchUpdate";
 	}
 	
-	// 留ㅼ튂�닔�젙
+	// 매치수정
 	@RequestMapping(value="/match/matchUpdate.do", method=RequestMethod.POST)
 	public String matchUpdateSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<留ㅼ튂�닔�젙 matchCommand>> : " + matchCommand);
+			log.debug("<<매치수정 matchCommand>> : " + matchCommand);
 		}
 		
 		if (result.hasErrors()) {
 			return "matchUpdate";
 		}
 		
-		// 留ㅼ튂�닔�젙
+		// 매치수정
 		matchService.updateMatch(matchCommand);
 		
 		return "redirect:/match/matchBoard.do";
 	}
 	
-	// �젏�닔蹂닿린
+	// 점수보기
 	@RequestMapping("/match/scoreDetail.do")
 	public ModelAndView scoreDetailForm(@RequestParam("m_seq") int m_seq) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<�젏�닔蹂닿린 m_seq>> : " + m_seq);
+			log.debug("<<점수보기 m_seq>> : " + m_seq);
 		}
 		
-		// 湲�踰덊샇(m_seq)�� �씪移섑븯�뒗 �젅肄붾뱶 �꽑�깮
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand match = matchService.selectMatch(m_seq);
 		
-		// �� �씠由� 媛��졇�삤湲�
+		// 팀 이름 가져오기
 		TeamCommand t_name = matchService.getTeam(match.getT_name());
 		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
 		
-		// 踰좏똿 由ъ뒪�듃
+		// 베팅 리스트
 		List<TotoCommand> list = totoService.totoList(m_seq);
 		
 		ModelAndView mav = new ModelAndView();
@@ -344,17 +354,17 @@ public class MatchController {
 		return mav;
 	}
 	
-	// 寃곌낵�벑濡앺뤌
+	// 결과등록폼
 	@RequestMapping(value="/match/scoreUpdate.do", method=RequestMethod.GET)
 	public String updateScoreForm(@RequestParam("m_seq") int m_seq, Model model) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<寃곌낵�벑濡앺뤌 m_seq>> : " + m_seq);
+			log.debug("<<결과등록폼 m_seq>> : " + m_seq);
 		}
 		
-		// 湲�踰덊샇(m_seq)�� �씪移섑븯�뒗 �젅肄붾뱶 �꽑�깮
+		// 글번호(m_seq)와 일치하는 레코드 선택
 		MatchCommand matchCommand = matchService.selectMatch(m_seq);
 		
-		// MVP硫ㅻ쾭 �꽑�깮�쓣 �쐞�븳 �� 硫ㅻ쾭 媛��졇�삤湲�
+		// MVP멤버 선택을 위한 팀 멤버 가져오기
 		List<String> mvpMember = matchService.getMvpMember(m_seq);
 		
 		model.addAttribute("match", matchCommand);
@@ -363,22 +373,22 @@ public class MatchController {
 		return "scoreUpdate";
 	}
 	
-	// 寃곌낵�벑濡�
+	// 결과등록
 	@RequestMapping(value="/match/scoreUpdate.do", method=RequestMethod.POST)
 	public String updateScoreSubmit(@ModelAttribute("match") @Valid MatchCommand matchCommand,
 									BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-			log.debug("<<寃곌낵�벑濡� matchCommand>> : " + matchCommand);
+			log.debug("<<결과등록 matchCommand>> : " + matchCommand);
 		}
 		
-		// 寃곌낵�벑濡�
+		// 결과등록
 		matchService.updateScore(matchCommand);
 		
-		// MVP 硫ㅻ쾭 �룷�씤�듃 利앷�
+		// MVP 멤버 포인트 증가
 		String id = matchCommand.getM_mvp();
 		totoService.updateMemberPoint(id);
 		
-		// �� �쟾�쟻 利앷�, �룷�씤�듃 利앷�
+		// 팀 전적 증가, 포인트 증가
 		int home = matchCommand.getM_home();
 		int away = matchCommand.getM_away();
 		
@@ -390,30 +400,25 @@ public class MatchController {
 			totoService.updateTeamLose(t_away);
 			totoService.updatePointWin(t_home);
 			totoService.updatePointLose(t_away);
-			System.out.println("���썝 �룷�씤�듃 利앷� �셿猷�");
+			System.out.println("팀원 포인트 증가 완료");
 			
-			// 踰좏똿�븳 �쉶�썝 �룷�씤�듃 利앷�
+			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("team", matchCommand.getT_name());
 			map.put("score", matchCommand.getM_home());
 			map.put("m_seq", matchCommand.getM_seq());
 			ArrayList<String> teamList = totoService.totoTeamList(map);
 			ArrayList<String> allList = totoService.totoAllList(map);
-			ArrayList<String> failList = totoService.totoFailList(map);
 			System.out.println("teamList" + teamList);
 			System.out.println("allList" + allList);
-			System.out.println("failList" + failList);
 						
-			// �씠湲댄�留� 留욎텣 硫ㅻ쾭媛� 踰좏똿�븳 �룷�씤�듃 媛��졇�삤湲�
+			// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
 			ArrayList<Integer> teamPoint = totoService.totoTeamPoint(map);
 			System.out.println("teamPoint" + teamPoint);
-			// �씠湲댄�怨� �젏�닔瑜� 留욎텣 硫ㅻ쾭媛� 踰좏똿�븳 �룷�씤�듃 媛��졇�삤湲�
+			// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
 			ArrayList<Integer> allPoint = totoService.totoAllPoint(map);
 			System.out.println("allPoint" + allPoint);
-			// 踰좏똿 �떎�뙣�븳 硫ㅻ쾭 �룷�씤�듃 媛��졇�삤湲�
-			ArrayList<Integer> failPoint = totoService.totoFailPoint(map);
-			System.out.println("failPoint" + failPoint);
-			// 諛곕떦瑜� 媛��졇�삤湲�
+			// 배당률 가져오기
 			double t_rate = totoService.totoRate(map);
 			System.out.println("t_rate=" + t_rate);
 					
@@ -426,7 +431,7 @@ public class MatchController {
 					teamMap.put("teamList", teamList.get(i));
 					System.out.println("teamList.get("+i+")="+teamList.get(i));
 					totoService.upPointTeam(teamMap);
-					System.out.println("teamList 踰좏똿 �룷�씤�듃 利앷� �셿猷�");
+					System.out.println("teamList 베팅 포인트 증가 완료");
 				}
 			}
 						
@@ -439,21 +444,8 @@ public class MatchController {
 					allMap.put("allList", allList.get(i));
 					System.out.println("allList.get("+i+")="+allList.get(i));
 					totoService.upPointAll(allMap);
-					System.out.println("allList 踰좏똿 �룷�씤�듃 利앷� �셿猷�");
+					System.out.println("allList 베팅 포인트 증가 완료");
 				}	
-			}	
-			
-			if (failList != null) {
-				for (int i = 0; i < failList.size(); i++) {
-					int point = failPoint.get(i);
-					Map<String, Object> failMap = new HashMap<String, Object>();
-					failMap.put("point", point);
-					System.out.println("failPoint.get("+i+")="+point);
-					failMap.put("failList", failList.get(i));
-					System.out.println("failList.get("+i+")="+failList.get(i));
-					totoService.downPoint(failMap);
-					System.out.println("failList 踰좏똿 �룷�씤�듃 媛먯냼 �셿猷�");
-				}
 			}
 		} else if (home == away) {
 			totoService.updateTeamDraw(matchCommand.getT_name());
@@ -461,7 +453,7 @@ public class MatchController {
 			totoService.updatePointDraw(t_home);
 			totoService.updatePointDraw(t_away);
 			
-			// 踰좏똿�븳 �쉶�썝 �룷�씤�듃 利앷�
+			// 베팅한 회원 포인트 증가
 			totoService.totoDraw(matchCommand);
 			
 		} else if (home < away) {
@@ -469,30 +461,25 @@ public class MatchController {
 			totoService.updateTeamWin(matchCommand.getM_challenger());
 			totoService.updatePointWin(t_away);
 			totoService.updatePointLose(t_home);
-			System.out.println("���썝 �룷�씤�듃 利앷� �셿猷�");
+			System.out.println("팀원 포인트 증가 완료");
 			
-			// 踰좏똿�븳 �쉶�썝 �룷�씤�듃 利앷�
+			// 베팅한 회원 포인트 증가
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("team", matchCommand.getM_challenger());
 			map.put("score", matchCommand.getM_away());
 			map.put("m_seq", matchCommand.getM_seq());
 			ArrayList<String> teamList = totoService.totoTeamList(map);
 			ArrayList<String> allList = totoService.totoAllList(map);
-			ArrayList<String> failList = totoService.totoFailList(map);
 			System.out.println("teamList" + teamList);
 			System.out.println("allList" + allList);
-			System.out.println("failList" + failList);
 			
-			// �씠湲댄�留� 留욎텣 硫ㅻ쾭媛� 踰좏똿�븳 �룷�씤�듃 媛��졇�삤湲�
+			// 이긴팀만 맞춘 멤버가 베팅한 포인트 가져오기
 			ArrayList<Integer> teamPoint = totoService.totoTeamPoint(map);
 			System.out.println("teamPoint" + teamPoint);
-			// �씠湲댄�怨� �젏�닔瑜� 留욎텣 硫ㅻ쾭媛� 踰좏똿�븳 �룷�씤�듃 媛��졇�삤湲�
+			// 이긴팀과 점수를 맞춘 멤버가 베팅한 포인트 가져오기
 			ArrayList<Integer> allPoint = totoService.totoAllPoint(map);
 			System.out.println("allPoint" + allPoint);
-			// 踰좏똿 �떎�뙣�븳 硫ㅻ쾭 �룷�씤�듃 媛��졇�삤湲�
-			ArrayList<Integer> failPoint = totoService.totoFailPoint(map);
-			System.out.println("failPoint" + failPoint);
-			// 諛곕떦瑜� 媛��졇�삤湲�
+			// 배당률 가져오기
 			double t_rate = totoService.totoRate(map);
 			System.out.println("t_rate=" + t_rate);
 			
@@ -505,7 +492,7 @@ public class MatchController {
 					teamMap.put("teamList", teamList.get(i));
 					System.out.println("teamList.get("+i+")="+teamList.get(i));
 					totoService.upPointTeam(teamMap);
-					System.out.println("teamList 踰좏똿 �룷�씤�듃 利앷� �셿猷�");
+					System.out.println("teamList 베팅 포인트 증가 완료");
 				}
 			}
 			
@@ -518,21 +505,8 @@ public class MatchController {
 					allMap.put("allList", allList.get(i));
 					System.out.println("allList.get("+i+")="+allList.get(i));
 					totoService.upPointAll(allMap);
-					System.out.println("allList 踰좏똿 �룷�씤�듃 利앷� �셿猷�");
+					System.out.println("allList 베팅 포인트 증가 완료");
 				}	
-			}	
-			
-			if (failList != null) {
-				for (int i = 0; i < failList.size(); i++) {
-					int point = failPoint.get(i);
-					Map<String, Object> failMap = new HashMap<String, Object>();
-					failMap.put("point", point);
-					System.out.println("failPoint.get("+i+")="+point);
-					failMap.put("failList", failList.get(i));
-					System.out.println("failList.get("+i+")="+failList.get(i));
-					totoService.downPoint(failMap);
-					System.out.println("failList 踰좏똿 �룷�씤�듃 媛먯냼 �셿猷�");
-				}
 			}
 		}
 		

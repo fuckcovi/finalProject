@@ -52,18 +52,15 @@ public interface TotoMapper {
 	// 이긴팀과 점수를 맞춘 멤버ID
 	@Select("SELECT id FROM g_toto WHERE t_winteam=#{team} and t_score=#{score} and m_seq=#{m_seq}")
 	public ArrayList<String> totoAllList(Map<String, Object> map);
-	// 베팅 실패한 멤버 ID
-	@Select("SELECT id FROM g_toto WHERE t_winteam!=#{team} and m_seq=#{m_seq}")
-	public ArrayList<String> totoFailList(Map<String, Object> map);
 	// 이긴팀만 맞춘 멤버 포인트 증가
 	@Update("UPDATE g_member SET point=point+#{point} WHERE id=#{teamList}")
 	public void upPointTeam(Map<String, Object> teamMap);
 	// 이긴팀과 점수를 맞춘 멤버 포인트 증가
 	@Update("UPDATE g_member SET point=point+#{point} WHERE id=#{allList}")
 	public void upPointAll(Map<String, Object> allMap);
-	// 베팅 실패한 멤버 포인트 감소
-	@Update("UPDATE g_member SET point=point-#{point} WHERE id=#{failList}")
-	public void downPoint(Map<String, Object> failMap);
+	// 베팅한 멤버 포인트 감소
+	@Update("UPDATE g_member SET point=point-#{point} WHERE id=#{id}")
+	public void downPoint(Map<String, Object> map);
 	// 비긴 경우 베팅한 멤버 포인트 증가
 	@Update("UPDATE g_member SET point=point+100 WHERE id IN(SELECT id FROM g_toto WHERE t_winteam=#{t_name} OR t_winteam=#{m_challenger} AND m_seq=#{m_seq})")
 	public void totoDraw(MatchCommand matchCommand);

@@ -34,6 +34,16 @@ public class TotoController {
 	@Resource
 	private TotoService totoService;
 	
+	@ModelAttribute("matchCommand")
+	public MatchCommand initMatchCommand() {
+		return new MatchCommand();
+	}
+	
+	@ModelAttribute("totoCommand")
+	public TotoCommand initTotoCommand() {
+		return new TotoCommand();
+	}
+	
 	// 승부예측
 	@RequestMapping("/match/sportsToto.do")
 	public ModelAndView sportsTotoForm(@RequestParam(value="type", defaultValue="축구") String type) {			
@@ -118,18 +128,23 @@ public class TotoController {
 	public String insertTotoSubmit(@ModelAttribute("toto") @Valid TotoCommand totoCommand,
 								   BindingResult result, HttpServletRequest request) {
 		if (log.isDebugEnabled()) {
-		log.debug("<<베팅하기 totoCommand>> : " + totoCommand);
+			log.debug("<<베팅하기 totoCommand>> : " + totoCommand);
 		}
 		
 		if (result.hasErrors()) {
-		return "totoDetail";
+			return "totoDetail";
 		}
 		
-		// DB에 저장
-		
+		// DB에 저장	
 		totoService.insertToto(totoCommand);
 		
-		return "redirect:/match/sportsToto.do";
+		// 베팅한 포인트 감소
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", totoCommand.getId());
+		map.put("point", totoCommand.getT_point());
+		totoService.downPoint(map);
+		
+		return "redirect:/match/totoInsert.do";
 	}
 	
 }

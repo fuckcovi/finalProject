@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+  	<definition name="leagueList" extends="main">
+  		<put-attribute name="title" value="리그"/>
+  		<put-attribute name="body" value="/WEB-INF/views/league/leagueList.jsp"/>
+  	</definition>
+  	
+  	<definition name="leagueDetail" extends="main">
+  		<put-attribute name="title" value="리그정보"/>
+  		<put-attribute name="body" value="/WEB-INF/views/league/leagueDetail.jsp"/>
+  	</definition>
+ 	
+ 	<definition name="leagueInsert" extends="main">
+  		<put-attribute name="title" value="리그등록"/>
+  		<put-attribute name="body" value="/WEB-INF/views/league/leagueInsert.jsp"/>
+  	</definition>
+  	
+  	<definition name="leagueUpdate" extends="main">
+  		<put-attribute name="title" value="리그수정"/>
+  		<put-attribute name="body" value="/WEB-INF/views/league/leagueUpdate.jsp"/>
+  	</definition>
+ 	
+</tiles-definitions>
