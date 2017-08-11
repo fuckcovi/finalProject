@@ -6,7 +6,7 @@
 <div class="page-main-style">
 	<h2>경기장 예약</h2>
 	<ul>
-	<form:form commandName="stadiumCommand">
+	<form:form commandName="stadiumCommand" enctype="multipart/form-data" id="stadiumRegister" action="stadiumRegi.do" class="style" >
 		<li>
 		<label for="s_name">경기장 이름</label>
 		<form:input path="s_name"/>

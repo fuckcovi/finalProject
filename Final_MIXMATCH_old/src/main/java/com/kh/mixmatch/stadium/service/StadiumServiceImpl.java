@@ -1,5 +1,8 @@
 package com.kh.mixmatch.stadium.service;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -52,6 +55,11 @@ public class StadiumServiceImpl implements StadiumService{
 	@Override
 	public BookingCommand selectBooking(Integer b_seq) {
 		return stadiumMapper.selectBooking(b_seq);
+	}
+
+	@Override
+	public List<StadiumCommand> listStadium(Map<String, Object> map) {
+		return stadiumMapper.listStadium(map);
 	}
 	
 }

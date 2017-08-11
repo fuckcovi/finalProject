@@ -1,5 +1,8 @@
 package com.kh.mixmatch.stadium.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mixmatch.stadium.domain.BookingCommand;
@@ -13,7 +16,8 @@ public interface StadiumService {
 	public void deleteStadium(Integer s_seq);
 	@Transactional(readOnly=true)
 	public StadiumCommand selectStadium(Integer s_seq);	// 1개 경기장
-	
+	@Transactional(readOnly=true)
+	public List<StadiumCommand> listStadium(Map<String, Object> map);
 	
 	// 예약 
 	public void insertBooking(BookingCommand booking);

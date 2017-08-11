@@ -69,6 +69,11 @@ public class StadiumCommand {
 	public void setS_regdate(Date s_regdate) {
 		this.s_regdate = s_regdate;
 	}
+	@Override
+	public String toString() {
+		return "StadiumCommand [s_seq=" + s_seq + ", s_name=" + s_name + ", s_address1=" + s_address1 + ", s_address2="
+				+ s_address2 + ", s_logo_name=" + s_logo_name + ", s_regdate=" + s_regdate + "]";
+	}
 	
 	
 	

@@ -45,7 +45,7 @@ public class StadiumController {
 		return "stadiumRegi";
 	}
 	@RequestMapping(value="/stadiumRegi.do",method=RequestMethod.POST)
-	public String stadiumRegi(@ModelAttribute("command") @Valid StadiumCommand stadium,BindingResult result,HttpSession session){
+	public String stadiumRegi(@ModelAttribute("command") @Valid StadiumCommand stadium,BindingResult result,HttpSession session) throws Exception{
 		if(log.isDebugEnabled()){
 			log.debug("<<<< StadiumCommand >>>>  : " + stadium);
 		}
@@ -53,17 +53,15 @@ public class StadiumController {
 			return stadiumRegiForm();
 		}
 		
-		/*
-		 Map<String, Object> map = new HashMap<String, Object>();
 		String user_id = (String)session.getAttribute("user_id");
-		map.put("id", user_id);
-		 List<TeamMemCommand> list =teamMemService.list(map);
-		for(int i =0 ;i<list.size();i++){
-			if(list.get(i).getT_name().equals(teamMem.getT_name())){ // 이미 가입신청한 팀이므로 신청 안되고 리턴
-				return "redirect:/team.do";
+		if(user_id != null){
+			if(user_id.equals("admin")){
+			// 관리자만 등록가능
+				stadiumService.insertStadium(stadium);
 			}
-		}*/
-		stadiumService.insertStadium(stadium);
+		}else{
+			return "redirect:/login.do";
+		}
 		return "redirect:/stadium.do";
 	
 	}

@@ -1,5 +1,8 @@
 package com.kh.mixmatch.stadium.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 
 import com.kh.mixmatch.stadium.domain.BookingCommand;
@@ -13,6 +16,8 @@ public interface StadiumMapper {
 	public void updateStadium(StadiumCommand stadium);
 	public void deleteStadium(Integer s_seq);
 	public StadiumCommand selectStadium(Integer s_seq);	// 1개 경기장
+	
+	public List<StadiumCommand> listStadium(Map<String, Object> map); // 총 경기장 목록
 	
 	
 	// 예약 

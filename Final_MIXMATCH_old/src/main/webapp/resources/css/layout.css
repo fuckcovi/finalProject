@@ -51,6 +51,8 @@ a#menu-link:hover{
 #login-bar{
 	float:right;
 	margin-right:50px;
+	min-width:350px;
+	height:40px;
 }
 #login-bar ul li{
 	border-left:1px solid #BDBDBD;
@@ -144,7 +146,7 @@ div.page-main-style{
 	text-align:center;
 }
 div.page-error-style{
-	width:50%;
+	width:50%; 
 	margin:0 auto;
 }
 .align-center{
@@ -158,7 +160,8 @@ div.page-error-style{
 }
 /* 메뉴 */
 #topMenu{
-	margin-left:65px;
+	float:right;
+	min-width:1050px;
 }
 #topMenu a{
 	color:black;

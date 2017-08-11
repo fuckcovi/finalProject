@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kh.mixmatch.stadium.dao.StadiumMapper">  
+	<select id="listStadium" parameterType="map" resultType="stadiumCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT  
+			b.* FROM g_stadium b
+					ORDER BY b.s_regdate DESC)a) 
+					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
+	</select>
+</mapper>

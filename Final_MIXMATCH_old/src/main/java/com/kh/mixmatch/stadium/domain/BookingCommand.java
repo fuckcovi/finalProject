@@ -38,6 +38,11 @@ public class BookingCommand {
 	public void setB_check(int b_check) {
 		this.b_check = b_check;
 	}
+	@Override
+	public String toString() {
+		return "BookingCommand [b_seq=" + b_seq + ", s_seq=" + s_seq + ", b_regdate=" + b_regdate + ", b_time=" + b_time
+				+ ", b_check=" + b_check + "]";
+	}
 	
 	
 }
