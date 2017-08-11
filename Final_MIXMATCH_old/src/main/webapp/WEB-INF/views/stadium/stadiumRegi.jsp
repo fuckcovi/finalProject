@@ -5,11 +5,21 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <div class="page-main-style">
 	<h2>경기장 예약</h2>
-	<ul>
+	<ul style="list-style: none;">
 	<form:form commandName="stadiumCommand" enctype="multipart/form-data" id="stadiumRegister" action="stadiumRegi.do" class="style" >
+		<br>
+		<br>
 		<li>
 		<label for="s_name">경기장 이름</label>
 		<form:input path="s_name"/>
+		</li>
+		<li>
+		<label for="s_type">경기장종목</label>
+		<form:select path="s_type">
+			<form:option value="야구"/>
+			<form:option value="농구"/>
+			<form:option value="축구"/>
+		</form:select>
 		</li>
 		<li>
 		<label for="s_address1">경기장 지역</label>

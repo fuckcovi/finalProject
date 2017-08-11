@@ -15,4 +15,8 @@
      	<put-attribute name="title" value="MIXMATCH 경기장예약"/>
      	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumRegi.jsp"/>
     </definition>
+     <definition name="stadiumDetail" extends="home">
+     	<put-attribute name="title" value="MIXMATCH 경기장상세보기"/>
+     	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumDetail.jsp"/>
+    </definition>
 </tiles-definitions>

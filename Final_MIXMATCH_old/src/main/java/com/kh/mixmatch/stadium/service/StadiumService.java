@@ -18,6 +18,9 @@ public interface StadiumService {
 	public StadiumCommand selectStadium(Integer s_seq);	// 1개 경기장
 	@Transactional(readOnly=true)
 	public List<StadiumCommand> listStadium(Map<String, Object> map);
+	@Transactional(readOnly=true)
+	public int getTotalCountStadium();
+
 	
 	// 예약 
 	public void insertBooking(BookingCommand booking);

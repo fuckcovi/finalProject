@@ -11,6 +11,8 @@ public class StadiumCommand {
 	@NotEmpty
 	private String s_name;
 	@NotEmpty
+	private String s_type;
+	@NotEmpty
 	private String s_address1;	// 지역
 	private String s_address2;	// 상세주소
 	private String s_logo_name;
@@ -19,6 +21,12 @@ public class StadiumCommand {
 	private Date s_regdate;
 	
 	
+	public String getS_type() {
+		return s_type;
+	}
+	public void setS_type(String s_type) {
+		this.s_type = s_type;
+	}
 	public int getS_seq() {
 		return s_seq;
 	}
@@ -71,8 +79,9 @@ public class StadiumCommand {
 	}
 	@Override
 	public String toString() {
-		return "StadiumCommand [s_seq=" + s_seq + ", s_name=" + s_name + ", s_address1=" + s_address1 + ", s_address2="
-				+ s_address2 + ", s_logo_name=" + s_logo_name + ", s_regdate=" + s_regdate + "]";
+		return "StadiumCommand [s_seq=" + s_seq + ", s_name=" + s_name + ", s_type=" + s_type + ", s_address1="
+				+ s_address1 + ", s_address2=" + s_address2 + ", s_logo_name=" + s_logo_name + ", s_regdate="
+				+ s_regdate + "]";
 	}
 	
 	

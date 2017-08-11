@@ -61,5 +61,10 @@ public class StadiumServiceImpl implements StadiumService{
 	public List<StadiumCommand> listStadium(Map<String, Object> map) {
 		return stadiumMapper.listStadium(map);
 	}
+
+	@Override
+	public int getTotalCountStadium() {
+		return stadiumMapper.getTotalCountStadium();
+	}
 	
 }
