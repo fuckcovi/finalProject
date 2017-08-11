@@ -13,13 +13,13 @@
 		</div>
 	</c:if>
 	<c:if test="${count>0 }">  
-	<ul style="list-style: none" id="teamScheduleList">
+	<ul style="list-style: none;margin: 0 auto;height:70px; width:750px;padding:0;" id="teamScheduleList">
 		<li style="float: left; width:150px;" value="allList">
-			<input type="button" class="btn" value="전체보기">
+			<input type="button" class="btn" style="width:150px;border:1px solid white;" value="전체보기">
 		</li>
 		<c:forEach var="list" items="${list}">
 			<li style="float: left; width:150px;" value="${list.t_name}"><!-- 클릭하면 ajax로 화면 바꿔서 일정 보이기 -->
-				<input type="button" class="btn" value="${list.t_name}">
+				<input type="button" class="btn" style="width:150px;border:1px solid white;"  value="${list.t_name}">
 			</li>
 		</c:forEach>
 	</ul>
