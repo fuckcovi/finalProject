@@ -17,11 +17,12 @@ public interface MypageService {
 	
 	//부모글
 	public List<MypageCommand> list(Map<String,Object> map);		//미니홈피 글 리스트 호출
-	public int getRowCount(Map<String,Object> map);		//미니홈피 글의 갯수
-	public void insert(MypageCommand mypage);			//미니홈피 글등록
-	public MypageCommand selectMypage(Integer seq);		//각각의 게시글
-	public void update(MypageCommand2 mypage);			//글수정
-	public void delete(Integer h_seq);					//미니홈피 글삭제
+	public int getRowCount(Map<String,Object> map);					//미니홈피 총 글의 갯수
+	public int getShowRowCount(Map<String,Object> map);				//미니홈피 전체공개인 글의 갯수
+	public void insert(MypageCommand mypage);						//미니홈피 글등록
+	public MypageCommand selectMypage(Integer seq);					//각각의 게시글
+	public void update(MypageCommand2 mypage);						//글수정
+	public void delete(Integer h_seq);								//미니홈피 글삭제
 
 	//댓글
 	public List<MypageReplyCommand> listReply(Map<String,Object> map);	//댓글목록

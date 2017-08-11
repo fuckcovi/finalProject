@@ -96,6 +96,11 @@ public class MypageServiceImpl implements MypageService{
 		return mypageMapper.selectBaseball(id);
 	}
 
+	@Override
+	public int getShowRowCount(Map<String, Object> map) {
+		return mypageMapper.getShowRowCount(map);
+	}
+
 	
 
 	

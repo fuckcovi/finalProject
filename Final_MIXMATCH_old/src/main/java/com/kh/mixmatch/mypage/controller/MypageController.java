@@ -61,6 +61,9 @@ public class MypageController {
 		
 		//총 글의 갯수
 		int count = mypageService.getRowCount(map);
+		
+		//h_show가 'y'인것의 갯수(전체공개글)
+		int h_show_count = mypageService.getShowRowCount(map);
 				
 		MypagePagingUtil page = new MypagePagingUtil(currentPage, count, rowCount, pageCount, "main.do?id="+id);
 		
@@ -84,13 +87,13 @@ public class MypageController {
 		mav.addObject("basketball",basketball);						//농구기록
 		mav.addObject("baseball",baseball);							//야구기록
 		mav.addObject("count",count);								//총 글의 갯수
+		mav.addObject("h_show_count",h_show_count);					//전체공개 글의 갯수
 		mav.addObject("list",list);									//글 목록
 		mav.addObject("pagingHtml",page.getPagingHtml());			//페이징
 		mav.addObject("mypageCommand",mypageCommand);				//미니홈피 자바빈
 		
 		return mav;
 	} 
-	
 	
 	
 	//미니홈피 글등록

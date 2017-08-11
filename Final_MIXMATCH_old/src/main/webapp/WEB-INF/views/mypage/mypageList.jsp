@@ -125,12 +125,16 @@
 	
 	
 	<!-- 목록출력 -->
+	<c:if test="${h_show_count == 0}">			<!-- 전체공개글이 없을시 등록된 글이 없다는 메시지 출력 -->
+	 	<div>등록된 글이 없습니다.</div>
+	</c:if>
+	
 	
 	<c:if test="${count > 0}">
 		<c:forEach var="mypage" items="${list}">	
 		
 		<!-- 로그인 되어있는 유저가 다른 유저의 페이지를 방문했을때 비공개로 되어있는 글은 확인불가능 -->				
-		<c:if test="${user_id != mypage.id}">							
+		<c:if test="${user_id != mypage.id}">					
 		<c:if test="${mypage.h_show eq 'y'}">
 			<input type="hidden" name="id" id="id" value="${mypage.id}">		<!-- 부모글 작성자 -->
 			<input type="hidden" name="h_show" value="${mypage.h_show}">		<!-- 글 공개여부 -->
@@ -307,7 +311,9 @@
 		</c:forEach>
 	</c:if>
 
-	<div class="align-center">${pagingHtml}</div>
+	<c:if test="${h_show_count != 0}">
+		<div class="align-center">${pagingHtml}</div>
+	</c:if>
 
 </div>
 	

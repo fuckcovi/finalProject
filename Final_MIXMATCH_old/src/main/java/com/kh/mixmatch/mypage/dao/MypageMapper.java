@@ -20,7 +20,9 @@ public interface MypageMapper {
 	//부모글
 	public List<MypageCommand> list(Map<String,Object> map);		//미니홈피 글 리스트 호출
 	@Select("SELECT count(*) FROM g_home WHERE id=#{id}")
-	public int getRowCount(Map<String,Object> map);					//미니홈피 글의 갯수
+	public int getRowCount(Map<String,Object> map);					//미니홈피 총 글의 갯수
+	@Select("SELECT count(*) FROM g_home WHERE id=#{id} and h_show='y'")
+	public int getShowRowCount(Map<String,Object> map);				//미니홈피 전체공개인 글의 갯수
 	@Insert("INSERT INTO g_home(h_seq,id,h_regdate,h_content,h_show,h_file,h_file_name) VALUES(g_home_seq.nextval,#{id},sysdate,#{h_content},#{h_show},#{h_file,jdbcType=BLOB},#{h_file_name,jdbcType=VARCHAR})")
 	public void insert(MypageCommand mypage);						//미니홈피 글등록
 	@Select("SELECT * FROM g_home WHERE h_seq=#{seq}")
