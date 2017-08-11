@@ -57,6 +57,8 @@ form.style, div.style {
 	width: 500px;
 	height: 450px;
 	background: #DDDDDD;
+	display:table-cell;
+	vertical-align:middle;
 }
 
 div.detail-style {
