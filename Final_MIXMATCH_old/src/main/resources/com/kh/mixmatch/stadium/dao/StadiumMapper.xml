@@ -37,4 +37,34 @@
 					</where>
 	</select>
 	
+	
+	
+	<select id="listBooking" parameterType="map" resultType="bookingCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT  
+			b.* FROM g_booking b WHERE s_seq=#{s_seq} AND b_regdate=#{b_regdate} 
+		<!-- 	<where>
+						<if test="keyword != '' and keyfield =='s_type'">
+							s_type like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='s_name'">
+							s_name like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='s_address1'">
+							s_address1 like '%' || #{keyword} || '%'
+						</if>
+					</where> -->
+					ORDER BY b.b_regdate DESC)a) 
+					<!-- 
+					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]> -->
+	</select>
+	<select id="getTotalCountBooking" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM g_booking
+			WHERE s_seq=#{s_seq} AND b_regdate=#{b_regdate} 
+					<!-- <where>
+						s_seq=#{s_seq} 
+						<if test="keyword != '' and keyfield =='b_regdate'">
+							and b_regdate like '%' || #{keyword} || '%'
+						</if>
+					</where> -->
+	</select>
 </mapper>

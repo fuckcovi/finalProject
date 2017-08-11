@@ -66,5 +66,17 @@ public class StadiumServiceImpl implements StadiumService{
 	public int getTotalCountStadium(Map<String, Object> map) {
 		return stadiumMapper.getTotalCountStadium(map);
 	}
+
+	@Override
+	public List<BookingCommand> listBooking(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return stadiumMapper.listBooking(map);
+	}
+
+	@Override
+	public int getTotalCountBooking(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return stadiumMapper.getTotalCountBooking(map);
+	}
 	
 }
