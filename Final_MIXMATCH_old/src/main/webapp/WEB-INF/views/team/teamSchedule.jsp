@@ -25,12 +25,16 @@
 		</c:forEach>
 	</ul>
 	<hr size="1" width="100%">
+<<<<<<< HEAD
 	<ul style="list-style: none;">
 		<li class="scheduleListX btn" style="display:inline-block;width:150px;background-color:#e8d477;">예정일정</li>
 		<li class="scheduleListC btn" style="display:inline-block;width:150px;background-color:#e8d477;">확정일정</li>
 		<li class="scheduleListF btn" style="display:inline-block;width:150px;background-color:#e8d477;">종료일정</li>
 	</ul>
 	<div class="scheduleListX" >
+=======
+	<div class="scheduleListX" style="background:green;"><h4 >예정일정: 아직 안잡힘</h4>
+>>>>>>> branch 'master' of https://github.com/khmixmatch/finalProject.git
 		<div class="scheduleList xplan">
 			<table class="style">			 
 			<tr class="tablehead">
@@ -57,7 +61,11 @@
 			</table>
 		</div>
 		</div>
+<<<<<<< HEAD
 		<div class="scheduleListC" >
+=======
+		<div class="scheduleListC" style="background:yellow;" ><h4>확정일정</h4>
+>>>>>>> branch 'master' of https://github.com/khmixmatch/finalProject.git
 		<div class="scheduleList cplan" style="display:none">
 			<table class="style">			
 			<tr class="tablehead">
@@ -91,7 +99,11 @@
 			</table>
 		</div>
 		</div>
+<<<<<<< HEAD
 		<div class="scheduleListF" >
+=======
+		<div class="scheduleListF" style="background:blue;"><h4 >결과 : 매칭 결과</h4>
+>>>>>>> branch 'master' of https://github.com/khmixmatch/finalProject.git
 		<div class="scheduleList fplan" style="display:none">
 			<table class="style">	 		
 			<tr class="tablehead">
