@@ -20,8 +20,7 @@ public interface StadiumMapper {
 	public StadiumCommand selectStadium(Integer s_seq);	// 1개 경기장
 	
 	public List<StadiumCommand> listStadium(Map<String, Object> map); // 총 경기장 목록
-	@Select("SELECT COUNT(*) FROM g_stadium")
-	public int getTotalCountStadium();// 총경기장 갯수
+	public int getTotalCountStadium(Map<String, Object> map);// 총경기장 갯수
 	
 	// 예약 
 	public void insertBooking(BookingCommand booking);

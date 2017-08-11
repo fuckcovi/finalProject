@@ -5,6 +5,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <div class="page-main-style">
 	<br>
+<div>
 	<h2>경기장 상세보기</h2>
 	<table>
 	<tr>
@@ -12,6 +13,7 @@
 		<th>경기장이름</th>
 		<th>종목</th>
 		<th>경기장지역</th>
+		<th>상세주소</th>
 		<th>경기장등록일</th>
 	</tr>
 	
@@ -37,13 +39,24 @@
 				</c:if>
 				</c:if>
 			</td>
-			<td><a href="${pageContext.request.contextPath }/stadiumDetail.do?s_seq=${stadium.s_seq}">${stadium.s_name}</a></td>
+			<td>${stadium.s_name}</td>
 			<td>${stadium.s_type }</td>
 			<td>${stadium.s_address1}</td>
+			<td>${stadium.s_address2}</td>
 			<td>${stadium.s_regdate}</td>
 		</tr>
 		
 	</table>
-		<div class="align-center">${pagingHtml}</div>
+</div>
+<hr noshade="noshade">
+<div>
+	<h2>예약하기</h2>
+
+	달력보여주고 각 날짜별로 4타임씩 선택가능.
+	db에서 존재하는건 선택불가능.
+	선택하면 날짜,타임이 db로 등록.
+	예약목록가서 확정하면 포인트 차감하고 완료.
+
+</div>	
 	
 </div>

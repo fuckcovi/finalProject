@@ -23,7 +23,24 @@
 		</li>
 		<li>
 		<label for="s_address1">경기장 지역</label>
-		<form:input path="s_address1"/>
+		<form:select path="s_address1">
+			<form:option value="서울"/>
+			<form:option value="경기"/>
+			<form:option value="인천"/>
+			<form:option value="강원"/>
+			<form:option value="대전"/>
+			<form:option value="충북"/>
+			<form:option value="충남"/>
+			<form:option value="광주"/>
+			<form:option value="전북"/>
+			<form:option value="전남"/>
+			<form:option value="대구"/>
+			<form:option value="울산"/>
+			<form:option value="경북"/>
+			<form:option value="경남"/>
+			<form:option value="부산"/>
+			<form:option value="제주"/>
+		</form:select>
 		</li>
 		<li>
 		<label for="s_address2">경기장 상세주소</label>

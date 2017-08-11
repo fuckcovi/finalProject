@@ -3,15 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
+
 <div class="page-main-style">
 	<br>
 	<h2>경기장 예약</h2>
 	<input type="button" value="경기장등록" onclick="location.href='stadiumRegi.do'">
 	협약맺은 경기장 등록 -->> 관리자가 하면 경기장 목록 쫙 뜨면서 경기장 상세정보 보면 지도 나오고.
 	경기장예약하기들어가서 해당 경기장의 날짜,시간 선택해서 예약(0)걸어두고 포인트 결제하면 (1)완료.
-	
-	
-	<table>
+<div style="width:100%;height:30px;">
+	<form action="stadium.do" id="search_form" method="get">
+		<ul class="search" style="list-style: none;">
+			<li style="float:left ;">
+				<select name="keyfield">
+					<option value="s_type">종목</option>
+					<option value="s_address1">지역</option>
+					<option value="s_name">경기장이름</option>
+				</select>
+			</li> 
+			<li style="float:left ;">
+				<input type="text" name="keyword" id="keyword">
+			</li>
+			<li style="float:left ;">
+				<input type="submit" value="경기장찾기">
+			</li>
+		</ul>
+	</form>
+</div>
+	<br>
+<div>
+	<table >
 	<tr>
 		<th>경기장사진</th>
 		<th>경기장이름</th>
@@ -61,5 +81,6 @@
 		
 	</table>
 	</c:if>
-	
+</div>
+
 </div>

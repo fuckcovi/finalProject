@@ -40,13 +40,26 @@ public class StadiumController {
 	}
 	
 	@RequestMapping("/stadium.do")
-	public ModelAndView stadium(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
+	public ModelAndView stadium(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+			@RequestParam(value="keyfield",defaultValue="") String keyfield,
+			@RequestParam(value="keyword",defaultValue="") String keyword){
+		if(log.isDebugEnabled()){
+			log.debug("<<pageNum>> : " +currentPage);
+			log.debug("<<keyfield>> : " +keyfield);
+			log.debug("<<keyword>> : " +keyword);
+		}
+		
 		int rowCount = 10;
 		int pageCount = 5;
-		int stadiumCount = stadiumService.getTotalCountStadium();
+		
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyfield",keyfield);
+		map.put("keyword", keyword);
+		int stadiumCount = stadiumService.getTotalCountStadium(map);
 		
 		PagingUtil page = new PagingUtil(currentPage, stadiumCount, rowCount, pageCount, "stadium.do");
-		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 		

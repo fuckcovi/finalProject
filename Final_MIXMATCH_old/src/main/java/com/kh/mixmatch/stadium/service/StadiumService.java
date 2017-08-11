@@ -19,7 +19,7 @@ public interface StadiumService {
 	@Transactional(readOnly=true)
 	public List<StadiumCommand> listStadium(Map<String, Object> map);
 	@Transactional(readOnly=true)
-	public int getTotalCountStadium();
+	public int getTotalCountStadium(Map<String, Object> map);
 
 	
 	// 예약 

@@ -7,7 +7,34 @@
 	<select id="listStadium" parameterType="map" resultType="stadiumCommand">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT  
 			b.* FROM g_stadium b
+			<where>
+						<if test="keyword != '' and keyfield =='s_type'">
+							s_type like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='s_name'">
+							s_name like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='s_address1'">
+							s_address1 like '%' || #{keyword} || '%'
+						</if>
+					</where>
 					ORDER BY b.s_regdate DESC)a) 
+					
 					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>
+	<select id="getTotalCountStadium" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM g_stadium 
+					<where>
+						<if test="keyword != '' and keyfield =='s_type'">
+							s_type like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='s_name'">
+							s_name like '%' || #{keyword} || '%'
+						</if>
+						<if test="keyword != '' and keyfield =='s_address1'">
+							s_address1 like '%' || #{keyword} || '%'
+						</if>
+					</where>
+	</select>
+	
 </mapper>
