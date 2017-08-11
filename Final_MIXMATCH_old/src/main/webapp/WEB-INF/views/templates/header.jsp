@@ -48,6 +48,7 @@
 			<a class="menuLink" href="${pageContext.request.contextPath}/stadium.do">경기장예약</a>
 			<ul class="submenu">
 				<li><a href="${pageContext.request.contextPath}/stadium.do" class="submenuLink">경기장예약</a></li>
+				<li><a href="${pageContext.request.contextPath}/stadiumConfirm.do" class="submenuLink">my예약목록</a></li>
 			</ul>
 		</li>
 		<li class="topMenuLi">
