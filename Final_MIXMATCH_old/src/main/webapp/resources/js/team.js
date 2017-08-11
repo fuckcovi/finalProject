@@ -34,6 +34,21 @@ $(document).ready(function(){
 		$("#축구").hide();
 	}); */
 	
+	$(".scheduleListX").click(function(){
+		$(".scheduleListX div").show();
+		$(".scheduleListC div").hide();
+		$(".scheduleListF div").hide();
+	});
+	$(".scheduleListC").click(function(){
+		$(".scheduleListX div").hide();
+		$(".scheduleListC div").show();
+		$(".scheduleListF div").hide();
+	});
+	$(".scheduleListF").click(function(){
+		$(".scheduleListX div").hide();
+		$(".scheduleListC div").hide();
+		$(".scheduleListF div").show();
+	});
 	
 	
 	$(".scheduleList tr").show();

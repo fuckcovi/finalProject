@@ -25,9 +25,14 @@
 		</c:forEach>
 	</ul>
 	<hr size="1" width="100%">
-	<h4>예정일정: 아직 안잡힘</h4>
+	<ul style="list-style: none;">
+		<li class="scheduleListX btn" style="display:inline-block;width:150px;background-color:#e8d477;">예정일정</li>
+		<li class="scheduleListC btn" style="display:inline-block;width:150px;background-color:#e8d477;">확정일정</li>
+		<li class="scheduleListF btn" style="display:inline-block;width:150px;background-color:#e8d477;">종료일정</li>
+	</ul>
+	<div class="scheduleListX" >
 		<div class="scheduleList xplan">
-			<table class="style">			
+			<table class="style">			 
 			<tr class="tablehead">
 				<th>경기일자</th>
 				<th>경기장소</th>
@@ -51,8 +56,9 @@
 			</tr>
 			</table>
 		</div>
-		<h4>확정일정</h4>
-		<div class="scheduleList cplan">
+		</div>
+		<div class="scheduleListC" >
+		<div class="scheduleList cplan" style="display:none">
 			<table class="style">			
 			<tr class="tablehead">
 				<th>경기일자</th>
@@ -84,8 +90,9 @@
 			</tr>
 			</table>
 		</div>
-		<h4>결과 : 매칭 결과</h4>
-		<div class="scheduleList fplan">
+		</div>
+		<div class="scheduleListF" >
+		<div class="scheduleList fplan" style="display:none">
 			<table class="style">	 		
 			<tr class="tablehead">
 				<th>경기일자</th>
@@ -112,6 +119,7 @@
 				<td colspan="4">매치결과없음</td>
 			</tr>
 			</table>
+		</div>
 		</div>
 	</c:if>
 	<br><hr class="style"> 
