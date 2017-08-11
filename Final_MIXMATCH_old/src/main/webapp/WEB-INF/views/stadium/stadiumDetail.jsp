@@ -106,7 +106,6 @@ function controller(target) {
 			sClass += i % 7 == 6 ? 'sat' : '';
  
 			arrTable.push('<td class="'+sClass+'" dataPick="'+that.getYearMonth(m_oMonth).substr(0,9)+oStartDt.getDate()+'일" id="'+that.getYearMonth(m_oMonth).substr(0,9)+oStartDt.getDate()+'일"><div>' + oStartDt.getDate() + '</div></td>'); 
-			/*  arrTable.push('<td class="'+sClass+'" dataPick="'+that.getYearMonth(m_oMonth).substr(0,9)+oStartDt.getDate()+'일" id="'+that.getYearMonth(m_oMonth).substr(0,9)+oStartDt.getDate()+'일"><a href="stadiumBooking.do?s_seq='+s_seq+'">' + oStartDt.getDate() + '</a></td>'); */ 
 			oStartDt.setDate(oStartDt.getDate() + 1);
 
 			if(i % 7 == 6) {
@@ -170,7 +169,8 @@ function controller(target) {
 	 
 	 $(document).on("click",".date-cell",function(){
 		$("#loading").show();
-		alert($(this).attr("dataPick")); 
+		var regdate =$(this).attr("dataPick"); 
+		var seq = $("#stadiumSeq").val();
 		$.ajax({
 			type:"post",
 			data:{b_regdate:$(this).attr("dataPick"),s_seq:$("#stadiumSeq").val()},
@@ -184,7 +184,6 @@ function controller(target) {
 				var bookCount = data.bookCount;
 				bookList = data.bookList;
 				if(bookCount>=0 && bookList!=null){
-					alert(bookList);
 					var output = "";
 					output += "<table>"
 					output += "	<tr>";
@@ -194,17 +193,17 @@ function controller(target) {
 					output += "	</tr>";
 					
 					$(bookList).each(function(index,item){	
-						alert("a123123123");
-						;
-						output += "	<tr>";
+						output += "	<tr id='"+item.b_time+"'>";
 						output += "		<td>"+item.b_regdate+"</td>";
 						output += "		<td>"+item.b_time+"</td>";
 						output += "		<td>"+item.b_check+"</td>";
 						output += "	</tr>";
 						
 					});
+					 
 
 					output += "</table>";
+					$("#output").html("");
 					$("#output").append(output);
 					
 					
@@ -283,8 +282,8 @@ function controller(target) {
 	</div>
 	<div id="calendar"></div>
 </div>
-<div class='wrap' id="output" style="border:1px solid red;">
-
+<div id="output" style="border:1px solid red;width:400px;height:200px;">
+ 
 </div>
   
 	

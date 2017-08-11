@@ -6,7 +6,7 @@
 			$("#main_side").hide();
 		}else{
 			$("#main_side").show();
-		}		
+		}
  });
 </script>
 <div class="align-center" id="sideMenu">

@@ -1,5 +1,6 @@
 package com.kh.mixmatch.stadium.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -147,13 +148,35 @@ public class StadiumController {
 		map.put("end",page.getEndCount());
 		
 		
-		System.out.println(bookCount + ";;;; "+s_seq +";;;" + b_regdate);
 		
 		List<BookingCommand> bookList = null;
 		if(bookCount>0){
 			bookList = stadiumService.listBooking(map);
+			String time = "";
+			for(int i =0;i<bookCount;i++){
+				time += "["+bookList.get(i).getB_time()+"]";
+			}
+			for(int i =1;i<5;i++){
+				if(!time.contains("["+i+"타임]")){
+					BookingCommand book = new BookingCommand();
+					book.setS_seq(s_seq);
+					book.setB_regdate(b_regdate);
+					book.setB_time(i+"타임");
+					book.setB_check(0);
+					bookList.add(book);
+				}
+			}
+		
 		}else{
-			bookList = Collections.emptyList();	// count가 0이여도 null이아닌 비어있는 리스트 호출
+			bookList = new ArrayList<BookingCommand>();
+			for(int i =1;i<5;i++){
+				BookingCommand book = new BookingCommand();
+				book.setS_seq(s_seq);
+				book.setB_regdate(b_regdate);
+				book.setB_time(i+"타임");
+				book.setB_check(0);
+				bookList.add(book);
+			}
 		}
 		
 		
@@ -161,7 +184,6 @@ public class StadiumController {
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		mapJson.put("bookList", bookList);
 		mapJson.put("bookCount", bookCount);
-		System.out.println(bookList);
 		return mapJson;
 	}
 	

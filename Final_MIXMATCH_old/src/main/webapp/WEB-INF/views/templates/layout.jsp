@@ -19,6 +19,11 @@
 			$("#main_side").show();
 		}
 	});
+	if($( window ).width() < 1050 ){
+		$("#main_side").hide();
+	}else{
+		$("#main_side").show();
+	}
 		
  });
 </script>
