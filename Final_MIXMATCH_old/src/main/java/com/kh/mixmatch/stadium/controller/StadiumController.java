@@ -187,5 +187,29 @@ public class StadiumController {
 		return mapJson;
 	}
 	
+	@RequestMapping("/stadiumBooking.do")
+	public ModelAndView stadiumBooking(@RequestParam String b_regdate, @RequestParam int s_seq,@RequestParam String b_time){
+		if(log.isDebugEnabled()){
+			log.debug("<<< b_regdate >>> : " + b_regdate);
+			log.debug("<<< s_seq >>> : " + s_seq);
+			log.debug("<<< b_time >>> : " + b_time);
+		}
+		BookingCommand booking = new BookingCommand();
+		booking.setS_seq(s_seq);
+		booking.setB_time(b_time);
+		booking.setB_regdate(b_regdate);
+		
+		stadiumService.insertBooking(booking);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("stadiumBooking");
+		mav.addObject("booking", booking);
+		return mav;
+	}
+	
+	@RequestMapping("/stadiumMap.do")
+	public String map(){
+		return "stadiumMap";
+	}
+	
 	
 }

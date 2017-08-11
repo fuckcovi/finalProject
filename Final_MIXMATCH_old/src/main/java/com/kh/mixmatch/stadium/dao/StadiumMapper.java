@@ -23,6 +23,7 @@ public interface StadiumMapper {
 	public int getTotalCountStadium(Map<String, Object> map);// 珥앷꼍湲곗옣 媛��닔
 	
 	// �삁�빟 
+	@Insert("INSERT INTO g_booking(b_seq,b_regdate,b_time,b_check,s_seq) VALUES(g_booking_seq.nextval,#{b_regdate},#{b_time},1,#{s_seq})")
 	public void insertBooking(BookingCommand booking);
 	public void updateBooking(BookingCommand booking);
 	public void deleteBooking(Integer b_seq);
