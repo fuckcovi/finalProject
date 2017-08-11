@@ -46,7 +46,9 @@
 /* #calendar table td.not-this-month a{
 	display: none;
 } */
-
+.tableBookingList th, .tableBookingList td{
+	height:40px;
+}
 
   </style>
 <script type='text/javascript'>//<![CDATA[
@@ -165,12 +167,21 @@ function controller(target) {
  
  <script type="text/javascript">
  $(document).ready(function(){
+
+	 
+	 $(document).on("click",".resBtn input", function(){
+		 alert("버튼 클릭");
+		 location.href="stadiumBooking.do?s_seq="+$(this).attr("s_seq")+"&b_regdate="+$(this).attr("b_regdate")+"&b_time="+$(this).attr("b_time");
+	 });
+	 
 	 var bookList;
 	 
 	 $(document).on("click",".date-cell",function(){
-		$("#loading").show();
+
 		var regdate =$(this).attr("dataPick"); 
 		var seq = $("#stadiumSeq").val();
+		
+		$("#loading").show();
 		$.ajax({
 			type:"post",
 			data:{b_regdate:$(this).attr("dataPick"),s_seq:$("#stadiumSeq").val()},
@@ -185,7 +196,7 @@ function controller(target) {
 				bookList = data.bookList;
 				if(bookCount>=0 && bookList!=null){
 					var output = "";
-					output += "<table>"
+					output += "<table class='tableBookingList'>"
 					output += "	<tr>";
 					output += "		<th>날짜</th>";
 					output += "		<th>타임</th>";
@@ -197,6 +208,9 @@ function controller(target) {
 						output += "		<td>"+item.b_regdate+"</td>";
 						output += "		<td>"+item.b_time+"</td>";
 						output += "		<td>"+item.b_check+"</td>";
+						if(item.b_check == 0){
+							output += "	<td class='resBtn'><input type='button' s_seq='"+seq+"' b_time='"+item.b_time+"' b_regdate='"+regdate+"'  value='예약하기'></td>";
+						}
 						output += "	</tr>";
 						
 					});
@@ -243,7 +257,7 @@ function controller(target) {
 							fn:endsWith(stadium.s_logo_name, '.JPG') || 
 							fn:endsWith(stadium.s_logo_name, '.PNG') || 
 							fn:endsWith(stadium.s_logo_name, '.GIF')}">
-					<img src="imageViewStadium.do?s_seq=${list.s_seq}" style="width:200px;height:200px;">
+					<img src="imageViewStadium.do?s_seq=${stadium.s_seq}" style="width:200px;height:200px;">
 				</c:if>
 				<c:if test="${empty stadium.s_logo_name }">
 				<c:if test="${stadium.s_type eq '야구' }">
@@ -282,7 +296,7 @@ function controller(target) {
 	</div>
 	<div id="calendar"></div>
 </div>
-<div id="output" style="border:1px solid red;width:400px;height:200px;">
+<div id="output" style="border:1px solid red;width:400px;height:200px;margin: 0 auto;">
  
 </div>
   
