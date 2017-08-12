@@ -20,7 +20,6 @@
 	<!--  공지사항 게시글 최근5개 보이기. 없으면 없음 띄움 -->
 	<div id="noticeView" class="half">
 		<h4>공지사항</h4>
-		<
 	</div>
 	<!--  자유게시판 인기글 5개 보이기 -->
 	<div id="freeboardView" class="half">

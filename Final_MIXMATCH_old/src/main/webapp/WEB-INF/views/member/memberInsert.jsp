@@ -62,7 +62,7 @@
 		</ul>
 		<div class="align-center">
 			<input type="submit" value="회원가입">
-			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main.do'">
+			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/home.do'">
 		</div>
 	</form:form>
 </div>

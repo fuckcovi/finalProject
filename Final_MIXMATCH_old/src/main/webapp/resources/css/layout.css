@@ -1,85 +1,248 @@
 @CHARSET "UTF-8";
-/*레이아웃*/
-body{
-	font-size:12pt;
-	font-family:"맑은 고딕";  
+
+html, body { height: 100% }
+body {
+	font-size: 12pt;
+	font-family: "맑은 고딕"; 
 }
-div#main{
-	width:100%;
-	margin:0 auto;
+div.page-main-style {
+	width: 98%;
+	margin: 0 auto;
+	text-align: center;
 }
-div#main_header{
-	position:fixed;
-	left:0;
-	width:100%;
-	height:80px;
-	border-bottom:1px solid black;
-	background:white;
-	z-index:999;
+div.page-error-style {
+	width: 50%; 
+	margin: 0 auto;
 }
-#menu-icon{
-	position:fixed;
-	top:0;
-	left:25px;
-	float:left;
+.align-center {
+	text-align: center;
 }
-.header ul li{
-	display:inline;
+.align-right {  
+	text-align: right;
 }
-.header a{
-	padding-right:3px;
-	display:table-cell;
-	vertical-align:middle;
+.error-color {
+	color: red;
+}
+/* 레이아웃 */
+div#main {
+	width: 100%;
+	margin: 0 auto;
+	background: #E5E5E5; 
+}
+div#main_header {
+	height: 230px;
+	background: #fff;
+	border-bottom: 1px solid #BDBDBD;
+}
+div#main_body {
+	width: 80%;
+	min-height: 800px;
+	background: #fff;
+	color: #333333;
+	text-align: center;
+	margin: 0 auto;
+	border: 0 1px 0 1px solid #BDBDBD;
+}
+div#main_footer {
+	height: 80px;
+	background: #333333;
+	color: #fff;
+	padding: 20px;
+}
+/* main_header */
+#main_header a {
+	color: #333333;
+}
+/* header1 */
+#header1 {
+	position: fixed;
+	min-width: 700px;
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #BDBDBD;
+	font-size: 10pt;
+	background: #fff;
+	z-index: 999;
+}
+/* icon-bar */
+#icon-bar {
+	float: left;
+	width: 50%;
+	min-width: 20%;
+	height: 100%;
+	left: 0px;
+}
+#icon-bar ul {
+	margin-top: -1px;
+	margin-left: 20%;
+	height: 39px;
+	list-style: none;
+	padding: 0;
+}
+#icon-bar ul li {
+	display: inline;
+	margin-right: 10px;
+}
+#home-icon {
+	width: 42px;
+	height: 100%;
+	padding: 10px 1px 0 0;
+	font-size: 20px;
+	background: #333333;
+	text-align: center;
+}
+a#home-icon {
+	color: #fff;
+}
+a#home-icon:hover {
+	text-decoration: none;
+	background: #25C9E4;
+}
+#bookmark {
+	top: -4px;
+}
+a#bookmark:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: #FFBB00;
+}
+/* login-bar */
+#login-bar {
+	float: left;
+	width: 50%;
+	min-width: 20%;
+	height: 39px;
+	text-align: right;
+	padding-top: 10px;
+	right: 0px;
+}
+#login-bar ul {
+	margin-right: 20%;
+	list-style: none;
+}
+#login-bar ul li {
+	display: inline;
+	margin-top: 10px;
+	padding: 0 5px 0 5px;
+	border-left: 1px solid #BDBDBD;
+}
+#login-bar ul li:first-child {
+	border-left: none;
+}
+#login-bar a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: #25C9E4;
+}
+/* header2 */
+#header2 {
+	position: fixed;
+	top: 40px;
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #000;
+	background: #fff;
+	z-index: 999;
+}
+#topMenu {
+	min-width: 1080px;
+	width: 80%;
+	height: 100%;
+	margin: 0 auto;
+}
+#topMenu ul {
+	list-style: none;
+	padding: 0;
+	margin-top: -10px;
+}
+#topMenu ul li {
+	position: relative;
+	float: left;
+	line-height: 40px;
+	text-align: center;
+}
+#header2 a {
+	color: #333333;
 	text-align:center;
 }
-a#home-icon{ 
-	color:white; 
-	background:#333333;
+#header2 a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: #25C9E4;
 }
-a#home-icon:hover{
-	background:#25C9E4; 
-	text-decoration:none;
+.menuLink, .submenuLink { 
+	text-decoration: none;
+	display: block;
+	width: 154px;
+	font-size: 14px; 
 }
-a#menu-link{ 
-	color:#333333;
+.submenuLink { 
+	font-size: 12px;
+	background-color: white;
+	margin-top: -1px; 
+	border: 1px solid black;
 }
-a#menu-link:hover{
-	color:#25C9E4;
-	font-weight:bold;
-	text-decoration:none;
+.submenu { 
+	position: absolute;
+	height: 0;
+	top: 50px;
+	overflow: hidden;
+	transition: height .2s;
+	-webkit-transition: height .2s;
+	-moz-transition: height .2s;
+	-o-transition: height .2s;
+	z-index: 999;
 }
-#login-bar{
-	float:right;
-	margin-right:50px;
-	min-width:350px;
-	height:40px;
+.topMenuLi:hover .submenu { 
+	height: 250px; 
 }
-#login-bar ul li{
-	border-left:1px solid #BDBDBD;
-	padding-left:10px;
-	line-height:10px;
+.blink {
+    -webkit-animation: blink 2.5s linear infinite;
+} 
+@-webkit-keyframes blink {
+    0% { color: red; }
+    33% { color: yellow; }
+    66% { color: blue; }
+    100% { color: green; }
 }
-#login-bar ul li:first-child{
-	border-left:none;
-	font-size:12px;
+/* main-logo */
+#main-logo {
+	position: relative;
+	top: 80px;
+	height: 149px;
+	padding-top: 25px;
+	text-align:center;
 }
-#login-bar a {
-	width:60px;
-	height:39px;
-	font-size:12px;
+/* side-menu */
+#side-button {
+	cursor: pointer;
+	position: fixed;
+	top: 50%;
+	padding-top: 18px;
+	right: 0;
+	width: 40px;
+	height: 60px;
+	text-align: center;
+	font-size: 20px;
+	background: #333333;
+	color: #fff;
+	border-radius: 10px 0 0 10px;
+	transition: 0.4s;
+	z-index: 999;
 }
-#main-menu{
-	height:40px;
+#side-button:hover {
+	background: #25C9E4;
 }
-#main-menu a{
-	color:black;
-}
-div#main_side{
-	position:fixed;
-	top:20px;
-	right:0px;
-	width:200px;
-	height:100%;
+#sidenav {
+	position: fixed;
+	top: 80px;
+	right: -200px;
+	width: 200px;
+	height: 100%;
+	background: #fff;
+	border-left: 1px solid #BDBDBD;
+	transition: 0.4s;
+	z-index: 999;
 }
 #sideMenu div{
 	height:100px;
@@ -89,125 +252,73 @@ div#main_side{
 	padding:0 0 0 0;
 	list-style: none;
 }
-#side-btn{
-	top:300px;
-	right:-160px;
-	font-size:20px;
-	width:40px;
-	height:60px;
-	text-align:center;
-	border-radius:15px 0 0 15px;
-	display:table-cell;
-	vertical-align:middle;
-	border:1px solid #BDBDBD;
+/* 위,아래 이동*/
+#up-btn {
+	cursor: pointer;
+	position: fixed;
+	bottom: 70px;
+	left: 47px;
+	width: 40px;
+	height: 40px;
+	font-size: 30pt;
+	color: #B2B2B2;
 }
-#side-btn:hover{
-	color:white;
-	background:#BDBDBD;
+#down-btn {
+	cursor: pointer;
+	position: fixed;
+	bottom: 20px;
+	left: 47px;
+	width: 40px;
+	height: 40px;
+	font-size: 30pt;
+	color: #B2B2B2;
 }
-div#main_body{
-	position:relative;
-	top:80px;
-	width:100%;
-	min-height:800px;
-	margin-bottom:100px;
+#up-btn:hover, #down-btn:hover {
+	color: #25C9E4;
 }
-div#main_footer{
-	position:absolute;
-	left:0;
-	margin-top:20px;
-	padding:20px;
-	clear:both;
-	width:100%;
-	height:80px;
-	background:#333333;
-	color:white;
-	z-index:999;
+/* main_body */
+/* 공지사항 */
+#notice-link {
+	width: 100%;
+	height: 50px;
+	background: #333333;
+	color: white;
+	margin-bottom: 40px;
 }
-ul.menu{
-	list-style:none;
-	width: 400px;
-	margin: 0 auto;
-}
-ul.menu li{
-	margin-bottom:10px;
-}
-li label{
-	width: 120px;
+.notice{
+	text-align: left;
 	float: left;
+	height: 50px; 
+	overflow: hidden; 
 }
-#main_body a{
-	text-decoration:none;
-	color:black;
+.notice ul { list-style:none; }
+.notice a, .notice a:hover { color:white; }
+.rolling{ position:relative; width:100%; height:auto; }
+.rolling li{width:100%; height:50px; line-height:50px; }
+/* 자유게시판 */
+#freeboard {
+	margin: 0 auto;
+	padding: 10px;
+	width: 80%;
+	height: 300px;
+	border: 1px solid #BDBDBD;
 }
-div.page-main-style{
-	width:98%;
-	margin:0 auto;
-	text-align:center;
+#freeboard a {
+	color: #333333;
 }
-div.page-error-style{
-	width:50%; 
-	margin:0 auto;
+#freeboard a:hover {
+	font-weight: bold;
+	text-decoration: none;
 }
-.align-center{
-	text-align:center;
+#freeboard table {
+	margin: 0 auto;	
+	width: 80%;
+	height: 200px;
 }
-.align-right{  
-	text-align:right;
+#freeboard th {
+	height: 30px;
+	text-align: center;
 }
-.error-color{
-	color:red;
+#freeboard tr {
+	border-bottom: 1px solid #BDBDBD;
 }
-/* 메뉴 */
-#topMenu{
-	float:right;
-	min-width:1050px;
-}
-#topMenu a{
-	color:black;
-	text-align:center;
-}
-#topMenu a:hover{
-	color:#25C9E4;
-	font-weight:bold;
-	text-decoration:none;
-}
-#topMenu ul {
-	list-style-type:none;
-	margin:0px;
-	padding:0px;
-}
-#topMenu ul li {
-	position:relative;
-	float:left;
-	line-height:40px;
-}
-.menuLink, .submenuLink { 
-	text-decoration:none;
-	display:block;
-	width:150px;
-	font-size:14px; 
-}
-.topMenuLi:hover .menuLink { 
-	color:#4d4d4d;
-}
-.submenuLink { 
-	font-size:12px;
-	background-color:white;
-	margin-top:-1px; 
-	border:1px solid black;
-}
-.submenu { 
-	position:absolute;
-	height:0px;
-	overflow:hidden;
-	transition:height .2s;
-	-webkit-transition:height .2s;
-	-moz-transition:height .2s;
-	-o-transition:height .2s;
-	z-index:999;
-}
-.topMenuLi:hover .submenu { 
-	height:250px; 
-}
-

@@ -1,13 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style type="text/css">
+<script type="text/javascript">
+$(document).ready(function(){
+	var height =  $(".notice").height(); //공지사항의 높이값을 구해주고~~
+	var num = $(".rolling li").length; // 공지사항의 개수를 알아볼수 있어요! length라는 것으로!
+	var max = height * num; //그렇다면 총 높이를 알 수 있겠죠 ?
+	var move = 0; //초기값을 설정해줍니다.
+	function noticeRolling(){
+		move += height; //여기에서 += 이라는 것은 move = move + height 값이라는 뜻을 줄인 거에요.
+		$(".rolling").animate({"top":-move},600,function(){ // animate를 통해서 부드럽게 top값을 올려줄거에요.
+			if( move >= max ){ //if문을 통해 최대값보다 top값을 많이 올렸다면 다시 !
+				$(this).css("top",0); //0으로 돌려주고~
+				move = 0; //초기값도 다시 0으로!
+			};
+		});
+	};
+	noticeRollingOff = setInterval(noticeRolling,5000); //자동롤링답게 setInterval를 사용해서 1000 = 1초마다 함수 실행!!
+	$(".rolling").append($(".rolling li").first().clone()); //올리다보면 마지막이 안보여서 clone을 통해 첫번째li 복사!
+});		
+</script>
+<div id="notice-link">
+	<div style="float:left;text-align:right;width:40px;height:50px;font-size:20px;padding-top:13px;">
+		<span class="glyphicon glyphicon-volume-up"></span>
+	</div>
+	<div class="notice">
+		<ul class="rolling">
+			<c:if test="${noticeCount>0 }">
+			<c:forEach var="noticeList" items="${noticeList}">
+				<li><a href="noticeDetail.do?gn_seq=${noticeList.gn_seq}">${noticeList.gn_title }</a></li>
+			</c:forEach>
+		</c:if>
+		<c:if test="${noticeCount==0 }">
+			<li>등록된 공지사항이 없습니다.</li>
+		</c:if>
+		</ul>
+	</div>
+</div>
+
+<div id="freeboard">
+	<a href="${pageContext.request.contextPath}/freeboard.do" style="font-size:18px;">자유게시판<span class="glyphicon glyphicon-chevron-right" style="font-size:18px;"></span></a>
+	<br><br>
+	<table>
+		<tr>
+			<th width="100">글번호</th>
+			<th>제목</th>
+			<th width="100">날짜</th>
+			<th width="100">조회수</th>
+		</tr>
+		<tr>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>날짜</td>
+			<td>조회수</td>
+		</tr>
+		<tr>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>날짜</td>
+			<td>조회수</td>
+		</tr>
+		<tr>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>날짜</td>
+			<td>조회수</td>
+		</tr>	
+	</table>
+</div>
+<%-- <style type="text/css">
 	ul{
 		list-style: none;
 	}
 	div.half{
 		width:49%;
-		height:200px;
+		height:200px; 
 		border:1px solid red;
 		margin:0 auto;
 		padding:0 0 0 0 ;
@@ -36,7 +102,6 @@
 		text-align: left;
 	}
 </style>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -57,11 +122,7 @@
 		});
 	});	
 </script>
-<div style="text-align:center;width:100%;height:150px;border-bottom:1px solid #BDBDBD;">
-	<img src="${pageContext.request.contextPath}/resources/images/mixmatch.png" height="100%">
-</div>
 <div style="width:80%;margin:0 auto;">
-	<br>
 	<!--  공지사항 게시글 최근5개 보이기. 없으면 없음 띄움 -->
 	<div id="noticeView" class="half" 
 		style="float:left;">
@@ -134,4 +195,4 @@
 		</ul>
 	</div>
 	
-</div>
+</div> --%>
