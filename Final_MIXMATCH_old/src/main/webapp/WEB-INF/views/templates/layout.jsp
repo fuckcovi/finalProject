@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/matchLayout.css">
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -37,6 +37,49 @@ $(document).ready(function(){
 	</div>
 </div>
 
+<div style="min-width:600px;width:100%;height:200px;">
+	<div class="flip-container" onclick="location.href='${pageContext.request.contextPath}/notice.do'">
+	    <div class="flipper">
+	        <div class="front">
+		       	공지사항<br><span class="glyphicon glyphicon-volume-up" style="font-size:30px;"></span>
+	        </div>
+	        <div class="back">
+		       	보러가기<br><span class="glyphicon glyphicon-chevron-right" style="font-size:30px;"></span>
+	        </div>
+	    </div>
+	</div>
+	<div class="flip-container" onclick="location.href='${pageContext.request.contextPath}/match/matchBoard.do'">
+	    <div class="flipper">
+	        <div class="front">
+		       	매치보드<br><span class="glyphicon glyphicon-list-alt" style="font-size:30px;"></span>
+	        </div>
+	        <div class="back">
+		    	보러가기<br><span class="glyphicon glyphicon-chevron-right" style="font-size:30px;"></span>
+	        </div>
+	    </div>
+	</div>
+	<div class="flip-container" onclick="location.href='${pageContext.request.contextPath}/stadium.do'">
+	    <div class="flipper">
+	        <div class="front">
+		       	경기장예약<br><span class="glyphicon glyphicon-calendar" style="font-size:30px;"></span>
+	        </div>
+	        <div class="back">
+		    	보러가기<br><span class="glyphicon glyphicon-chevron-right" style="font-size:30px;"></span>
+	        </div>
+	    </div>
+	</div>
+	<div class="flip-container" onclick="location.href='${pageContext.request.contextPath}/mypage/main.do?id=${user_id}'">
+	    <div class="flipper">
+	        <div class="front">
+		   		미니홈피<br><span class="glyphicon glyphicon-home" style="font-size:30px;"></span>
+	        </div>
+	        <div class="back">
+		    	보러가기<br><span class="glyphicon glyphicon-chevron-right" style="font-size:30px;"></span>
+	        </div>
+	    </div>
+	</div>
+</div>
+<br>
 <div id="freeboard">
 	<a href="${pageContext.request.contextPath}/freeboard.do" style="font-size:18px;">자유게시판<span class="glyphicon glyphicon-chevron-right" style="font-size:18px;"></span></a>
 	<br><br>
@@ -67,6 +110,55 @@ $(document).ready(function(){
 		</tr>	
 	</table>
 </div>
+<br>
+<div id="rankView">
+	<a href="${pageContext.request.contextPath}/totalRank.do" style="font-size:18px;">기록/랭킹<span class="glyphicon glyphicon-chevron-right" style="font-size:18px;"></span></a>
+	<br><br>
+	<table>
+		<tr>
+			<th width="100">순위</th>
+			<th colspan="2">회원</th>
+			<th width="100">포인트</th>
+			<th width="100">가입일</th>
+		</tr>
+		<tr>
+			<td><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="30"></td>
+			<td>사진</td>
+			<td>아이디</td>
+			<td>포인트</td>
+			<td>가입일</td>
+		</tr>
+		<tr>
+			<td><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="30"></td>
+			<td>사진</td>
+			<td>아이디</td>
+			<td>포인트</td>
+			<td>가입일</td>
+		</tr>
+		<tr>
+			<td><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="30"></td>
+			<td>사진</td>
+			<td>아이디</td>
+			<td>포인트</td>
+			<td>가입일</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>사진</td>
+			<td>아이디</td>
+			<td>포인트</td>
+			<td>가입일</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>사진</td>
+			<td>아이디</td>
+			<td>포인트</td>
+			<td>가입일</td>
+		</tr>	
+	</table>
+</div>
+<br>
 <%-- <style type="text/css">
 	ul{
 		list-style: none;
@@ -123,26 +215,7 @@ $(document).ready(function(){
 	});	
 </script>
 <div style="width:80%;margin:0 auto;">
-	<!--  공지사항 게시글 최근5개 보이기. 없으면 없음 띄움 -->
-	<div id="noticeView" class="half" 
-		style="float:left;">
-		<h4>공지사항</h4>
-		<ul id="noticeList">
-		<c:if test="${noticeCount>0 }">
-			<c:forEach var="noticeList" items="${noticeList}">
-				<li><a href="noticeDetail.do?gn_seq=${noticeList.gn_seq}">${noticeList.gn_title }</a></li>
-			</c:forEach>
-		</c:if>
-		<c:if test="${noticeCount==0 }">
-			<li>등록된 공지사항이 없습니다.</li>
-		</c:if>
-		</ul>
-	</div>
-	<!--  자유게시판 인기글 5개 보이기 -->
-	<div id="freeboardView" class="half" style="float:right;">
-		<h4>자유게시판</h4>
-		
-	</div>
+
 	<div id="rankView" class="full">
 		<h4>팀랭킹</h4>
 		<ul id="ttype">
