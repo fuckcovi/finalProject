@@ -46,8 +46,8 @@ $(document).ready(function() {
 </script>
 <style type="text/css">
 	#sideul li{
-		height:150px;
-		border:1px solid blue;
+		height:130px;
+		border:1px solid #BDBDBD;
 	}
 	#sideul li form input{
 		width:80px;
@@ -76,17 +76,17 @@ $(document).ready(function() {
 			</c:if>
 			<c:if test="${empty user_id}">
 			
-			<form action="${pageContext.request.contextPath}/login.do" method="post">
-				<label for="id">ID</label><input type="text" id="id" name="id" >
-				<label for="pw">PW</label><input type="password" id="pw" name="pw">
-				<input type="submit" value="로그인">
+			<form action="${pageContext.request.contextPath}/login.do" method="post"><br>
+				<label for="id">ID</label><input type="text" id="id" name="id" ><br>
+				<label for="pw">PW</label><input type="password" id="pw" name="pw"><br><br>
+				<input type="submit" value="로그인" class="btn">
 			</form>
 			</c:if>
 		</li>
 		<li> 
 			<div  >
 			<c:if test="${joinCountSide==0 }">
-			가입신청한 팀이 없습니다. 자신의 팀을 생성하거나 이미 등록된 팀에 가입신청하세요.
+			<br><br>가입신청한 팀이 없습니다. 자신의 팀을 생성하거나 이미 등록된 팀에 가입신청하세요.<br>
 			<a href="${pageContext.request.contextPath}/team.do">팀생성</a>
 			</c:if>
 			<c:if test="${joinCountSide>0 }">  
@@ -128,11 +128,11 @@ $(document).ready(function() {
 		</li>
 		<li>
 			<c:if test="${!empty user_id }">
-			<div id="chat" style="height:100px;background:green;"> 채팅			
+			<div id="chat" style="height:100px;">채팅<br><img src="${pageContext.request.contextPath}/resources/images/chat.png" width="80">		
 			</div>
 			</c:if>
 			<c:if test="${empty user_id}">
-			<div style="height:100px;background:green;">로그인하세요</div>
+			<div style="height:100px;">채팅을 하시려면 로그인하세요</div>
 			</c:if>
 		</li>
 	</ul>

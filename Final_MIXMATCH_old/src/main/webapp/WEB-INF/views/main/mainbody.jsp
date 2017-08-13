@@ -17,6 +17,22 @@ $(document).ready(function(){
 	};
 	noticeRollingOff = setInterval(noticeRolling,5000); //자동롤링답게 setInterval를 사용해서 1000 = 1초마다 함수 실행!!
 	$(".rolling").append($(".rolling li").first().clone()); //올리다보면 마지막이 안보여서 clone을 통해 첫번째li 복사!
+	
+	$("#baseRank").click(function(){
+		$("#teamRankList .base").show();
+		$("#teamRankList .foot").hide();
+		$("#teamRankList .basket").hide();
+	});
+	$("#basketRank").click(function(){
+		$("#teamRankList .base").hide();
+		$("#teamRankList .foot").hide();
+		$("#teamRankList .basket").show();
+	});
+	$("#footRank").click(function(){
+		$("#teamRankList .base").hide();
+		$("#teamRankList .foot").show();
+		$("#teamRankList .basket").hide();
+	});
 });		
 </script>
 <div id="notice-link">
@@ -114,145 +130,88 @@ $(document).ready(function(){
 <div id="rankView">
 	<a href="${pageContext.request.contextPath}/totalRank.do" style="font-size:18px;">기록/랭킹<span class="glyphicon glyphicon-chevron-right" style="font-size:18px;"></span></a>
 	<br><br>
-	<table>
+	<ul id="ttype">
+		<li id="footRank"><img src="${pageContext.request.contextPath}/resources/images/scicon.png" width="15"> 축구</li>
+		<li id="baseRank"><img src="${pageContext.request.contextPath}/resources/images/bsicon.png" width="15"> 야구</li>
+		<li id="basketRank"><img src="${pageContext.request.contextPath}/resources/images/bkicon.png" width="15"> 농구</li>
+	</ul>
+	<br>
+	<table id="teamRankList">
 		<tr>
-			<th width="100">순위</th>
-			<th colspan="2">회원</th>
-			<th width="100">포인트</th>
-			<th width="100">가입일</th>
+			<th>순위</th>
+			<th>팀명</th>
+			<th>승리</th>
+			<th>무승부</th>
+			<th>패배</th>
+			<th>연고지</th>
 		</tr>
-		<tr>
-			<td><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="30"></td>
-			<td>사진</td>
-			<td>아이디</td>
-			<td>포인트</td>
-			<td>가입일</td>
-		</tr>
-		<tr>
-			<td><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="30"></td>
-			<td>사진</td>
-			<td>아이디</td>
-			<td>포인트</td>
-			<td>가입일</td>
-		</tr>
-		<tr>
-			<td><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="30"></td>
-			<td>사진</td>
-			<td>아이디</td>
-			<td>포인트</td>
-			<td>가입일</td>
-		</tr>
-		<tr>
-			<td>4</td>
-			<td>사진</td>
-			<td>아이디</td>
-			<td>포인트</td>
-			<td>가입일</td>
-		</tr>
-		<tr>
-			<td>5</td>
-			<td>사진</td>
-			<td>아이디</td>
-			<td>포인트</td>
-			<td>가입일</td>
-		</tr>	
+		<c:if test="${baseTeamCount>0 }">
+			<c:forEach var="baseTeamList" items="${baseTeamList}" varStatus="status">
+					<tr class="base" onclick="location.href='teamInfo.do?t_name=${baseTeamList.t_name}'" style="display: none;">
+						<td>
+							<c:if test="${status.count eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
+							<c:if test="${status.count eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
+							<c:if test="${status.count eq 3}"><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="20"></c:if>
+							<c:if test="${status.count ne 1 && status.count ne 2 && status.count ne 3}">${status.count}</c:if>
+						</td>
+						<td>${baseTeamList.t_name}</td>
+						<td>${baseTeamList.t_win}</td>
+						<td>${baseTeamList.t_draw}</td>
+						<td>${baseTeamList.t_lose}</td>
+						<td>${baseTeamList.t_address}</td>
+					</tr>
+			</c:forEach>			
+		</c:if>
+		<c:if test="${baseTeamCount==0 }">
+			<tr class="base"><td colspan="6">등록된 야구팀이 없습니다.</td></tr>
+		</c:if>
+			
+		<c:if test="${basketTeamCount>0 }">
+			<c:forEach var="basketTeamList" items="${basketTeamList}" varStatus="status">
+				<tr class="basket" onclick="location.href='teamInfo.do?t_name=${basketTeamList.t_name}'" style="display: none;">
+						<td>
+							<c:if test="${status.count eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
+							<c:if test="${status.count eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
+							<c:if test="${status.count eq 3}"><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="20"></c:if>
+							<c:if test="${status.count ne 1 && status.count ne 2 && status.count ne 3}">${status.count}</c:if>
+						</td>
+						<td>${basketTeamList.t_name}</td>
+						<td>${basketTeamList.t_win}</td>
+						<td>${basketTeamList.t_draw}</td>
+						<td>${basketTeamList.t_lose}</td>
+						<td>${basketTeamList.t_address}</td>
+					</tr>	
+			</c:forEach>			
+		</c:if>
+		<c:if test="${basketTeamCount==0 }">
+			<tr class="basket"><td colspan="6">등록된 농구팀이 없습니다.</td></tr>
+		</c:if>
+		
+		<c:if test="${footTeamCount>0 }">
+			<c:forEach var="footTeamList" items="${footTeamList}" varStatus="status">
+				<tr class="foot" onclick="location.href='teamInfo.do?t_name=${footTeamList.t_name}'" style="display: none;">
+						<td>
+							<c:if test="${status.count eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
+							<c:if test="${status.count eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
+							<c:if test="${status.count eq 3}"><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="20"></c:if>
+							<c:if test="${status.count ne 1 && status.count ne 2 && status.count ne 3}">${status.count}</c:if>
+						</td>
+						<td>${footTeamList.t_name}</td>
+						<td>${footTeamList.t_win}</td>
+						<td>${footTeamList.t_draw}</td>
+						<td>${footTeamList.t_lose}</td>
+						<td>${footTeamList.t_address}</td>
+					</tr>
+			</c:forEach>			
+		</c:if>
+		<c:if test="${footTeamCount==0 }">
+			<tr class="foot"><td colspan="6">등록된 축구팀이 없습니다.</td></tr>
+		</c:if>
 	</table>
 </div>
 <br>
-<%-- <style type="text/css">
-	ul{
-		list-style: none;
-	}
-	div.half{
-		width:49%;
-		height:200px; 
-		border:1px solid red;
-		margin:0 auto;
-		padding:0 0 0 0 ;
-	}
-	div.full{
-		width:100%;
-		height:200px;
-		border:1px solid blue;
-		float:left;
-	}
-	#ttype li{
-		display: inline-block;
-	}
-	#noticeList{
-		border: 1px solid red;
-	}
-	#noticeList li{
-		border: 1px solid red;
-		text-align: left;
-	}
-	#teamRankList{
-		border: 1px solid blue;
-	}
-	#teamRankList li{
-		border: 1px solid blue;
-		text-align: left;
-	}
-</style>
-<script type="text/javascript">
-	$(document).ready(function(){
-		
-		$("#baseRank").click(function(){
-			$("#teamRankList .base").show();
-			$("#teamRankList .foot").hide();
-			$("#teamRankList .basket").hide();
-		});
-		$("#basketRank").click(function(){
-			$("#teamRankList .base").hide();
-			$("#teamRankList .foot").hide();
-			$("#teamRankList .basket").show();
-		});
-		$("#footRank").click(function(){
-			$("#teamRankList .base").hide();
-			$("#teamRankList .foot").show();
-			$("#teamRankList .basket").hide();
-		});
-	});	
-</script>
-<div style="width:80%;margin:0 auto;">
 
-	<div id="rankView" class="full">
-		<h4>팀랭킹</h4>
-		<ul id="ttype">
-			<li id="baseRank">야구</li>
-			<li id="footRank">축구</li>
-			<li id="basketRank">농구</li>
-		</ul>
-		<ul id="teamRankList">
-			<c:if test="${baseTeamCount>0 }">
-				<c:forEach var="baseTeamList" items="${baseTeamList}" varStatus="status">
-					<li class="base" ><a href="teamInfo.do?t_name=${baseTeamList.t_name}">${status.count}-${baseTeamList.t_name}-${baseTeamList.t_win}-${baseTeamList.t_draw}-${baseTeamList.t_lose}-${baseTeamList.t_address}</a></li>	
-				</c:forEach>			
-			</c:if>
-			<c:if test="${baseTeamCount==0 }">
-				<li class="base">등록된 야구팀이 없습니다.</li>
-			</c:if>
-			
-			<c:if test="${basketTeamCount>0 }">
-				<c:forEach var="basketTeamList" items="${basketTeamList}">
-					<li class="basket" style="display: none;"><a href="teamInfo.do?t_name=${basketTeamList.t_name}">${basketTeamList.t_name}-${basketTeamList.t_win}-${basketTeamList.t_draw}-${basketTeamList.t_lose}-${basketTeamList.t_address}</a></li>	
-				</c:forEach>			
-			</c:if>
-			<c:if test="${basketTeamCount==0 }">
-				<li class="basket">등록된 농구팀이 없습니다.</li>
-			</c:if>
-			
-			<c:if test="${footTeamCount>0 }">
-				<c:forEach var="footTeamList" items="${footTeamList}">
-					<li class="foot" style="display: none;"><a href="teamInfo.do?t_name=${footTeamList.t_name}">${footTeamList.t_name}-${footTeamList.t_win}-${footTeamList.t_draw}-${footTeamList.t_lose}-${footTeamList.t_address}</a></li>	
-				</c:forEach>			
-			</c:if>
-			<c:if test="${footTeamCount==0 }">
-				<li class="foot">등록된 축구팀이 없습니다.</li>
-			</c:if>
-		</ul>
-	</div>
-	<div id="matchView" class="full">
+<%-- <div id="matchView" class="full">
 		<h4>최근경기결과</h4>
 		<ul>
 		<c:if test="${matchResultCount>0 }">

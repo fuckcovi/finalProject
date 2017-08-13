@@ -422,14 +422,14 @@ a#bookmark:hover {
   position: absolute;
   backface-visibility:hidden;
 }
-/* 랭킹 */
+/* 기록/랭킹 */
 #rankView {
 	position: relative;
 	padding: 10px;
 	margin-top: 20px;
 	left: 10%;
 	width: 80%;
-	height: 500px;
+	height: 350px;
 	border: 1px solid #BDBDBD;
 }
 #rankView a {
@@ -440,10 +440,26 @@ a#bookmark:hover {
 	text-decoration: none;
 	color: #25c9e4;
 }
+#rankView ul {
+	width: 90%;
+	list-style: none;
+	text-align: left;
+	margin:0 auto;
+}
+#rankView ul li {
+	display: inline;
+	font-size: 14px;
+	line-height: 30px;
+	margin-right: 10px;
+}
+#rankView ul li:hover {
+	color: #25c9e4;
+	font-weight: bold;
+}
 #rankView table {
 	margin: 0 auto;	
 	width: 80%;
-	height: 400px;
+	height: 200px;
 }
 #rankView th {
 	height: 30px;
