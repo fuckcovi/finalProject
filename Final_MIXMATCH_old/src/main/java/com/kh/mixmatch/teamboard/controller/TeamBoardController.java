@@ -52,7 +52,7 @@ public class TeamBoardController {
 			log.debug("<<keyword>> : " +keyword);
 		}
 
-		/// ¼Ò¼Ó ÆÀ ¸ñ·Ï ±¸ÇÏ±â
+		/// ì†Œì† íŒ€ ëª©ë¡ êµ¬í•˜ê¸°
 		List<TeamMemCommand> teamlist = null;
 		Map<String, Object> tmap = new HashMap<String, Object>();
 		String user_id = (String)session.getAttribute("user_id");
@@ -65,7 +65,7 @@ public class TeamBoardController {
 		if(teamcount>0){
 			teamlist = teamMemService.listConfirmTeam(tmap);
 				if(t_name.equals("")){
-					map.put("t_name", teamlist.get(0).getT_name());	// ÀÓÀÇ·Î Ã¹¹øÂ° ÆÀÀ» ³Ö¾î¼­ °Ë»ö
+					map.put("t_name", teamlist.get(0).getT_name());	// ì„ì˜ë¡œ ì²«ë²ˆì§¸ íŒ€ì„ ë„£ì–´ì„œ ê²€ìƒ‰
 				}else{
 					map.put("t_name", t_name);
 				}
@@ -75,7 +75,7 @@ public class TeamBoardController {
 		
 		
 		
-		// ÃÑ ±ÛÀÇ °¹¼ö ¶Ç´Â °Ë»öµÈ ±ÛÀÇ °¹¼ö
+		// ì´ ê¸€ì˜ ê°¯ìˆ˜ ë˜ëŠ” ê²€ìƒ‰ëœ ê¸€ì˜ ê°¯ìˆ˜
 		int count = teamBoardService.getTbRowCount(map);
 		if(log.isDebugEnabled()){
 			log.debug("<<<count>> : "+count );
@@ -106,14 +106,14 @@ public class TeamBoardController {
 		if(log.isDebugEnabled()){
 			log.debug("<<<< gt_seq>>>>> : " +gt_seq);
 		}
-		// ÇØ´ç ±ÛÀÇ Á¶È¸¼ö Áõ°¡
+		// í•´ë‹¹ ê¸€ì˜ ì¡°íšŒìˆ˜ ì¦ê°€
 		teamBoardService.teamboardUpdateHit(gt_seq);
 		TeamBoardCommand teamboard = teamBoardService.teamboardSelect(gt_seq);
 		
 		return new ModelAndView("teamboardDetail","teamboard",teamboard);
 	}
 
-	// ÆÄÀÏ ´Ù¿î·Îµå
+	// íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	@RequestMapping("/teamboardfile.do")
 	public ModelAndView download(@RequestParam int gt_seq){
 		TeamBoardCommand teamboard = teamBoardService.teamboardSelect(gt_seq);
@@ -124,7 +124,7 @@ public class TeamBoardController {
 		return mav;
 	}
 	
-	// ÀÌ¹ÌÁö Ãâ·Â
+	// ì´ë¯¸ì§€ ì¶œë ¥
 	@RequestMapping("/teamboardimageView.do")
 	public ModelAndView viewImage(@RequestParam int gt_seq){
 		TeamBoardCommand teamboard = teamBoardService.teamboardSelect(gt_seq);
@@ -164,10 +164,84 @@ public class TeamBoardController {
 		if(result.hasErrors()){
 			return "redirect:/teamboardInsert.do";
 		}
-		// ±Û¾²±â
+		// ê¸€ì“°ê¸°
 		teamboardCommand.setIp(request.getRemoteAddr());
 		System.out.println(teamboardCommand);
 		teamBoardService.teamboardInsert(teamboardCommand);
+		return "redirect:/teamboard.do";
+	}
+	// ê¸€ ìˆ˜ì •í¼
+	@RequestMapping(value="teamboardUpdate.do", method=RequestMethod.GET)
+	public ModelAndView teamboardUpdateForm(@RequestParam("gt_seq") int gt_seq, HttpSession session) {
+		String id = (String)session.getAttribute("user_id");
+		
+		int teamcount = teamMemService.getRowTeamCount(id);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("id",id);
+		List<TeamMemCommand> teamlist = null;
+		if(teamcount>0){
+			teamlist = teamMemService.listConfirmTeam(map);
+			System.out.println("<<íŒ€ê²Œì‹œíŒ ìˆ˜ì •>> : " + teamlist);
+		}
+		
+		TeamBoardCommand teamBoardCommand = teamBoardService.teamboardSelect(gt_seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("teamboardUpdate");
+		mav.addObject("teamboard", teamBoardCommand);
+		mav.addObject("teamlist", teamlist);
+		
+		return mav;
+	}
+	
+	// ê¸€ ìˆ˜ì •
+	@RequestMapping(value="teamboardUpdate.do", method=RequestMethod.POST)
+	public String teamboardUpdateSubmit(@ModelAttribute("teamboard") TeamBoardCommand teamBoardCommand,
+										BindingResult result, HttpSession session, HttpServletRequest request) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("<<teamBoardCommand>> : " + teamBoardCommand);
+		}
+		
+		String user_id = (String) session.getAttribute("user_id");
+		if (!user_id.equals(teamBoardCommand.getId())) {
+			throw new Exception("ë³¸ì¸ ê¸€ì´ ì•„ë‹ˆë©´ ì‚­ì œí•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+		}
+		
+		TeamBoardCommand teamBoard = teamBoardService.teamboardSelect(teamBoardCommand.getGt_seq());
+		
+		if (result.hasErrors()) {
+			teamBoardCommand.setGt_filename(teamBoard.getGt_filename());
+			return "teamboardUpdate";
+		}
+		
+		if (teamBoardCommand.getGt_uploadfile_upload().isEmpty()) {
+			teamBoardCommand.setGt_uploadfile(teamBoard.getGt_uploadfile());
+			teamBoardCommand.setGt_filename(teamBoard.getGt_filename());
+			
+		}
+		
+		teamBoardCommand.setIp(request.getRemoteAddr());
+		
+		teamBoardService.teamboardUpdate(teamBoardCommand);
+		
+		return "redirect:/teamboard.do";
+	}
+	
+	// ê¸€ ì‚­ì œ
+	@RequestMapping("teamboardDelete.do")
+	public String teamboardDeleteProcess(@RequestParam("gt_seq") int gt_seq, HttpSession session) throws Exception {
+		if (log.isDebugEnabled()) {
+			log.debug("<<gt_seq>> : " + gt_seq);
+		}
+		
+		TeamBoardCommand teamBoardCommand = teamBoardService.teamboardSelect(gt_seq);
+		String user_id = (String) session.getAttribute("user_id");
+		if (!user_id.equals(teamBoardCommand.getId())) {
+			throw new Exception("ë³¸ì¸ ê¸€ì´ ì•„ë‹ˆë©´ ì‚­ì œí•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+		}
+		
+		teamBoardService.teamboardDelete(teamBoardCommand.getGt_seq());
+		
 		return "redirect:/teamboard.do";
 	}
 	

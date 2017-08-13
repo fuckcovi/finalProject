@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mixmatch.teamboard.dao.TeamBoardMapper;
 import com.kh.mixmatch.teamboard.domain.TeamBoardCommand;
+import com.kh.mixmatch.teamboard.domain.TeamBoardReplyCommand;
 @Service("teamBoardService")
 public class TeamBoardServiceImpl implements TeamBoardService{
 	
@@ -22,6 +23,7 @@ public class TeamBoardServiceImpl implements TeamBoardService{
 
 	@Override
 	public void teamboardDelete(Integer gt_seq) {
+		teamBoardMapper.deleteReply(gt_seq);
 		teamBoardMapper.teamboardDelete(gt_seq);
 	}
 
@@ -48,6 +50,31 @@ public class TeamBoardServiceImpl implements TeamBoardService{
 	@Override
 	public List<TeamBoardCommand> teamboardList(Map<String, Object> map) {
 		return teamBoardMapper.teamboardList(map);
+	}
+
+	@Override
+	public List<TeamBoardReplyCommand> listReply(Map<String, Object> map) {
+		return teamBoardMapper.listReply(map);
+	}
+
+	@Override
+	public int getRowCountReply(Map<String, Object> map) {
+		return teamBoardMapper.getRowCountReply(map);
+	}
+
+	@Override
+	public void insertReply(TeamBoardReplyCommand teamBoardReply) {
+		teamBoardMapper.insertReply(teamBoardReply);
+	}
+
+	@Override
+	public void updateReply(TeamBoardReplyCommand teamBoardReply) {
+		teamBoardMapper.updateReply(teamBoardReply);
+	}
+
+	@Override
+	public void deleteReply(Integer gtre_no) {
+		teamBoardMapper.deleteReply(gtre_no);
 	}
 	
 	

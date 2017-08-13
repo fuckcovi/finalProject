@@ -23,6 +23,7 @@ public class TeamBoardCommand {
 	@NotEmpty
 	private String id;
 	private String ip;
+	
 	public int getGt_seq() {
 		return gt_seq;
 	}

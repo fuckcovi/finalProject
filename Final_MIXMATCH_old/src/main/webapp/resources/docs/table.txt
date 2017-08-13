@@ -264,10 +264,10 @@ create table g_teamboard_re(
   gtre_content varchar2(900) not null,
   gtre_date date not null,
   ip varchar2(40) not null,
-  gtre_seq number not null,
+  gt_seq number not null,
   id varchar2(12) not null,
   constraint g_teamboard_reply_pk primary key (gtre_no),
-  constraint reply_g_teamboard_fk1 foreign key (gtre_seq) references g_teamboard (gt_seq),
+  constraint reply_g_teamboard_fk1 foreign key (gt_seq) references g_teamboard (gt_seq),
   constraint reply_gt_member_fk2 foreign key (id) references g_member (id)
 );
 

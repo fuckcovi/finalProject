@@ -3,12 +3,11 @@ package com.kh.mixmatch.teamboard.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mixmatch.teamboard.domain.TeamBoardCommand;
+import com.kh.mixmatch.teamboard.domain.TeamBoardReplyCommand;
+
 @Transactional
 public interface TeamBoardService {
 	
@@ -23,4 +22,13 @@ public interface TeamBoardService {
 	public int getTbRowCount(Map<String, Object> map);
 	@Transactional(readOnly=true) 
 	public List<TeamBoardCommand> teamboardList(Map<String, Object> map);
+
+	//댓글
+	@Transactional(readOnly=true)
+	public List<TeamBoardReplyCommand> listReply(Map<String,Object> map);
+	@Transactional(readOnly=true)
+	public int getRowCountReply(Map<String,Object> map);
+	public void insertReply(TeamBoardReplyCommand teamBoardReply);
+	public void updateReply(TeamBoardReplyCommand teamBoardReply);
+	public void deleteReply(Integer gtre_no);
 }

@@ -50,4 +50,25 @@
 					ORDER BY b.gt_seq DESC)a) 
 					<![CDATA[ WHERE rnum>=#{start} AND rnum<=#{end} ]]>
 	</select>
+	
+	<select id="listReply" parameterType="map"
+	                           resultType="teamBoardReplyCommand">
+		SELECT
+		   gtre_no,
+		   gtre_content,
+		   to_char(gtre_date,'YYYY-MM-DD HH24:MI:SS') gtre_date,
+		   gt_seq,
+		   id
+		FROM (SELECT
+		        a.*,
+		        rownum rnum
+		      FROM(SELECT
+		              *
+		           FROM g_teamboard_re
+		           WHERE gt_seq = #{gt_seq}
+		           ORDER BY gtre_no DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>                                         
+	</select>
 </mapper>

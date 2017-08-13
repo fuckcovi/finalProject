@@ -23,6 +23,57 @@ div.page-error-style {
 .error-color {
 	color: red;
 }
+/* 댓글 */
+div#reply_div{
+	padding:5px 10px 40px 10px;
+	margin-top:10px;
+	background-color:#eeeeee;
+}
+form#re_form{
+	width:650px;
+	margin:0 auto;
+}
+span.re-title{
+	color:#000;
+	font-size:12pt;
+	line-height:200%;
+}
+span.letter-count{
+	font-size:10pt;
+	color:#999;
+}
+span.form-id{
+	padding-lef:93px;
+	color:#000;
+}
+textarea.rep-content{
+	width:97%;
+	height:50px;
+	margin:10px 10px;
+}
+div#re_first{
+	float:left;
+	width:79%;
+	margin-bottom:10px;
+}
+div#re_second{
+	float:left;
+	width:20%;
+	margin-bottom:10px;
+}
+div#loading{
+	width:100px;
+	margin:0 auto;
+}
+div.paging-button{
+	text-align:right;
+}
+div#output{
+	clear:both;
+}
+form#mre_form{
+	margin:5px;
+}
 /* 레이아웃 */
 div#main {
 	width: 100%;
@@ -314,6 +365,7 @@ a#bookmark:hover {
 #freeboard a:hover {
 	font-weight: bold;
 	text-decoration: none;
+	color: #25c9e4;
 }
 #freeboard table {
 	margin: 0 auto;	
@@ -386,6 +438,7 @@ a#bookmark:hover {
 #rankView a:hover {
 	font-weight: bold;
 	text-decoration: none;
+	color: #25c9e4;
 }
 #rankView table {
 	margin: 0 auto;	
