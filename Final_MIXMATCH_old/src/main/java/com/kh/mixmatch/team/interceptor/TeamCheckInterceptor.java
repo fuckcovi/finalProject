@@ -7,9 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
-import com.kh.mixmatch.team.service.TeamService;
 
 public class TeamCheckInterceptor extends HandlerInterceptorAdapter{
 	private Logger log = Logger.getLogger(this.getClass());
@@ -17,16 +15,16 @@ public class TeamCheckInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		if(log.isDebugEnabled()){
-			log.debug("=============TeamCheckInterceptor ÁøÀÔ=========");
+			log.debug("=============TeamCheckInterceptor ì§„ì…=========");
 		}
-		// ·Î±×ÀÎ ¿©ºÎ °Ë»ç
+		// ë¡œê·¸ì¸ ì—¬ë¶€ ê²€ì‚¬
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
-		System.out.println(user_id + " : ¾ÆÀÌµğ");
+		System.out.println(user_id + " : ì•„ì´ë””");
 		System.out.println(teamMemService.getRowTeamCount(user_id));
 		int teamCount = teamMemService.getRowTeamCount(user_id);
 		
-		System.out.println("ÆÀ ¼ö : " + teamCount);
+		System.out.println("íŒ€ ìˆ˜ : " + teamCount);
 		if(teamCount <1){
 			
 			response.sendRedirect(request.getContextPath()+"/team.do");
