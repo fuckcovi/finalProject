@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/teamLogo.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var flag = false;
@@ -84,7 +85,7 @@ $(document).ready(function() {
 			</c:if>
 		</li>
 		<li> 
-			<div  >
+			<div>
 			<c:if test="${joinCountSide==0 }">
 			<br><br>가입신청한 팀이 없습니다. 자신의 팀을 생성하거나 이미 등록된 팀에 가입신청하세요.<br>
 			<a href="${pageContext.request.contextPath}/team.do">팀생성</a>

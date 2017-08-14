@@ -329,7 +329,7 @@ public class MatchController {
 	
 	// 점수보기
 	@RequestMapping("/match/scoreDetail.do")
-	public ModelAndView scoreDetailForm(@RequestParam("m_seq") int m_seq) {
+	public ModelAndView scoreDetailForm(@RequestParam("m_seq") int m_seq,HttpSession session) {
 		if (log.isDebugEnabled()) {
 			log.debug("<<점수보기 m_seq>> : " + m_seq);
 		}
@@ -340,6 +340,10 @@ public class MatchController {
 		// 팀 이름 가져오기
 		TeamCommand t_name = matchService.getTeam(match.getT_name());
 		TeamCommand m_challenger = matchService.getTeam(match.getM_challenger());
+
+		// 로그인한 유저가 팀마스터인 팀명 가져오기
+		String id = (String)session.getAttribute("user_id");
+		List<String> mt_name = matchService.getTeamList(id);
 		
 		// 베팅 리스트
 		List<TotoCommand> list = totoService.totoList(m_seq);
@@ -350,7 +354,7 @@ public class MatchController {
 		mav.addObject("t_name", t_name.getT_logo_name());
 		mav.addObject("m_challenger", m_challenger.getT_logo_name());
 		mav.addObject("list", list);
-		
+		mav.addObject("mt_name", mt_name);
 		return mav;
 	}
 	

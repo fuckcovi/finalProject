@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="page-main-style">
 	<h2>점수보기</h2>
 	<hr class="style"><br>
@@ -53,7 +54,9 @@
 				<td align="left"> ${match.m_place}</td>
 			</tr>
 		</table><br><br>
+	<c:if test="${fn:contains(mt_name,match.t_name)}">  
 		<input type="button" value="개인기록+" class="btn" onclick="location.href='${pageContext.request.contextPath}/matchMemRecordInsert.do?m_seq=${match.m_seq}'">
+	</c:if>
 		<input type="button" value="목록으로" class="btn" onclick="location.href='scoreBoard.do'">
 	</div>
 	<br><hr class="style">
