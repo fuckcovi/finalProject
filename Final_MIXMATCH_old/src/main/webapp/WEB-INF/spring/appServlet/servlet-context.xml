@@ -138,6 +138,7 @@
 			<mvc:mapping path="/teamRecord.do"/>
 			<mvc:mapping path="/mypage/main.do"/>
 			<mvc:mapping path="/teamboard.do"/>
+			<mvc:mapping path="/stadium.do"/>
 			<beans:bean class="com.kh.mixmatch.member.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
