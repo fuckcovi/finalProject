@@ -164,7 +164,7 @@ CREATE TABLE G_HOME_RE(
 );
 CREATE SEQUENCE G_HOME_RE_SEQ;
 
------------------------ 占쏙옙占쏙옙트 占쏙옙 ---------------------------------------------
+----------------------- 포인트샵 ---------------------------------------------
 CREATE TABLE G_POINT_PRODUCT
 (
     p_seq          INT              NOT NULL, 
@@ -180,7 +180,7 @@ CREATE SEQUENCE G_POINT_PRODUCT_SEQ
 START WITH 1
 INCREMENT BY 1;
 
---------------------------------- 占쌉쏙옙占쏙옙 ------------------------------------
+--------------------------------- 자유게시판 ------------------------------------
 create table g_board(
  gb_seq number not null,
  gb_title varchar2(100) not null,
@@ -281,7 +281,7 @@ create table g_sale_history(
 	constraint g_sale_history_fk2 foreign key(p_seq) references g_point_product(p_seq)
 );
 
---------------------------由ш렇-------------------------------------
+--------------------------리그-------------------------------------
 create table g_league (
   l_seq number not null primary key,
   id varchar2(20) not null,
@@ -310,7 +310,7 @@ create table g_league_detail (
 create sequence g_league_detail_seq;
 
 
---------------------- 寃쎄린�옣 ------------
+--------------------- 경기장예약 ------------
 CREATE TABLE G_STADIUM (
     S_SEQ NUMBER PRIMARY KEY,
     S_NAME VARCHAR2(30) NOT NULL,
