@@ -60,13 +60,14 @@
 				<beans:value>/WEB-INF/tiles-def/league.xml</beans:value>
 				<!-- 경기장예약 -->
 				<beans:value>/WEB-INF/tiles-def/stadium.xml</beans:value>
+				<!-- 포인트샵 관련 -->
+				<beans:value>/WEB-INF/tiles-def/pointshop.xml</beans:value> 
 				<!-- 일단 주석처리 -->
 				<!-- 팀관련
 				
 				게시판관련(모든 게시판 포함)
 				<beans:value>/WEB-INF/tiles-def/board.xml</beans:value>
-				포인트샵 관련
-				<beans:value>/WEB-INF/tiles-def/pointshop.xml</beans:value> --> 
+				--> 
 			</beans:list>
 		</beans:property>
 	</beans:bean>
