@@ -68,6 +68,10 @@
 			<td>${list.s_type }</td>
 			<td>${list.s_address1}</td>
 			<td>${list.s_regdate}</td>
+			<c:if test="${user_id eq 'admin' }">
+				<td><input type="button" value="경기장수정" onclick="location.href='stadiumUpdate.do?s_seq=${list.s_seq}'"></td>
+				<td><input type="button" value="경기장삭제" onclick="location.href='stadiumDel.do?s_seq=${list.s_seq}'"></td>
+			</c:if>
 		</tr>
 		</c:forEach>
 		

@@ -26,7 +26,10 @@ public interface TeamService {
 	
 	@Transactional(readOnly=true)
 	public List<TeamCommand> listRank(Map<String, Object> map);
-	
+	@Transactional(readOnly=true)
+	public List<TeamCommand> listMaster(String id);
+	@Transactional(readOnly=true)
+	public int countMasterTeam(String id);
 	// 매치 service
 	@Transactional(readOnly=true)
 	public List<MatchCommand> listMatch(Map<String, Object> map);

@@ -4,9 +4,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.min.js"></script>
 <div class="page-main-style">
-	<h2>경기장 등록</h2>
+	<h2>경기장 수정</h2>
 	<ul style="list-style: none;">
-	<form:form commandName="stadiumCommand" enctype="multipart/form-data" id="stadiumRegister" action="stadiumRegi.do" class="style" >
+	<form:form commandName="stadiumCommand" enctype="multipart/form-data" id="stadiumUpdate" action="stadiumUpdate.do" class="style" >
+	<form:hidden path="s_seq" value="${s_seq}"/>
 		<br>
 		<br>
 		<li>
@@ -49,8 +50,12 @@
 		<li>
 		<label for="s_logo_upload">경기장 로고</label>
 		<input type="file" id="s_logo_upload" name="s_logo_upload">
+		<c:if test="${!empty stadiumCommand.s_logo_name}">
+			<br>
+			<span>(${stadiumCommand.s_logo_name}이 등록되어있습니다. 재업로드하면 기존 파일은 삭제됩니다.)</span>
+		</c:if>
 		</li>
-		<input type="submit" value="경기장등록">
+		<input type="submit" value="경기장수정">
 	</form:form>
 	</ul>
 </div>

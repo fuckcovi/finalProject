@@ -71,5 +71,17 @@ public class TeamServiceImpl implements TeamService {
 	public MatchCommand selectMatchDetail(Integer mseq) {
 		return teamMapper.selectMatchDetail(mseq);
 	}
+
+	@Override
+	public List<TeamCommand> listMaster(String id) {
+		// TODO Auto-generated method stub
+		return teamMapper.listMaster(id);
+	}
+
+	@Override
+	public int countMasterTeam(String id) {
+		// TODO Auto-generated method stub
+		return teamMapper.countMasterTeam(id);
+	}
 	
 }

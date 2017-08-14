@@ -170,8 +170,7 @@ function controller(target) {
 
 	 
 	 $(document).on("click",".resBtn input", function(){
-		 alert("버튼 클릭");
-		 location.href="stadiumBooking.do?s_seq="+$(this).attr("s_seq")+"&b_regdate="+$(this).attr("b_regdate")+"&b_time="+$(this).attr("b_time");
+		 location.href="stadiumBooking.do?s_seq="+$(this).attr("s_seq")+"&b_regdate="+$(this).attr("b_regdate")+"&b_time="+$(this).attr("b_time")+"&t_name="+$("#t_name option:selected").val();
 	 });
 	 
 	 var bookList;
@@ -180,7 +179,6 @@ function controller(target) {
 
 		var regdate =$(this).attr("dataPick"); 
 		var seq = $("#stadiumSeq").val();
-		
 		$("#loading").show();
 		$.ajax({
 			type:"post",
@@ -191,7 +189,6 @@ function controller(target) {
 			timeout:30000,
 			success:function(data){
 				$("#loading").hide();
-				alert("예약가능 목록 호출");
 				var bookCount = data.bookCount;
 				bookList = data.bookList;
 				if(bookCount>=0 && bookList!=null){
@@ -209,7 +206,7 @@ function controller(target) {
 						output += "		<td>"+item.b_time+"</td>";
 						output += "		<td>"+item.b_check+"</td>";
 						if(item.b_check == 0){
-							output += "	<td class='resBtn'><input type='button' s_seq='"+seq+"' b_time='"+item.b_time+"' b_regdate='"+regdate+"'  value='예약하기'></td>";
+							output += "	<td class='resBtn'><input type='button' s_seq='"+seq+"' b_time='"+item.b_time+"' b_regdate='"+regdate+"' value='예약하기'></td>";
 						}
 						output += "	</tr>";
 						
@@ -283,11 +280,6 @@ function controller(target) {
 <hr noshade="noshade">
 <div>
 	<h2>예약하기</h2>
-
-	달력보여주고 각 날짜별로 4타임씩 선택가능.
-	db에서 존재하는건 선택불가능.
-	선택하면 날짜,타임이 db로 등록.
-	예약목록가서 확정하면 포인트 차감하고 완료.
 <div class='wrap' >
 	<div class='btn-holder'>
 		<button id='btnPrev'>&lt;</button>
@@ -295,6 +287,15 @@ function controller(target) {
 		<button id='btnNext'>&gt;</button>
 	</div>
 	<div id="calendar"></div>
+</div>
+<div>
+
+		<select id="t_name">
+		<c:forEach var="list" items="${t_name}">
+				<option>${list.t_name}</option> 
+	
+		</c:forEach>
+		</select>
 </div>
 <div id="output" style="border:1px solid red;width:400px;height:200px;margin: 0 auto;">
  

@@ -6,6 +6,14 @@ public class BookingCommand {
 	private String b_regdate;
 	private String b_time;
 	private int b_check;
+	private String t_name;
+	
+	public String getT_name() {
+		return t_name;
+	}
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
+	}
 	public int getB_seq() {
 		return b_seq;
 	}
@@ -39,7 +47,7 @@ public class BookingCommand {
 	@Override
 	public String toString() {
 		return "BookingCommand [b_seq=" + b_seq + ", s_seq=" + s_seq + ", b_regdate=" + b_regdate + ", b_time=" + b_time
-				+ ", b_check=" + b_check + "]";
+				+ ", b_check=" + b_check + ", t_name=" + t_name + "]";
 	}
 	
 	

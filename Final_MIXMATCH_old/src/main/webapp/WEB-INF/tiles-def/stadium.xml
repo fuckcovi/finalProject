@@ -19,6 +19,10 @@
      	<put-attribute name="title" value="MIXMATCH 경기장상세보기"/>
      	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumDetail.jsp"/>
     </definition>
+     <definition name="stadiumUpdate" extends="home">
+     	<put-attribute name="title" value="MIXMATCH 경기장수정"/>
+     	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumUpdate.jsp"/>
+    </definition>
     <definition name="stadiumBooking" extends="home">
      	<put-attribute name="title" value="MIXMATCH 경기장예약확인"/>
      	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumBooking.jsp"/>
@@ -26,5 +30,9 @@
     <definition name="stadiumMap" extends="home">
      	<put-attribute name="title" value="MIXMATCH 경기장예약확인"/>
      	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumMap.jsp"/>
+    </definition>
+     <definition name="stadiumConfirm" extends="home">
+     	<put-attribute name="title" value="MIXMATCH 경기장예약확인"/>
+     	<put-attribute name="body" value="/WEB-INF/views/stadium/stadiumConfirm.jsp"/>
     </definition>
 </tiles-definitions>

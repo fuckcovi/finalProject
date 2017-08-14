@@ -30,6 +30,11 @@ public interface TeamMapper {
 	
 	public List<TeamCommand> listRank(Map<String, Object> map);
 	
+	// 팀장인 팀 리스트
+	@Select("SELECT * FROM g_team WHERE id=#{id}")
+	public List<TeamCommand> listMaster(String id);
+	@Select("SELECT COUNT(*) FROM g_team WHERE id=#{id}")
+	public int countMasterTeam(String id);
 	
 	// 매치 mapper
 	@Select("SELECT t.t_logo_name,t.t_logo,m.* FROM g_team t , (SELECT * FROM g_match)m WHERE t.t_name=m.t_name")	// teamInfo에서 호출
