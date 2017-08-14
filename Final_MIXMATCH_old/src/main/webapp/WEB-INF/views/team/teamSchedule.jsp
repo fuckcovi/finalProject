@@ -32,7 +32,8 @@
 		<li class="scheduleListC btn" style="display:inline-block;width:150px;background-color:#e8d477;">확정일정</li>
 		<li class="scheduleListF btn" style="display:inline-block;width:150px;background-color:#e8d477;">종료일정</li>
 	</ul>
-	<div class="scheduleListX" style="margin:0 auto;overflow-y: auto;height:351px;">
+	<div style="height:351px;">
+	<div class="scheduleListX" style="margin:0 auto;overflow-y: auto;">
 		<div class="scheduleList xplan">
 			<table class="style">			 
 			<tr class="tablehead">
@@ -121,6 +122,7 @@
 				<td colspan="4">매치결과없음</td>
 			</tr>
 			</table>
+		</div>
 		</div>
 		</div>
 	</c:if>
