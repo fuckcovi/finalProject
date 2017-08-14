@@ -21,8 +21,8 @@ public class BaseCommand {
 	private int b_er;
 	private double b_era;
 	
-	private String name; //È¸¿ø¸í : MemberCommand Á¶ÀÎ
-	private String profile_name; //ÇÁ·ÎÇÊ¸í : MemberCommand Á¶ÀÎ
+	private String name; //íšŒì›ëª… : MemberCommand ì¡°ì¸
+	private String profile_name; //í”„ë¡œí•„ëª… : MemberCommand ì¡°ì¸
 	private byte[] profile;
 	private MultipartFile profile_upload;
 

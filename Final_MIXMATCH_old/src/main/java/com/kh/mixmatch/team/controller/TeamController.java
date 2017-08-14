@@ -1,7 +1,5 @@
 package com.kh.mixmatch.team.controller;
 
-import java.security.PublicKey;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -59,15 +56,12 @@ public class TeamController {
 	private int rowCount = 3;
 	private int pageCount = 1;
 
-//===================== ���솃 ============
-	
 	@RequestMapping("/team.do")
 	public ModelAndView process(@RequestParam(defaultValue="") String t_type,@RequestParam(value="pageNum",defaultValue="1") int currentPage,HttpSession session){
 		if(log.isDebugEnabled()){
 			log.debug("<<< currentPage >>> : " + currentPage);
 		}
 		
-		// �궗�씠�듃�뿉 �벑濡앸릺�뼱 �엳�뒗 �� 紐⑸줉
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<TeamCommand> list = null;
 		map.put("keyfield", "teamtype");
@@ -81,7 +75,7 @@ public class TeamController {
 		if(count>0){
 			list = teamService.list(map);
 		}
-		// 媛��엯�떊泥��븳 �� 紐⑸줉
+
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		String user_id = (String)session.getAttribute("user_id");
 		map2.put("id", user_id);
@@ -93,11 +87,11 @@ public class TeamController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("teamHome");
-		mav.addObject("count", count);	// �벑濡앸맂 ���쓽 珥� �닔
-		mav.addObject("list",list);	// �벑濡앸맂 ���쓽 由ъ뒪�듃
+		mav.addObject("count", count);
+		mav.addObject("list",list);
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		mav.addObject("joinCount",joinCount);
-		mav.addObject("joinList",joinList);			// 媛��엯�떊泥��븳 �� 紐⑸줉
+		mav.addObject("joinList",joinList);
 		return mav;
 	}
 	
@@ -112,13 +106,13 @@ public class TeamController {
 			match = teamService.listMatch(map);
 			for(int i=0;i<match.size();i++){
 				if(match.get(i).getM_home()==-1 || match.get(i).getM_away() ==-1){
-					match.remove(i);	// 留ㅼ묶寃곌낵 �엯�젰�븞�맂寃껋� 由ъ뒪�듃�뿉�꽌 類�.
+					match.remove(i);
 				}
 			}
 		}
 		String id = (String)session.getAttribute("user_id");
 		boolean tCheck = false;
-		// �� 媛��엯�떊泥� 痍⑥냼踰꾪듉 �솢�꽦�솕
+
 		map.put("id", id);
 		List<TeamMemCommand> list = teamMemService.list(map);
 		for(int i=0;i<list.size();i++){
@@ -127,7 +121,7 @@ public class TeamController {
 				break;
 			}
 		}
-		// ���썝�닔
+
 		int count = teamMemService.getRowTeamMemCount(t_name);
 
 		ModelAndView mav = new ModelAndView();
@@ -159,7 +153,7 @@ public class TeamController {
 		mav.addObject("filename", team.getT_logo_name());
 		return mav;
 	}
-//=========== ���뿉 媛��엯�떊泥� ======================
+
 	@RequestMapping("/teamMemJoin.do")
 	public String teamMemJoin(@ModelAttribute("command") @Valid TeamMemCommand teamMem,BindingResult result,HttpSession session){
 
@@ -174,7 +168,7 @@ public class TeamController {
 		map.put("id", user_id);
 		List<TeamMemCommand> list =teamMemService.list(map);
 		for(int i =0 ;i<list.size();i++){
-			if(list.get(i).getT_name().equals(teamMem.getT_name())){ // �씠誘� 媛��엯�떊泥��븳 ���씠誘�濡� �떊泥� �븞�릺怨� 由ы꽩
+			if(list.get(i).getT_name().equals(teamMem.getT_name())){
 				return "redirect:/team.do";
 			}
 		}
@@ -192,7 +186,6 @@ public class TeamController {
 		return "redirect:/team.do";
 	}
 	
-//=============== �� �벑濡� ============================
 	
 	@RequestMapping(value="/teamRegister.do",method=RequestMethod.GET)
 	public String form(){
@@ -213,7 +206,7 @@ public class TeamController {
 		TeamMemCommand teamMem =new TeamMemCommand();
 		teamMem.setId(teamCommand.getId());
 		teamMem.setT_name(teamCommand.getT_name());
-		teamMem.setT_mem_auth(1);//���쓣 �깮�꽦�븳 留덉뒪�꽣�뒗 auth媛믪쓣 1濡� 以�.
+		teamMem.setT_mem_auth(1);
 		teamMemService.insertTeamMem(teamMem);
 		return "redirect:/team.do";
 	}
@@ -231,7 +224,7 @@ public class TeamController {
 		if(log.isDebugEnabled()){
 			log.debug("<<<< teamCommand >>>>  : " + teamCommand);
 		}
-		// �썝�옒�쓽 ���젙蹂�
+
 		TeamCommand team = teamService.selectTeam(teamCommand.getT_name()); 
 		if(result.hasErrors()){
 			teamCommand.setT_logo_name(team.getT_logo_name());	
@@ -240,9 +233,9 @@ public class TeamController {
 		
 		String id = (String)session.getAttribute("user_id");
 		if(!id.equals(teamCommand.getId())){
-			throw new Exception("占쏙옙占쏙옙占쏙옙占싶곤옙 占싣니몌옙 占쏙옙占쏙옙 占쌀곤옙");
+			throw new Exception("본인 글이 아니면 수정하실 수 없습니다.");
 		}
-		// �쟾�넚�맂 �뙆�씪�씠 �뾾�뒗寃쎌슦 湲곗〈�뙆�씪 �뾽濡쒕뱶
+
 		if(teamCommand.getT_logo_upload().isEmpty()){
 			teamCommand.setT_logo(team.getT_logo());
 			teamCommand.setT_logo_name(team.getT_logo_name());
@@ -255,17 +248,16 @@ public class TeamController {
 	@RequestMapping("/deleteTeam.do")
 	public String deleteTeam(@RequestParam String t_name,HttpSession session) throws Exception{
 		String id = (String)session.getAttribute("user_id");
-		// 濡쒓렇�씤�븳 �쑀��媛� ��留덉뒪�꽣 �씠硫� �� �궘�젣
+
 		TeamCommand team = teamService.selectTeam(t_name);
 		if(!id.equals(team.getId())){
-			throw new Exception("��留덉뒪�꽣留� �궘�젣�븷 �닔 �엳�뒿�땲�떎.");
+			throw new Exception("본인 글이 아니면 삭제하실 수 없습니다.");
 		}
 		teamMemService.deleteTeam(t_name);
 		teamService.deleteTeam(t_name);
 		return "redirect:/team.do";
 	}
 	
-//============= ��紐� 以묐났泥댄겕 =========================
 	@RequestMapping("/confirmTname.do")
 	@ResponseBody
 	public Map<String, String> confirmTname(@RequestParam String tname){
@@ -322,7 +314,6 @@ public class TeamController {
 		return mav;
 	}
 	
-//============= �� �옲�궧 ===========================
 	@RequestMapping("/teamRank.do")
 	public ModelAndView teamRank(@RequestParam String t_name,@RequestParam(defaultValue="f_shoot") String forder,@RequestParam(defaultValue="b_hit") String border,@RequestParam(defaultValue="b_score") String bkorder){
 
@@ -340,13 +331,13 @@ public class TeamController {
 		map.put("type", team.getT_type());
 		
 		int teamMemCount = teamMemService.getRowTeamMemRecordCount(map);
-		if(teamMemCount>0 && team.getT_type().equals("異뺢뎄")){
+		if(teamMemCount>0 && team.getT_type().equals("축구")){
 			map.put("forder",forder);
 			listTMemFoot = teamMemService.listTMemFoot(map);
-		}else if(teamMemCount>0 && team.getT_type().equals("�빞援�")){
+		}else if(teamMemCount>0 && team.getT_type().equals("야구")){
 			map.put("border",border);
 			listTMemBase = teamMemService.listTMemBase(map);
-		}else if(teamMemCount>0 && team.getT_type().equals("�냽援�")){
+		}else if(teamMemCount>0 && team.getT_type().equals("농구")){
 			map.put("bkorder",bkorder);
 			listTMemBasket = teamMemService.listTMemBasket(map);
 		}
@@ -358,11 +349,10 @@ public class TeamController {
 	}
 
 	
-//================================ �� �씪�젙寃곌낵/湲곕줉=====================
 	@RequestMapping("/teamSchedule.do")
 	public ModelAndView teamSchedule(HttpSession session){
 		String user_id = (String)session.getAttribute("user_id");
-		// 濡쒓렇�씤�븳 �쑀���쓽 �듅�씤 �냼�냽�� 由ъ뒪�듃
+
 		List<TeamMemCommand> list = null;
 		List<String> teamList = null;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -373,7 +363,6 @@ public class TeamController {
 			teamList= teamMemService.getTeamMemList(user_id);
 		}
 		
-		// 紐⑤뱺 留ㅼ튂�씪�젙-寃곌낵 由ъ뒪�듃
 		List<MatchCommand> matchList = teamService.listMatch(null);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("teamSchedule");
@@ -384,9 +373,6 @@ public class TeamController {
 		return mav;
 	}
 	
-	
-	
-//==============================   留ㅼ묶寃곌낵 : 媛쒖씤湲곕줉 �벑濡�  =====================================
 	@RequestMapping(value="/matchMemRecordInsert.do",method=RequestMethod.GET)
 	public ModelAndView matchMemRecordInsertForm(@RequestParam int m_seq){
 		MatchCommand match = matchService.selectMatch(m_seq);
@@ -410,20 +396,19 @@ public class TeamController {
 		mav.addObject("basketCommand",basketCommand);
 		mav.addObject("baseCommand",baseCommand);
 		
-		// �빐�떦留ㅼ튂�쓽 湲곕줉�씠 �삱�씪媛붾뒗吏� 由ъ뒪�듃 蹂댁뿬以�
 		List<FootCommand> footlist = null;
 		List<BaseCommand> baselist = null;
 		List<BasketCommand> basketlist = null;
 		int footcount = 0;
 		int basecount = 0;
 		int basketcount = 0;
-		if(match.getM_type().equals("異뺢뎄")){
+		if(match.getM_type().equals("축구")){
 			footlist = teamMemService.listMatchFoot(m_seq);
 			footcount = footlist.size();
-		}else if(match.getM_type().equals("�빞援�")){
+		}else if(match.getM_type().equals("야구")){
 			baselist = teamMemService.listMatchBase(m_seq);
 			basecount = baselist.size();
-		}else if(match.getM_type().equals("�냽援�")){
+		}else if(match.getM_type().equals("농구")){
 			basketlist = teamMemService.listMatchBasket(m_seq);
 			basketcount = basketlist.size();
 		}
@@ -438,17 +423,15 @@ public class TeamController {
 		
 		return mav;
 	}
-////異뺢뎄
+
 	@RequestMapping("/homeMemRecordFoot.do")
 	public ModelAndView homeMemRecordFoot(@ModelAttribute("footCommand") FootCommand footCommand,BindingResult result,HttpSession session){
 		System.out.println(footCommand );
 		int m_seq = footCommand.getM_seq();
 			
-		// �씠誘� �빐�떦 留ㅼ튂踰덊샇�쓽 �냼�냽���쓽 �쑀�� 湲곕줉�씠 �벑濡앸릺�엳�쑝硫� insert�븞�릺怨� 由ы꽩.
 		List<FootCommand> footlist = teamMemService.listMatchFoot(m_seq);
 		for(int i =0;i<footlist.size();i++){
 			if(footlist.get(i).getId().equals(footCommand.getId())&& footlist.get(i).getT_name().equals(footCommand.getT_name())){
-				// �씠誘� �씠�궗�엺�� �씠踰덈ℓ移섏쓽 媛쒖씤湲곕줉�쓣 �벑濡앺븿
 				return matchMemRecordInsertForm(m_seq);
 			}
 		}
@@ -459,11 +442,9 @@ public class TeamController {
 	public ModelAndView awayMemRecordFoot(@ModelAttribute("footCommand") FootCommand footCommand,BindingResult result,HttpSession session){
 		int m_seq = footCommand.getM_seq();
 		
-		// �씠誘� �빐�떦 留ㅼ튂踰덊샇�쓽 �냼�냽���쓽 �쑀�� 湲곕줉�씠 �벑濡앸릺�엳�쑝硫� insert�븞�릺怨� 由ы꽩.
 		List<FootCommand> footlist = teamMemService.listMatchFoot(m_seq);
 		for(int i =0;i<footlist.size();i++){
 			if(footlist.get(i).getId().equals(footCommand.getId())&& footlist.get(i).getT_name().equals(footCommand.getT_name())){
-				// �씠誘� �씠�궗�엺�� �씠踰덈ℓ移섏쓽 媛쒖씤湲곕줉�쓣 �벑濡앺븿			
 				return matchMemRecordInsertForm(m_seq);
 			}
 		}
@@ -471,7 +452,7 @@ public class TeamController {
 			
 		return matchMemRecordInsertForm(m_seq);
 	}
-	//////////// �냽援�
+
 	@RequestMapping("/homeMemRecordBasket.do")
 	public ModelAndView homeMemRecordBasket(@ModelAttribute("basketCommand") BasketCommand basketCommand ,BindingResult result,HttpSession session){
 		
@@ -500,7 +481,7 @@ public class TeamController {
 		
 		return matchMemRecordInsertForm(m_seq);
 	}
-///////////s�빞援�
+
 	@RequestMapping("/homeMemRecordBase.do")
 	public ModelAndView homeMemRecordBase(@ModelAttribute("baseCommand") BaseCommand baseCommand,BindingResult result,HttpSession session){
 		int m_seq= baseCommand.getM_seq();
@@ -528,7 +509,6 @@ public class TeamController {
 		return matchMemRecordInsertForm(m_seq);
 	}
 	
-// =================== 媛쒖씤湲곕줉 �닔�젙 - 異뺢뎄
 	@RequestMapping("/footMemModify.do")
 	public ModelAndView footMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,@RequestParam int f_shoot, @RequestParam int f_assist,@RequestParam int f_goal,@RequestParam int f_attack){
 		List<FootCommand> footlist = teamMemService.listMatchFoot(m_seq);
@@ -545,7 +525,7 @@ public class TeamController {
 		}
 		return matchMemRecordInsertForm(m_seq);
 	}
-// ================= 媛쒖씤湲곕줉 �닔�젙 - �냽援�
+
 	@RequestMapping("/basketMemModify.do")
 	public ModelAndView basketMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,@RequestParam int b_score, @RequestParam int b_assist,@RequestParam int b_rebound,@RequestParam int b_steel, @RequestParam int b_block,@RequestParam int b_3point){
 		List<BasketCommand> basketlist = teamMemService.listMatchBasket(m_seq);
@@ -564,7 +544,7 @@ public class TeamController {
 		}
 		return matchMemRecordInsertForm(m_seq);
 	}
-// ==================媛쒖씤湲곕줉 �닔�젙 - �빞援�
+
 	@RequestMapping("/baseMemModify.do")
 	public ModelAndView baseMemModify(@RequestParam int m_seq,@RequestParam String t_name, @RequestParam String id,
 			@RequestParam int b_bat, @RequestParam int b_hit, @RequestParam int b_rbi, @RequestParam int b_score, @RequestParam int b_win,@RequestParam int b_lose, @RequestParam int b_strike,@RequestParam int b_ip, @RequestParam int b_er){
@@ -589,13 +569,10 @@ public class TeamController {
 		return matchMemRecordInsertForm(m_seq);
 	}	
 	
-	
-// ============================================ ��湲곕줉
-	
 	@RequestMapping("/teamRecord.do")
 	public ModelAndView teamRecord(HttpSession session){
 		String user_id = (String)session.getAttribute("user_id");
-		// 濡쒓렇�씤�븳 �쑀���쓽 �듅�씤 �냼�냽�� 由ъ뒪�듃
+
 		List<TeamMemCommand> list = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", user_id);
@@ -603,7 +580,7 @@ public class TeamController {
 		if(count>0){
 			list = teamMemService.listConfirmTeam(map);
 		}
-		// 紐⑤뱺 留ㅼ튂�씪�젙-寃곌낵 由ъ뒪�듃
+
 		List<MatchCommand> matchList = teamService.listMatch(null);
 		
 		ModelAndView mav = new ModelAndView();
@@ -623,17 +600,16 @@ public class TeamController {
 		int footcount = 0;
 		int basecount = 0;
 		int basketcount = 0;
-		if(match.getM_type().equals("異뺢뎄")){
+		if(match.getM_type().equals("축구")){
 			footlist = teamMemService.listMatchFoot(m_seq);
 			footcount = footlist.size();
-		}else if(match.getM_type().equals("�빞援�")){
+		}else if(match.getM_type().equals("야구")){
 			baselist = teamMemService.listMatchBase(m_seq);
 			basecount = baselist.size();
-		}else if(match.getM_type().equals("�냽援�")){
+		}else if(match.getM_type().equals("농구")){
 			basketlist = teamMemService.listMatchBasket(m_seq);
 			basketcount = basketlist.size();
 		}
-		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("matchDetailRecord");
@@ -647,16 +623,10 @@ public class TeamController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-//================================ �넻�빀�룷�씤�듃�옲�궧==========================
 	private int totalProwCount =10	;
 	private int totalPpageCount = 5;
 	@RequestMapping("/totalRank.do")
 	public ModelAndView totalPointRank(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
-		// 媛��엯�븳 珥� �쑀�� 紐⑸줉
 		int count = teamMemService.getMemCount();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -677,7 +647,7 @@ public class TeamController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
-//=============================== �넻�빀�빞援щ옲�궧 =================
+
 	@RequestMapping("/totalBaseRank.do")
 	public ModelAndView totalBaseRank(@RequestParam(defaultValue="t_win") String order,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -701,6 +671,7 @@ public class TeamController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
+	
 	@RequestMapping("/totalBaseMemRank.do")
 	public ModelAndView totalBaseMemRank(@RequestParam(defaultValue="b_hit") String morder,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -708,7 +679,7 @@ public class TeamController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalBaseMemRank");
-		// 占쌩깍옙占쏙옙占쏙옙 占쏙옙占� 확占쏙옙 占쏙옙.
+
 		map.put("keyword","야구");
 		int count = teamMemService.getMemRecordCount(map);
 		
@@ -726,10 +697,9 @@ public class TeamController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
-//============================= �넻�빀�냽援щ옲�궧 ========================
+
 	@RequestMapping("/totalBasketRank.do")
 	public ModelAndView totalBasketRank(@RequestParam(defaultValue="t_win") String order,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
-		/// ���엯�씠 �냽援ъ씤 �� 紐⑸줉
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword","농구");
 		map.put("keyfield","teamtype");
@@ -751,14 +721,13 @@ public class TeamController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
+	
 	@RequestMapping("/totalBasketMemRank.do")
 	public ModelAndView totalBasketMemRank(@RequestParam(defaultValue="b_score") String morder,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalBasketMemRank");
-		// 占쏙옙占쏙옙占쏙옙 占쏙옙占� 확占쏙옙 占쏙옙.
 		map.put("keyword","농구");
 		int count = teamMemService.getMemRecordCount(map);
 		
@@ -776,7 +745,7 @@ public class TeamController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
-//================================= �넻�빀異뺢뎄�옲�궧 =============
+
 	@RequestMapping("/totalFootRank.do")
 	public ModelAndView totalFootRank(@RequestParam(defaultValue="t_win") String order,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -800,12 +769,12 @@ public class TeamController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		return mav;
 	}
+	
 	@RequestMapping("/totalFootMemRank.do")
 	public ModelAndView totalFootMemRank(@RequestParam(defaultValue="f_goal") String morder,@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		Map<String, Object> map = new HashMap<String, Object>();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("totalFootMemRank");
-		// 占썅구占쏙옙占쏙옙 占쏙옙占� 확占쏙옙 占쏙옙.
 		map.put("keyword","축구");
 		int count = teamMemService.getMemRecordCount(map);
 		
@@ -821,7 +790,6 @@ public class TeamController {
 		mav.addObject("count",count);
 		mav.addObject("listMem",listMem);
 		mav.addObject("pagingHtml",page.getPagingHtml());
-		
 		
 		return mav;
 	}

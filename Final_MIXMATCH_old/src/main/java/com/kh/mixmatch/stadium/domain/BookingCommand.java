@@ -1,7 +1,5 @@
 package com.kh.mixmatch.stadium.domain;
 
-import java.sql.Date;
-
 public class BookingCommand {
 	private int b_seq;
 	private int s_seq;

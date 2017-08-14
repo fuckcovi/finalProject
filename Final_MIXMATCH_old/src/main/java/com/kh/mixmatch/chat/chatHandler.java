@@ -12,28 +12,28 @@ public class chatHandler extends TextWebSocketHandler{
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println(session.getId() + " ¿¬°á µÊ");
+		System.out.println(session.getId() + " ì—°ê²° ë¨");
 		users.put(session.getId(), session);
 	}
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println(session.getId() + " ¿¬°áÁ¾·á");
+		System.out.println(session.getId() + " ì—°ê²°ì¢…ë£Œ");
 		users.remove(session.getId());
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println(session.getId() + "·ÎºÎÅÍ ¸Ş¼¼Áö ¼ö½Å : " + message.getPayload());
+		System.out.println(session.getId() + "ë¡œë¶€í„° ë©”ì„¸ì§€ ìˆ˜ì‹  : " + message.getPayload());
 		
-		// ¿¬°áµÇ¾î ÀÖ´Â ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡ ¸Ş¼¼Áö Àü¼Û
+		// ì—°ê²°ë˜ì–´ ìˆëŠ” ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ì— ë©”ì„¸ì§€ ì „ì†¡
 		for(WebSocketSession s : users.values()){
 			s.sendMessage(message);
-			System.out.println(s.getId() + "¿¡ ¸Ş¼¼Áö ¹ß¼Û : " + message.getPayload());
+			System.out.println(s.getId() + "ì— ë©”ì„¸ì§€ ë°œì†¡ : " + message.getPayload());
 		}
 	}
 	
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		System.out.println(session.getId() + " ¿¹¿Ü ¹ß»ı : " + exception.getMessage());
+		System.out.println(session.getId() + " ì˜ˆì™¸ ë°œìƒ : " + exception.getMessage());
 	}
 }

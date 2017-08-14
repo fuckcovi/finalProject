@@ -54,7 +54,7 @@ public class NoticeController {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyfield",keyfield);
 		map.put("keyword", keyword);
-		// ÃÑ ±ÛÀÇ °¹¼ö ¶Ç´Â °Ë»öµÈ ±ÛÀÇ °¹¼ö
+		// ì´ ê¸€ì˜ ê°¯ìˆ˜ ë˜ëŠ” ê²€ìƒ‰ëœ ê¸€ì˜ ê°¯ìˆ˜
 		int count = noticeService.getRowCount(map);
 		if(log.isDebugEnabled()){
 			log.debug("<<<count>> : "+count );
@@ -91,7 +91,7 @@ public class NoticeController {
 			return "noticeInsert";
 		}
 		noticeCommand.setIp(request.getRemoteAddr());
-		// ±Û¾²±â
+		// ê¸€ì“°ê¸°
 		noticeService.noticeInsert(noticeCommand);
 		return "redirect:/notice.do";
 	}
@@ -100,14 +100,14 @@ public class NoticeController {
 		if(log.isDebugEnabled()){
 			log.debug("<<<< gn_seq>>>>> : " +gn_seq);
 		}
-		// ÇØ´ç ±ÛÀÇ Á¶È¸¼ö Áõ°¡
+		// í•´ë‹¹ ê¸€ì˜ ì¡°íšŒìˆ˜ ì¦ê°€
 		noticeService.noticeUpdateHit(gn_seq);
 		NoticeCommand notice = noticeService.noticeSelect(gn_seq);
 		
 		return new ModelAndView("noticeDetail","notice",notice);
 	}
 
-	// ÆÄÀÏ ´Ù¿î·Îµå
+	// íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 	@RequestMapping("/noticefile.do")
 	public ModelAndView download(@RequestParam int gn_seq){
 		NoticeCommand notice = noticeService.noticeSelect(gn_seq);
@@ -118,7 +118,7 @@ public class NoticeController {
 		return mav;
 	}
 	
-	// ÀÌ¹ÌÁö Ãâ·Â
+	// ì´ë¯¸ì§€ ì¶œë ¥
 	@RequestMapping("/noticeimageView.do")
 	public ModelAndView viewImage(@RequestParam int n_seq){
 		NoticeCommand notice = noticeService.noticeSelect(n_seq);

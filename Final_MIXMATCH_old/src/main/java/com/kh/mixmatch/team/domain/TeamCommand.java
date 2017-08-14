@@ -2,7 +2,6 @@ package com.kh.mixmatch.team.domain;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Arrays;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;

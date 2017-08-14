@@ -22,7 +22,6 @@ import com.kh.mixmatch.team.domain.TeamCommand;
 import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.team.service.TeamMemService;
 import com.kh.mixmatch.team.service.TeamService;
-import com.kh.mixmatch.util.PagingUtil;
 
 @Controller
 public class MainController {

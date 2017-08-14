@@ -2,7 +2,6 @@ package com.kh.mixmatch.team.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mixmatch.member.domain.MemberCommand;
@@ -41,16 +40,16 @@ public interface TeamMemService {
 	
 	
 	@Transactional(readOnly=true)
-	public List<FootCommand> listTMemFoot(Map<String, Object> map);	// ���������� �౸���
+	public List<FootCommand> listTMemFoot(Map<String, Object> map);
 	@Transactional(readOnly=true)
-	public List<BaseCommand> listTMemBase(Map<String, Object> map);	// ���������� �߱����
+	public List<BaseCommand> listTMemBase(Map<String, Object> map);
 	@Transactional(readOnly=true)
-	public List<BasketCommand> listTMemBasket(Map<String, Object> map);	// ���������� �󱸱��
+	public List<BasketCommand> listTMemBasket(Map<String, Object> map);
 	
 	@Transactional(readOnly=true)
-	public List<FootCommand> listMatchFoot(Integer mseq);	// �� ��ġ�� �������	
+	public List<FootCommand> listMatchFoot(Integer mseq);
 	@Transactional(readOnly=true)
-	public List<BaseCommand> listMatchBase(Integer mseq);	// �� ��ġ�� �������
+	public List<BaseCommand> listMatchBase(Integer mseq);
 	@Transactional(readOnly=true)
 	public List<BasketCommand> listMatchBasket(Integer mseq);	
 	@Transactional(readOnly=true)
@@ -58,11 +57,10 @@ public interface TeamMemService {
 	@Transactional(readOnly=true)
 	public int getRowTeamMemRecordCount(Map<String, Object> map);
 	
-	// ���service
 	@Transactional(readOnly=true)
-	public int getMemCount();	// �� ȸ�� ��
+	public int getMemCount();
 	@Transactional(readOnly=true)
-	public List<MemberCommand> getMemList(Map<String, Object> map);	// �� ȸ������Ʈ
+	public List<MemberCommand> getMemList(Map<String, Object> map);
 	@Transactional(readOnly=true)
 	public List<String> getTeamMemList(String user_id);
 }

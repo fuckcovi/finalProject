@@ -3,7 +3,6 @@ package com.kh.mixmatch.team.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mixmatch.match.domain.MatchCommand;
@@ -28,7 +27,7 @@ public interface TeamService {
 	@Transactional(readOnly=true)
 	public List<TeamCommand> listRank(Map<String, Object> map);
 	
-	// ¸ÅÄ¡service
+	// ë§¤ì¹˜ service
 	@Transactional(readOnly=true)
 	public List<MatchCommand> listMatch(Map<String, Object> map);
 	@Transactional(readOnly=true)

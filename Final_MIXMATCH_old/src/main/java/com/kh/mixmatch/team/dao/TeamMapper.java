@@ -31,14 +31,14 @@ public interface TeamMapper {
 	public List<TeamCommand> listRank(Map<String, Object> map);
 	
 	
-	// ¸ÅÄ¡ mapper
-	@Select("SELECT t.t_logo_name,t.t_logo,m.* FROM g_team t , (SELECT * FROM g_match)m WHERE t.t_name=m.t_name")	// teamInfo¿¡¼­ È£Ãâ
-	public List<MatchCommand> listMatch(Map<String, Object> map); // ¸ÅÄ¡ ¸®½ºÆ® ´Ù °¡Á®¿À±â
+	// ë§¤ì¹˜ mapper
+	@Select("SELECT t.t_logo_name,t.t_logo,m.* FROM g_team t , (SELECT * FROM g_match)m WHERE t.t_name=m.t_name")	// teamInfoì—ì„œ í˜¸ì¶œ
+	public List<MatchCommand> listMatch(Map<String, Object> map); // ë§¤ì¹˜ ë¦¬ìŠ¤íŠ¸ ë‹¤ ê°€ì ¸ì˜¤ê¸°
 	@Select("SELECT COUNT(*) FROM g_match WHERE t_name=#{t_name}")
-	public int countHomeMatch(String tname);	// ¸ÅÄ¡¼ö
+	public int countHomeMatch(String tname);	// ë§¤ì¹˜ìˆ˜
 	@Select("SELECT COUNT(*) FROM g_match WHERE m_challenger=#{t_name}")
-	public int countAwayMatch(String tname);	// ¸ÅÄ¡¼ö
+	public int countAwayMatch(String tname);	// ë§¤ì¹˜ìˆ˜
 	@Select("SELECT * FROM g_match WHERE m_seq=#{m_seq}")
-	public MatchCommand selectMatchDetail(Integer mseq);// ¸ÅÄ¡¹øÈ£·Î ¸ÅÄ¡³»¿ë Ã£±â
+	public MatchCommand selectMatchDetail(Integer mseq);// ë§¤ì¹˜ë²ˆí˜¸ë¡œ ë§¤ì¹˜ë‚´ìš© ì°¾ê¸°
 	
 }

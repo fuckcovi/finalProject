@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import oracle.sql.BLOB;
-
 public class FootCommand {
 	private int f_seq;
 	private String id;
@@ -15,14 +13,14 @@ public class FootCommand {
 	private int f_assist;
 	private int f_goal;
 	private int f_attack;
-	private String name; //È¸¿ø¸í : MemberCommand Á¶ÀÎ
-	private String profile_name; //ÇÁ·ÎÇÊ¸í : MemberCommand Á¶ÀÎ
+	private String name; //íšŒì›ëª… : MemberCommand ì¡°ì¸
+	private String profile_name; //í”„ë¡œí•„ëª… : MemberCommand ì¡°ì¸
 	private byte[] profile;
 	private MultipartFile profile_upload;
 
 	
-	private String m_challenger;	// ÆÀº° ¸ÅÄ¡¹øÈ£¿¡ µû¸¥ ±â·Ï
-	private String m_type;	// ¸ÅÄ¡Å¸ÀÔ
+	private String m_challenger;	// íŒ€ë³„ ë§¤ì¹˜ë²ˆí˜¸ì— ë”°ë¥¸ ê¸°ë¡
+	private String m_type;	// ë§¤ì¹˜íƒ€ì…
 	
 	private int recordstatus;
 	

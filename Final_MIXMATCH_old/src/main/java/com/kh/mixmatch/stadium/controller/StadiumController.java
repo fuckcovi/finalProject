@@ -1,7 +1,6 @@
 package com.kh.mixmatch.stadium.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.mixmatch.stadium.domain.BookingCommand;
 import com.kh.mixmatch.stadium.domain.StadiumCommand;
 import com.kh.mixmatch.stadium.service.StadiumService;
-import com.kh.mixmatch.team.domain.TeamCommand;
-import com.kh.mixmatch.team.domain.TeamMemCommand;
 import com.kh.mixmatch.util.PagingUtil;
-
 
 @Controller
 public class StadiumController {
@@ -95,7 +91,6 @@ public class StadiumController {
 		String user_id = (String)session.getAttribute("user_id");
 		if(user_id != null){
 			if(user_id.equals("admin")){
-			// 愿�由ъ옄留� �벑濡앷��뒫
 				stadiumService.insertStadium(stadium);
 			}
 		}else{
@@ -119,7 +114,6 @@ public class StadiumController {
 	public ModelAndView stadiumDetail(@RequestParam int s_seq){
 		StadiumCommand stadium = stadiumService.selectStadium(s_seq);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("stadiumDetail");
 		mav.addObject("stadium",stadium);

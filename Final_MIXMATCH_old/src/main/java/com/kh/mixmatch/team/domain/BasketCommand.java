@@ -16,8 +16,8 @@ public class BasketCommand {
 	private int b_block;
 	private int b_3point;
 	
-	private String name; //È¸¿ø¸í : MemberCommand Á¶ÀÎ
-	private String profile_name; //ÇÁ·ÎÇÊ¸í : MemberCommand Á¶ÀÎ
+	private String name; //íšŒì›ëª… : MemberCommand ì¡°ì¸
+	private String profile_name; //í”„ë¡œí•„ëª… : MemberCommand ì¡°ì¸
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	

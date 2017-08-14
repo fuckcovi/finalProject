@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import com.kh.mixmatch.member.domain.MemberCommand;
@@ -43,55 +42,46 @@ public class TeamMemServiceImpl implements TeamMemService{
 
 	@Override
 	public int getRowTeamMemCount(String t_name) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getRowTeamMemCount(t_name);
 	}
 
 	@Override
 	public List<TeamMemCommand> listTeamMem(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listTeamMem(map);
 	}
 
 	@Override
 	public List<FootCommand> listTMemFoot(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listTMemFoot(map);
 	}
 
 	@Override
 	public List<BaseCommand> listTMemBase(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listTMemBase(map);
 	}
 
 	@Override
 	public List<BasketCommand> listTMemBasket(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listTMemBasket(map);
 	}
 
 	@Override
 	public int getRowTeamCount(String id) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getRowTeamCount(id);
 	}
 
 	@Override
 	public List<TeamMemCommand> listConfirmTeam(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listConfirmTeam(map);
 	}
 
 	@Override
 	public int getMemCount() {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getMemCount();
 	}
 
 	@Override
 	public List<MemberCommand> getMemList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getMemList(map);
 	}
 	
@@ -109,7 +99,6 @@ public class TeamMemServiceImpl implements TeamMemService{
 
 	@Override
 	public List<FootCommand> listMatchFoot(Integer mseq) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listMatchFoot(mseq);
 	}
 
@@ -120,31 +109,26 @@ public class TeamMemServiceImpl implements TeamMemService{
 
 	@Override
 	public List<BaseCommand> listMatchBase(Integer mseq) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listMatchBase(mseq);
 	}
 
 	@Override
 	public List<BasketCommand> listMatchBasket(Integer mseq) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.listMatchBasket(mseq);
 	}
 
 	@Override
 	public int getMemRecordCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getMemRecordCount(map);
 	}
 
 	@Override
 	public int getRowTeamMemRecordCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getRowTeamMemRecordCount(map);
 	}
 
 	@Override
 	public List<String> getTeamMemList(String user_id) {
-		// TODO Auto-generated method stub
 		return teamMemMapper.getTeamMemList(user_id);
 	}
 	

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.kh.mixmatch.team.domain.BaseCommand;
@@ -34,13 +33,9 @@ public interface TotalTypeMapper {
 	public BasketCommand selectBasket(Integer b_seq);
 	public FootCommand selectFoot(Integer f_seq);
 	
-	
-	// °³ÀÎº° ÅëÇÕ·©Å· ¸®½ºÆ®
+	// ê°œì¸ë³„ í†µí•©ë­í‚¹ ë¦¬ìŠ¤íŠ¸
 	public List<BaseCommand> listBase(Map<String, Object> map);
 	public List<BasketCommand> listBasket(Map<String, Object> map);	
 	public List<FootCommand> listFoot(Map<String, Object> map);
-	
-	
-	
 	
 }

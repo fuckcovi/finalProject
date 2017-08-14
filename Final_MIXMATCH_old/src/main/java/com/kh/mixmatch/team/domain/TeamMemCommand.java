@@ -15,8 +15,8 @@ public class TeamMemCommand {
 	private Date t_mem_regdate;
 	private int t_mem_auth;
 	
-	private String name;	// ���� MEMBER
-	private String profile_name; //�����ʸ� : MemberCommand ����
+	private String name;
+	private String profile_name;
 	private byte[] profile;
 	private MultipartFile profile_upload;
 	private String master;

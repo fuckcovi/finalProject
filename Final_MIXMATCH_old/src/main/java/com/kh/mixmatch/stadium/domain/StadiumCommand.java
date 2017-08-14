@@ -84,6 +84,4 @@ public class StadiumCommand {
 				+ s_regdate + "]";
 	}
 	
-	
-	
 }
