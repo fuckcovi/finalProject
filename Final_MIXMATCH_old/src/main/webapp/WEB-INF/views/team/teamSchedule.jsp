@@ -13,6 +13,7 @@
 		</div>
 	</c:if>
 	<c:if test="${count>0 }">
+	<div style="margin:0 auto;overflow-y: auto;height:70px;">    
 	<ul style="list-style: none;margin: 0 auto;height:70px; width:750px;padding:0;"  id="teamScheduleList" >
 		<li style="float: left; width:150px;" value="allList">
 			<input type="button" class="btn"  style="width:150px;border:1px solid white;" value="전체보기">
@@ -24,13 +25,14 @@
 			</li>
 		</c:forEach>
 	</ul>
+	</div>
 	<hr size="1" width="100%">
 	<ul style="list-style: none;">
 		<li class="scheduleListX btn" style="display:inline-block;width:150px;background-color:#e8d477;">예정일정</li>
 		<li class="scheduleListC btn" style="display:inline-block;width:150px;background-color:#e8d477;">확정일정</li>
 		<li class="scheduleListF btn" style="display:inline-block;width:150px;background-color:#e8d477;">종료일정</li>
 	</ul>
-	<div class="scheduleListX" >
+	<div class="scheduleListX" style="margin:0 auto;overflow-y: auto;height:351px;">
 		<div class="scheduleList xplan">
 			<table class="style">			 
 			<tr class="tablehead">

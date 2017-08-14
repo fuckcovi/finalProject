@@ -13,7 +13,8 @@
 			소속 팀도 없는데 기록이 있을리가 
 		</div>
 	</c:if>
-	<c:if test="${count>0 }">  
+	<c:if test="${count>0 }">
+	<div style="margin:0 auto;overflow-y: auto;height:70px;">    
 	<ul style="list-style: none;margin: 0 auto;height:70px; width:750px;padding:0;" id="teamScheduleList">
 		<li style="float: left; width:150px;" value="allList">
 			<input type="button" class="btn" style="width:150px;border:1px solid white;" value="전체보기">
@@ -24,13 +25,15 @@
 			</li>
 		</c:forEach>
 	</ul>
+	</div>
 	<br>
 	<hr size="1" width="85%">
-	<table class="scheduleList fplan">
+	<div style="margin:0 auto;overflow-y: auto;height:351px;">  
+	<table class="scheduleList fplan style" >
 		<tr class="tablehead">
-			<th>매치번호</th>
-			<th>매치일자</th>
-			<th>매치결과</th>
+			<th  style="text-align: center;">매치번호</th>
+			<th  style="width:200px;text-align: center;">매치일자</th>
+			<th style="width:400px;text-align: center;">매치결과</th>
 		</tr>
 		<c:set var="seq" value="0"/>
 		<c:forEach var="teamlist" items="${list}">
@@ -52,6 +55,7 @@
 			<td colspan="4">매치결과없음</td>
 		</tr>
 	</table>
+	</div>
 	</c:if> 
 	<br><hr class="style"> 
 </div>
