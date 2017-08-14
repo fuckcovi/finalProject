@@ -189,7 +189,7 @@ $(document).ready(function(){
 		
 		<c:if test="${footTeamCount>0 }">
 			<c:forEach var="footTeamList" items="${footTeamList}" varStatus="status">
-				<tr class="foot" onclick="location.href='teamInfo.do?t_name=${footTeamList.t_name}'" style="display: none;">
+				<tr class="foot" onclick="location.href='teamInfo.do?t_name=${footTeamList.t_name}'" >
 						<td>
 							<c:if test="${status.count eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
 							<c:if test="${status.count eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
