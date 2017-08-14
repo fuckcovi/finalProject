@@ -106,7 +106,7 @@ public class PointShopController {
 //////////////////////////////////////////////////////////////
 	
 	//���ų���
-	@RequestMapping("point/pointShopCart.do")
+	@RequestMapping("/point/pointShopCart.do")
 	public String pointshopcart(Model model){
 		
 		

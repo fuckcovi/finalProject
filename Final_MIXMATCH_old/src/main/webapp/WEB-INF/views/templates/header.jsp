@@ -82,11 +82,11 @@
 				<a class="menuLink" href="${pageContext.request.contextPath}/mypage/main.do?id=${user_id}">마이페이지</a>
 				<ul class="submenu">
 					<li><a href="${pageContext.request.contextPath}/mypage/main.do?id=${user_id}" class="submenuLink">미니홈피</a></li>
-					<li><a href="${pageContext.request.contextPath}/#" class="submenuLink">구매내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/point/pointShopCart.do" class="submenuLink">구매내역</a></li>
 				</ul>
 			</li>
 			<li class="topMenuLi">
-				<a href="${pageContext.request.contextPath}/#"><span class="menuLink glyphicon glyphicon-hand-right blink"><span>포인트몰</span></span></a>
+				<a href="${pageContext.request.contextPath}/point/pointHome.do"><span class="menuLink glyphicon glyphicon-hand-right blink"><span>포인트몰</span></span></a>
 			</li>
 		</ul>
 	</div>

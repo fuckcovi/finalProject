@@ -19,6 +19,8 @@ public class PointShopCommand {
 	private int p_price;
 	private String p_file_name;
 	private byte[] upload_file;
+
+	@NotNull
 	private MultipartFile p_file;
 	private String id;
 	

@@ -191,9 +191,9 @@ CREATE TABLE g_pointshop_cart
     p_name     VARCHAR2(30)    NULL, 
     amount     NUMBER(30)    NULL, 
     p_price    NUMBER          NULL, 
+    p_date DATE NULL,
     CONSTRAINT G_POINTSHOP_CART_PK PRIMARY KEY (id)
-)
-/
+);
 
 CREATE SEQUENCE g_pointshop_cart_SEQ
 START WITH 1
