@@ -42,7 +42,10 @@
 		<c:if test="${count>0 }">
 		<c:forEach var="listMem" items="${listMem}">
 			<tr>
-				<td>${listMem.recordstatus}</td>
+				<td><c:if test="${listMem.recordstatus eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
+					<c:if test="${listMem.recordstatus eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
+					<c:if test="${listMem.recordstatus eq 3}"><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="20"></c:if>
+					<c:if test="${listMem.recordstatus ne 1 && listMem.recordstatus ne 2 && listMem.recordstatus ne 3}">${listMem.recordstatus}</c:if></td>
 				<td>
 				<c:if test="${fn:endsWith(listMem.profile_name, '.jpg') || fn:endsWith(listMem.profile_name, '.png') || fn:endsWith(listMem.profile_name, '.gif') || fn:endsWith(listMem.profile_name, '.JPG') || fn:endsWith(listMem.profile_name, '.PNG') || fn:endsWith(listMem.profile_name, '.GIF')}">
 					<img src="imageViewMem.do?id=${listMem.id}" style="width:100px;height:100px;">

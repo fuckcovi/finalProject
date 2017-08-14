@@ -33,7 +33,12 @@
 		<c:if test="${count>=0 }">
 		<c:forEach var="list" items="${list}">
 			<tr>
-				<td>${list.status}</td>
+				<td>
+					<c:if test="${list.status eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
+					<c:if test="${list.status eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
+					<c:if test="${list.status eq 3}"><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="20"></c:if>
+					<c:if test="${list.status ne 1 && list.status ne 2 && list.status ne 3}">${list.status}</c:if>
+				</td>
 				<td>
 				<c:if test="${fn:endsWith(list.t_logo_name, '.jpg') || fn:endsWith(list.t_logo_name, '.png') || fn:endsWith(list.t_logo_name, '.gif') || fn:endsWith(list.t_logo_name, '.JPG') || fn:endsWith(list.t_logo_name, '.PNG') || fn:endsWith(list.t_logo_name, '.GIF')}">
 					<img src="imageView.do?t_name=${list.t_name}" style="width:100px;height:100px;">

@@ -21,7 +21,12 @@
 	<tbody>
 	<c:forEach var="list" items="${list}" >
 		<tr>
-			<td>${list.pointStatus}</td>
+			<td>
+				<c:if test="${list.pointStatus eq 1}"><img src="${pageContext.request.contextPath}/resources/images/goldmedal.png" width="20"></c:if>
+				<c:if test="${list.pointStatus eq 2}"><img src="${pageContext.request.contextPath}/resources/images/silvermedal.png" width="20"></c:if>
+				<c:if test="${list.pointStatus eq 3}"><img src="${pageContext.request.contextPath}/resources/images/bronzemedal.png" width="20"></c:if>
+				<c:if test="${list.pointStatus ne 1 && list.pointStatus ne 2 && list.pointStatus ne 3}">${list.pointStatus}</c:if>
+			</td>
 			<td>
 				<c:if test="${empty list.profile_name }">
 					<img src="${pageContext.request.contextPath}/resources/images/profile.jpg" style="width:60px;height:60px;">
